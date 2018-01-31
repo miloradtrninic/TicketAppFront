@@ -14,6 +14,7 @@ import { ReservationComponent } from './components/reservation/reservation.compo
 import { OneClickTicketComponent } from './components/one-click-ticket/one-click-ticket.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { UserPanelComponent } from './components/user-panel/user-panel.component';
+import { AdminFanZoneComponent } from './components/admin-panel/admin-fan-zone/admin-fan-zone.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UserPanelComponent } from './components/user-panel/user-panel.component
     ReservationComponent,
     OneClickTicketComponent,
     AdminPanelComponent,
-    UserPanelComponent
+    UserPanelComponent,
+    AdminFanZoneComponent
   ],
   imports: [
     BrowserModule
