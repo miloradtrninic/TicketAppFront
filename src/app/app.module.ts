@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing-module/app-routing.module';
@@ -28,10 +30,12 @@ import { UserPanelComponent } from './components/user-panel/user-panel.component
     ReservationComponent,
     OneClickTicketComponent,
     AdminPanelComponent,
-    UserPanelComponent
+    UserPanelComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [AppRoutingModule],
   bootstrap: [AppComponent]
