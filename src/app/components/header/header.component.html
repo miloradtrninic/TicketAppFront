@@ -1,26 +1,24 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      Ovde ide logo
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">Ticket App</a>
     </div>
-    <div class="col-sm">
-      Ovde idu dugmici za navigaciju po sajtu
-    </div>
-    <div class="col-sm">
-      Ovde ide search ako ga ima
-    </div>
-    <div class="col-sm">
-      <button type="button" class="btn btn-primary" data-toggle="modal"
-              data-target="#registerModal"> Register </button>
-      <button type="button" class="btn btn-success" data-toggle="modal"
-              data-target="#loginModal"> Login </button>
+
+    <div class="collapse navbar-collapse" id="navbar" #navbarList>
+      <ul class="nav navbar-nav navbar-right">
+        <li> <button routerLink="/search" class="btn btn-primary navbar-btn"> <i class="glyphicon glyphicon-search"></i>Search </button></li>
+        <li ><a routerLink="/register" class="mouse"><span class="glyphicon glyphicon-user link"></span> Register</a></li>
+        <li ><a routerLink="/login" class="mouse"><span class="glyphicon glyphicon-log-in link"></span> Log in</a></li>
+        <li ><a class="mouse"><span class="glyphicon glyphicon-log-out link"></span> Log out</a></li>
+      </ul>
     </div>
   </div>
-</div>
+</nav>
+
 
 <!-- U Formi, ngModel moze da radi samo sa inputima koji imaju name property postavljen! -->
 <!-- Modal -->
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerHeader" aria-hidden="true">
+<!--<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerHeader" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -74,10 +72,10 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="registerHeader2" aria-hidden="true">
+<!--<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="registerHeader2" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -106,4 +104,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

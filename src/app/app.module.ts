@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import {AppRoutingModule} from './app-routing-module/app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { AuditoriumListComponent } from './components/auditorium-list/auditorium-list.component';
 import { CinemaComponent } from './components/cinema/cinema.component';
@@ -17,6 +16,8 @@ import { OneClickTicketComponent } from './components/one-click-ticket/one-click
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { UserPanelComponent } from './components/user-panel/user-panel.component';
 import { AdminFanZoneComponent } from './components/admin-panel/admin-fan-zone/admin-fan-zone.component';
+import { HomeComponent } from './components/home/home.component';
+import {RoutingModule} from './app-routing/routing.module';
 
 @NgModule({
   declarations: [
@@ -32,14 +33,16 @@ import { AdminFanZoneComponent } from './components/admin-panel/admin-fan-zone/a
     OneClickTicketComponent,
     AdminPanelComponent,
     UserPanelComponent,
-    AdminFanZoneComponent
+    AdminFanZoneComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
+    RoutingModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [AppRoutingModule],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
