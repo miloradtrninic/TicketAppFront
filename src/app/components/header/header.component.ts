@@ -7,12 +7,12 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  const uri='';
-  const regUri='';
-  const loginUri='';
+  uri = '';
+  regUri = '';
+  loginUri = '';
 
 
-  let regInfo = {
+  regInfo = {
     password: '',
     repeatPW: '',
     name: '',
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     city: '',
   };
 
-  let logInfo = {
+  logInfo = {
     email: '',
     password: '',
   };
@@ -36,27 +36,27 @@ export class HeaderComponent implements OnInit {
 
   tryRegister() {
     this.clearAllInfo();
-    console.log("Spawn register clicked");
+    console.log('Spawn register clicked');
   }
 
-  cancelClick(){
+  cancelClick() {
     this.clearAllInfo();
-    console.log("Cancel clicked, cleared fields.");
+    console.log('Cancel clicked, cleared fields.');
   }
 
   clearAllInfo() {
-    this.regInfo.password='';
-    this.regInfo.repeatPW='';
-    this.regInfo.name='';
-    this.regInfo.surname='';
-    this.regInfo.email='';
-    this.regInfo.phoneno='';
-    this.logInfo.password='';
+    this.regInfo.password = '';
+    this.regInfo.repeatPW = '';
+    this.regInfo.name = '';
+    this.regInfo.surname = '';
+    this.regInfo.email = '';
+    this.regInfo.phoneno = '';
+    this.logInfo.password = '';
   }
 
   tryLogin() {
     this.clearAllInfo();
-    console.log("Spawn login clicked");
+    console.log('Spawn login clicked');
   }
 
 }
