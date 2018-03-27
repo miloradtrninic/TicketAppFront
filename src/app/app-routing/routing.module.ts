@@ -7,6 +7,8 @@ import {FanZoneComponent} from '../components/fan-zone/fan-zone.component';
 import {AdminPanelComponent} from '../components/admin-panel/admin-panel.component';
 import {CommonModule} from '@angular/common';
 import {HomeComponent} from '../components/home/home.component';
+import {RegistrationComponent} from '../components/registration/registration.component';
+import {LoginComponent} from '../components/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'auditorium/cinema/:id', component: CinemaComponent},
   { path: 'auditorium/theatre/:id', component: TheatreComponent},
   { path: 'fanzone', component: FanZoneComponent},
-  { path: 'admin-panel', component: AdminPanelComponent}
+  { path: 'admin-panel', component: AdminPanelComponent},
+  { path: 'register', component: RegistrationComponent},
+  { path: 'login', component: LoginComponent},
 
 ];
 

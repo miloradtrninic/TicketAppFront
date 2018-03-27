@@ -1,0 +1,45 @@
+<h1 align="center">
+  Registration is free and always will be
+</h1>
+
+<div align="center">
+    <form class="registerForm">
+        <div class="form-group">
+          <label for="email"> Email address: </label>
+          <input type="email" class="form-control" id="email" placeholder="Your email goes here..."
+                 name="email" [(ngModel)]="regInfo.email">
+        </div>
+        <div class="form-group">
+          <label for="password1"> Password: </label>
+          <input type="password" class="form-control" id="password1" placeholder="Enter password..."
+                  name="password" [(ngModel)]="regInfo.password">
+        </div>
+        <div class="form-group">
+          <label for="password2"> Re-enter password: </label>
+          <input type="password" class="form-control" id="password2" placeholder="Password again..."
+                  name="repeatPW" [(ngModel)]="regInfo.repeatPW">
+        </div>
+        <div class="form-group">
+          <label for="name"> Name: </label>
+          <input type="text" class="form-control" id="name" placeholder="Your name..."
+                  name="name" [(ngModel)]="regInfo.name">
+        </div>
+        <div class="form-group">
+          <label for="surname"> Last name: </label>
+          <input type="text" class="form-control" id="surname" placeholder="Your last name..."
+                name="surname" [(ngModel)]="regInfo.surname">
+        </div>
+        <div class="">
+          <label for="city"> City: </label>
+          <input type="text" class="form-control" id="city" placeholder="City you live in..."
+                  name="city" [(ngModel)]="regInfo.city">
+        </div>
+        <div class="form-group">
+          <label for="phone"> Phone number: </label>
+          <input type="text" class="form-control" id="phone" placeholder="Phone number..."
+                name="phone" [(ngModel)]="regInfo.phoneNo">
+        </div>
+
+        <button type="button" class="btn btn-success" (click)="tryRegister()">Register</button>
+  </form>
+</div>

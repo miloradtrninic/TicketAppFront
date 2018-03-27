@@ -18,6 +18,13 @@ import { UserPanelComponent } from './components/user-panel/user-panel.component
 import { AdminFanZoneComponent } from './components/admin-panel/admin-fan-zone/admin-fan-zone.component';
 import { HomeComponent } from './components/home/home.component';
 import {RoutingModule} from './app-routing/routing.module';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
+import { CommunicatorService } from './shared/services/communicator.service';
+
+import { Constants } from './shared/constants/constants';
+
+import { Payload } from './shared/util/payload';
 
 @NgModule({
   declarations: [
@@ -34,15 +41,19 @@ import {RoutingModule} from './app-routing/routing.module';
     AdminPanelComponent,
     UserPanelComponent,
     AdminFanZoneComponent,
-    HomeComponent
+    HomeComponent,
+    RegistrationComponent,
+    LoginComponent,
+    Payload,
   ],
   imports: [
     BrowserModule,
     RoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [CommunicatorService,
+              Constants,],
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }
