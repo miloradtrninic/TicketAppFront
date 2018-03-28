@@ -23,8 +23,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CommunicatorService } from './shared/services/communicator.service';
 
 import { Constants } from './shared/constants/constants';
-
-import { Payload } from './shared/util/payload';
+import { EmailComponent } from './shared/components/email/email.component';
 
 @NgModule({
   declarations: [
@@ -44,16 +43,16 @@ import { Payload } from './shared/util/payload';
     HomeComponent,
     RegistrationComponent,
     LoginComponent,
-    Payload,
+    EmailComponent
   ],
   imports: [
     BrowserModule,
     RoutingModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [CommunicatorService,
-              Constants,],
+              Constants],
   bootstrap: [AppComponent,]
 })
 export class AppModule { }

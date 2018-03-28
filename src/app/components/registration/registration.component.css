@@ -4,3 +4,30 @@
   align-self: center;
   padding-top: 10px;
 }
+
+.errorContainer {
+  font-size: 1.2em;
+  margin-left: 25%;
+  width: 50%;
+}
+
+@keyframes bounce {
+  from {
+    transform: scaleX(0%);
+    transform: scaleY(0%)
+  }
+  to {
+    transform: scaleY(100%);
+    transform: scaleX(100%);
+  }
+}
+@-webkit-keyframes bounce {
+  from {
+    transform: scaleX(0%);
+    transform: scaleY(0%)
+  }
+  to {
+    transform: scaleY(100%);
+    transform: scaleX(100%);
+  }
+}

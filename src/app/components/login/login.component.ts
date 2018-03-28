@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Payload } from '../../shared/util/payload';
+import { CommunicatorService } from '../../shared/services/communicator.service';
+import { HelperFunctions } from '../../shared/util/helper-functions';
+import { Constants } from '../../shared/constants/Constants';
 
 @Component({
   selector: 'app-login',
@@ -7,14 +10,15 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  url = 'auth/login'
-
+  url = 'api/auth/login';
+  errorMessage=null;
   logInfo = {
     email: '',
     password: '',
+    rememberMe: null,
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private communicator: CommunicatorService) { }
 
   ngOnInit() {
   }
@@ -25,8 +29,19 @@ export class LoginComponent implements OnInit {
   }
 
   tryLogin() {
-    this.http.post(this.url, this.logInfo)
-    .subscribe(res => (console.log(res)));
+    if(!HelperFunctions.containsEmptyValues(this.logInfo)){
+      this.errorMessage = null;
+      let payload = new Payload(this.url, null, null, this.logInfo);
+      let user = this.communicator.execute(Constants.methods.GET,
+                                           Constants.modelClassNames.USER,
+                                           payload);
+      console.log(user);
+    } else {
+      this.errorMessage = "Some fields were left empty. Please, fill in the form and try again.";
+    }
   }
 
+  hideError(){
+    this.errorMessage = null;
+  }
 }

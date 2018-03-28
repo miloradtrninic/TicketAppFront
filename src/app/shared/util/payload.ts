@@ -1,9 +1,15 @@
 export class Payload {
+
+  private url:string = '';
+  private headers:any = null;
+  private params:any = null;
+  private body:any = null;
+
   constructor(
-    private url:string,
-    private headers:any,
-    private params:any,
-    private body:any) {
+    url:string,
+    headers:any,
+    params:any,
+    body:any) {
       this.url = url;
       this.headers = headers;
       this.params = params;
@@ -12,7 +18,7 @@ export class Payload {
 
   toPlainObject(): any {
     return {
-      body: this.body,
+      body: JSON.stringify(this.body),
       options: this.createOptions(),
       url: this.url,
     };

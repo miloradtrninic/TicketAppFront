@@ -2,30 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Constants } from '../constants/constants';
 import { Payload } from '../util/payload';
+import { HelperFunctions } from '../../shared/util/helper-functions';
 
 @Injectable()
 export class CommunicatorService {
 
-  constructor(private http: HttpClient,
-              private method:string,
-              private payload:Payload) {
-                this.method = method;
-                this.payload = payload;
-  }
+  constructor(private http: HttpClient) {}
 
-  execute(modelName:string): any {
-    let responseData = this.pingServer(this.payload.toPlainObject());
-    let model = Object.create(window[modelName].prototype);
+  execute(method:string, modelName:string, payload:Payload): any {
+    let responseData = this.pingServer(method, payload.toPlainObject());
+    let model = null;
 
-    model.constructor.apply(model, responseData);
+    if(!HelperFunctions.isEmptyValue(modelName)){
+      let model = Object.create(window[modelName].prototype);
+      if(HelperFunctions.isEmptyValue(model))
+        model.constructor.apply(model, responseData);
+    }
 
     return model;
   }
 
-  pingServer(payloadPlain:any): any {
+  pingServer(method:string, payloadPlain:any): any {
     let response = null;
 
-    switch(this.method) {
+    switch(method) {
       case Constants.methods.GET : this.http.get(payloadPlain.url, payloadPlain.options)
                                   .subscribe(res => {
                                     response = res;
