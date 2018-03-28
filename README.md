@@ -1,4 +1,5 @@
 #uputstvo za pokretanje projekta
+
 npm start ----> komunikacija sa serverom preko proksija, ovako izbegavamo da pisemo http:localhost:8080 u HTTP zahtevima
 
 # TicketAppFront
