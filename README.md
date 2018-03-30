@@ -1,4 +1,7 @@
 #uputstvo za pokretanje projekta
+
+npm start ----> komunikacija sa serverom preko proksija, ovako izbegavamo da pisemo http:localhost:8080 u HTTP zahtevima
+
 # TicketAppFront
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.2.
