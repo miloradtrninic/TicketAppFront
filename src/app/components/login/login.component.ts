@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     if(!HelperFunctions.containsEmptyValues(this.logInfo)){
       this.errorMessage = null;
       let payload = new Payload(this.url, null, null, this.logInfo);
-      let user = this.communicator.execute(Constants.methods.GET,
+      let user = this.communicator.execute(Constants.HttpMethods.GET,
                                            Constants.modelClassNames.USER,
                                            payload);
       console.log(user);

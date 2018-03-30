@@ -1,13 +1,15 @@
+import {HttpHeaders} from '@angular/common/http';
+
 export class Payload {
 
   private url:string = '';
-  private headers:any = null;
+  private headers:HttpHeaders = null;
   private params:any = null;
   private body:any = null;
 
   constructor(
     url:string,
-    headers:any,
+    headers:HttpHeaders,
     params:any,
     body:any) {
       this.url = url;
@@ -18,7 +20,7 @@ export class Payload {
 
   toPlainObject(): any {
     return {
-      body: JSON.stringify(this.body),
+      body: this.body,
       options: this.createOptions(),
       url: this.url,
     };
