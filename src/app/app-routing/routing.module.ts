@@ -29,7 +29,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes, {useHash: true}),
+  ],
+  exports : [RouterModule],
+  declarations: []
 })
 export class RoutingModule { }

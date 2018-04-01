@@ -18,6 +18,12 @@ import { UserPanelComponent } from './components/user-panel/user-panel.component
 import { AdminFanZoneComponent } from './components/admin-panel/admin-fan-zone/admin-fan-zone.component';
 import {RoutingModule} from './routing/routing.module';
 import { HomeComponent } from './components/home/home.component';
+import {BidService} from './services/bid.service';
+import {CinemaService} from './services/cinema.service';
+import {FanItemService} from './services/fan-item.service';
+import {FanadService} from './services/fanad.service';
+import {FanzoneService} from './services/fanzone.service';
+import {TheatreService} from './services/theatre.service';
 
 @NgModule({
   declarations: [
@@ -38,10 +44,11 @@ import { HomeComponent } from './components/home/home.component';
   ],
   imports: [
     BrowserModule,
+    RoutingModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [RoutingModule],
+  providers: [BidService, CinemaService, FanItemService, FanadService, FanzoneService, TheatreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
