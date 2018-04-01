@@ -3,6 +3,7 @@ import { Payload } from '../../shared/util/payload';
 import { CommunicatorService } from '../../shared/services/communicator.service';
 import { HelperFunctions } from '../../shared/util/helper-functions';
 import { Constants } from '../../shared/constants/Constants';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +11,7 @@ import { Constants } from '../../shared/constants/Constants';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  url = 'api/auth/hey';
+  url = 'api/auth/register';
   repeatPW = "";
   regInfo = {
     password: '',
@@ -33,8 +34,11 @@ export class RegistrationComponent implements OnInit {
     let shouldSendToServer = !areAnyEmptyValues && arePasswordsMatching;
 
     if(shouldSendToServer) {
-      let payload = new Payload(this.url, null, null, this.regInfo);
-      let user = this.communicator.execute(Constants.methods.GET,
+      const headers = new HttpHeaders({
+        'Content-Type':'application/json',
+      });
+      let payload = new Payload(this.url, headers, null, this.regInfo);
+      let user = this.communicator.execute(Constants.HttpMethods.POST,
                                            Constants.modelClassNames.USER,
                                            payload);
       console.log(user);

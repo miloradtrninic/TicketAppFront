@@ -1,6 +1,6 @@
 export class Constants {
   /*Koristi komunikator servis*/
-  public static methods = {
+  public static HttpMethods = {
     GET: 'GET',
     POST: 'POST',
     PUT: 'PUT',

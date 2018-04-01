@@ -26,32 +26,32 @@ export class CommunicatorService {
     let response = null;
 
     switch(method) {
-      case Constants.methods.GET : this.http.get(payloadPlain.url, payloadPlain.options)
+      case Constants.HttpMethods.GET : this.http.get(payloadPlain.url, payloadPlain.options)
                                   .subscribe(res => {
                                     response = res;
                                   }); break;
 
-      case Constants.methods.POST : this.http.post(payloadPlain.url, payloadPlain.body, payloadPlain.options)
+      case Constants.HttpMethods.POST : this.http.post(payloadPlain.url, payloadPlain.body, payloadPlain.options)
                                     .subscribe(res => {
                                       response = res;
                                     }); break;
 
-      case Constants.methods.PUT : this.http.put(payloadPlain.url, payloadPlain.body, payloadPlain.options)
+      case Constants.HttpMethods.PUT : this.http.put(payloadPlain.url, payloadPlain.body, payloadPlain.options)
                                     .subscribe(res => {
                                       response = res;
                                     }); break;
 
-      case Constants.methods.DELETE : this.http.delete(payloadPlain.url, payloadPlain.options)
+      case Constants.HttpMethods.DELETE : this.http.delete(payloadPlain.url, payloadPlain.options)
                                       .subscribe(res => {
                                         response = res;
                                       });; break;
 
-      case Constants.methods.OPTIONS : this.http.options(payloadPlain.url, payloadPlain.options)
+      case Constants.HttpMethods.OPTIONS : this.http.options(payloadPlain.url, payloadPlain.options)
                                       .subscribe(res => {
                                         response = res;
                                       });; break;
 
-      case Constants.methods.HEAD : this.http.head(payloadPlain.url, payloadPlain.options)
+      case Constants.HttpMethods.HEAD : this.http.head(payloadPlain.url, payloadPlain.options)
                                       .subscribe(res => {
                                         response = res;
                                       }); break;
