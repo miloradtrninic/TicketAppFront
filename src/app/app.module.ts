@@ -16,14 +16,8 @@ import { OneClickTicketComponent } from './components/one-click-ticket/one-click
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { UserPanelComponent } from './components/user-panel/user-panel.component';
 import { AdminFanZoneComponent } from './components/admin-panel/admin-fan-zone/admin-fan-zone.component';
+import {RoutingModule} from './routing/routing.module';
 import { HomeComponent } from './components/home/home.component';
-import {RoutingModule} from './app-routing/routing.module';
-import { RegistrationComponent } from './components/registration/registration.component';
-import { LoginComponent } from './components/login/login.component';
-import { CommunicatorService } from './shared/services/communicator.service';
-
-import { Constants } from './shared/constants/constants';
-import { EmailComponent } from './shared/components/email/email.component';
 
 @NgModule({
   declarations: [
@@ -40,19 +34,14 @@ import { EmailComponent } from './shared/components/email/email.component';
     AdminPanelComponent,
     UserPanelComponent,
     AdminFanZoneComponent,
-    HomeComponent,
-    RegistrationComponent,
-    LoginComponent,
-    EmailComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    RoutingModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [CommunicatorService,
-              Constants],
-  bootstrap: [AppComponent,]
+  providers: [RoutingModule],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
