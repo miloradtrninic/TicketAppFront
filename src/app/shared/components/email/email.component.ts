@@ -6,17 +6,17 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./email.component.css', '../styles/styles.css']
 })
 export class EmailComponent implements OnInit {
-  @Input() id:string;
-  @Input() name:string;
-  text:string = null;
-  error:boolean;
+  @Input() id: string;
+  @Input() name: string;
+  text: string = null;
+  error: boolean;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onKeyUp(e):void {
+  onKeyUp(e): void {
 
   }
 }

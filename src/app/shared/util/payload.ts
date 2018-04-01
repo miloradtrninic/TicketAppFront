@@ -6,10 +6,10 @@ export class Payload {
   private body:any = null;
 
   constructor(
-    url:string,
-    headers:any,
-    params:any,
-    body:any) {
+    url: string,
+    headers: any,
+    params: any,
+    body: any) {
       this.url = url;
       this.headers = headers;
       this.params = params;

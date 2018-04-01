@@ -9,7 +9,7 @@ export class CommunicatorService {
 
   constructor(private http: HttpClient) {}
 
-  execute(method:string, modelName:string, payload:Payload): any {
+  execute(method: string, modelName: string, payload: Payload): any {
     let responseData = this.pingServer(method, payload.toPlainObject());
     let model = null;
 
