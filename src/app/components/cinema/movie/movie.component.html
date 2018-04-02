@@ -1,3 +1,35 @@
-<p>
-  movie works!
-</p>
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-primary"> Add movie </button>
+        
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12"  >
+        <a href = "" 
+        class = "list-group-item clearfix" 
+        *ngFor = "let movie of movies"   >
+       
+        <div class = "pull-left"  >
+            <h2 class = "list-group-item-heading letter"><b> {{ movie.name }} </b></h2>
+            <p class = "list-group-item-text"><i> Director : {{ movie.director }} </i></p>
+            <p class = "list-group-item-text"> Duration : {{ movie.duration }} min </p>
+            <p class = "list-group-item-text desc">  {{ movie.description }}</p>
+            <button class="btn btn-success"> Edit movie </button>
+            <button class="btn btn-danger"> Delete movie </button>
+        </div>
+        <span class="pull-right">
+            <img 
+            src="{{ movie.coverImage }}" 
+            alt="{{ movie.name}}" 
+            class="img-responsive" 
+            style = "max-height : 120px">
+        </span>
+     
+    </a>
+      
+    </div>
+  </div>
+  
+  

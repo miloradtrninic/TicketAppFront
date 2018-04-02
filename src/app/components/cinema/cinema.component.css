@@ -1,7 +1,7 @@
-h2 {
-    color : blue;
+.letter {
+    font-weight: bold;
 }
 .desc {
-    border : 1px solid;
+    border : 2px solid linen;
     margin : 5px;
 }

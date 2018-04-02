@@ -1,20 +1,22 @@
 <div class="row">
   <div class="col-xs-12">
       <button class="btn btn-primary"> Add cinema </button>
-      <button class="btn btn-success"> Edit cinema </button>
-       <button class="btn btn-danger"> Delete cinema </button>
+      
   </div>
 </div>
 <hr>
 <div class="row">
-  <div class="col-xs-12" >
+  <div class="col-xs-12"  >
       <a href = "" 
       class = "list-group-item clearfix" 
-      *ngFor = "let cinema of cinemas">
-      <div class = "pull-left">
-          <h2 class = "list-group-item-heading"><b> {{ cinema.name }} </b></h2>
+      *ngFor = "let cinema of cinemas"  routerLink= "/auditorium/cinema/{{cinema.id}}" >
+     
+      <div class = "pull-left"  >
+          <h2 class = "list-group-item-heading letter"><b> {{ cinema.name }} </b></h2>
           <p class = "list-group-item-text"><i> {{ cinema.address }} </i></p>
           <p class = "list-group-item-text desc"> {{ cinema.description }}</p>
+          <button class="btn btn-success"> Edit cinema </button>
+          <button class="btn btn-danger"> Delete cinema </button>
       </div>
       <span class="pull-right">
           <img 
@@ -23,6 +25,7 @@
           class="img-responsive" 
           style = "max-height : 120px">
       </span>
+   
   </a>
     
   </div>
