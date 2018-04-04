@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPanelComponent implements OnInit {
 
+  private activeTab: number = null;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  changeActive(event) {
+    this.activeTab = event.target.getAttribute('id');
   }
 
 }

@@ -1,3 +1,20 @@
-<p>
-  user-panel works!
-</p>
+<div class="row" align="center" class="Panel">
+  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{1}} [ngClass] = "{'Active':activeTab === '1'}">
+    Theatre
+  </div>
+  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{2}} [ngClass] = "{'Active':activeTab === '2'}">
+    Cinema
+  </div>
+  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{3}} [ngClass] = "{'Active':activeTab === '3'}">
+    Friends
+  </div>
+  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{4}} [ngClass] = "{'Active':activeTab === '4'}">
+    Reservations
+  </div>
+  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{5}} [ngClass] = "{'Active':activeTab === '5'}">
+    Settings
+  </div>
+  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{6}} [ngClass] = "{'Active':activeTab === '6'}">
+    Fan Zone
+  </div>
+</div>

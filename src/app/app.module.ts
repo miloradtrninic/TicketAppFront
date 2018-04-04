@@ -24,6 +24,8 @@ import {FanItemService} from './services/fan-item.service';
 import {FanadService} from './services/fanad.service';
 import {FanzoneService} from './services/fanzone.service';
 import {TheatreService} from './services/theatre.service';
+import { SearchComponent } from './shared/components/search/search.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import {TheatreService} from './services/theatre.service';
     AdminPanelComponent,
     UserPanelComponent,
     AdminFanZoneComponent,
-    HomeComponent
+    HomeComponent,
+    SearchComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

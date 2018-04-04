@@ -1,0 +1,73 @@
+<div>
+
+  <h1 align="center"> Welcome to your profile </h1>
+
+  <div class="col-sm-5">
+    <button class="btn btn-primary" align="center" *ngIf="mode === Constants.State.VIEW">Update profile</button>
+
+    <ul *ngIf="mode === Constants.State.VIEW" class="list-group">
+      <li class="list-group-item">
+        <div>E-mail: </div>
+        <div>__________</div>
+      </li>
+      <li class="list-group-item">
+        <div>First Name: </div>
+        <div>__________</div>
+      </li>
+      <li class="list-group-item">
+        <div>Last Name: </div>
+        <div>__________</div>
+      </li>
+      <li class="list-group-item">
+        <div>City: </div>
+        <div>__________</div>
+      </li>
+      <li class="list-group-item">
+        <div>Phone: </div>
+        <div>__________</div>
+      </li>
+    </ul>
+
+    <table class="table" *ngIf="mode === Constants.State.EDIT">
+      <tr>
+        <th> Edit Personal Info </th>
+      </tr>
+      <tr>
+        <td><label for="email">E-mail: </label></td>
+        <td><input type="email" name="email" id="email"></td>
+      </tr>
+      <tr>
+        <td><label for="name">First name: </label></td>
+        <td><input type="text" name="name" id="name"></td>
+      </tr>
+      <tr>
+        <td><label for="last">Last name: </label></td>
+        <td><input type="text" name="last" id="last"></td>
+      </tr>
+      <tr>
+        <td><label for="city">City: </label></td>
+        <td><input type="text" name="city" id="city"></td>
+      </tr>
+      <tr>
+        <td><label for="phone">Phone: </label></td>
+        <td><input type="text" name="phone" id="phone"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center"><button class="btn btn-success" *ngIf="mode === Constants.State.EDIT">Save changes</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-md-7">
+    <div class="col-sm-6">
+      <h3>Add friends</h3>
+      <app-search></app-search>
+    </div>
+
+    <div class="col-sm-6">
+      <h3>Remove friends</h3>
+      <app-search></app-search>
+    </div>
+  </div>
+
+</div>

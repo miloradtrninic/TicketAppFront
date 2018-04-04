@@ -17,4 +17,9 @@ export class Constants {
     BID : 'Bid',
     CINEMA : 'Cinema',
   };
+
+  public static State = {
+    VIEW : 'view',
+    EDIT : 'edit',
+  }
 }
