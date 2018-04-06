@@ -12,14 +12,14 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class RegistrationComponent implements OnInit {
   url = 'api/auth/register';
-  repeatPW = "";
+  repeatPW = '';
   regInfo = {
-    password: '',
-    name: '',
-    surname: '',
-    email: '',
-    phoneno: '',
-    city: '',
+    username: null,
+    email: null,
+    password: null,
+    name: null,
+    lastname: null,
+    phoneNo: null,
   };
   errorMessage = null;
 
@@ -31,36 +31,35 @@ export class RegistrationComponent implements OnInit {
   tryRegister() {
     const areAnyEmptyValues = HelperFunctions.containsEmptyValues(this.regInfo);
     const arePasswordsMatching = this.regInfo.password === this.repeatPW;
-    let shouldSendToServer = !areAnyEmptyValues && arePasswordsMatching;
+    const shouldSendToServer = !areAnyEmptyValues && arePasswordsMatching;
 
-    if(shouldSendToServer) {
+    if (shouldSendToServer) {
       const headers = new HttpHeaders({
-        'Content-Type':'application/json',
+        'Content-Type': 'application/json',
       });
-      let payload = new Payload(this.url, headers, null, this.regInfo);
-      let user = this.communicator.execute(Constants.HttpMethods.POST,
+      const payload = new Payload(this.url, headers, null, this.regInfo);
+      const user = this.communicator.execute(Constants.HttpMethods.POST,
                                            Constants.modelClassNames.USER,
                                            payload);
       console.log(user);
       this.errorMessage = null;
     } else {
       this.clearImportantDetails();
-      if(arePasswordsMatching === false) {
-        this.errorMessage = "Passwords don't match. Please, try again.";
-      } else if(areAnyEmptyValues) {
-        this.errorMessage = "Some fields were left empty. Please, fill in the form and try again.";
-      }
-      else{
-        this.errorMessage = "Error registering you. Please, try again.";
+      if (arePasswordsMatching === false) {
+        this.errorMessage = 'Passwords don\'t match. Please, try again.';
+      } else if (areAnyEmptyValues) {
+        this.errorMessage = 'Some fields were left empty. Please, fill in the form and try again.';
+      } else {
+        this.errorMessage = 'Error registering you. Please, try again.';
       }
     }
   }
 
-  hideError(){
+  hideError() {
     this.errorMessage = null;
   }
 
-  validateInformation(param):boolean {
+  validateInformation(param): boolean {
     return HelperFunctions.isEmptyValue(param);
   }
 
@@ -68,9 +67,9 @@ export class RegistrationComponent implements OnInit {
     this.regInfo.password = '';
     this.repeatPW = '';
     this.regInfo.name = '';
-    this.regInfo.surname = '';
+    this.regInfo.lastname = '';
     this.regInfo.email = '';
-    this.regInfo.phoneno = '';
+    this.regInfo.phoneNo = '';
   }
 
   clearImportantDetails() {
