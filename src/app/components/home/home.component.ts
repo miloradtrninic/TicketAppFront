@@ -9,6 +9,10 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
 
   private dummyItems = [];
+  selectedCinema : boolean;
+  selectedTheatre : boolean;
+
+
   constructor() { }
 
   ngOnInit() {
@@ -40,5 +44,13 @@ export class HomeComponent implements OnInit {
 
   itemClicked(index) {
    alert('Item clicked, with text: ' + this.dummyItems[index]['text']);
+  }
+
+  selectTheatre() {
+    this.selectedTheatre = true;
+  }
+
+  selectCinema() {
+    this.selectedCinema = true;
   }
 }
