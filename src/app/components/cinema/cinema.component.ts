@@ -7,6 +7,8 @@ import { Cinema } from '../../model/cinema.model';
 })
 export class CinemaComponent implements OnInit {
 
+  selectedCinema = false;
+
   cinemas : Cinema[] = [
     new Cinema( 1, "Arena", "Jovana Jovanovica 3", "Neki opis bioskopa" , 4, "zona1" , "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg"),
     new Cinema( 2, "Jadran", "Petra Jovanovica 4", "Neki opis bioskopa2" , 3, "zona2", "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg")
@@ -16,4 +18,11 @@ export class CinemaComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSelect()  {
+    if(this.selectedCinema) {
+      this.selectedCinema = false;
+    } else {
+      this.selectedCinema = true;
+    }
+  }
 }

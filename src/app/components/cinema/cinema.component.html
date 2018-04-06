@@ -5,18 +5,21 @@
   </div>
 </div>
 <hr>
-<div class="row">
-  <div class="col-xs-12"  >
+<div class="row"  >
+  <div class="col-xs-12"  (click)="onSelect()"  >
       <a href = "" 
       class = "list-group-item clearfix" 
-      *ngFor = "let cinema of cinemas"  routerLink= "/auditorium/cinema/{{cinema.id}}" >
+      *ngFor = "let cinema of cinemas" routerLink= "/auditorium/cinema"  >
      
-      <div class = "pull-left"  >
-          <h2 class = "list-group-item-heading letter"><b> {{ cinema.name }} </b></h2>
-          <p class = "list-group-item-text"><i> {{ cinema.address }} </i></p>
-          <p class = "list-group-item-text desc"> {{ cinema.description }}</p>
-          <button class="btn btn-success"> Edit cinema </button>
-          <button class="btn btn-danger"> Delete cinema </button>
+      <div class = "pull-left"    >
+          <h2 class = "list-group-item-heading letter"><b>{{ cinema.name | uppercase }} </b></h2>
+            <div *ngIf = "selectedCinema" >
+              <p class = "list-group-item-text"><i> {{ cinema.address }} </i></p>
+              <p class = "list-group-item-text desc"> {{ cinema.description }}</p>
+              <button class="btn btn-primary" routerLink= "/auditorium/cinema/{cinema.id}" > Open cinema </button>
+               <button class="btn btn-success"> Edit cinema </button>
+               <button class="btn btn-danger"> Delete cinema </button>
+           </div> 
       </div>
       <span class="pull-right">
           <img 

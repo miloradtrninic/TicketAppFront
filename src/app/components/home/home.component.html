@@ -4,10 +4,10 @@
                 (onElementClickEvent)="itemClicked($event)"></app-search>
   </div>
   <div class="row">
-    <div class="col-xs-6 col-md-4 col-lg-offset-4 button">
+    <div class="col-xs-6 col-md-4 col-lg-offset-4 button" >
       <a routerLink="/auditorium/theatre" > <button class="btn btn-primary btn-xlarge letter" >  THEATRE </button> </a>
     </div>
-    <div class="col-xs-6 col-md-4 col-lg-offset-1 button">
+    <div class="col-xs-6 col-md-4 col-lg-offset-1 button" (click) = "selectCinema()">
       <a routerLink= "/auditorium/cinema"  > <button class="btn btn-primary btn-xlarge letter">  CINEMA  </button> </a>
     </div>
   </div>

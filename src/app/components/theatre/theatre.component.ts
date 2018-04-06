@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Theatre } from '../../model/theatre.model';
 
 @Component({
   selector: 'app-theatre',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TheatreComponent implements OnInit {
 
+  selectedTheatre = false;
+
+  theatres : Theatre[] = [
+    new Theatre( 1, "Srpsko narodno", "Nenada Jovanovica 9", "Neki opis pozorista" , 2, "zona2" , "https://upload.wikimedia.org/wikipedia/commons/a/aa/Serbian_National_Theatre_Sept_2005.jpg"),
+    new Theatre( 2, "Decije", "Nikole Pasica 43", "Neki opis pozorista2" , 4, "zona3", "https://upload.wikimedia.org/wikipedia/commons/a/aa/Serbian_National_Theatre_Sept_2005.jpg"),
+    new Theatre( 2, "Beogradsko dramsko", "Petra Petrovica 22", "Neki opis pozorista3" , 4, "zona3", "https://upload.wikimedia.org/wikipedia/commons/a/aa/Serbian_National_Theatre_Sept_2005.jpg")
+ 
+  ];
+
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSelect() {
+    if(this.selectedTheatre) {
+      this.selectedTheatre = false;
+    } else {
+      this.selectedTheatre = true;
+    }
+  }
+
+ 
 }

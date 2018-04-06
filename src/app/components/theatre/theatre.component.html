@@ -1,3 +1,36 @@
-<p>
-  theatre works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+      <button class="btn btn-primary"> Add theatre </button>
+      
+  </div>
+</div>
+<hr>
+<div class="row"  >
+  <div class="col-xs-12" (click)="onSelect()"    >
+      <a href = "" 
+      class = "list-group-item clearfix" 
+      *ngFor = "let theatre of theatres" routerLink= "/auditorium/theatre"  >
+     
+      <div class = "pull-left"    >
+          <h2 class = "list-group-item-heading letter"><b>{{ theatre.name | uppercase }} </b></h2>
+            <div *ngIf = "selectedTheatre" >
+              <p class = "list-group-item-text"><i> {{ theatre.address }} </i></p>
+              <p class = "list-group-item-text desc"> {{ theatre.description }}</p>
+              <button class="btn btn-primary" routerLink= "/auditorium/theatre/{theatre.id}" > Open theatre </button>
+               <button class="btn btn-success"> Edit theatre </button>
+               <button class="btn btn-danger"> Delete theatre </button>
+           </div> 
+      </div>
+      <span class="pull-right">
+          <img 
+          src="{{ theatre.poster }}" 
+          alt="{{ theatre.name}}" 
+          class="img-responsive" 
+          style = "max-height : 120px">
+      </span>
+   
+  </a>
+    
+  </div>
+</div>
+
