@@ -1,9 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TheatreComponent } from '../theatre/theatre.component'
-import { CinemaComponent } from '../cinema/cinema.component'
-import { Cinema } from '../../model/cinema.model';
-import { Theatre } from '../../model/theatre.model';
-import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-auditorium-list',
@@ -12,11 +7,19 @@ import { HomeComponent } from '../home/home.component';
 })
 export class AuditoriumListComponent implements OnInit {
 
-  @Input() cinema: HomeComponent;
-  @Input() theatre: HomeComponent;
+
+  
+  currentURL='';
+  routeCinema = 'http://localhost:4200/auditorium/cinema';
+  routeTheatre =  'http://localhost:4200/auditorium/theatre';
+
 
   constructor() { }
 
+  currUrl() {
+  return this.currentURL=window.location.href;
+  }
+  
   ngOnInit() {
   }
 

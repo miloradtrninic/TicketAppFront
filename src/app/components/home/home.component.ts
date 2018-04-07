@@ -9,8 +9,8 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
 
   private dummyItems = [];
-  selectedCinema : boolean;
-  selectedTheatre : boolean;
+  selectedCinema = false;
+  selectedTheatre = false;
 
 
   constructor() { }

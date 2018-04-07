@@ -1,5 +1,17 @@
-<!-- TO DO:  u zavisnosti selektovanog, da to otvara -->
-  <app-theatre ></app-theatre>
+
+<div *ngIf = "currUrl() === routeCinema" >
+    <app-cinema> </app-cinema>
+</div>
+
+<div *ngIf = "currUrl() === routeTheatre">
+    <app-theatre></app-theatre>
+</div>
+  
+
+
+
+
+
 
 
 
