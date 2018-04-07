@@ -1,7 +1,14 @@
 .letter {
     font-weight: bold;
+   
 }
 .desc {
     border : 2px solid linen;
     margin : 5px;
+}
+h2 {
+    color: blue;
+}
+.detail {
+    font-style: italic;
 }

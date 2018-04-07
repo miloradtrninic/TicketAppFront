@@ -8,7 +8,10 @@ import { Theatre } from '../../model/theatre.model';
 })
 export class TheatreComponent implements OnInit {
 
-  selectedTheatre = false;
+
+  detailTheatre = false;
+  nodetailTheatre = true;
+  currentURL='';
 
   theatres : Theatre[] = [
     new Theatre( 1, "Srpsko narodno", "Nenada Jovanovica 9", "Neki opis pozorista" , 2, "zona2" , "https://upload.wikimedia.org/wikipedia/commons/a/aa/Serbian_National_Theatre_Sept_2005.jpg"),
@@ -23,12 +26,26 @@ export class TheatreComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelect() {
-    if(this.selectedTheatre) {
-      this.selectedTheatre = false;
+  onDetail()  {
+    if(this.detailTheatre) {
+      this.detailTheatre = false;
+      this.nodetailTheatre = true;
     } else {
-      this.selectedTheatre = true;
+      this.detailTheatre = true;
+      this.nodetailTheatre = false;
     }
+  }
+  offDetail()  {
+    if(this.nodetailTheatre) {
+      this.nodetailTheatre = false;
+      this.detailTheatre = true;
+    } else {
+      this.nodetailTheatre = true;
+      this.detailTheatre = false;
+    }
+  }
+  numTheatre() {
+    this.currentURL = this.currentURL=window.location.href;
   }
 
  
