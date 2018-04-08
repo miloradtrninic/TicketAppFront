@@ -11,6 +11,7 @@ import {CommonModule} from '@angular/common';
 import {HomeComponent} from '../components/home/home.component';
 import {RegistrationComponent} from '../components/registration/registration.component';
 import {LoginComponent} from '../components/login/login.component';
+import {UserProfileComponent} from '../components/user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'admin-panel', component: AdminPanelComponent},
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'profile', component: UserProfileComponent},
 
 ];
 

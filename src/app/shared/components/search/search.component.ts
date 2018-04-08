@@ -8,6 +8,7 @@ import { HelperFunctions } from '../../util/helper-functions';
 })
 export class SearchComponent implements OnInit {
 
+  @Input() public shouldHaveList: boolean;
   @Input() public criteriaKeys: Array<any>;    // Niz kljuceva nekog objekta po kom ce se vrsiti pretraga (moze biti kombinacija kljuceva)
   @Input() public items: Array<any>;           // DTO objekti koje dobijamo nekako sa servera
   @Input() public displayKeys: Array<any>;  // Koje atribute u objektu item treba prikazati
@@ -22,6 +23,8 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.shouldShowAutocomplete = false;
+    console.log(this.criteriaKeys);
+    this.selectedCriteria = this.criteriaKeys[0];
 
     if (!HelperFunctions.isEmptyValue(this.criteriaKeys)) {
       for (let i = 0; i < this.criteriaKeys.length; i++) {
@@ -58,7 +61,7 @@ export class SearchComponent implements OnInit {
 
   onInputChange(event) {
     this.searchResults = [];
-    this.shouldShowAutocomplete = true;
+    this.shouldShowAutocomplete = true && !this.shouldHaveList;
 
     if (!HelperFunctions.isEmptyValue(this.selectedCriteria)) {
       this.filterReults();
@@ -115,6 +118,32 @@ export class SearchComponent implements OnInit {
           this.searchResults.push(toAdd);
         }
       }
+    }
+  }
+
+  allToView() {
+    console.log("Upaljeno");
+    const ret = [];
+
+    if (HelperFunctions.isEmptyValue(this.searchResults)) {
+      for (let i = 0; i < this.items.length; i++) {
+        ret.push(this.searchResultToString(this.items[i]));
+      }
+    } else {
+      for (let i = 0; i < this.searchResults.length; i++) {
+        ret.push(this.searchResultToString(this.searchResults[i]));
+      }
+    }
+
+    return ret;
+  }
+
+  criteriaChange(event) {
+    this.searchResults = [];
+    this.shouldShowAutocomplete = true && !this.shouldHaveList;
+
+    if (!HelperFunctions.isEmptyValue(this.selectedCriteria)) {
+      this.filterReults();
     }
   }
 }

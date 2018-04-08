@@ -1,21 +1,18 @@
-
-
-
 <div>
   <div class="row">
-    <app-search [criteriaKeys]="['id', 'text', ['id','text']]" [items]="dummyItems" [displayKeys]="['text']"
+    <app-search [criteriaKeys]="['id', 'text', ['id','text']]" [items]="dummyItems" [displayKeys]="['text']" [shouldHaveList]="true"
                 (onElementClickEvent)="itemClicked($event)"></app-search>
   </div>
-  
+
   <div class="row">
     <div class="col-xs-6 col-md-4 col-lg-offset-4 button"  (click)  = selectTheatre()>
-        <button class="btn btn-primary btn-xlarge letter" [routerLink]="['//auditorium/theatre']" >  
-         THEATRE</button> 
+        <button class="btn btn-primary btn-xlarge letter" [routerLink]="['//auditorium/theatre']" >
+         THEATRE</button>
     </div>
 
     <div class="col-xs-6 col-md-4 col-lg-offset-1 button"  >
-        <button class="btn btn-primary btn-xlarge letter" [routerLink]="['//auditorium/cinema']" > 
-        CINEMA</button> 
+        <button class="btn btn-primary btn-xlarge letter" [routerLink]="['//auditorium/cinema']" >
+        CINEMA</button>
     </div>
   </div>
 
@@ -23,5 +20,5 @@
 
 
 
-     
+
 

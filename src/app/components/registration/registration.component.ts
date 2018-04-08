@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Payload } from '../../shared/util/payload';
-import { CommunicatorService } from '../../shared/services/communicator.service';
 import { HelperFunctions } from '../../shared/util/helper-functions';
-import { Constants } from '../../shared/constants/Constants';
-import { HttpHeaders } from '@angular/common/http';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +8,6 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  url = 'api/auth/register';
   repeatPW = '';
   regInfo = {
     username: null,
@@ -23,7 +19,7 @@ export class RegistrationComponent implements OnInit {
   };
   errorMessage = null;
 
-  constructor(private communicator: CommunicatorService) { }
+  constructor(private service: UserService) { }
 
   ngOnInit() {
   }
@@ -34,14 +30,8 @@ export class RegistrationComponent implements OnInit {
     const shouldSendToServer = !areAnyEmptyValues && arePasswordsMatching;
 
     if (shouldSendToServer) {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-      });
-      const payload = new Payload(this.url, headers, null, this.regInfo);
-      const user = this.communicator.execute(Constants.HttpMethods.POST,
-                                           Constants.modelClassNames.USER,
-                                           payload);
-      console.log(user);
+      const ret = this.service.register(this.regInfo);
+      console.log(ret);
       this.errorMessage = null;
     } else {
       this.clearImportantDetails();
@@ -76,5 +66,4 @@ export class RegistrationComponent implements OnInit {
     this.regInfo.password = '';
     this.repeatPW = '';
   }
-
 }

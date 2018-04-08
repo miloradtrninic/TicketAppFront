@@ -4,7 +4,6 @@ export class HelperFunctions {
     let isEmpty = false;
 
     isEmpty = toCheck === null || toCheck === undefined;
-    console.log('Tip provere: ' + typeof toCheck);
 
     if (typeof toCheck === 'string' && isEmpty !== true) {
       isEmpty = toCheck.length <= 0 || toCheck === '';
