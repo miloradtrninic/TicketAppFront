@@ -10,9 +10,10 @@ import {Router} from '@angular/router';
 export class TheatreComponent implements OnInit {
 
 
-  detailTheatre = false;
-  nodetailTheatre = true;
+  detailTheatre = -1;
   currentURL='';
+  click = false;
+  selected: Theatre;
 
   theatres : Theatre[] = [
     new Theatre( 1, "Srpsko narodno", "Nenada Jovanovica 9", "Neki opis pozorista" , 2, "zona2" , "https://upload.wikimedia.org/wikipedia/commons/a/aa/Serbian_National_Theatre_Sept_2005.jpg"),
@@ -27,23 +28,12 @@ export class TheatreComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDetail()  {
-    if(this.detailTheatre) {
-      this.detailTheatre = false;
-      this.nodetailTheatre = true;
-    } else {
-      this.detailTheatre = true;
-      this.nodetailTheatre = false;
-    }
+  onDetail(index: number)  {
+    this.detailTheatre = index;
   }
+
   offDetail()  {
-    if(this.nodetailTheatre) {
-      this.nodetailTheatre = false;
-      this.detailTheatre = true;
-    } else {
-      this.nodetailTheatre = true;
-      this.detailTheatre = false;
-    }
+    this.detailTheatre = -1;
   }
   numTheatre() {
     this.currentURL = this.currentURL=window.location.href;

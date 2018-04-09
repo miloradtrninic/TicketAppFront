@@ -7,8 +7,10 @@
     margin : 5px;
 }
 h2 {
-    color: blue;
+    color: black;
+    font-size: 36px;
 }
 .detail {
     font-style: italic;
+    cursor:pointer;
 }

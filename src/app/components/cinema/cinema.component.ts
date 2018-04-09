@@ -9,12 +9,11 @@ import {Router} from '@angular/router';
 })
 export class CinemaComponent implements OnInit {
 
-  detailCinema = false;
-  nodetailCinema = true;
+  detailCinema = -1;
   currentURL='';
   routeAddCinema = 'http://localhost:4200/auditorium/cinema/addCinema';
   click = false;
-
+  selected: Cinema;
   cinemas : Cinema[] = [
     new Cinema( 1, "Arena", "Jovana Jovanovica 3", "Neki opis bioskopa" , 4, "zona1" , "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg"),
     new Cinema( 2, "Jadran", "Petra Jovanovica 4", "Neki opis bioskopa2" , 3, "zona2", "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg"),
@@ -26,24 +25,12 @@ export class CinemaComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDetail()  {
-    if(this.detailCinema) {
-      this.detailCinema = false;
-      this.nodetailCinema = true;
-    } else {
-      this.detailCinema = true;
-      this.nodetailCinema = false;
-    }
+  onDetail(index: number)  {
+    this.detailCinema = index;
   }
 
   offDetail()  {
-    if(this.nodetailCinema) {
-      this.nodetailCinema = false;
-      this.detailCinema = true;
-    } else {
-      this.nodetailCinema = true;
-      this.detailCinema = false;
-    }
+    this.detailCinema = -1;
   }
   numCinema() {
     this.currentURL = this.currentURL=window.location.href;
@@ -54,6 +41,6 @@ export class CinemaComponent implements OnInit {
     }
 
     isClicked() {
-
+      
     }
 }

@@ -16,7 +16,6 @@ import { OneClickTicketComponent } from './components/one-click-ticket/one-click
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { UserPanelComponent } from './components/user-panel/user-panel.component';
 import { AdminFanZoneComponent } from './components/admin-panel/admin-fan-zone/admin-fan-zone.component';
-import { RoutingModule} from './routing/routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { BidService} from './services/bid.service';
 import { CinemaService} from './services/cinema.service';
@@ -26,13 +25,16 @@ import { FanzoneService} from './services/fanzone.service';
 import { TheatreService} from './services/theatre.service';
 import { SearchComponent } from './shared/components/search/search.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-<<<<<<< HEAD
+
 import { AddCinemaComponent } from './components/cinema/add-cinema/add-cinema.component';
 import { AddTheatreComponent } from './components/theatre/add-theatre/add-theatre.component'; 
 
-=======
+
 import { ListComponent } from './shared/components/list/list.component';
->>>>>>> 225b9b1976769f02a6e251f3a7d6e157f0fba5ec
+import { RoutingModule } from './app-routing/routing.module';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { ListComponent } from './shared/components/list/list.component';
     PlayComponent,
     FanZoneComponent,
     ReservationComponent,
+    RegistrationComponent,
     OneClickTicketComponent,
     AdminPanelComponent,
     UserPanelComponent,
@@ -52,12 +55,10 @@ import { ListComponent } from './shared/components/list/list.component';
     HomeComponent,
     SearchComponent,
     UserProfileComponent,
-<<<<<<< HEAD
     AddCinemaComponent,
-    AddTheatreComponent
-=======
+    AddTheatreComponent,
+    LoginComponent,
     ListComponent
->>>>>>> 225b9b1976769f02a6e251f3a7d6e157f0fba5ec
   ],
   imports: [
     BrowserModule,
@@ -65,7 +66,8 @@ import { ListComponent } from './shared/components/list/list.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [BidService, CinemaService, FanItemService, FanadService, FanzoneService, TheatreService],
+  providers: [BidService, CinemaService, FanItemService,
+     FanadService, FanzoneService, TheatreService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

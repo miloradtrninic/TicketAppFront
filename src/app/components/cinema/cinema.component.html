@@ -1,8 +1,8 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <a  routerLink = 'addCinema' ><button class="btn btn-primary"  > Add cinema </button></a>
-    </div>
+    <a class="btn btn-primary" (click) = "selected=undefined" data-toggle="modal" data-target="#editCinema">Add cinema</a>
+  </div>
 </div>
 
 <hr>
@@ -12,19 +12,17 @@
     <a class = "list-group-item clearfix" 
       *ngFor = "let cinema of cinemas; let i = index">
       <div class = "pull-left">
-          <h2 class = "list-group-item-heading letter"><b>{{ cinema.name | uppercase }} </b></h2>
-             <div *ngIf = "nodetailCinema">
-                    <a class = "detail" (click)="onDetail()"  >Detaljnije</a>
+          <h2 class = "list-group-item-heading letter"><a routerLink= "/auditorium/cinema/{{i}}/movie"><b>{{ cinema.name | uppercase }} </b></a></h2>
+             <div *ngIf = "detailCinema !== i">
+                    <a class = "detail" (click)="onDetail(i)"  >Detaljnije</a>
             </div>
-            <div *ngIf = "detailCinema">
+            <div *ngIf = "detailCinema === i">
                     <a class = "detail" (click)="offDetail()"  >Vrati</a>
             </div>
-            <div *ngIf = "detailCinema" >
-                   <!-- {{i}} {{cinema.id}}-->
+            <div *ngIf = "detailCinema === i" >
                     <p class = "list-group-item-text"><i> {{ cinema.address }} </i></p>
                     <p class = "list-group-item-text desc"> {{ cinema.description }}</p>
-                    <button class="btn btn-primary"  routerLink= "/auditorium/cinema/{{i}}/movie" > Open cinema </button>
-                    <button class="btn btn-success"> Edit cinema </button>
+                    <button class="btn btn-success" (click) = "selected=cinema" data-toggle="modal" data-target="#editCinema" > Edit cinema </button>
                     <button class="btn btn-danger" > Delete cinema </button>
            </div> 
       </div>
@@ -38,5 +36,19 @@
     </a> 
   </div>
 </div>
+
+<div id="editCinema" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <app-add-cinema [cinema] = "selected" ></app-add-cinema>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
 
 
