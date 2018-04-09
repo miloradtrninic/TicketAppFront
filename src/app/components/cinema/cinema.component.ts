@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cinema } from '../../model/cinema.model';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
+import { CinemaService } from '../../services/cinema.service';
 
 @Component({
   selector: 'app-cinema',
@@ -8,39 +9,24 @@ import {Router} from '@angular/router';
   styleUrls: ['./cinema.component.css']
 })
 export class CinemaComponent implements OnInit {
+  cinema: Cinema;
+  message: string;
+  id: number;
+  constructor(public cinemaService: CinemaService, private route: ActivatedRoute) {
 
-  detailCinema = -1;
-  currentURL='';
-  routeAddCinema = 'http://localhost:4200/auditorium/cinema/addCinema';
-  click = false;
-  selected: Cinema;
-  cinemas : Cinema[] = [
-    new Cinema( 1, "Arena", "Jovana Jovanovica 3", "Neki opis bioskopa" , 4, "zona1" , "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg"),
-    new Cinema( 2, "Jadran", "Petra Jovanovica 4", "Neki opis bioskopa2" , 3, "zona2", "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg"),
-    new Cinema(3, "Arena2", "Petra Ivkovica 14", "Neki opis bioskopa3" , 1, "zona3", "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg")
- 
-  ];
-  constructor() { }
+  }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.id = +params['id']; // (+) converts string 'id' to a number
+      this.cinemaService.getOne(this.id).subscribe(
+        (resp: Cinema) => {
+          this.cinema = resp;
+        }, error => {
+          this.message = error;
+        }
+      );
+   });
+    
   }
-
-  onDetail(index: number)  {
-    this.detailCinema = index;
-  }
-
-  offDetail()  {
-    this.detailCinema = -1;
-  }
-  numCinema() {
-    this.currentURL = this.currentURL=window.location.href;
-  }
-
-  currUrl() {
-    return this.currentURL=window.location.href;
-    }
-
-    isClicked() {
-      
-    }
 }

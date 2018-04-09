@@ -14,7 +14,7 @@ export class AddTheatreComponent implements OnInit {
   address = '';
   description = '';
   poster = '';
-  allowP = false;
+  allowP = true;
   @Input() theatre: Theatre;
 
   constructor() { }
@@ -34,8 +34,11 @@ export class AddTheatreComponent implements OnInit {
   }
 
 
-  allowPreview() {
-    this.allowP = true;
+  allowPreview1() {
+      this.allowP = false;
+  }
+  allowPreview2() {
+      this.allowP = true;  
   }
 
   

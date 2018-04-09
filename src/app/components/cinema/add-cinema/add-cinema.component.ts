@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 import { Cinema } from '../../../model/cinema.model';
+import { NgForm } from '@angular/forms';
+import { CinemaService } from '../../../services/cinema.service';
 
 
 @Component({
@@ -14,10 +16,12 @@ export class AddCinemaComponent implements OnInit {
   address = '';
   description = '';
   poster = '';
-  allowP = false;
+  allowP = true;
   detailCinema = -1;
+  message: string;
   @Input() cinema: Cinema;
-  constructor() { }
+  @ViewChild('addForm') form: NgForm;
+  constructor(public cinemaService: CinemaService) { }
 
   ngOnInit() {
   }
@@ -32,6 +36,25 @@ export class AddCinemaComponent implements OnInit {
 
   offDetail()  {
     this.detailCinema = -1;
+  }
+
+  allowPreview1() {
+    this.allowP = false;
+  }
+  allowPreview2() {
+    this.allowP = true;  
+  }
+  add() {
+    console.log('add');
+    const cinema: Cinema = new Cinema(null, this.form.value['name'], this.form.value['address'], 
+            this.form.value['descrtiption'], 0, null, this.form.value['poster']);
+    this.cinemaService.insert(cinema).subscribe(
+      resp => {
+        console.log(resp);
+      }, error => {
+        this.message = JSON.stringify(error);
+      }
+    );
   }
 
 }

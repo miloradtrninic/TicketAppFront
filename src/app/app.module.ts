@@ -35,6 +35,9 @@ import { RoutingModule } from './app-routing/routing.module';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserService } from './services/user.service';
+import { CinemaListComponent } from './components/cinema/cinema-list/cinema-list.component';
+import { AuthService } from './services/auth.service';
+import { TheatreListComponent } from './components/theatre/theatre-list/theatre-list.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,9 @@ import { UserService } from './services/user.service';
     AddCinemaComponent,
     AddTheatreComponent,
     LoginComponent,
-    ListComponent
+    ListComponent,
+    CinemaListComponent,
+    TheatreListComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,7 @@ import { UserService } from './services/user.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [BidService, CinemaService, FanItemService,
+  providers: [BidService, CinemaService, FanItemService, AuthService,
      FanadService, FanzoneService, TheatreService, UserService],
   bootstrap: [AppComponent]
 })

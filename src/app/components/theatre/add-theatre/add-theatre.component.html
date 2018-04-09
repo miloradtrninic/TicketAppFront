@@ -36,9 +36,10 @@
 
         <div class="form-group">
          
-            <button type="button" class="btn btn-success" (click)="allowPreview()"> Preview </button>
+            <button *ngIf = "allowP" type="button" class="btn btn-success" (click)="allowPreview1()"> Preview </button>
+            <button  *ngIf = "!allowP" type="button" class="btn btn-success" (click)="allowPreview2()"> OK </button>
             <hr>
-            <div class="row col-xm-36" *ngIf = "allowP"> 
+            <div class="row col-xm-36" *ngIf = "!allowP"> 
              
                 <div class="col-xs-8" >
                   <a class = "list-group-item clearfix">

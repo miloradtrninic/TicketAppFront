@@ -4,13 +4,14 @@ import { User } from '../model/user.model';
 import {Observable} from 'rxjs/Observable';
 import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {AuthenticationRequest} from '../model/authentication-request';
+import { AuthService } from './auth.service';
 
 
 @Injectable()
 export class UserService extends AbstractService<User, number> {
 
-  constructor(http: HttpClient) {
-    super(http, '/user');
+  constructor(http: HttpClient, protected authService: AuthService) {
+    super(http, '/user', authService);
   }
 
   register(user: User): Observable<User> {
