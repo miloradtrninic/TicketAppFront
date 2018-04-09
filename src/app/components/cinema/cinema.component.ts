@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cinema } from '../../model/cinema.model';
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-cinema',
   templateUrl: './cinema.component.html',
@@ -10,6 +12,8 @@ export class CinemaComponent implements OnInit {
   detailCinema = false;
   nodetailCinema = true;
   currentURL='';
+  routeAddCinema = 'http://localhost:4200/auditorium/cinema/addCinema';
+  click = false;
 
   cinemas : Cinema[] = [
     new Cinema( 1, "Arena", "Jovana Jovanovica 3", "Neki opis bioskopa" , 4, "zona1" , "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg"),
@@ -43,8 +47,13 @@ export class CinemaComponent implements OnInit {
   }
   numCinema() {
     this.currentURL = this.currentURL=window.location.href;
-
   }
 
-  
+  currUrl() {
+    return this.currentURL=window.location.href;
+    }
+
+    isClicked() {
+
+    }
 }

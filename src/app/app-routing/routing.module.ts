@@ -11,6 +11,8 @@ import {CommonModule} from '@angular/common';
 import {HomeComponent} from '../components/home/home.component';
 import {RegistrationComponent} from '../components/registration/registration.component';
 import {LoginComponent} from '../components/login/login.component';
+import { AddCinemaComponent } from '../components/cinema/add-cinema/add-cinema.component';
+import { AddTheatreComponent } from '../components/theatre/add-theatre/add-theatre.component'; 
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'admin-panel', component: AdminPanelComponent},
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'addCinema', component: AddCinemaComponent},
+  { path: 'addTheatre', component: AddTheatreComponent},
 
 ];
 

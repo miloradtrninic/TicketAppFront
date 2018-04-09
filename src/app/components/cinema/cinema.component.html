@@ -1,11 +1,12 @@
 
 <div class="row">
   <div class="col-xs-12">
-      <button class="btn btn-primary"> Add cinema </button>
-      
-  </div>
+    <a  routerLink = 'addCinema' ><button class="btn btn-primary"  > Add cinema </button></a>
+    </div>
 </div>
+
 <hr>
+
 <div class="row"> 
   <div class="col-xs-12" >
     <a class = "list-group-item clearfix" 
@@ -19,7 +20,7 @@
                     <a class = "detail" (click)="offDetail()"  >Vrati</a>
             </div>
             <div *ngIf = "detailCinema" >
-                    {{i}} {{cinema.id}}
+                   <!-- {{i}} {{cinema.id}}-->
                     <p class = "list-group-item-text"><i> {{ cinema.address }} </i></p>
                     <p class = "list-group-item-text desc"> {{ cinema.description }}</p>
                     <button class="btn btn-primary"  routerLink= "/auditorium/cinema/{{i}}/movie" > Open cinema </button>
@@ -34,9 +35,7 @@
           class="img-responsive" 
           style = "max-height : 120px">
       </span>
-   
-  </a>
-    
+    </a> 
   </div>
 </div>
 
