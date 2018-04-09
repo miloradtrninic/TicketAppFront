@@ -26,9 +26,13 @@ import { FanzoneService} from './services/fanzone.service';
 import { TheatreService} from './services/theatre.service';
 import { SearchComponent } from './shared/components/search/search.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+<<<<<<< HEAD
 import { AddCinemaComponent } from './components/cinema/add-cinema/add-cinema.component';
 import { AddTheatreComponent } from './components/theatre/add-theatre/add-theatre.component'; 
 
+=======
+import { ListComponent } from './shared/components/list/list.component';
+>>>>>>> 225b9b1976769f02a6e251f3a7d6e157f0fba5ec
 
 @NgModule({
   declarations: [
@@ -48,8 +52,12 @@ import { AddTheatreComponent } from './components/theatre/add-theatre/add-theatr
     HomeComponent,
     SearchComponent,
     UserProfileComponent,
+<<<<<<< HEAD
     AddCinemaComponent,
     AddTheatreComponent
+=======
+    ListComponent
+>>>>>>> 225b9b1976769f02a6e251f3a7d6e157f0fba5ec
   ],
   imports: [
     BrowserModule,
