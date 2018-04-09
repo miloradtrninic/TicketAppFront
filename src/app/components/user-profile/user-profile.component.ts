@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Constants } from '../../shared/constants/constants'
+import { Constants } from '../../shared/constants/constants';
+import { HelperFunctions} from '../../shared/util/helper-functions';
 
 @Component({
   selector: 'app-user-profile',

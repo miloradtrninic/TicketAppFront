@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="row ListHeader">
+    {{header}}
+  </div>
+
+  <div class="row ListWrapper">
+    <ul class="list-group">
+      <li class="list-group-item ListItem" *ngFor="let item of items; let i = index" (click)="elementClicked($event)"
+          id={{i}}>
+         {{item}}
+      </li>
+    </ul>
+  </div>
+</div>

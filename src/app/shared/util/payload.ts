@@ -1,9 +1,9 @@
 export class Payload {
 
-  private url:string = '';
-  private headers:any = null;
-  private params:any = null;
-  private body:any = null;
+  private url: string = null;
+  private headers: any = null;
+  private params: any = null;
+  private body: any = null;
 
   constructor(
     url: string,
@@ -31,7 +31,7 @@ export class Payload {
     };
   }
 
-  getUrl():string {
+  getUrl(): string {
     return this.url;
   }
 }

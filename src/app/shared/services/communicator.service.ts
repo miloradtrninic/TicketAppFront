@@ -10,19 +10,19 @@ export class CommunicatorService {
   constructor(private http: HttpClient) {}
 
   execute(method: string, modelName: string, payload: Payload): any {
-    let responseData = this.pingServer(method, payload.toPlainObject());
+    const responseData = this.pingServer(method, payload.toPlainObject());
     let model = null;
 
-    if(!HelperFunctions.isEmptyValue(modelName)){
-      let model = Object.create(window[modelName].prototype);
-      if(HelperFunctions.isEmptyValue(model))
+    if (!HelperFunctions.isEmptyValue(modelName)) {
+      model = Object.create(window[modelName].prototype);
+      if (HelperFunctions.isEmptyValue(model))
         model.constructor.apply(model, responseData);
     }
 
     return model;
   }
 
-  pingServer(method:string, payloadPlain:any): any {
+  pingServer(method: string, payloadPlain: any): any {
     let response = null;
 
     switch(method) {

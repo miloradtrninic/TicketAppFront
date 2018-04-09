@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {Fanad} from '../model/fanad.model';
 import {AbstractService} from './abstract-service';
-import {Http} from '@angular/http';
+import { User } from '../model/user.model';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable()
-export class FanadService extends AbstractService<Fanad, number> {
+export class AuthService extends AbstractService<User, number> {
 
   constructor(http: HttpClient) {
-    super(http, '/fanad');
+    super(http, '/auth');
   }
+
 }
