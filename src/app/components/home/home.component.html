@@ -1,7 +1,6 @@
 <div>
-  <div class="row">
-    <app-search [criteriaKeys]="['id', 'text', ['id','text']]" [items]="dummyItems" [displayKeys]="['text']" [shouldHaveList]="true"
-                (onElementClickEvent)="itemClicked($event)"></app-search>
+  <div class="row" *ngIf="userAuthenticated">
+
   </div>
 
   <div class="row">

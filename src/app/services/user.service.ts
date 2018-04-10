@@ -4,10 +4,13 @@ import { User } from '../model/user.model';
 import {Observable} from 'rxjs/Observable';
 import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {AuthenticationRequest} from '../model/authentication-request';
+import {Token} from '../model/token';
 
 
 @Injectable()
 export class UserService extends AbstractService<User, number> {
+
+  private token: Token;
 
   constructor(http: HttpClient) {
     super(http, '/user');
@@ -30,6 +33,22 @@ export class UserService extends AbstractService<User, number> {
       })
     };
 
-    return this.http.post('/auth/login', loginInfo, options);
+    this.http.post('/auth/login', loginInfo, options)
+      .subscribe(ret => {
+        console.log(ret);       // ovde treba da se namesti token
+      });
+    return this.token;
+  }
+
+  getByToken() {
+    return this.http.post('user/getByToken', this.token.token);
+  }
+
+  getByUserName(userName: string) {
+    return this.http.post('user/getByUserName', userName);
+  }
+
+  getToken() {
+    return this.token;
   }
 }

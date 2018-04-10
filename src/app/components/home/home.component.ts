@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
 
   private dummyItems = [];
+  private userAuthenticated: boolean;
   selectedCinema = false;
   selectedTheatre = false;
 
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.userAuthenticated = true;
     this.createDummyTest()
   }
 

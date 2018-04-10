@@ -1,0 +1,17 @@
+.Buttons {
+  alignment: center;
+  align-items: center;
+  align-content: center;
+}
+
+.InfoWrapper {
+  width: 70%;
+}
+
+.RemoveFriends {
+  background: linear-gradient(to bottom, red, darkred, red);
+}
+
+.AddFriends {
+  background: linear-gradient(to bottom, lawngreen, green, lawngreen);
+}

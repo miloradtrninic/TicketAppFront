@@ -5,6 +5,6 @@ import {Membership} from './membership.model';
 
 export class User {
   constructor(id: number, username: string, email: string, name: string, lastname: string,
-              phoneNo: string, friends: string[], friendOf: string[], friendRequests: string[], friendRequestsSent: string,
+              phoneNo: string, city: string, friends: string[], friendOf: string[], friendRequests: string[], friendRequestsSent: string,
               userAds: Array<Fanad>, bidList: Array<Bid>, userRoles: Array<UserRole>, membership: Membership) {}
 }
