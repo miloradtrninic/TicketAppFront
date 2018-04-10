@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { Cinema } from '../../../model/cinema.model';
 import { NgForm } from '@angular/forms';
 import { CinemaService } from '../../../services/cinema.service';

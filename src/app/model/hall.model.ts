@@ -2,5 +2,5 @@ import {Auditorium} from './auditorium.model';
 import {Hallsegment} from './hallsegment.model';
 
 export class Hall {
-  constructor(id: number, name: string, auditorium: Auditorium, hallSegments: Array<Hallsegment>) {}
+  constructor(public id: number, public name: string,public auditorium: Auditorium,public hallSegmentListIds: Array<Hallsegment>) {}
 }

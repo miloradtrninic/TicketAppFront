@@ -1,6 +1,11 @@
 <h2>{{theatre?.name}}</h2>
    
-<form class="form-horizontal">
+<div class="alert alert-warning alert-dismissible" *ngIf= "message">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+
+<form class="form-horizontal" #addForm = "ngForm" (ngSubmit)="add()">
 
       <div class="form-group">
         <label for="name" class="col-sm-2 control-label"> Name: </label>
@@ -44,7 +49,7 @@
                 <div class="col-xs-8" >
                   <a class = "list-group-item clearfix">
                     <div class = "pull-left">
-                        <h2 class = "list-group-item-heading letter"><b>{{ name | uppercase }} </b></h2>
+                        <h2 class = "list-group-item-heading letter"><b>{{ theatre.name | uppercase }} </b></h2>
                            <div *ngIf = "detailTheatre !== i">
                                   <a class = "detail" (click)="onDetail(i)"  >Detaljnije</a>
                           </div>
@@ -52,14 +57,14 @@
                                   <a class = "detail" (click)="offDetail()"  >Vrati</a>
                           </div>
                           <div *ngIf = "detailTheatre === i" >
-                                  <p class = "list-group-item-text"><i> {{ address }} </i></p>
-                                  <p class = "list-group-item-text desc"> {{ description }}</p>
+                                  <p class = "list-group-item-text"><i> {{ theatre.address }} </i></p>
+                                  <p class = "list-group-item-text desc"> {{ theatre.description }}</p>
                          </div> 
                     </div>
                     <span class="pull-right">
                         <img 
-                        src="{{ poster }}" 
-                        alt="{{ name}}" 
+                        src="{{ theatre.poster }}" 
+                        alt="{{ theatre.name}}" 
                         class="img-responsive" 
                         style = "max-height : 120px">
                     </span>
@@ -69,7 +74,7 @@
               </div>
 
               <hr>   
-            <button type="button" class="btn btn-primary" (click)="add()">Add theatre</button>
+            <input type="submit" class = "btn btn-primary" value = "Add theatre" >
          
         </div>
   </form>
