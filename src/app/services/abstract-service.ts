@@ -10,20 +10,20 @@ export abstract class AbstractService<Entity, Key> {
   constructor(protected http: HttpClient, protected url: string, protected authService: AuthService) {
     this.actionUrl = this.actionUrl + url + '/';
   }
-  getAll(): Observable<Entity[]> {
+  getAll(): Observable<any[]> {
     return this.http.get(this.actionUrl).map(resp => resp as Entity[]);
   }
-  getOne(id: Key): Observable<Entity> {
+  getOne(id: Key): Observable<any> {
     return this.http.get(`${this.actionUrl}${id}`).map(resp => resp as Entity);
   }
-  insert(toInsert: Entity): Observable<Entity> {
+  insert(toInsert: any): Observable<Entity> {
     console.log(toInsert);
     return this.http.post(this.actionUrl + 'new', toInsert).map(resp => resp as Entity);
   }
   delete(toDelete: Key): Observable<any> {
     return this.http.delete(this.actionUrl + 'delete' + toDelete);
   }
-  update(toUpdate: Entity): Observable<Entity> {
+  update(toUpdate: any): Observable<any> {
     return this.http.put(this.actionUrl + 'update', toUpdate);
   }
 }
