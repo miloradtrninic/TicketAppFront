@@ -2,5 +2,6 @@ import {Projection} from './projection.model';
 import {Fanzone} from './fanzone.model';
 
 export class Fanitem {
-  constructor(id: number, projection: Projection, fanzone: Fanzone) {}
+  constructor(public id: number, public name: string, public description: string,
+              public imagePath: string, public projection: Projection, public fanzone: Fanzone) {}
 }

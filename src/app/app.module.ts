@@ -27,7 +27,7 @@ import { SearchComponent } from './shared/components/search/search.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 import { AddCinemaComponent } from './components/cinema/add-cinema/add-cinema.component';
-import { AddTheatreComponent } from './components/theatre/add-theatre/add-theatre.component'; 
+import { AddTheatreComponent } from './components/theatre/add-theatre/add-theatre.component';
 
 
 import { ListComponent } from './shared/components/list/list.component';
@@ -38,6 +38,7 @@ import { UserService } from './services/user.service';
 import { CinemaListComponent } from './components/cinema/cinema-list/cinema-list.component';
 import { AuthService } from './services/auth.service';
 import { TheatreListComponent } from './components/theatre/theatre-list/theatre-list.component';
+import { AdminFanZoneItemsComponent } from './components/admin-panel/admin-fan-zone/admin-fan-zone-items/admin-fan-zone-items.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { TheatreListComponent } from './components/theatre/theatre-list/theatre-
     LoginComponent,
     ListComponent,
     CinemaListComponent,
-    TheatreListComponent
+    TheatreListComponent,
+    AdminFanZoneItemsComponent
   ],
   imports: [
     BrowserModule,

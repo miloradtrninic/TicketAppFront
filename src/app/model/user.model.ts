@@ -4,7 +4,8 @@ import {UserRole} from './user-role.model';
 import {Membership} from './membership.model';
 
 export class User {
-  constructor(id: number, username: string, email: string, name: string, lastname: string,
-              phoneNo: string, friends: string[], friendOf: string[], friendRequests: string[], friendRequestsSent: string,
-              userAds: Array<Fanad>, bidList: Array<Bid>, userRoles: Array<UserRole>, membership: Membership) {}
+  constructor(public id: number, public username: string, public  email: string, public  name: string, public lastname: string,
+              public phoneNo: string, public  friends: string[], public  friendOf: string[], public  friendRequests: string[],
+              public friendRequestsSent: string, public userAds: Array<Fanad>, public  bidList: Array<Bid>,
+              public userRoles: Array<UserRole>, public  membership: Membership) {}
 }

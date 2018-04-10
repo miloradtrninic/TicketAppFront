@@ -1,7 +1,10 @@
-export class Movie {
+import {Projection} from './projection.model';
 
-  constructor(public id:number, public name : string, public ratings : number, public director : string,
-  public duration : number, public coverImage : string, public description : string) {
+export class Movie extends Projection {
+
+  constructor(id: number, name: string, ratings: number, director: string,
+              duration: number, coverImage: string, description: string) {
+    super(id, name, ratings, director, duration, coverImage, description);
   }
 
 }

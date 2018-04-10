@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 
 
 export abstract class AbstractService<Entity, Key> {
-  actionUrl: string = 'http://localhost:8080/api';
+  actionUrl = 'http://localhost:8080/api';
   constructor(protected http: HttpClient, protected url: string, protected authService: AuthService) {
     this.actionUrl = this.actionUrl + url + '/';
   }
@@ -20,7 +20,10 @@ export abstract class AbstractService<Entity, Key> {
     console.log(toInsert);
     return this.http.post(this.actionUrl + 'new', toInsert).map(resp => resp as Entity);
   }
-  delete(toDelete: string): Observable<any> {
+  delete(toDelete: Key): Observable<any> {
     return this.http.delete(this.actionUrl + 'delete' + toDelete);
+  }
+  update(toUpdate: Entity): Observable<Entity> {
+    return this.http.put(this.actionUrl + 'update', toUpdate);
   }
 }
