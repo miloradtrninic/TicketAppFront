@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddCinemaComponent } from './add-cinema.component';
+import { AdminFanZoneItemsComponent } from './admin-fan-zone-items.component';
 
-describe('AddCinemaComponent', () => {
-  let component: AddCinemaComponent;
-  let fixture: ComponentFixture<AddCinemaComponent>;
+describe('AdminFanZoneItemsComponent', () => {
+  let component: AdminFanZoneItemsComponent;
+  let fixture: ComponentFixture<AdminFanZoneItemsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddCinemaComponent ]
+      declarations: [ AdminFanZoneItemsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddCinemaComponent);
+    fixture = TestBed.createComponent(AdminFanZoneItemsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

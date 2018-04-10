@@ -14,22 +14,31 @@ import {LoginComponent} from '../components/login/login.component';
 import { AddCinemaComponent } from '../components/cinema/add-cinema/add-cinema.component';
 import { AddTheatreComponent } from '../components/theatre/add-theatre/add-theatre.component';
 import {UserProfileComponent} from '../components/user-profile/user-profile.component';
+import { CinemaListComponent } from '../components/cinema/cinema-list/cinema-list.component';
+import { TheatreListComponent } from '../components/theatre/theatre-list/theatre-list.component';
+import {AdminFanZoneComponent} from '../components/admin-panel/admin-fan-zone/admin-fan-zone.component';
+import {AdminFanZoneItemsComponent} from '../components/admin-panel/admin-fan-zone/admin-fan-zone-items/admin-fan-zone-items.component';
 
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
-
-  { path: 'auditorium/cinema', component: CinemaComponent},
-  { path: 'auditorium/cinema/:id', component: MovieComponent},
-  { path: 'auditorium/theatre', component: TheatreComponent},
-  { path: 'auditorium/theatre/:id', component: PlayComponent},
+  { path: 'cinema', component: CinemaListComponent},
+  { path: 'cinema/:id', component: CinemaComponent},
+  { path: 'cinema/:id/movie/:movieId', component: MovieComponent},
+  { path: 'theatre', component: TheatreListComponent},
+  { path: 'theatre/:id', component: TheatreComponent},
+  { path: 'theatre/:id/play/:playId', component: TheatreComponent},
   { path: 'fanzone', component: FanZoneComponent},
-  { path: 'admin-panel', component: AdminPanelComponent},
+  { path: 'admin-panel', component: AdminPanelComponent, children: [
+    {path: 'fan-zone', component: AdminFanZoneComponent},
+    {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent}
+  ]},
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: UserProfileComponent}
+
 ];
 
 @NgModule({

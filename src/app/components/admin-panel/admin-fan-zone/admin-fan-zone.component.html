@@ -1,3 +1,53 @@
-<p>
-  admin-fan-zone works!
-</p>
+<div *ngIf="error" class="alert alert-warning alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
+<a class="btn btn-success" data-target="#dialog" data-toggle="modal" (click)="select(undefined)"><i class="glyphicon glyphicon-plus"></i> New fan zone</a>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <th>#</th>
+      <th>Admin</th>
+      <th>Auditorium</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let zone of fanZones">
+        <td>{{zone.id}}</td>
+        <td>{{zone.admin.username}}</td>
+        <td>{{zone.auditorium.name}}</td>
+        <td><button class="btn btn-primary" (click)="select(zone)" data-target="#dialog" data-toggle="modal">Edit zone</button></td>
+        <td><button class="btn btn-danger" (click)="delete()">Delete zone</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="dialog">
+  <div class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Fan zone</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" (submit)="submitForm()" #f="ngForm" >
+          <div class="form-group">
+            <label>Admin: </label>
+            <select [compareWith] = "userId" class="form-control" name="admin" #admin="ngModel" ngModel>
+              <option [ngValue]="admin" *ngFor="let admin of admins">{{admin.username}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Auditorium</label>
+            <select [compareWith] = "audId" class="form-control" name="auditorium" #autitorium="ngModel" ngModel>
+              <option [ngValue]="audit" *ngFor="let audit of auditoriums">
+                {{audit.name}}
+              </option>
+            </select>
+          </div>
+          <button type="submit" [disabled]="!f.valid" class="btn btn-success btn-lg btn-block">Send
+            <i class="glyphicon glyphicon-upload"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
