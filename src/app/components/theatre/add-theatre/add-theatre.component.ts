@@ -1,6 +1,8 @@
-import { Component, OnInit , Input} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit , Input, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
 import { Theatre } from '../../../model/theatre.model';
+import { NgForm } from '@angular/forms';
+import { TheatreService } from '../../../services/theatre.service';
 
 @Component({
   selector: 'app-add-theatre',
@@ -9,15 +11,18 @@ import { Theatre } from '../../../model/theatre.model';
 })
 export class AddTheatreComponent implements OnInit {
 
-  detailTheatre = -1;
+  
   name = '';
   address = '';
   description = '';
   poster = '';
   allowP = true;
+  detailTheatre = -1;
+  message: string;
   @Input() theatre: Theatre;
+  @ViewChild('addForm') form: NgForm;
 
-  constructor() { }
+ constructor(public theatreService: TheatreService) { }
 
 
   ngOnInit() {
@@ -41,5 +46,17 @@ export class AddTheatreComponent implements OnInit {
       this.allowP = true;  
   }
 
+  add() {
+    console.log('add theatre');
+    const theatre: Theatre = new Theatre(null, this.form.value['name'], this.form.value['address'], 
+            this.form.value['descrtiption'], 0, null, this.form.value['poster']);
+    this.theatreService.insert(theatre).subscribe(
+      resp => {
+        console.log(resp);
+      }, error => {
+        this.message = JSON.stringify(error);
+      }
+    );
+  }
   
 }

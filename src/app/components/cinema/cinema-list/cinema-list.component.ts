@@ -15,12 +15,7 @@ export class CinemaListComponent implements OnInit {
   click = false;
   selected: Cinema;
   message: string;
-  cinemas : Cinema[] = [
-    new Cinema( 1, "Arena", "Jovana Jovanovica 3", "Neki opis bioskopa" , 4, "zona1" , "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg"),
-    new Cinema( 2, "Jadran", "Petra Jovanovica 4", "Neki opis bioskopa2" , 3, "zona2", "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg"),
-    new Cinema(3, "Arena2", "Petra Ivkovica 14", "Neki opis bioskopa3" , 1, "zona3", "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ksenija_Bulatovic_Bioskop_Fontana.jpg")
- 
-  ];
+  cinemas : Cinema[] = [];
   constructor(public cinemaService: CinemaService) { }
 
   ngOnInit() {
