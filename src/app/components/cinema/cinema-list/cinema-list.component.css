@@ -1,0 +1,16 @@
+.letter {
+    font-weight: bold;
+   
+}
+.desc {
+    border : 2px solid linen;
+    margin : 5px;
+}
+h2 {
+    color: black;
+    font-size: 36px;
+}
+.detail {
+    font-style: italic;
+    cursor:pointer;
+}

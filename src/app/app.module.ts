@@ -39,6 +39,9 @@ import { CinemaListComponent } from './components/cinema/cinema-list/cinema-list
 import { AuthService } from './services/auth.service';
 import { TheatreListComponent } from './components/theatre/theatre-list/theatre-list.component';
 import { AdminFanZoneItemsComponent } from './components/admin-panel/admin-fan-zone/admin-fan-zone-items/admin-fan-zone-items.component';
+import { AddMovieComponent } from './components/cinema/movie/add-movie/add-movie.component';
+import { MovieListComponent } from './components/cinema/movie/movie-list/movie-list.component';
+import { MovieService } from './services/movie.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,9 @@ import { AdminFanZoneItemsComponent } from './components/admin-panel/admin-fan-z
     ListComponent,
     CinemaListComponent,
     TheatreListComponent,
-    AdminFanZoneItemsComponent
+    AdminFanZoneItemsComponent,
+    AddMovieComponent,
+    MovieListComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,7 @@ import { AdminFanZoneItemsComponent } from './components/admin-panel/admin-fan-z
     HttpClientModule
   ],
   providers: [BidService, CinemaService, FanItemService, AuthService,
-     FanadService, FanzoneService, TheatreService, UserService],
+     FanadService, FanzoneService, TheatreService, UserService, MovieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
