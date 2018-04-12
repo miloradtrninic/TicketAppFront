@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HelperFunctions } from '../../shared/util/helper-functions';
 import {UserService} from '../../services/user.service';
+import {UserCreation} from '../../model/creation/user-creation.model';
 
 @Component({
   selector: 'app-registration',
@@ -8,6 +9,7 @@ import {UserService} from '../../services/user.service';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  registered = false;
   repeatPW = '';
   regInfo = {
     username: null,
@@ -30,9 +32,19 @@ export class RegistrationComponent implements OnInit {
     const shouldSendToServer = !areAnyEmptyValues && arePasswordsMatching;
 
     if (shouldSendToServer) {
-      const ret = this.service.register(this.regInfo);
-      console.log(ret);
-      this.errorMessage = null;
+      const user = (new UserCreation(this.regInfo.username, this.regInfo.email, this.regInfo.name,
+                                      this.regInfo.lastname, this.regInfo.phoneNo, this.regInfo.password));
+
+      const ret = this.service.register(user)
+        .subscribe(res => {
+          this.registered = true;
+          this.errorMessage = null;
+        },
+          err => {
+          this.registered = false;
+          this.errorMessage = 'Error registering you. This was our fault. Please, try again.';
+        });
+
     } else {
       this.clearImportantDetails();
       if (arePasswordsMatching === false) {

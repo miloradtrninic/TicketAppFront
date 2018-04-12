@@ -2,44 +2,37 @@
   Log in with your information
 </h1>
 
-<div *ngIf="errorMessage !== null" class="errorContainer">
+<div *ngIf="errorMessage !== null" class="errorContainer" align="center">
   <div class="alert alert-danger alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)='hideError()'>
       <span aria-hidden="true">&times;</span></button>
-      {{errorMessage}}
+    <strong>{{errorMessage}}</strong>
   </div>
 </div>
 
 <div align="center">
-  <form class="loginForm form-horizontal">
+  <form class="loginForm form-horizontal" #loginForm="ngForm">
       <div class="form-group">
         <label for="email" class="col-sm-2 control-label"> Email address: </label>
-        <div class="col-sm-10">
+        <div class="col-sm-7">
           <input type="email" class="form-control" id="email" placeholder="Your email goes here..."
-                  name="email" [(ngModel)]="logInfo.email">
+                  name="email" [(ngModel)]="logInfo.email" required #email="ngModel" minlength="2">
         </div>
+        <div [hidden]="(email.untouched && email.pristine) || email.valid"
+             class="alert alert-danger">E-mail or username required</div>
       </div>
 
       <div class="form-group">
         <label for="password" class="col-sm-2 control-label"> Password: </label>
         <div class="col-sm-10">
           <input type="password" class="form-control" id="password" placeholder="Enter password..."
-                  name="email" [(ngModel)]="logInfo.password">
+                  name="password" [(ngModel)]="logInfo.password" required #password="ngModel">
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-sm-10">
-          <div class="checkbox">
-            <label><input type="checkbox" id="rememberMe" name="rememberMe"
-                   [(ngModel)]="logInfo.rememberMe">Remember me</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-10">
-          <button type="button" class="btn btn-primary" (click)="tryLogin()">Login</button>
+          <button type="button" class="btn btn-primary" (click)="tryLogin()" [disabled]="!loginForm.form.valid">Login</button>
         </div>
       </div>
   </form>

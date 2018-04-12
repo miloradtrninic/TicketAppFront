@@ -12,11 +12,7 @@ import {User} from '../../model/user.model';
 export class UserProfileComponent implements OnInit {
 
   private mode: string;
-  private user: User = new User(0, 'rixon', 'milosribar@yahoo.com', 'Riki',
-    'Bogotac', '0611586802',
-    'Gejacka republika, tamo dje trava raste',
-    null, null, null, null,
-    null, null, null, null);
+  private user: User;
   private allUsers: Array<User>;
   private shouldShowPWForm: boolean;
   private userEditInfo = {

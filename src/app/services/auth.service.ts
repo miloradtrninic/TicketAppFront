@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import {AbstractService} from './abstract-service';
-import { User } from '../model/user.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Token } from '../model/token';
+import { Token } from '../model/token.model';
 
 @Injectable()
 export class AuthService {
   loggedUserToken: Token;
   errorMessage: string;
   headers = new HttpHeaders({'Content-Type': 'application/json' });
+
   constructor(http: HttpClient) {
   }
 
