@@ -1,11 +1,20 @@
+.addForm {
+    width: 50%;
+    align-items: center;
+    align-self: center;
+    padding-top: 10px;
+  }
+
+.description {
+    height: 150px;
+}
 .letter {
     font-weight: bold;
    
 }
 .desc {
     border : 2px solid linen;
-    margin : 15px;
-    height: 30%;
+    margin : 5px;
 }
 h2 {
     color: black;

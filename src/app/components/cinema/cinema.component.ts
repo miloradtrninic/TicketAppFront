@@ -9,9 +9,12 @@ import { CinemaService } from '../../services/cinema.service';
   styleUrls: ['./cinema.component.css']
 })
 export class CinemaComponent implements OnInit {
+
   cinema: Cinema;
   message: string;
   id: number;
+  cinemas : Cinema[] = [];
+  
   constructor(public cinemaService: CinemaService, private route: ActivatedRoute) {
 
   }
