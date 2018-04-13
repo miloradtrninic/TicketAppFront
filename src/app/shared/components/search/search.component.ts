@@ -123,7 +123,6 @@ export class SearchComponent implements OnInit {
   }
 
   allToView() {
-    console.log("Upaljeno");
     const ret = [];
 
     if (HelperFunctions.isEmptyValue(this.searchResults)) {

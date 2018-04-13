@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { HelperFunctions } from '../../shared/util/helper-functions';
 import {UserService} from '../../services/user.service';
 import {UserCreation} from '../../model/creation/user-creation.model';
+import {TopLevelComponent} from '../top-level/top-level.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent extends TopLevelComponent implements OnInit {
   registered = false;
   repeatPW = '';
   regInfo = {
@@ -21,9 +23,12 @@ export class RegistrationComponent implements OnInit {
   };
   errorMessage = null;
 
-  constructor(private service: UserService) { }
+  constructor(protected service: UserService, protected router: Router) {
+    super(service, router, '/home');
+  }
 
   ngOnInit() {
+    super.ngOnInit();
   }
 
   tryRegister() {

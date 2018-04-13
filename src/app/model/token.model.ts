@@ -1,3 +1,3 @@
 export class Token {
-    constructor(public role?, public username?, public token?) {}
+    constructor(public roles?, public privileges?, public username?, public id?, public token?) {}
 }

@@ -42,6 +42,7 @@ import { AdminFanZoneItemsComponent } from './components/admin-panel/admin-fan-z
 import { AddMovieComponent } from './components/cinema/movie/add-movie/add-movie.component';
 import { MovieListComponent } from './components/cinema/movie/movie-list/movie-list.component';
 import { MovieService } from './services/movie.service';
+import { TopLevelComponent } from './components/top-level/top-level.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { MovieService } from './services/movie.service';
     TheatreListComponent,
     AdminFanZoneItemsComponent,
     AddMovieComponent,
-    MovieListComponent
+    MovieListComponent,
+    TopLevelComponent
   ],
   imports: [
     BrowserModule,
