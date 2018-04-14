@@ -1,6 +1,6 @@
 export class Constants {
   /*Koristi komunikator servis*/
-  public static HttpMethods = {
+  public static readonly HttpMethods = {
     GET: 'GET',
     POST: 'POST',
     PUT: 'PUT',
@@ -10,7 +10,7 @@ export class Constants {
   };
 
   /*Koristi bilo koja komponenta koja poziva komunikator servis*/
-  public static modelClassNames = {
+  public static readonly modelClassNames = {
     USER : 'User',
     USER_ROLE: 'UserRole',
     AUDITORIUM : 'Auditorium',
@@ -18,8 +18,18 @@ export class Constants {
     CINEMA : 'Cinema',
   };
 
-  public static State = {
+  public static readonly State = {
     VIEW : 'view',
     EDIT : 'edit',
+  }
+
+  /*Tip zahteva, dodavati po zelji i menjati request komponentu*/
+  public static readonly RequestType = {
+    ACPTDEC: 'Accept-Decline',
+  }
+
+  public static readonly ListType = {
+    COMMON : 'Common',
+    REQUEST_LIST: 'Request list'
   }
 }

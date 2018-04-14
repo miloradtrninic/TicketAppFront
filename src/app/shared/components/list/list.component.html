@@ -3,11 +3,21 @@
     {{header}}
   </div>
 
-  <div class="row ListWrapper">
+  <div class="row ListWrapper" *ngIf="type == null || type == listType.COMMON">
     <ul class="list-group">
       <li class="list-group-item ListItem" *ngFor="let item of items; let i = index" (click)="elementClicked($event)"
           id={{i}}>
          {{item}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="row ListWrapper" *ngIf="type == null || type == listType.REQUEST_LIST">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let item of items; let i = index" (click)="elementClicked($event)"
+          id="{{'Request'+i}}">
+        <app-request [requestText]="item.text" [acceptClickEvent]="item.acceptFn"
+                      [declineClickEvent]="item.declineFn" [type]="item.type"></app-request>
       </li>
     </ul>
   </div>

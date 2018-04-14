@@ -60,7 +60,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}/friends/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}friends/${this.authService.loggedUserToken['id']}`;
 
     return this.http.get(url, options).map(resp => resp as UserPreview[]);
   }
@@ -69,7 +69,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}/nonFriends/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}notFriends/${this.authService.loggedUserToken['id']}`;
 
     return this.http.get(url, options).map(resp => resp as UserPreview[]);
   }
@@ -87,7 +87,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}/removeFriend/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}removeFriend/${this.authService.loggedUserToken['id']}`;
 
     return this.http.post(url, userId, options).map(resp => resp as UserPreview);
   }
@@ -96,7 +96,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}/acceptFriendship/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}acceptFriendship/${this.authService.loggedUserToken['id']}`;
 
     return this.http.post(url, userId, options).map(resp => resp as UserPreview);
   }
@@ -105,7 +105,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}/declineFriendship/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}declineFriendship/${this.authService.loggedUserToken['id']}`;
 
     return this.http.post(url, userId, options).map(resp => resp as UserPreview);
   }

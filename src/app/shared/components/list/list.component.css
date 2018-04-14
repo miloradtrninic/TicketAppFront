@@ -1,6 +1,6 @@
 .ListWrapper {
   width: auto;
-  height: auto;
+  height: 350px;
   border-style: solid;
   border-color: cadetblue;
   overflow: scroll;
@@ -31,4 +31,11 @@
   background-color: dodgerblue;
   color: white;
   cursor: pointer;
+}
+
+.NoItems {
+  width: auto;
+  height: auto;
+  color: orange;
+  background: darkslategray;
 }

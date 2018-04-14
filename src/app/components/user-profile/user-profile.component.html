@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <br/> <br/>
+  <br/>
 
   <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog" role="document">
@@ -51,80 +51,95 @@
     </div>
   </div>
 
-  <div class="col-sm-5 InfoWrapper" *ngIf="mode === 'view'">
-    <table class="table">
-      <tr>
-        <th> Personal Info </th>
-      </tr>
-      <tr>
-        <td><label for="email">E-mail: </label></td>
-        <td><label>{{user.email}}</label></td>
-      </tr>
-      <tr>
-        <td><label for="name">First name: </label></td>
-        <td><label>{{user.name}}</label></td>
-      </tr>
-      <tr>
-        <td><label for="last">Last name: </label></td>
-        <td><label>{{user.lastname}}</label></td>
-      </tr>
-      <tr>
-        <td><label for="city">City: </label></td>
-        <td><label>{{user.city}}</label></td>
-      </tr>
-      <tr>
-        <td><label for="phone">Phone: </label></td>
-        <td><label>{{user.phoneNo}}</label></td>
-      </tr>
-    </table>
+  <div>
+    <div class="col-sm-3 InfoWrapper" *ngIf="mode === 'view'">
+      <table class="table">
+        <tr>
+          <th> Personal Info </th>
+        </tr>
+        <tr>
+          <td><label for="email">E-mail: </label></td>
+          <td><label>{{user.email}}</label></td>
+        </tr>
+        <tr>
+          <td><label for="name">First name: </label></td>
+          <td><label>{{user.name}}</label></td>
+        </tr>
+        <tr>
+          <td><label for="last">Last name: </label></td>
+          <td><label>{{user.lastname}}</label></td>
+        </tr>
+        <tr>
+          <td><label for="city">City: </label></td>
+          <td><label>{{user.city}}</label></td>
+        </tr>
+        <tr>
+          <td><label for="phone">Phone: </label></td>
+          <td><label>{{user.phoneNo}}</label></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-sm-3 InfoWrapper" *ngIf="mode === 'edit'">
+      <table class="table">
+        <tr>
+          <th> Edit Personal Info </th>
+        </tr>
+        <tr>
+          <td><label for="email">E-mail: </label></td>
+          <td><input type="email" name="email" id="email" [(ngModel)]="userEditInfo.email" value="{{user.email}}"/></td>
+        </tr>
+        <tr>
+          <td><label for="name">First name: </label></td>
+          <td><input type="text" name="name" id="name" [(ngModel)]="userEditInfo.name" value="{{user.name}}"/></td>
+        </tr>
+        <tr>
+          <td><label for="last">Last name: </label></td>
+          <td><input type="text" name="last" id="last" [(ngModel)]="userEditInfo.lastname" value="{{user.lastname}}"/></td>
+        </tr>
+        <tr>
+          <td><label for="city">City: </label></td>
+          <td><input type="text" name="city" id="city" [(ngModel)]="userEditInfo.city" value="{{user.city}}"/></td>
+        </tr>
+        <tr>
+          <td><label for="phone">Phone: </label></td>
+          <td><input type="text" name="phone" id="phone" [(ngModel)]="userEditInfo.phoneNo" value="{{user.phoneNo}}"/></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center"><button class="btn btn-success" (click)="updateInfo($event)">Save changes</button></td>
+        </tr>
+      </table>
+    </div>
   </div>
 
-  <div class="col-sm-5 InfoWrapper" *ngIf="mode === 'edit'">
-    <table class="table">
-      <tr>
-        <th> Edit Personal Info </th>
-      </tr>
-      <tr>
-        <td><label for="email">E-mail: </label></td>
-        <td><input type="email" name="email" id="email" [(ngModel)]="userEditInfo.email" value="{{user.email}}"/></td>
-      </tr>
-      <tr>
-        <td><label for="name">First name: </label></td>
-        <td><input type="text" name="name" id="name" [(ngModel)]="userEditInfo.name" value="{{user.name}}"/></td>
-      </tr>
-      <tr>
-        <td><label for="last">Last name: </label></td>
-        <td><input type="text" name="last" id="last" [(ngModel)]="userEditInfo.lastname" value="{{user.lastname}}"/></td>
-      </tr>
-      <tr>
-        <td><label for="city">City: </label></td>
-        <td><input type="text" name="city" id="city" [(ngModel)]="userEditInfo.city" value="{{user.city}}"/></td>
-      </tr>
-      <tr>
-        <td><label for="phone">Phone: </label></td>
-        <td><input type="text" name="phone" id="phone" [(ngModel)]="userEditInfo.phoneNo" value="{{user.phoneNo}}"/></td>
-      </tr>
-      <tr>
-        <td colspan="2" align="center"><button class="btn btn-success" (click)="updateInfo($event)">Save changes</button></td>
-      </tr>
-    </table>
+  <div>
+    <div class="col-sm-3">
+      <table class="table">
+        <tr *ngIf="notFriends != null && notFriends != undefined && notFriends.length > 0">
+          <td>
+            <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="notFriends"
+                          [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Add Friends'"
+                          (onElementClickEvent)="addFriend($event)">
+            </app-search>
+          </td>
+        </tr>
+        <tr *ngIf="friends != null && friends != undefined && friends.length > 0">
+          <td>
+            <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="friends"
+                        [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Remove Friends'"
+                        (onElementClickEvent)="removeFriend($event)">
+            </app-search>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 
-  <div class="col-sm-3">
+  <br/>
+
+  <div>
     <div class="row">
-      <div class="col-sm-3 AddFriends">
-          <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="friends"
-            [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Add Friends'"
-            (onElementClickEvent)="addFriend($event)">
-          </app-search>
-      </div>
-
-      <div class="col-sm-3 RemoveFriends">
-         <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="notFriends"
-             [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Remove Friends'"
-             (onElementClickEvent)="removeFriend($event)">
-         </app-search>
-      </div>
+      <app-list (onElementClickEvent)="null" [header]="'Friend requests'" [items]="makeReq()" [type]="'Request list'"></app-list>
     </div>
   </div>
 </div>

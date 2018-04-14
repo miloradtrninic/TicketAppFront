@@ -7,6 +7,7 @@ import {AuthService} from '../../services/auth.service';
 import {UserPreview} from '../../model/preview/user-preview.model';
 import {TopLevelComponent} from '../top-level/top-level.component';
 import {Router} from '@angular/router';
+import {Request} from '../../shared/model/request';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,7 +17,7 @@ import {Router} from '@angular/router';
 export class UserProfileComponent extends TopLevelComponent implements OnInit {
 
   private mode: string;
-  private user: UserPreview;
+  private user: UserPreview = new UserPreview(0, '', '', '', '', '', false, '', '');
   private friends: UserPreview[];
   private notFriends: UserPreview[];
   private shouldShowPWForm: boolean;
@@ -47,21 +48,20 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
         console.log('Navigate to register');
       });
 
-    /*this.service.getUserFriends()
+    this.service.getUserFriends()
       .subscribe(res => {
         this.friends = res;
       },
       err => {
         console.log('Greska u dobavljanju prijatelja');
       });
-
     this.service.getNotUserFriends()
       .subscribe(res => {
-          this.friends = res;
+          this.notFriends = res;
         },
         err => {
           console.log('Greska u dobavljanju ne-prijatelja :(');
-        });*/
+      });
   }
 
   changeMode() {
@@ -115,6 +115,24 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
         err => {
           console.log('Ne mos obrisati prijatelja...');
         });
+  }
+
+  accept(event) {
+    alert('Accept click!');
+  }
+
+  decline(event) {
+    alert('Decline click!');
+  }
+
+  makeReq() {
+    const items = [];
+
+    for (let i = 0; i < 5; i++) {
+      items.push(new Request('Request' + i, Constants.RequestType.ACPTDEC, this.accept, this.decline));
+    }
+
+    return items;
   }
 
   switchPWFormVisibility(event) {

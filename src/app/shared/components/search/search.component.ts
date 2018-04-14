@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges} from '@angular/core';
 import { HelperFunctions } from '../../util/helper-functions';
 
 @Component({
@@ -6,7 +6,7 @@ import { HelperFunctions } from '../../util/helper-functions';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
 
   @Input() public shouldHaveList: boolean;
   @Input() public criteriaKeys: Array<any>;    // Niz kljuceva nekog objekta po kom ce se vrsiti pretraga (moze biti kombinacija kljuceva)
@@ -21,6 +21,14 @@ export class SearchComponent implements OnInit {
   private shouldShowAutocomplete: boolean;
 
   constructor() { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const chng = changes['items'];
+    console.log(chng.currentValue);
+    if (HelperFunctions.isEmptyValue(chng.currentValue)) {
+      console.log(chng.currentValue);
+    }
+  }
 
   ngOnInit() {
     this.shouldShowAutocomplete = false;
@@ -94,29 +102,31 @@ export class SearchComponent implements OnInit {
   }
 
   filterReults() {
-    for (let i = 0; i < this.items.length; i++) {
-      const toAdd = {};
-      const item = this.items[i];
+    if (!HelperFunctions.isEmptyValue(this.items)) {
+      for (let i = 0; i < this.items.length; i++) {
+        const toAdd = {};
+        const item = this.items[i];
 
-      for (let k = 0; k < this.displayKeys.length; k++) {
-        const key = this.displayKeys[k];
-        toAdd[key] = item[key];
-        toAdd['index'] = i;
-      }
-
-      const critKeys = this.selectedCriteria.split('and');
-      if (typeof critKeys !== 'string') {
-        for (let z = 0; z < critKeys.length; z++) {
-          critKeys[z] = critKeys[z].trim();
+        for (let k = 0; k < this.displayKeys.length; k++) {
+          const key = this.displayKeys[k];
+          toAdd[key] = item[key];
+          toAdd['index'] = i;
         }
-        for (let j = 0; j < critKeys.length; j++) {
-          if (this.shouldAddToResults(item[critKeys[j]], toAdd[critKeys[j]])) {
+
+        const critKeys = this.selectedCriteria.split('and');
+        if (typeof critKeys !== 'string') {
+          for (let z = 0; z < critKeys.length; z++) {
+            critKeys[z] = critKeys[z].trim();
+          }
+          for (let j = 0; j < critKeys.length; j++) {
+            if (this.shouldAddToResults(item[critKeys[j]], toAdd[critKeys[j]])) {
+              this.searchResults.push(toAdd);
+            }
+          }
+        } else {
+          if (this.shouldAddToResults(item[this.selectedCriteria], toAdd)) {
             this.searchResults.push(toAdd);
           }
-        }
-      } else {
-        if (this.shouldAddToResults(item[this.selectedCriteria], toAdd)) {
-          this.searchResults.push(toAdd);
         }
       }
     }
@@ -125,13 +135,13 @@ export class SearchComponent implements OnInit {
   allToView() {
     const ret = [];
 
-    if (HelperFunctions.isEmptyValue(this.searchResults)) {
-      for (let i = 0; i < this.items.length; i++) {
-        ret.push(this.searchResultToString(this.items[i]));
-      }
-    } else {
+    if (!HelperFunctions.isEmptyValue(this.searchResults)) {
       for (let i = 0; i < this.searchResults.length; i++) {
         ret.push(this.searchResultToString(this.searchResults[i]));
+      }
+    } else if (HelperFunctions.isEmptyValue(this.text)) {
+      for (let i = 0; i < this.items.length; i++) {
+        ret.push(this.searchResultToString(this.items[i]));
       }
     }
 
