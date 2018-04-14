@@ -12,7 +12,7 @@
       *ngFor = "let theatre of theatres; let i = index">
      
         <div class = "pull-left">
-            <h2 class = "list-group-item-heading letter"> <a routerLink= "/auditorium/theatre/{i}}/play"><b>{{ theatre.name | uppercase }} </b></a></h2>
+            <h2 class = "list-group-item-heading letter"> <a routerLink= "{{theatre.id}}"><b>{{ theatre.name | uppercase }} </b></a></h2>
                 <div *ngIf = "detailTheatre !== i">
                     <a class = "detail" (click)="onDetail(i)"  >Detaljnije</a>
                 </div>
@@ -23,14 +23,13 @@
                 <div *ngIf = "detailTheatre === i" >
                 <p class = "list-group-item-text"><i> {{ theatre.address }} </i></p>
                 <p class = "list-group-item-text desc"> {{ theatre.description }}</p>
-                <button class="btn btn-success" (click) = "selected=cinema" data-toggle="modal" data-target="#editTheatre"> Edit theatre </button>
-                <button class="btn btn-danger"> Delete theatre </button>
+                <button class="btn btn-success" (click) = "selected=theatre" data-toggle="modal" data-target="#editTheatre"> Edit theatre </button>
+                <button class="btn btn-danger" (click) = "selected=theatre"><a (click) = "deleteTheatre(theatre.id)"> Delete theatre </a></button>
             </div> 
         </div>
       <span class="pull-right">
           <img 
           src="{{ theatre.poster }}" 
-          alt="{{ theatre.name}}" 
           class="img-responsive" 
           style = "max-height : 120px">
       </span>
@@ -46,7 +45,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body">
-              <app-add-theatre [theatre] = "selected" ></app-add-theatre>
+              <app-add-theatre [theatre] = "selected" (addedTheatre)="theatres.push($event)" ></app-add-theatre>
             </div>
           </div>
         </div>

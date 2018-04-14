@@ -1,10 +1,10 @@
 
-<div class="row">
+<!-- <div class="row">
         <div class="col-xs-12">
           <a class="btn btn-primary" (click) = "selected=undefined" data-toggle="modal" data-target="#editMovie">Add movie</a>
         </div>
       </div>
-      
+    -->  
       <hr>
       
       <div class="row"> 
@@ -12,7 +12,7 @@
           <a class = "list-group-item clearfix" 
             *ngFor = "let movie of movies; let i = index">
             <div class = "pull-left">
-                <h2 class = "list-group-item-heading letter"><a routerLink= "{{movie.id}}"><b>{{ movie.name | uppercase }} </b></a></h2>
+                <h2 class = "list-group-item-heading letter"><a routerLink= "{{movie?.id}}"><b>{{ movie.name | uppercase }} </b></a></h2>
                    <div *ngIf = "detailMovie !== i">
                           <a class = "detail" (click)="onDetail(i)"  >Detaljnije</a>
                   </div>
@@ -20,16 +20,16 @@
                           <a class = "detail" (click)="offDetail()"  >Vrati</a>
                   </div>
                   <div *ngIf = "detailMovie === i" >
-                          <p class = "list-group-item-text"><i> {{ movie.director }} </i></p>
-                          <p class = "list-group-item-text desc"> {{ movie.description }}</p>
+                          <p class = "list-group-item-text"><i> {{ movie?.director }} </i></p>
+                          <p class = "list-group-item-text desc"> {{ movie?.description }}</p>
                           <button class="btn btn-success" (click) = "selected=cinema" data-toggle="modal" data-target="#editMovie" > Edit movie </button>
                           <button class="btn btn-danger" > Delete movie </button>
                  </div> 
             </div>
             <span class="pull-right">
                 <img 
-                src="{{movie.poster}}" 
-                alt="{{movie.name}}" 
+                src="{{movie?.poster}}" 
+                alt="{{movie?.name}}" 
                 class="img-responsive" 
                 style = "max-height : 120px">
             </span>
@@ -37,7 +37,7 @@
         </div>
       </div>
       
-      <div id="editMovie" class="modal fade" role="dialog">
+  <!--    <div id="editMovie" class="modal fade" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-body">
@@ -45,4 +45,4 @@
               </div>
             </div>
           </div>
-      </div>  
+      </div>   -->

@@ -1,32 +1,60 @@
-<h2>{{movie?.name}}</h2>
-<div class="alert alert-warning alert-dismissible" *ngIf= "message">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    {{message}}
-</div>
 
-<form class="form-horizontal" #addForm = "ngForm" (ngSubmit)="add()">
+
+
+<div class="row">
+    <div class="col-sm-10" align = "center" >
+      <button  class="btn btn-primary" data-toggle="modal" data-target="#addDirector"> Add director </button>
+      <button  class="btn btn-primary" data-toggle="modal" data-target="#addActor"> Add actor </button>
+      <button  class="btn btn-primary" data-toggle="modal" data-target="#addGenre"> Add genre </button>
+    </div>
+  </div>
+<hr> 
+
+<form class="form-horizontal" #addForm = "ngForm"  >
+
   
+
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label"> Name: </label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="name" 
-              name="name" ngModel #name="ngModel">
+              name="name" [(ngModel)] = "name">
     </div>
   </div>
 
     <div class="form-group">
       <label for="director" class="col-sm-2 control-label"> Director: </label>
       <div class="col-sm-10">
-        <input type="director" class="form-control" id="director" 
-                name="director" ngModel #director="ngModel">
+          <select name="director" class="form-control" id="director"  [(ngModel)] = "director" >
+              <option value="">Choose director</option>
+          </select>
       </div>
     </div>
+
+    <div class="form-group">
+        <label for="director" class="col-sm-2 control-label"> Actors: </label>
+        <div class="col-sm-10">
+            <select name="actor" class="form-control" id="actor"  [(ngModel)] = "actor" >
+                <option value="">Choose actors</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="genre" class="col-sm-2 control-label"> Genre: </label>
+          <div class="col-sm-10">
+              <select name="genre" class="form-control" id="genre"  [(ngModel)] = "genre" >
+                  <option value="">Choose genre</option>
+              </select>
+          </div>
+        </div>
+
 
     <div class="form-group">
       <label for="description" class="col-sm-2 control-label"> Description: </label>
       <div class="col-sm-10">
         <textarea class="form-control description" id="description" 
-                name="description" ngModel #description="ngModel"></textarea>
+                name="description" [(ngModel)] = "description"></textarea>
       </div>         
     </div>
 
@@ -34,7 +62,7 @@
       <label for="duration" class="col-sm-2 control-label"> Duration: </label>
       <div class="col-sm-10">
         <input type="duration" class="form-control " id="duration" 
-                name="duration" ngModel #duration="ngModel">
+                name="duration" [(ngModel)] = "duration">
       </div>         
     </div>
 
@@ -42,7 +70,7 @@
       <label for="poster" class="col-sm-2 control-label"> Poster: </label>
       <div class="col-sm-10">
         <input type="poster" class="form-control" id="poster" 
-                name="poster" ngModel #poster="ngModel">
+                name="poster" [(ngModel)] = "poster">
       </div>
     </div>
 
@@ -57,7 +85,7 @@
             <div class="col-xs-8" >
               <a class = "list-group-item clearfix">
                 <div class = "pull-left">
-                    <h2 class = "list-group-item-heading letter"><b>{{ movie.name | uppercase }} </b></h2>
+                    <h2 class = "list-group-item-heading letter"><b>{{ name | uppercase }} </b></h2>
                         <div *ngIf = "detailMovie !== i">
                               <a class = "detail" (click)="onDetail(i)"  >Detaljnije</a>
                       </div>
@@ -65,15 +93,14 @@
                               <a class = "detail" (click)="offDetail()"  >Vrati</a>
                       </div>
                       <div *ngIf = "detailMovie === i" >
-                              <p class = "list-group-item-text"><i> {{ movie.director }} </i></p>
-                              <p class = "list-group-item-text desc"> {{ movie.description }}</p>
-                              <p class = "list-group-item-text desc"> {{ movie.duration }}</p>
+                              <p class = "list-group-item-text"><i> {{ director }} </i></p>
+                              <p class = "list-group-item-text desc"> {{ description }}</p>
+                              <p class = "list-group-item-text desc"> {{ duration }}</p>
                       </div> 
                 </div>
                 <span class="pull-right">
                     <img 
-                    src="{{ movie.poster }}" 
-                    alt="{{ movie.name}}" 
+                    src="{{ poster }}" 
                     class="img-responsive" 
                     style = "max-height : 120px">
                 </span>
@@ -83,10 +110,94 @@
           </div>
 
           <hr>
-        <input type="submit" class="btn btn-primary" value="Add movie"/>
+     <!--   <input  type="submit" (click) = "add()" routerLink= "/add" class="btn btn-primary" value="Add movie"/> -->
       
     </div>
 </form>
+
+
+<!--MODALNI ZA DODAVANJE DIREKTOR -->
+<div id="addDirector" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+            
+            <form class="form-horizontal" #addDirector = "ngForm"  >
+                <div class="form-group">
+                    <label for="firstNameDirector" class="col-sm-2 control-label"> First name: </label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="firstNameDirector" 
+                              name="firstNameDirector" [(ngModel)] = "firstNameDirector">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastNameDirector" class="col-sm-2 control-label"> Last name: </label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="lastNameDirector" 
+                              name="lastNameDirector" [(ngModel)] = "lastNameDirector">
+                    </div>
+                </div>
+                <button  class="btn btn-primary" (click) = "addDirector()" > Add director </button>
+             </form>
+        </div>
+      </div>
+    </div>
+</div>  
+
+
+<!--MODALNI ZA DODAVANJE ACTORA -->
+<div id="addActor" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+            
+            <form class="form-horizontal" #addActor = "ngForm"  >
+                <div class="form-group">
+                    <label for="firstNameActor" class="col-sm-2 control-label"> First name: </label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="firstNameActor" 
+                              name="firstNameActor" [(ngModel)] = "firstNameActor">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastNameActor" class="col-sm-2 control-label"> Last name: </label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="lastNameActor" 
+                              name="lastNameActor" [(ngModel)] = "lastNameActor">
+                    </div>
+                </div>
+                <button  class="btn btn-primary" (click) = "addActor()" > Add actor </button>
+             </form>
+        </div>
+      </div>
+    </div>
+</div>  
+
+
+<!--MODALNI ZA DODAVANJE GENRE -->
+<div id="addGenre" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+            
+            <form class="form-horizontal" #addGenre = "ngForm"  >
+                <div class="form-group">
+                    <label for="genreName" class="col-sm-2 control-label"> Name: </label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="genreName" 
+                              name="genreName" [(ngModel)] = "genreName">
+                    </div>
+                </div>
+                <button  class="btn btn-primary" (click) = "addGenre()" > Add genre </button>
+             </form>
+        </div>
+      </div>
+    </div>
+</div>  
+
+
 
 
 

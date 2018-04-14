@@ -13,11 +13,12 @@ import {RegistrationComponent} from '../components/registration/registration.com
 import {LoginComponent} from '../components/login/login.component';
 import { AddCinemaComponent } from '../components/cinema/add-cinema/add-cinema.component';
 import { AddTheatreComponent } from '../components/theatre/add-theatre/add-theatre.component';
-import {UserProfileComponent} from '../components/user-profile/user-profile.component';
+import { UserProfileComponent} from '../components/user-profile/user-profile.component';
 import { CinemaListComponent } from '../components/cinema/cinema-list/cinema-list.component';
 import { TheatreListComponent } from '../components/theatre/theatre-list/theatre-list.component';
-import {AdminFanZoneComponent} from '../components/admin-panel/admin-fan-zone/admin-fan-zone.component';
-import {AdminFanZoneItemsComponent} from '../components/admin-panel/admin-fan-zone/admin-fan-zone-items/admin-fan-zone-items.component';
+import { AdminFanZoneComponent} from '../components/admin-panel/admin-fan-zone/admin-fan-zone.component';
+import { AdminFanZoneItemsComponent} from '../components/admin-panel/admin-fan-zone/admin-fan-zone-items/admin-fan-zone-items.component';
+import { AddMovieComponent } from '../components/cinema/movie/add-movie/add-movie.component';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'cinema', component: CinemaListComponent},
   { path: 'cinema/:id', component: CinemaComponent},
+  { path: 'cinema/:id/new', component: AddMovieComponent},
   { path: 'cinema/:id/movie/:movieId', component: MovieComponent},
   { path: 'theatre', component: TheatreListComponent},
   { path: 'theatre/:id', component: TheatreComponent},

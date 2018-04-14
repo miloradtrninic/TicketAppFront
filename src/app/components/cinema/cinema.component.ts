@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Cinema } from '../../model/cinema.model';
 import {Router, ActivatedRoute} from '@angular/router';
 import { CinemaService } from '../../services/cinema.service';
@@ -10,7 +10,7 @@ import { CinemaService } from '../../services/cinema.service';
 })
 export class CinemaComponent implements OnInit {
 
-  cinema: Cinema;
+  @Input() cinema: Cinema;
   message: string;
   id: number;
   cinemas : Cinema[] = [];
@@ -20,9 +20,10 @@ export class CinemaComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(window.location.href);
     this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
-      this.cinemaService.getOne(this.id).subscribe(
+       this.cinemaService.getOne(this.id).subscribe(
         (resp: Cinema) => {
           this.cinema = resp;
         }, error => {
@@ -30,6 +31,6 @@ export class CinemaComponent implements OnInit {
         }
       );
    });
-    
+   console.log(window.location.href);
   }
 }

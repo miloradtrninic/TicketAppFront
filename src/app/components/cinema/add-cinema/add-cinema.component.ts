@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cinema } from '../../../model/cinema.model';
 import { NgForm } from '@angular/forms';
 import { CinemaService } from '../../../services/cinema.service';
+import { CinemaCreation } from '../../../model/creation/cinema-creation.model';
 
 
 @Component({
@@ -20,14 +21,11 @@ export class AddCinemaComponent implements OnInit {
   detailCinema = -1;
   message: string;
   @Input() cinema: Cinema;
+  @Output() addedCinema: EventEmitter<any> = new EventEmitter();
   @ViewChild('addForm') form: NgForm;
   constructor(public cinemaService: CinemaService) { }
 
   ngOnInit() {
-  }
-
-  allowPreview() {
-    this.allowP = true;
   }
 
   onDetail(index: number)  {
@@ -45,16 +43,17 @@ export class AddCinemaComponent implements OnInit {
     this.allowP = true;  
   }
   add() {
-    console.log('add');
-    const cinema: Cinema = new Cinema(null, this.form.value['name'], this.form.value['address'], 
-            this.form.value['description'], 0, null, this.form.value['poster']);
+    console.log('add cinema');
+    const cinema: CinemaCreation = new CinemaCreation(this.form.value['name'], this.form.value['address'], 
+            this.form.value['description'], 0);
     this.cinemaService.insert(cinema).subscribe(
       resp => {
+        this.addedCinema.emit(resp);
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);
       }
     );
   }
-
+  
 }

@@ -1,5 +1,6 @@
 
-export class Fanad {
+
+export class GenreCreation {
     constructor(public name: string) {
 
     }

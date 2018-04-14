@@ -13,7 +13,7 @@
         *ngFor = "let cinema of cinemas; let i = index">
         <div class = "pull-left">
             <h2 class = "list-group-item-heading letter"><a routerLink= "{{cinema.id}}"><b>{{ cinema.name | uppercase }} </b></a></h2>
-               <div *ngIf = "detailCinema !== i">
+               <div *ngIf = "detailCinema !== i" >
                       <a class = "detail" (click)="onDetail(i)"  >Detaljnije</a>
               </div>
               <div *ngIf = "detailCinema === i">
@@ -23,13 +23,12 @@
                       <p class = "list-group-item-text"><i> {{ cinema.address }} </i></p>
                       <p class = "list-group-item-text desc"> {{ cinema.description }}</p>
                       <button class="btn btn-success" (click) = "selected=cinema" data-toggle="modal" data-target="#editCinema" > Edit cinema </button>
-                      <button class="btn btn-danger" > Delete cinema </button>
-             </div> 
+                      <button class="btn btn-danger" (click) = "selected=cinema "> <a (click) = "deleteCinema(cinema.id)"> Delete cinema </a></button>
+              </div> 
         </div>
         <span class="pull-right">
             <img 
             src="{{cinema.poster}}" 
-            alt="{{cinema.name}}" 
             class="img-responsive" 
             style = "max-height : 120px">
         </span>
@@ -41,7 +40,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body">
-            <app-add-cinema [cinema] = "selected" ></app-add-cinema>
+            <app-add-cinema [cinema] = "selected" (addedCinema)="cinemas.push($event)"></app-add-cinema>
           </div>
         </div>
       </div>

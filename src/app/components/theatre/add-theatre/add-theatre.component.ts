@@ -1,4 +1,4 @@
-import { Component, OnInit , Input, ViewChild} from '@angular/core';
+import { Component, OnInit , Input, ViewChild, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import { Theatre } from '../../../model/theatre.model';
 import { NgForm } from '@angular/forms';
@@ -20,6 +20,7 @@ export class AddTheatreComponent implements OnInit {
   detailTheatre = -1;
   message: string;
   @Input() theatre: Theatre;
+  @Output() addedTheatre: EventEmitter<any> = new EventEmitter();
   @ViewChild('addForm') form: NgForm;
 
  constructor(public theatreService: TheatreService) { }
@@ -52,6 +53,7 @@ export class AddTheatreComponent implements OnInit {
             this.form.value['descrtiption'], 0, null, this.form.value['poster']);
     this.theatreService.insert(theatre).subscribe(
       resp => {
+        this.addedTheatre.emit(resp);
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);

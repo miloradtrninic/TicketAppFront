@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Cinema } from '../../../model/cinema.model';
 import { CinemaService } from '../../../services/cinema.service';
 
@@ -10,15 +10,16 @@ import { CinemaService } from '../../../services/cinema.service';
 export class CinemaListComponent implements OnInit {
 
   detailCinema = -1;
-  currentURL='';
-  routeAddCinema = 'http://localhost:4200/auditorium/cinema/addCinema';
-  click = false;
-  selected: Cinema;
+  @Output() selected: Cinema;
   message: string;
   cinemas : Cinema[] = [];
+
+
   constructor(public cinemaService: CinemaService) { }
 
+  
   ngOnInit() {
+    console.log('ngOnInit cinema list');
     this.cinemaService.getAll().subscribe(
       (resp: Cinema[]) => {
         this.cinemas = resp;
@@ -26,6 +27,21 @@ export class CinemaListComponent implements OnInit {
         this.message = error;
       }
     );
+  }
+  deleteCinema(index){
+    console.log('delete cinema');
+    this.cinemaService.delete(index).subscribe(
+      resp => {
+        this.cinemas.splice(index, 1);
+        console.log(resp);
+      }, error => {
+        this.message = JSON.stringify(error);
+      }
+    );
+  }
+
+  updateCinema(index) {
+    
   }
 
   onDetail(index: number)  {
@@ -35,15 +51,5 @@ export class CinemaListComponent implements OnInit {
   offDetail()  {
     this.detailCinema = -1;
   }
-  numCinema() {
-    this.currentURL = this.currentURL=window.location.href;
-  }
 
-  currUrl() {
-    return this.currentURL=window.location.href;
-  }
-
-  isClicked() {
-    
-  }
 }

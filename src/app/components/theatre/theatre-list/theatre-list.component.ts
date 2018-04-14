@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Theatre } from '../../../model/theatre.model';
 import { TheatreService } from '../../../services/theatre.service';
 
@@ -10,23 +10,30 @@ import { TheatreService } from '../../../services/theatre.service';
 export class TheatreListComponent implements OnInit {
 
   detailTheatre = -1;
-  currentURL='';
-  click = false;
-  selected: Theatre;
+  @Output()  selected: Theatre;
   message: string;
-
-
-  theatres : Theatre[];
-
+  theatres : Theatre[] = [];
 
   constructor(public theatreService: TheatreService) { }
 
   ngOnInit() {
+    console.log('ngOnInit theatre list');
     this.theatreService.getAll().subscribe(
       (resp: Theatre[]) => {
         this.theatres = resp;
       }, error => {
         this.message = error;
+      }
+    );
+  }
+  deleteTheatre(index){
+    console.log('delete theatre');
+    this.theatreService.delete(index).subscribe(
+      resp => {
+        this.theatres.splice(index, 1);
+        console.log(resp);
+      }, error => {
+        this.message = JSON.stringify(error);
       }
     );
   }
@@ -40,8 +47,4 @@ export class TheatreListComponent implements OnInit {
     this.detailTheatre = -1;
   }
 
-  numTheatre() {
-    this.currentURL = this.currentURL=window.location.href;
-  }
-  
 }

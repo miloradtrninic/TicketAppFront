@@ -49,7 +49,7 @@
                 <div class="col-xs-8" >
                   <a class = "list-group-item clearfix">
                     <div class = "pull-left">
-                        <h2 class = "list-group-item-heading letter"><b>{{ theatre.name | uppercase }} </b></h2>
+                        <h2 class = "list-group-item-heading letter"><b>{{ name | uppercase }} </b></h2>
                            <div *ngIf = "detailTheatre !== i">
                                   <a class = "detail" (click)="onDetail(i)"  >Detaljnije</a>
                           </div>
@@ -57,14 +57,13 @@
                                   <a class = "detail" (click)="offDetail()"  >Vrati</a>
                           </div>
                           <div *ngIf = "detailTheatre === i" >
-                                  <p class = "list-group-item-text"><i> {{ theatre.address }} </i></p>
-                                  <p class = "list-group-item-text desc"> {{ theatre.description }}</p>
+                                  <p class = "list-group-item-text"><i> {{ address }} </i></p>
+                                  <p class = "list-group-item-text desc"> {{ description }}</p>
                          </div> 
                     </div>
                     <span class="pull-right">
                         <img 
-                        src="{{ theatre.poster }}" 
-                        alt="{{ theatre.name}}" 
+                        src="{{ poster }}" 
                         class="img-responsive" 
                         style = "max-height : 120px">
                     </span>
