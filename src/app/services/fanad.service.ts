@@ -11,4 +11,7 @@ export class FanadService extends AbstractService<Fanad, number> {
   constructor(http: HttpClient, protected authService: AuthService) {
     super(http, '/fanad', authService);
   }
+  assignToMe(ad: Fanad) {
+    this.http.put(this.actionUrl + '/assign', ad);
+  }
 }

@@ -1,3 +1,34 @@
-<p>
-  fanad-to-approve works!
-</p>
+<h4>To approve</h4>
+<hr/>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th>Date created</th>
+    <th>Expiration date</th>
+    <th>Posted by</th>
+    <th>Fan item</th>
+    <th>&nbsp;</th>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let ad of ads; let i = index;">
+      <tr data-toggle="collapse" [attr.data-target]="'#' + ad.id">
+        <td>{{ad.id}}</td>
+        <td>{{ad.name}}</td>
+        <td>{{ad.dateCreated}}</td>
+        <td>{{ad.expirationDate}}</td>
+        <td>{{ad.postedBy.username}}</td>
+        <td>{{ad.fanItem.name}}</td>
+        <td><button class="btn btn-primary" *ngIf="!ad.accepted">Approve</button></td>
+        <td><button class="btn btn-primary" *ngIf="!ad.accepted">Disapprove</button></td>
+      </tr>
+      <div class="collapse">
+        <div class="well" [attr.id]="ad.id">
+          {{ad.description}}
+        </div>
+      </div>
+    </ng-container>
+    </tbody>
+  </table>
+</div>

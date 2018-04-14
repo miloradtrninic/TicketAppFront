@@ -20,7 +20,10 @@
         <td>{{ad.expirationDate}}</td>
         <td>{{ad.postedBy.username}}</td>
         <td>{{ad.fanItem.name}}</td>
-        <td><button class="btn btn-primary" *ngIf="!ad.accepted">Assign to me</button></td>
+        <td>
+          <button class="btn btn-primary" *ngIf="!ad.accepted" (click)="assign()">Assign to me</button>
+          <button class="btn btn-success" disabled *ngIf="ad.accepted">Approved</button>
+        </td>
       </tr>
       <div class="collapse">
         <div class="well" [attr.id]="ad.id">

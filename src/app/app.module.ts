@@ -45,6 +45,14 @@ import { MovieService } from './services/movie.service';
 import { ActorService } from './services/actor.service';
 import { DirectorService } from './services/director.service';
 import { GenreService } from './services/genre.service';
+import {HomeAdminComponent} from './components/admin-panel/home-admin/home-admin.component';
+import {UserAdministrationComponent} from './components/admin-panel/user-administration/user-administration.component';
+import {MembershipAdminComponent} from './components/admin-panel/membership-admin/membership-admin.component';
+import {FanadAdminComponent} from "app/components/admin-panel/fanad-admin/fanad-admin.component";
+import {AllAdsComponent} from "app/components/admin-panel/fanad-admin/all-ads/all-ads.component";
+import {AuditoriumService} from "app/services/auditorium.service";
+import {UserRoleService} from './services/user-role.service';
+import {MembershipService} from './services/membership.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +81,12 @@ import { GenreService } from './services/genre.service';
     TheatreListComponent,
     AdminFanZoneItemsComponent,
     AddMovieComponent,
-    MovieListComponent
+    MovieListComponent,
+    HomeAdminComponent,
+    UserAdministrationComponent,
+    MembershipAdminComponent,
+    FanadAdminComponent,
+    AllAdsComponent
   ],
   imports: [
     BrowserModule,
@@ -82,8 +95,9 @@ import { GenreService } from './services/genre.service';
     HttpClientModule
   ],
   providers: [BidService, CinemaService, FanItemService, AuthService,
-     FanadService, FanzoneService, TheatreService, UserService, MovieService, 
-     DirectorService, ActorService, GenreService],
+     FanadService, FanzoneService, TheatreService, UserService, MovieService,
+     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
+    MembershipService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
