@@ -4,7 +4,7 @@ import {Fanitem} from './fanitem.model';
 import {Bid} from './bid.model';
 
 export class Fanad {
-  constructor(id: number, name: string, description: string, dateCreated: Date, imagePath: string,
-              postedBy: User, fanZone: Fanzone, fanItem: Fanitem, accepted: boolean,
-              expirationDate: Date, bidList: Array<Bid>) {}
+  constructor(public id: number, public name: string, public description: string, public dateCreated: Date, public imagePath: string,
+              public postedBy: User, public fanZone: Fanzone, public fanItem: Fanitem, public accepted: boolean,
+              public expirationDate: Date, public bidList: Array<Bid>) {}
 }

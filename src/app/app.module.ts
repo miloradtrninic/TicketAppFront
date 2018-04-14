@@ -42,6 +42,15 @@ import { AdminFanZoneItemsComponent } from './components/admin-panel/admin-fan-z
 import { AddMovieComponent } from './components/cinema/movie/add-movie/add-movie.component';
 import { MovieListComponent } from './components/cinema/movie/movie-list/movie-list.component';
 import { MovieService } from './services/movie.service';
+import { HomeAdminComponent } from './components/admin-panel/home-admin/home-admin.component';
+import {AuditoriumService} from './services/auditorium.service';
+import { UserAdministrationComponent } from './components/admin-panel/user-administration/user-administration.component';
+import {UserRoleService} from './services/user-role.service';
+import { MembershipAdminComponent } from './components/admin-panel/membership-admin/membership-admin.component';
+import {MembershipService} from './services/membership.service';
+import { FanadAdminComponent } from './components/admin-panel/fanad-admin/fanad-admin.component';
+import { FanadToApproveComponent } from './components/admin-panel/fanad-admin/fanad-to-approve/fanad-to-approve.component';
+import { AllAdsComponent } from './components/admin-panel/fanad-admin/all-ads/all-ads.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +79,13 @@ import { MovieService } from './services/movie.service';
     TheatreListComponent,
     AdminFanZoneItemsComponent,
     AddMovieComponent,
-    MovieListComponent
+    MovieListComponent,
+    HomeAdminComponent,
+    UserAdministrationComponent,
+    MembershipAdminComponent,
+    FanadAdminComponent,
+    FanadToApproveComponent,
+    AllAdsComponent
   ],
   imports: [
     BrowserModule,
@@ -78,8 +93,8 @@ import { MovieService } from './services/movie.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [BidService, CinemaService, FanItemService, AuthService,
-     FanadService, FanzoneService, TheatreService, UserService, MovieService],
+  providers: [AuditoriumService, BidService, CinemaService, FanItemService, AuthService,
+     FanadService, FanzoneService, TheatreService, UserService, MovieService, UserRoleService, MembershipService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

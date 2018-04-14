@@ -4,6 +4,9 @@ import {Fanzone} from '../../../model/fanzone.model';
 import {User} from '../../../model/user.model';
 import {Auditorium} from '../../../model/auditorium.model';
 import {NgForm} from '@angular/forms';
+import {FanzoneCreation} from '../../../model/creation/fanzone-creation.model';
+import {UserService} from '../../../services/user.service';
+import {AuditoriumService} from '../../../services/auditorium.service';
 
 @Component({
   selector: 'app-admin-fan-zone',
@@ -17,7 +20,7 @@ export class AdminFanZoneComponent implements OnInit {
   auditoriums: Array<Auditorium>;
   selected: Fanzone;
   @ViewChild('f') form: NgForm;
-  constructor(public fanzoneService: FanzoneService) {
+  constructor(public fanzoneService: FanzoneService, public userService: UserService, public auditoriumService: AuditoriumService) {
     this.fanZones = new Array();
   }
   ngOnInit() {
@@ -28,22 +31,6 @@ export class AdminFanZoneComponent implements OnInit {
 
   select(selected: Fanzone) {
     this.selected = selected;
-    if (selected !== undefined) {
-      this.form.controls['admin'].setValue(this.selected.admin);
-      this.form.controls['auditorium'].setValue(this.selected.auditorium);
-      this.form.controls['auditorium'].setValue(this.selected.auditorium);
-    }
-  }
-
-  add(toAdd: Fanzone) {
-    this.fanzoneService.insert(toAdd).subscribe(
-      resp => this.fanZones.push(resp), error2 => this.error = error2
-    );
-  }
-  edit(selected: Fanzone) {
-    this.fanzoneService.update(selected).subscribe(
-      resp => selected = resp, error2 => {this.error = error2}
-    );
   }
   delete(selected: Fanzone) {
     this.fanzoneService.delete(selected.id).subscribe(
@@ -55,18 +42,19 @@ export class AdminFanZoneComponent implements OnInit {
       }, error2 => {this.error = error2}
     );
   }
-  submitForm() {
-    if (this.selected === undefined) {
-      const newFanzone = new Fanzone(null, this.form.value['admin'], null, this.form.value['auditorium']);
-      this.fanzoneService.insert(newFanzone).subscribe(
+  add() {
+    this.auditoriumService.getAll().subscribe(
+      resp => this.auditoriums = resp, error => this.error = error
+    );
+    this.userService.getByRole('ADMIN_FAN').subscribe(
+      resp => this.admins = resp, error => this.error = error
+    );
+  }
+  insertNew() {
+    const newFanzone = new FanzoneCreation(this.form.value['admin'], this.form.value['auditorium']);
+    this.fanzoneService.insert(newFanzone).subscribe(
         resp => this.fanZones.push(resp), error2 => this.error = error2
-      );
-    } else {
-      const editZone = new Fanzone(this.selected.id, this.form.value['admin'], this.selected.fanitemList, this.form.value['auditorium'])
-      this.fanzoneService.update(editZone).subscribe(
-        resp => this.selected = resp, error2 => this.error = error2
-      );
-    }
+    );
   }
   userId(u1: User, u2: User): boolean {
     if (u1 && u2) {

@@ -11,19 +11,21 @@ import {CommonModule} from '@angular/common';
 import {HomeComponent} from '../components/home/home.component';
 import {RegistrationComponent} from '../components/registration/registration.component';
 import {LoginComponent} from '../components/login/login.component';
-import { AddCinemaComponent } from '../components/cinema/add-cinema/add-cinema.component';
-import { AddTheatreComponent } from '../components/theatre/add-theatre/add-theatre.component';
+import { MembershipAdminComponent } from '../components/admin-panel/membership-admin/membership-admin.component';
 import {UserProfileComponent} from '../components/user-profile/user-profile.component';
 import { CinemaListComponent } from '../components/cinema/cinema-list/cinema-list.component';
 import { TheatreListComponent } from '../components/theatre/theatre-list/theatre-list.component';
 import {AdminFanZoneComponent} from '../components/admin-panel/admin-fan-zone/admin-fan-zone.component';
 import {AdminFanZoneItemsComponent} from '../components/admin-panel/admin-fan-zone/admin-fan-zone-items/admin-fan-zone-items.component';
+import {HomeAdminComponent} from '../components/admin-panel/home-admin/home-admin.component';
+import {UserAdministrationComponent} from '../components/admin-panel/user-administration/user-administration.component';
+import {FanadAdminComponent} from '../components/admin-panel/fanad-admin/fanad-admin.component';
+import {AllAdsComponent} from '../components/admin-panel/fanad-admin/all-ads/all-ads.component';
 
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent},
+  { path: '', component: HomeComponent},
   { path: 'cinema', component: CinemaListComponent},
   { path: 'cinema/:id', component: CinemaComponent},
   { path: 'cinema/:id/movie/:movieId', component: MovieComponent},
@@ -32,7 +34,14 @@ const routes: Routes = [
   { path: 'theatre/:id/play/:playId', component: TheatreComponent},
   { path: 'fanzone', component: FanZoneComponent},
   { path: 'admin-panel', component: AdminPanelComponent, children: [
+    {path: '', component: HomeAdminComponent},
+    {path: 'user-admin', component: UserAdministrationComponent},
     {path: 'fan-zone', component: AdminFanZoneComponent},
+    {path: 'memberships', component: MembershipAdminComponent},
+    {path: 'fan-ads', component: FanadAdminComponent, children: [
+      {path: '', component: AllAdsComponent},
+      {path: 'to-approve', component: AllAdsComponent}
+    ]},
     {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent}
   ]},
   { path: 'register', component: RegistrationComponent},

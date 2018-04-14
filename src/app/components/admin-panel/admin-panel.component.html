@@ -1,3 +1,20 @@
-<p>
-  admin-panel works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs" style="margin-top: 1em;">
+          <li><a routerLink="/admin-panel">Home</a></li>
+          <li [routerLinkActive]="['active']"><a routerLink="fan-zone">Fan zones</a></li>
+          <li [routerLinkActive]="['active']"><a routerLink="user-admin">Users</a></li>
+          <li [routerLinkActive]="['active']"><a routerLink="memberships">Memberships</a></li>
+          <li [routerLinkActive]="['active']"><a routerLink="fan-ads">Fan Ads</a></li>
+        </ul>
+      </div>
+      <div class="panel-body">
+        <div class="tab-content">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

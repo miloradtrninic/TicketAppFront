@@ -1,3 +1,3 @@
 export class Membership {
-  constructor(id: number, name: string, points: number, discount: number) {}
+  constructor(public id: number, public name: string, public points: number, public discount: number) {}
 }
