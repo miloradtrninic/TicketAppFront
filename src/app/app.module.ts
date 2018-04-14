@@ -53,6 +53,7 @@ import {AllAdsComponent} from "app/components/admin-panel/fanad-admin/all-ads/al
 import {AuditoriumService} from "app/services/auditorium.service";
 import {UserRoleService} from './services/user-role.service';
 import {MembershipService} from './services/membership.service';
+import {FanadToApproveComponent} from './components/admin-panel/fanad-admin/fanad-to-approve/fanad-to-approve.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import {MembershipService} from './services/membership.service';
     UserAdministrationComponent,
     MembershipAdminComponent,
     FanadAdminComponent,
-    AllAdsComponent
+    AllAdsComponent,
+    FanadToApproveComponent
   ],
   imports: [
     BrowserModule,

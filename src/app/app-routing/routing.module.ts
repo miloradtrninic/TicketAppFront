@@ -24,6 +24,7 @@ import {MembershipAdminComponent} from '../components/admin-panel/membership-adm
 import {AllAdsComponent} from '../components/admin-panel/fanad-admin/all-ads/all-ads.component';
 import {FanadAdminComponent} from '../components/admin-panel/fanad-admin/fanad-admin.component';
 import {HomeAdminComponent} from '../components/admin-panel/home-admin/home-admin.component';
+import {FanadToApproveComponent} from '../components/admin-panel/fanad-admin/fanad-to-approve/fanad-to-approve.component';
 
 
 
@@ -46,7 +47,7 @@ const routes: Routes = [
     {path: 'memberships', component: MembershipAdminComponent},
     {path: 'fan-ads', component: FanadAdminComponent, children: [
       {path: '', component: AllAdsComponent},
-      {path: 'to-approve', component: AllAdsComponent}
+      {path: 'to-approve', component: FanadToApproveComponent}
     ]}
   ]},
   { path: 'register', component: RegistrationComponent},
