@@ -43,15 +43,9 @@ export class AddCinemaComponent implements OnInit {
     this.allowP = true;
   }
   add() {
-<<<<<<< HEAD
     console.log('add cinema');
     const cinema: CinemaCreation = new CinemaCreation(this.form.value['name'], this.form.value['address'], 
             this.form.value['description'], 0);
-=======
-    console.log('add');
-    const cinema: Cinema = new Cinema(null, this.form.value['name'], this.form.value['address'],
-            this.form.value['description'], 0, null, this.form.value['poster']);
->>>>>>> 8a7f8cf6fc7db0f092738c83b042cb1054326737
     this.cinemaService.insert(cinema).subscribe(
       resp => {
         this.addedCinema.emit(resp);
