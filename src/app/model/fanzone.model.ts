@@ -3,5 +3,5 @@ import {Fanitem} from './fanitem.model';
 import {Auditorium} from './auditorium.model';
 
 export class Fanzone {
-  constructor(public id: number, public admin: User, public fanitemList: Array<Fanitem>, public auditorium: Auditorium) {}
+  constructor(public id: number, public adminUsername: string, public auditoriumName: string,  public fanitemList: Array<Fanitem>) {}
 }

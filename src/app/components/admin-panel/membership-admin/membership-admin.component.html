@@ -1,0 +1,84 @@
+<h1>
+  Memberships
+  <a class="btn btn-primary pull-right" data-target="#addMember" data-toggle="modal">
+    <i class="glyphicon glyphicon-plus"></i>
+    New membership
+  </a>
+</h1>
+
+
+<hr/>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <th>#</th>
+      <th>Name</th>
+      <th>Points</th>
+      <th>Discount</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mem of memberships; let i = index">
+        <td>{{mem.id}}</td>
+        <td>{{mem.name}}</td>
+        <td>{{mem.points}}</td>
+        <td>{{mem.discount}}</td>
+        <td><button class="btn btn-primary" data-toggle="modal" data-target="#editMember" (click)="editMember(mem)">Edit</button></td>
+        <td><button class="btn btn-danger" (click)="delete(mem, i)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div id="editMember" class="modal fade" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit {{selected?.name}}</h3>
+      </div>
+      <div class="modal-body" style="padding: 2em;">
+        <div class="alert alert-info" *ngIf="message">{{message}}</div>
+        <form class="form form-horizontal" #fEdit="ngForm" (submit)="editMemberSubmit()">
+          <div class="form-group">
+            <label>Points:</label>
+            <input class="form-control" type="number" ngModel name="ePoints" #ePoints = "ngModel"/>
+          </div>
+          <div class="form-group">
+            <label>Discount(%):</label>
+            <input class="form-control" type="number" ngModel name="eDiscount" #eDiscount = "ngModel"/>
+          </div>
+          <input [disabled]="!fEdit.valid" type="submit" class="btn btn-success btn-block" value="Edit" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="addMember" class="modal fade" role="dialog" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add new membership</h3>
+      </div>
+      <div class="modal-body" style="padding: 2em;">
+        <form class="form form-horizontal" #fNew="ngForm" (submit)="addNew()">
+          <div class="form-group">
+            <label>Name:</label>
+            <input class="form-control" type="text" ngModel name="name" #name = "ngModel"/>
+          </div>
+          <div class="form-group">
+            <label>Points:</label>
+            <input class="form-control" type="number" ngModel name="points" #points = "ngModel"/>
+          </div>
+          <div class="form-group">
+            <label>Discount(%):</label>
+            <input [disabled]="!fNew.valid" class="form-control" type="number" ngModel name="discount" #discount = "ngModel"/>
+          </div>
+          <input type="submit" class="btn btn-success" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

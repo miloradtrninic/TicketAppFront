@@ -1,0 +1,80 @@
+<div class="alert alert-info alert-dismissable" *ngIf="message">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+<div class="alert alert-info alert-dismissable" *ngIf="error">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>#</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Full Name</th>
+      <th>Phone number</th>
+      <th>Membership</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.name}} {{user.lastname}}</td>
+        <td>{{user.phoneNo}}</td>
+        <td>{{user.membershipName}}</td>
+        <td *ngIf="user.enabled"><button class="btn btn-danger" (click)="ban(user)">Ban</button> </td>
+        <td *ngIf="!user.enabled"><button class="btn btn-success" (click)="activate(user)">Activate</button> </td>
+        <td><button class="btn btn-primary" (click)="selected = user" data-target="#editRoles" data-toggle="modal">Edit roles</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="editRoles" class="modal fade" role="dialog" *ngIf="selected">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit {{selected.username}}</h4>
+      </div>
+      <div class="modal-body" style="padding: 2em;">
+        <div class="alert alert-info alert-dismissable" *ngIf="message">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{message}}
+        </div>
+        <div class="alert alert-danger alert-dismissable" *ngIf="error">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{error}}
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let role of selected.userRoles">
+            {{role.name}}
+            <span class="pull-right">
+              <span class="btn btn-xs btn-danger">
+                  <span class="glyphicon glyphicon-minus" (click)="removeRole(role)" aria-hidden="true"></span>
+              </span>
+            </span>
+          </li>
+        </ul>
+        <div class="input-group">
+          <select class="form-control" [(ngModel)]="newRole">
+            <option></option>
+            <option *ngFor="let role of roles" [hidden]="hasRole(role.id)" [ngValue]="role">{{role.name}}</option>
+          </select>
+          <span class="input-group-btn">
+            <button class="btn btn-primary" style="marging:1em;" (click)="addRole()"><i class="glyphicon glyphicon-add"></i>Add role</button>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-block" (click)="editRoles()">Submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
