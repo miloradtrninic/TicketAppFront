@@ -1,0 +1,27 @@
+<div class="panel-group" style="margin-top: 5ex;">
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h4>{{ theatre?.name | uppercase }} </h4>
+        </div>
+
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                <div> Description:
+                    <span class="lisyt-group-item-text desc">{{theatre?.description}} </span>
+                </div>
+                <div class="list-group-item-text">Address: {{theatre?.address}}</div>
+            </ul>
+            <span class="pull-right">
+                <img src="{{theatre?.poster}}" class="img-responsive" style="max-height : 120px">
+            </span>
+
+        </div>
+        <button routerLink="new" class="btn btn-primary"> Add play </button>
+
+        <hr/>
+        <p> ovde predstave
+            <app-play-list></app-play-list>
+        </p>
+    </div>
+</div>

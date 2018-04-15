@@ -1,5 +1,6 @@
 
 
 export class HallsegmentCreation {
-    constructor( hallId: number, name: string, seatNo: number, seatingList: Array<Number>) {}
+    constructor(public hallId: number,public name: string, public seatingsNo: number,
+      public seatingList: Array<Number>) {}
   }

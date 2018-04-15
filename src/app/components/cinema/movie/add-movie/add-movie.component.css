@@ -24,3 +24,6 @@ h2 {
     font-style: italic;
     cursor:pointer;
 }
+.bord {
+    border:  solid mintcream;
+}

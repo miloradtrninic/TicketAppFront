@@ -54,6 +54,8 @@ import {AuditoriumService} from "app/services/auditorium.service";
 import {UserRoleService} from './services/user-role.service';
 import {MembershipService} from './services/membership.service';
 import {FanadToApproveComponent} from './components/admin-panel/fanad-admin/fanad-to-approve/fanad-to-approve.component';
+import { AddPlayComponent } from './components/theatre/play/add-play/add-play.component';
+import { PlayListComponent } from './components/theatre/play/play-list/play-list.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,9 @@ import {FanadToApproveComponent} from './components/admin-panel/fanad-admin/fana
     MembershipAdminComponent,
     FanadAdminComponent,
     AllAdsComponent,
-    FanadToApproveComponent
+    FanadToApproveComponent,
+    AddPlayComponent,
+    PlayListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Theatre } from '../../model/theatre.model';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
+import { TheatreService } from '../../services/theatre.service';
 
 @Component({
   selector: 'app-theatre',
@@ -10,34 +11,34 @@ import {Router} from '@angular/router';
 export class TheatreComponent implements OnInit {
 
 
-  detailTheatre = -1;
-  currentURL='';
-  click = false;
-  selected: Theatre;
 
-  theatres : Theatre[] = [
-    new Theatre( 1, "Srpsko narodno", "Nenada Jovanovica 9", "Neki opis pozorista" , 2, "zona2" , "https://upload.wikimedia.org/wikipedia/commons/a/aa/Serbian_National_Theatre_Sept_2005.jpg"),
-    new Theatre( 2, "Decije", "Nikole Pasica 43", "Neki opis pozorista2" , 4, "zona3", "https://upload.wikimedia.org/wikipedia/commons/a/aa/Serbian_National_Theatre_Sept_2005.jpg"),
-    new Theatre( 2, "Beogradsko dramsko", "Petra Petrovica 22", "Neki opis pozorista3" , 4, "zona3", "https://upload.wikimedia.org/wikipedia/commons/a/aa/Serbian_National_Theatre_Sept_2005.jpg")
- 
-  ];
+  @Input() theatre: Theatre;
+  message: string;
+  id: number;
+  theatres : Theatre[] = [];
 
 
-  constructor() { }
+
+
+  constructor(public theatreService: TheatreService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(window.location.href);
+    this.route.params.subscribe(params => {
+      this.id = +params['id']; // (+) converts string 'id' to a number
+       this.theatreService.getOne(this.id).subscribe(
+        (resp: Theatre) => {
+          this.theatre = resp;
+        }, error => {
+          this.message = error;
+        }
+      );
+   });
+   console.log(window.location.href);
   }
 
-  onDetail(index: number)  {
-    this.detailTheatre = index;
-  }
 
-  offDetail()  {
-    this.detailTheatre = -1;
-  }
-  numTheatre() {
-    this.currentURL = this.currentURL=window.location.href;
-  }
+
 
  
 }

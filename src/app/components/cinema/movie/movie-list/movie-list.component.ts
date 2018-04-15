@@ -13,17 +13,19 @@ export class MovieListComponent implements OnInit {
   selected: Movie;
   message: string;
   movies : Movie[] = [];
+
   constructor(public movieService: MovieService) { }
 
   ngOnInit() {
-    console.log(this.movies);
-    this.movieService.getAll().subscribe(
+    console.log("olalal" + this.movies);
+  this.movieService.getAll().subscribe(
       (resp: Movie[]) => {
         this.movies = resp;
       }, error => {
         this.message = error;
       }
     );
+
 
   }
 

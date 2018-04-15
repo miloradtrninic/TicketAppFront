@@ -47,10 +47,10 @@ export class AddTheatreComponent implements OnInit {
       this.allowP = true;  
   }
 
-  add() {
+  addTheatre() {
     console.log('add theatre');
     const theatre: Theatre = new Theatre(null, this.form.value['name'], this.form.value['address'], 
-            this.form.value['descrtiption'], 0, null, this.form.value['poster']);
+            this.form.value['description'], 0, null, this.form.value['poster']);
     this.theatreService.insert(theatre).subscribe(
       resp => {
         this.addedTheatre.emit(resp);
@@ -59,6 +59,10 @@ export class AddTheatreComponent implements OnInit {
         this.message = JSON.stringify(error);
       }
     );
+    this.name = '';
+    this.address = '';
+    this.description = '';
+    this.poster = '';
   }
   
 }

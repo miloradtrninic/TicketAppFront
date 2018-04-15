@@ -42,7 +42,7 @@ export class AddCinemaComponent implements OnInit {
   allowPreview2() {
     this.allowP = true;
   }
-  add() {
+  addCinema() {
     console.log('add cinema');
     const cinema: CinemaCreation = new CinemaCreation(this.form.value['name'], this.form.value['address'], 
             this.form.value['description'], 0);
@@ -54,6 +54,10 @@ export class AddCinemaComponent implements OnInit {
         this.message = JSON.stringify(error);
       }
     );
+    this.name = '';
+    this.address = '';
+    this.description = '';
+    this.poster = '';
   }
   
 }
