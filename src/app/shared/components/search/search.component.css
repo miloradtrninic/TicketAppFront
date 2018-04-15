@@ -1,6 +1,7 @@
 .SearchWrapper {
   width: auto;
   height: auto;
+  max-height: 350px;
 }
 
 .AutocompleteWrapper {

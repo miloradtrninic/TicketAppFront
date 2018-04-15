@@ -8,11 +8,22 @@ import {AuthenticationRequest} from '../model/authentication-request';
 import { AuthService } from './auth.service';
 import {UserCreation} from '../model/creation/user-creation.model';
 
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';  // debug
+import 'rxjs/add/operator/catch';
+import {Token} from '../model/token.model';
+import {UserPreview} from '../model/preview/user-preview.model';
+
 @Injectable()
 export class UserService extends AbstractService<User, number> {
 
   constructor(http: HttpClient, protected authService: AuthService) {
     super(http, '/user', authService);
+  }
+
+  setLoginInfo() {
+    this.authService.init();
   }
 
   register(user: UserCreation) {
@@ -22,7 +33,7 @@ export class UserService extends AbstractService<User, number> {
   login(loginInfo: AuthenticationRequest) {
     return this.http.post(this.actionUrl + '/auth/login', loginInfo)
       .map(ret => {
-          this.authService.loggedUserToken = ret['token'];
+          this.authService.loggedUserToken =  new Token(ret['roles'], ret['privileges'], loginInfo.username, ret['id'], ret['token']);
           this.authService.storeToken();
       });
   }
@@ -39,10 +50,94 @@ export class UserService extends AbstractService<User, number> {
     return this.http.get(this.actionUrl + 'ban/' + id, ).map(resp => resp as User);
   }
   getByToken() {
-    return this.http.post(this.actionUrl + '/getByToken', this.authService.loggedUserToken);
+    const options = {
+      headers: this.authService.getAuthHeader()
+    };
+
+    return this.http.post('/profile', this.authService.loggedUserToken, options);
   }
 
   getByUserName(userName: string) {
     return this.http.post(this.actionUrl + '/getByUserName', userName);
+  }
+
+  getOne() {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}${'/' + this.authService.loggedUserToken['id']}`;
+    return this.http.get(url, options).map(resp => resp as UserPreview);
+  }
+
+  getUserFriends() {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}friends/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.get(url, options).map(resp => resp as UserPreview[]);
+  }
+
+  getNotUserFriends() {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}notFriends/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.get(url, options).map(resp => resp as UserPreview[]);
+  }
+
+  sendFriendRequest(userId: number) {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}/addFriend/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.post(url, userId, options).map(resp => resp as UserPreview);
+  }
+
+  removeFriend(userId: number) {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}removeFriend/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.post(url, userId, options).map(resp => resp as UserPreview);
+  }
+
+  acceptFriendship(userId: number) {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}acceptFriendship/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.post(url, userId, options).map(resp => resp as UserPreview);
+  }
+
+  declineFriendship(userId: number) {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}declineFriendship/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.post(url, userId, options).map(resp => resp as UserPreview);
+  }
+
+  getFriendRequests() {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}getFriendRequests/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.get(url, options).map(resp => resp as UserPreview[]);
+  }
+
+  changePassword(newPassword: string) {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}changePw/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.put(url, newPassword, options).map(resp => resp as UserPreview);
   }
 }

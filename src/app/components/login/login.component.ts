@@ -3,22 +3,26 @@ import { HelperFunctions } from '../../shared/util/helper-functions';
 import {UserService} from '../../services/user.service';
 import {AuthenticationRequest} from '../../model/authentication-request';
 import {Router} from '@angular/router';
+import {TopLevelComponent} from '../top-level/top-level.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends TopLevelComponent implements OnInit {
   private errorMessage= null;
   private logInfo = {
     email: '',
     password: ''
   };
 
-  constructor(private service: UserService, private router: Router) { }
+  constructor(protected service: UserService, protected router: Router) {
+    super(service, router, '/home');
+  }
 
   ngOnInit() {
+    super.ngOnInit();
   }
 
   clearAllInfo() {
@@ -37,6 +41,8 @@ export class LoginComponent implements OnInit {
         }, err => {
           if (err['error'] != null && typeof err['error'] !== 'object') {
             this.errorMessage = err['error'];
+          } else {
+            this.errorMessage = 'Server error. Please, try again later.';
           }
         });
     } else {

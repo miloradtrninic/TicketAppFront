@@ -10,22 +10,26 @@ export abstract class AbstractService<Entity, Key> {
 
   constructor(protected http: HttpClient, protected url: string, protected authService: AuthService) {
     this.actionUrl = this.actionUrl + url + '/';
+    this.authService.init();
   }
+
   getAll(): Observable<any[]> {
-    return this.http.get(this.actionUrl).map(resp => resp as Entity[]);
+    return this.http.get(this.actionUrl, {headers: this.authService.getJSONAuthHeader()})
+      .map(resp => resp as Entity[]);
   }
   getOne(id: Key): Observable<any> {
-    return this.http.get(`${this.actionUrl}${id}`).map(resp => resp as Entity);
+    return this.http.get(`${this.actionUrl}${id}`, {headers: this.authService.getJSONAuthHeader()})
+      .map(resp => resp as Entity);
   }
   insert(toInsert: any): Observable<Entity> {
- //   console.log("aaaaaaa" + this.actionUrl);
-  //  console.log(toInsert);
-    return this.http.post(this.actionUrl + 'new', toInsert).map(resp => resp as Entity);
+    console.log(toInsert);
+    return this.http.post(this.actionUrl + 'new', toInsert, {headers: this.authService.getJSONAuthHeader()})
+      .map(resp => resp as Entity);
   }
   delete(toDelete: Key): Observable<any> {
-    return this.http.delete(this.actionUrl + 'delete/' + toDelete);
+    return this.http.delete(this.actionUrl + 'delete' + toDelete, {headers: this.authService.getJSONAuthHeader()});
   }
   update(toUpdate: any): Observable<any> {
-    return this.http.put(this.actionUrl + 'update/', toUpdate);
+    return this.http.put(this.actionUrl + 'update', toUpdate, {headers: this.authService.getJSONAuthHeader()});
   }
 }

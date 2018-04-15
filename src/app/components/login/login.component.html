@@ -19,7 +19,7 @@
                   name="email" [(ngModel)]="logInfo.email" required #email="ngModel" minlength="2">
         </div>
         <div [hidden]="(email.untouched && email.pristine) || email.valid"
-             class="alert alert-danger">E-mail or username required</div>
+             class="alert alert-danger">Field required</div>
       </div>
 
       <div class="form-group">
