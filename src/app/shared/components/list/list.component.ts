@@ -7,7 +7,7 @@ import {Constants} from '../../constants/constants';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent implements OnInit {
 
   private listType = Constants.ListType;
   private requestType = Constants.RequestType;
@@ -19,15 +19,6 @@ export class ListComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('LISTA');
-    const chng = changes['items'];
-    console.log(chng.currentValue);
-    if (HelperFunctions.isEmptyValue(chng.currentValue)) {
-      console.log(chng.currentValue);
-    }
-  }
 
   elementClicked(event) {
     this.onElementClickEvent.emit(event);

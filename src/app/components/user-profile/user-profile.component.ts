@@ -16,11 +16,15 @@ import {Request} from '../../shared/model/request';
 })
 export class UserProfileComponent extends TopLevelComponent implements OnInit {
 
+  private pw: string;
+  private repeatpw: string;
+  private errormsg: string;
   private mode: string;
   private user: UserPreview = new UserPreview(0, '', '', '', '', '', false, '', '');
   private friends: UserPreview[];
   private notFriends: UserPreview[];
   private shouldShowPWForm: boolean;
+  private friendRequests: UserPreview[];
   private userEditInfo = {
     name: null,
     lastname: null,
@@ -45,7 +49,7 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
         this.restartEditInfo(res);
       },
       err => {
-        console.log('Navigate to register');
+        this.errormsg = 'Error fetching user information';
       });
 
     this.service.getUserFriends()
@@ -53,22 +57,33 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
         this.friends = res;
       },
       err => {
-        console.log('Greska u dobavljanju prijatelja');
+        this.errormsg = 'Error fetching friends';
       });
+
     this.service.getNotUserFriends()
       .subscribe(res => {
           this.notFriends = res;
         },
         err => {
-          console.log('Greska u dobavljanju ne-prijatelja :(');
+          this.errormsg = 'Error fetching users that are not friends';
       });
+
+    this.service.getFriendRequests()
+      .subscribe(res => {
+        if (!HelperFunctions.isEmptyValue(res)) {
+          this.friendRequests = res;
+        }
+      },
+        err => {
+          this.errormsg = 'Error fetching friend requests';
+        })
   }
 
   changeMode() {
     switch (this.mode) {
       case Constants.State.VIEW: this.mode = Constants.State.EDIT; break;
       case Constants.State.EDIT: this.mode = Constants.State.VIEW; this.restartEditInfo(this.user); break;
-      default: console.log('Something went wrong...'); break;
+      default: this.errormsg = 'Error switching modes'; break;
     }
   }
 
@@ -89,7 +104,7 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
         this.user = res;
       },
         err => {
-        console.log('Greska pri azuriranju');
+          this.errormsg = 'Error updating user information';
         })
   }
 
@@ -97,11 +112,14 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
     this.service.sendFriendRequest(this.notFriends[index].id)
       .subscribe(res => {
         const removeMe = this.notFriends[index];
+        if (HelperFunctions.isEmptyValue(this.friends)) {
+          this.friends = [];
+        }
         this.friends.push(removeMe);
         this.notFriends.splice(this.notFriends.indexOf(removeMe), 1);
       },
       err => {
-        console.log('Ne mos dodati prijatelja...');
+        this.errormsg = 'Error adding friend';
       });
   }
 
@@ -109,33 +127,65 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
     this.service.removeFriend(this.friends[index].id)
       .subscribe(res => {
           const removeMe = this.friends[index];
+          if (HelperFunctions.isEmptyValue(this.notFriends)) {
+            this.notFriends = [];
+          }
           this.notFriends.push(removeMe);
           this.friends.splice(this.friends.indexOf(removeMe), 1);
         },
         err => {
-          console.log('Ne mos obrisati prijatelja...');
+          this.errormsg = 'Error deleting friend';
         });
   }
 
-  accept(event) {
-    alert('Accept click!');
+  accept(user: UserPreview) {
+    this.service.acceptFriendship(user.id)
+      .subscribe(res => {
+        if (HelperFunctions.isEmptyValue(this.friends)) {
+          this.friends = [];
+        }
+        this.friends.push(res);
+        this.notFriends.splice(this.notFriends.indexOf(res), 1);
+      })
   }
 
-  decline(event) {
-    alert('Decline click!');
+  decline(user: UserPreview) {
+    this.service.declineFriendship(user.id)
+      .subscribe(res => {
+        if (HelperFunctions.isEmptyValue(this.notFriends)) {
+          this.notFriends = [];
+        }
+        this.notFriends.push(res);
+        this.friends.splice(this.friends.indexOf(res), 1);
+      })
   }
 
-  makeReq() {
+  makeRequests() {
     const items = [];
 
-    for (let i = 0; i < 5; i++) {
-      items.push(new Request('Request' + i, Constants.RequestType.ACPTDEC, this.accept, this.decline));
+    for (let i = 0; i < this.friendRequests.length; i++) {
+      items.push(new Request('Request' + i, Constants.RequestType.ACPTDEC, this.friendRequests[i], this.accept, this.decline));
     }
 
     return items;
   }
 
+  changePassword() {
+    if (this.pw === this.repeatpw) {
+      this.service.changePassword(this.pw)
+        .subscribe( res => {
+          window.localStorage.clear();
+          this.router.navigate(['/login']);
+        },
+          err => {
+            this.errormsg = 'Error changing password';
+          })
+    }
+  }
+
   switchPWFormVisibility(event) {
     this.shouldShowPWForm = !this.shouldShowPWForm;
+    this.pw = '';
+    this.repeatpw = '';
   }
 }

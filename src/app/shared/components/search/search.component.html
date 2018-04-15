@@ -18,7 +18,7 @@
 
   <div *ngIf="shouldHaveList">
     <app-list [items]='allToView()' [header]="header" (onElementClickEvent)="elementClicked($event)"></app-list>
-    <div class="row SearchWrapper">
+    <div class="SearchWrapper">
     <input type="text" name="search" placeholder="Search..." class="col-sm-8 SearchInput"
            [(ngModel)]="text" (ngModelChange)="onInputChange($event)">
     <select [(ngModel)]="selectedCriteria" class="col-sm-4 DropDown" (change)="criteriaChange($event)">

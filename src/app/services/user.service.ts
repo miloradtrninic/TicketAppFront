@@ -109,4 +109,22 @@ export class UserService extends AbstractService<User, number> {
 
     return this.http.post(url, userId, options).map(resp => resp as UserPreview);
   }
+
+  getFriendRequests() {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}getFriendRequests/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.get(url, options).map(resp => resp as UserPreview[]);
+  }
+
+  changePassword(newPassword: string) {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}changePw/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.put(url, newPassword, options).map(resp => resp as UserPreview);
+  }
 }

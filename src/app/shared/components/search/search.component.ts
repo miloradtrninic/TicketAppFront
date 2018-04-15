@@ -6,7 +6,7 @@ import { HelperFunctions } from '../../util/helper-functions';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit, OnChanges {
+export class SearchComponent implements OnInit {
 
   @Input() public shouldHaveList: boolean;
   @Input() public criteriaKeys: Array<any>;    // Niz kljuceva nekog objekta po kom ce se vrsiti pretraga (moze biti kombinacija kljuceva)
@@ -21,14 +21,6 @@ export class SearchComponent implements OnInit, OnChanges {
   private shouldShowAutocomplete: boolean;
 
   constructor() { }
-
-  ngOnChanges(changes: SimpleChanges) {
-    const chng = changes['items'];
-    console.log(chng.currentValue);
-    if (HelperFunctions.isEmptyValue(chng.currentValue)) {
-      console.log(chng.currentValue);
-    }
-  }
 
   ngOnInit() {
     this.shouldShowAutocomplete = false;

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Token } from '../model/token.model';
 import { HelperFunctions } from '../shared/util/helper-functions';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -9,7 +10,7 @@ export class AuthService {
   errorMessage: string;
   headers = new HttpHeaders({'Content-Type': 'application/json' });
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private router: Router) {
   }
 
   init() {
@@ -22,6 +23,13 @@ export class AuthService {
   storeToken() {
     window.localStorage.setItem('currentUser', JSON.stringify(this.loggedUserToken));
   }
+
+  logout() {
+    window.localStorage.clear();
+    this.loggedUserToken = null;
+    this.router.navigate(['/home']);
+  }
+
   getJSONAuthHeader(): HttpHeaders {
     this.init();
     return new HttpHeaders({

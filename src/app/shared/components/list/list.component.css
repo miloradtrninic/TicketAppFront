@@ -23,6 +23,10 @@
   height: auto;
 }
 
+.RequestItem{
+  width: 100%;
+}
+
 .ListItem{
   width: 100%;
 }

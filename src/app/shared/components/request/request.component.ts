@@ -13,7 +13,7 @@ export class RequestComponent implements OnInit {
   @Input() public requestText: string;
   @Input() acceptClickEvent;
   @Input() declineClickEvent;
-
+  @Input() relatedItem: any;
 
   constructor() { }
 
@@ -21,10 +21,18 @@ export class RequestComponent implements OnInit {
   }
 
   accept(event) {
-    this.acceptClickEvent();
+    if (this.relatedItem == null) {
+      this.acceptClickEvent(0);
+    } else {
+      this.acceptClickEvent(this.relatedItem);
+    }
   }
 
   decline(event) {
-    this.declineClickEvent();
+    if (this.relatedItem == null) {
+      this.declineClickEvent(0);
+    } else {
+      this.declineClickEvent(this.relatedItem);
+    }
   }
 }

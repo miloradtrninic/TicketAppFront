@@ -2,7 +2,13 @@
 
   <h1 align="center"> Welcome to your profile </h1>
 
-  <br/> <br/>
+  <br/>
+
+  <div class="alert alert-danger" align="center" *ngIf="errormsg != null && errormsg != undefined && errormsg.length > 0">
+    <strong>{{this.errormsg}}</strong>
+  </div>
+
+  <br/>
 
   <div class="row Buttons" align="center">
     <div class="col-sm-3">
@@ -31,12 +37,14 @@
           <form class="form">
               <div class="form-group">
                 <label for="pw">New password: </label>
-                <input type="password" class="form-control" name="pw" id="pw">
+                <input type="password" class="form-control" name="pw" id="pw"
+                       [(ngModel)]="pw"/>
               </div>
 
               <div class="form-group">
                 <label for="repeat">Repeat password: </label>
-                <input type="password" class="form-control" name="repeat" id="repeat"/>
+                <input type="password" class="form-control" name="repeat" id="repeat"
+                       [(ngModel)]="repeatpw"/>
               </div>
           </form>
         </div>
@@ -51,8 +59,8 @@
     </div>
   </div>
 
-  <div>
-    <div class="col-sm-3 InfoWrapper" *ngIf="mode === 'view'">
+  <div class="row">
+    <div class="InfoWrapper" *ngIf="mode === 'view'">
       <table class="table">
         <tr>
           <th> Personal Info </th>
@@ -80,66 +88,70 @@
       </table>
     </div>
 
-    <div class="col-sm-3 InfoWrapper" *ngIf="mode === 'edit'">
-      <table class="table">
-        <tr>
-          <th> Edit Personal Info </th>
-        </tr>
-        <tr>
-          <td><label for="email">E-mail: </label></td>
-          <td><input type="email" name="email" id="email" [(ngModel)]="userEditInfo.email" value="{{user.email}}"/></td>
-        </tr>
-        <tr>
-          <td><label for="name">First name: </label></td>
-          <td><input type="text" name="name" id="name" [(ngModel)]="userEditInfo.name" value="{{user.name}}"/></td>
-        </tr>
-        <tr>
-          <td><label for="last">Last name: </label></td>
-          <td><input type="text" name="last" id="last" [(ngModel)]="userEditInfo.lastname" value="{{user.lastname}}"/></td>
-        </tr>
-        <tr>
-          <td><label for="city">City: </label></td>
-          <td><input type="text" name="city" id="city" [(ngModel)]="userEditInfo.city" value="{{user.city}}"/></td>
-        </tr>
-        <tr>
-          <td><label for="phone">Phone: </label></td>
-          <td><input type="text" name="phone" id="phone" [(ngModel)]="userEditInfo.phoneNo" value="{{user.phoneNo}}"/></td>
-        </tr>
-        <tr>
-          <td colspan="2" align="center"><button class="btn btn-success" (click)="updateInfo($event)">Save changes</button></td>
-        </tr>
-      </table>
+    <div class="InfoWrapper" *ngIf="mode === 'edit'">
+      <form class="form" #updateForm = "ngForm">
+        <table class="table">
+          <tr>
+            <th> Edit Personal Info </th>
+          </tr>
+          <tr>
+            <td><label for="email">E-mail: </label></td>
+            <td><input type="email" name="email" id="email"
+                       [(ngModel)]="userEditInfo.email" value="{{user.email}}" required #email="ngModel"/></td>
+          </tr>
+          <tr>
+            <td><label for="name">First name: </label></td>
+            <td><input type="text" name="name" id="name"
+                       [(ngModel)]="userEditInfo.name" value="{{user.name}}" required #name="ngModel"/></td>
+          </tr>
+          <tr>
+            <td><label for="last">Last name: </label></td>
+            <td><input type="text" name="last" id="last"
+                       [(ngModel)]="userEditInfo.lastname" value="{{user.lastname}}" required #last="ngModel"/></td>
+          </tr>
+          <tr>
+            <td><label for="city">City: </label></td>
+            <td><input type="text" name="city" id="city"
+                       [(ngModel)]="userEditInfo.city" value="{{user.city}}" required #city="ngModel"/></td>
+          </tr>
+          <tr>
+            <td><label for="phone">Phone: </label></td>
+            <td><input type="text" name="phone" id="phone"
+                       [(ngModel)]="userEditInfo.phoneNo" value="{{user.phoneNo}}" required #phone="ngModel"/></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <button class="btn btn-success"
+                      (click)="updateInfo($event)" [disabled]="!updateForm.valid">
+                Save changes
+              </button>
+            </td>
+          </tr>
+        </table>
+      </form>
     </div>
   </div>
 
-  <div>
-    <div class="col-sm-3">
-      <table class="table">
-        <tr *ngIf="notFriends != null && notFriends != undefined && notFriends.length > 0">
-          <td>
-            <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="notFriends"
-                          [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Add Friends'"
-                          (onElementClickEvent)="addFriend($event)">
-            </app-search>
-          </td>
-        </tr>
-        <tr *ngIf="friends != null && friends != undefined && friends.length > 0">
-          <td>
-            <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="friends"
-                        [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Remove Friends'"
-                        (onElementClickEvent)="removeFriend($event)">
-            </app-search>
-          </td>
-        </tr>
-      </table>
+  <div class="row">
+    <div class="col-sm-4" *ngIf="notFriends != null && notFriends != undefined && notFriends.length > 0">
+      <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="notFriends"
+                  [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Add Friends'"
+                  (onElementClickEvent)="addFriend($event)">
+      </app-search>
     </div>
+
+      <div class="col-sm-4" *ngIf="friends != null && friends != undefined && friends.length > 0">
+        <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="friends"
+                    [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Remove Friends'"
+                    (onElementClickEvent)="removeFriend($event)">
+        </app-search>
+      </div>
+
+      <div class="col-sm-4" *ngIf="friendRequests != null && friendRequests != undefined && friendRequests.length > 0">
+        <app-list (onElementClickEvent)="null" [header]="'Friend requests'" [items]=""
+                  [type]="'Request list'"></app-list>
+      </div>
   </div>
 
-  <br/>
-
-  <div>
-    <div class="row">
-      <app-list (onElementClickEvent)="null" [header]="'Friend requests'" [items]="makeReq()" [type]="'Request list'"></app-list>
-    </div>
-  </div>
+  <br/> <br/>
 </div>

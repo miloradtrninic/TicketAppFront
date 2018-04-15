@@ -9,7 +9,7 @@
         <li> <button routerLink="/search" class="btn btn-primary navbar-btn"> <i class="glyphicon glyphicon-search"></i>Search </button></li>
         <li ><a routerLink="/register" class="mouse"><span class="glyphicon glyphicon-user link"></span> Register</a></li>
         <li ><a routerLink="/login" class="mouse"><span class="glyphicon glyphicon-log-in link"></span> Log in</a></li>
-        <li ><a class="mouse"><span class="glyphicon glyphicon-log-out link"></span> Log out</a></li>
+        <li ><a class="mouse" (click)="logout($event)"><span class="glyphicon glyphicon-log-out link"></span> Log out</a></li>
       </ul>
     </div>
   </div>
