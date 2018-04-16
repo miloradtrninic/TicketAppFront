@@ -8,7 +8,7 @@
       </option>
     </select>
 
-    <ul class="list-group AutocompleteWrapper" *ngIf="shouldShowAutocomplete">
+    <ul class="list-group AutocompleteWrapper" *ngIf="shouldShowAutocomplete && searchResults.length > 0">
       <li class="list-group-item AutocompleteItem" *ngFor="let result of searchResults; let i = index" (click)="elementClicked($event)"
           id={{result.index}}>
         {{searchResultToString(result)}}
@@ -18,7 +18,7 @@
 
   <div *ngIf="shouldHaveList">
     <app-list [items]='allToView()' [header]="header" (onElementClickEvent)="elementClicked($event)"></app-list>
-    <div class="row SearchWrapper">
+    <div class="SearchWrapper">
     <input type="text" name="search" placeholder="Search..." class="col-sm-8 SearchInput"
            [(ngModel)]="text" (ngModelChange)="onInputChange($event)">
     <select [(ngModel)]="selectedCriteria" class="col-sm-4 DropDown" (change)="criteriaChange($event)">

@@ -1,6 +1,6 @@
 .ListWrapper {
   width: auto;
-  height: auto;
+  height: 350px;
   border-style: solid;
   border-color: cadetblue;
   overflow: scroll;
@@ -23,6 +23,10 @@
   height: auto;
 }
 
+.RequestItem{
+  width: 100%;
+}
+
 .ListItem{
   width: 100%;
 }
@@ -31,4 +35,11 @@
   background-color: dodgerblue;
   color: white;
   cursor: pointer;
+}
+
+.NoItems {
+  width: auto;
+  height: auto;
+  color: orange;
+  background: darkslategray;
 }

@@ -59,6 +59,8 @@ import { PlayListComponent } from './components/theatre/play/play-list/play-list
 import { HallComponent } from './components/hall/hall.component';
 import { TerminComponent } from './components/termin/termin.component';
 import { PlayService } from './services/play.service';
+import { TopLevelComponent } from './components/top-level/top-level.component';
+import { RequestComponent } from './shared/components/request/request.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +100,8 @@ import { PlayService } from './services/play.service';
     PlayListComponent,
     HallComponent,
     TerminComponent
+    TopLevelComponent,
+    RequestComponent
   ],
   imports: [
     BrowserModule,
