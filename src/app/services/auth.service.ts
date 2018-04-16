@@ -5,11 +5,15 @@ import { HelperFunctions } from '../shared/util/helper-functions';
 import {Router} from '@angular/router';
 import {AuthenticationRequest} from '../model/authentication-request';
 import {UserCreation} from '../model/creation/user-creation.model';
+import { Subject } from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
+  private logger = new Subject<boolean>();
   loggedUserToken: Token;
   headers = new HttpHeaders({'Content-Type': 'application/json' });
+
 
   constructor(private http: HttpClient, private router: Router) {
     this.loggedUserToken = new Token(' ', ' ', ' ', 0, ' ');
@@ -38,6 +42,7 @@ export class AuthService {
       .map(ret => {
         this.loggedUserToken =  new Token(ret['roles'], ret['privileges'], loginInfo.username, ret['id'], ret['token']);
         this.storeToken();
+        this.logger.next(true);
       });
   }
 
@@ -45,6 +50,7 @@ export class AuthService {
     window.localStorage.clear();
     this.loggedUserToken = null;
     this.router.navigate(['/home']);
+    this.logger.next(false);
   }
 
   getJSONAuthHeader(): HttpHeaders {
@@ -75,15 +81,19 @@ export class AuthService {
     let token = null;
     const ls = window.localStorage.getItem('currentUser');
 
-    if (this.loggedUserToken != null) {
+    if (this.loggedUserToken != null && this.loggedUserToken.id !== 0) {
       token = this.loggedUserToken;
-    } else if (HelperFunctions.isEmptyValue(window.localStorage.getItem('currentUser'))) {
+    } else if (!HelperFunctions.isEmptyValue(window.localStorage.getItem('currentUser'))) {
       this.loggedUserToken = new Token(ls['roles'], ls['privileges'], ls['username'], ls['id'], ls['token']);
       this.storeToken();
       token = this.loggedUserToken;
     }
-
+    console.log('Token: ' + token);
     return token;
+  }
+
+  isLoggedIn(): Observable<boolean> {
+    return this.logger.asObservable();
   }
 
 }
