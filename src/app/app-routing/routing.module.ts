@@ -47,7 +47,7 @@ const routes: Routes = [
   { path: 'theatre/:id/new', component: AddPlayComponent},
   { path: 'theatre/:id/play/:playId', component: TheatreComponent},
   { path: 'fanzone', component: FanZoneComponent},
-  { path: 'admin-panel', component: AdminPanelComponent, children: [
+  { path: 'admin-panel', component: AdminPanelComponent, /*canActivate: [OnlyAdminGuard],*/ children: [
     {path: '', component: HomeAdminComponent},
     {path: 'fan-zone', component: AdminFanZoneComponent},
     {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent},

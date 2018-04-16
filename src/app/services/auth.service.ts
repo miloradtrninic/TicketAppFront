@@ -9,11 +9,10 @@ import {UserCreation} from '../model/creation/user-creation.model';
 @Injectable()
 export class AuthService {
   loggedUserToken: Token;
-  errorMessage: string;
   headers = new HttpHeaders({'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient, private router: Router) {
-    this.init();
+    this.loggedUserToken = new Token(' ', ' ', ' ', 0, ' ');
   }
 
   init() {
@@ -71,6 +70,20 @@ export class AuthService {
   }
   getJSONHeader(): HttpHeaders {
     return this.headers;
+  }
+  getToken(): Token {
+    let token = null;
+    const ls = window.localStorage.getItem('currentUser');
+
+    if (this.loggedUserToken != null) {
+      token = this.loggedUserToken;
+    } else if (HelperFunctions.isEmptyValue(window.localStorage.getItem('currentUser'))) {
+      this.loggedUserToken = new Token(ls['roles'], ls['privileges'], ls['username'], ls['id'], ls['token']);
+      this.storeToken();
+      token = this.loggedUserToken;
+    }
+
+    return token;
   }
 
 }

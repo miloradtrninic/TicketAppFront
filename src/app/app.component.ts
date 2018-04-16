@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {UserService} from './services/user.service';
-import {AuthService} from './services/auth.service';
+import {HelperFunctions} from './shared/util/helper-functions';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,5 @@ import {AuthService} from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isUserAuthenticated = window.localStorage.getItem('currentUser') != null;
+  isUserAuthenticated = !HelperFunctions.isEmptyValue(window.localStorage.getItem('currentUser') != null);
 }
