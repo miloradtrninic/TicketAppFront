@@ -1,47 +1,127 @@
+<div class="row">
+  <div class="col-xs-12">
+    <a class="btn btn-primary" (click)="selected=undefined" data-toggle="modal" data-target="#addCinema">Add cinema</a>
+  </div>
+</div>
+
+<hr>
 
 <div class="row">
-    <div class="col-xs-12">
-      <a class="btn btn-primary" (click) = "selected=undefined" data-toggle="modal" data-target="#editCinema">Add cinema</a>
-    </div>
-  </div>
-  
-  <hr>
-  
-  <div class="row"> 
-    <div class="col-xs-12" >
-      <a class = "list-group-item clearfix" 
-        *ngFor = "let cinema of cinemas; let i = index">
-        <div class = "pull-left">
-            <h2 class = "list-group-item-heading letter"><a routerLink= "{{cinema.id}}"><b>{{ cinema.name | uppercase }} </b></a></h2>
-               <div *ngIf = "detailCinema !== i" >
-                      <a class = "detail" (click)="onDetail(i)"  >Detaljnije</a>
-              </div>
-              <div *ngIf = "detailCinema === i">
-                      <a class = "detail" (click)="offDetail()"  >Vrati</a>
-              </div>
-              <div *ngIf = "detailCinema === i" >
-                      <p class = "list-group-item-text"><i> {{ cinema.address }} </i></p>
-                      <p class = "list-group-item-text desc"> {{ cinema.description }}</p>
-                      <button class="btn btn-success" (click) = "selected=cinema" data-toggle="modal" data-target="#editCinema" > Edit cinema </button>
-                      <button class="btn btn-danger" (click) = "selected=cinema "> <a (click) = "deleteCinema(cinema.id)"> Delete cinema </a></button>
-              </div> 
+  <div class="col-xs-12">
+    <a class="list-group-item clearfix" *ngFor="let cinema of cinemas; let i = index">
+      <div class="pull-left">
+        <h2 class="list-group-item-heading letter">
+          <a routerLink="{{cinema.id}}">
+            <b>{{ cinema.name | uppercase }} </b>
+          </a>
+        </h2>
+        <div *ngIf="detailCinema !== i">
+          <a class="detail" (click)="onDetail(i)">Detaljnije</a>
         </div>
-        <span class="pull-right">
-            <img 
-            src="{{cinema.poster}}" 
-            class="img-responsive" 
-            style = "max-height : 120px">
-        </span>
-      </a> 
-    </div>
-  </div>
-  
-  <div id="editCinema" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <app-add-cinema [cinema] = "selected" (addedCinema)="cinemas.push($event)"></app-add-cinema>
-          </div>
+        <div *ngIf="detailCinema === i">
+          <a class="detail" (click)="offDetail()">Vrati</a>
+        </div>
+        <div *ngIf="detailCinema === i">
+          <p class="list-group-item-text">
+            <i> {{ cinema.address }} </i>
+          </p>
+          <p class="list-group-item-text desc"> {{ cinema.description }}</p>
+          <button class="btn btn-success" (click)="selected=cinema; fillFields(selected)" data-toggle="modal" data-target="#editCinema">
+          Edit cinema </button>
+          <button class="btn btn-danger" (click)="selected=cinema ">
+            <a (click)="deleteCinema(cinema.id)"> Delete cinema </a>
+          </button>
         </div>
       </div>
-  </div>  
+      <span class="pull-right">
+        <img src="{{cinema.poster}}" class="img-responsive" style="max-height : 120px">
+      </span>
+    </a>
+  </div>
+</div>
+
+<!--MODALNI ZA DODAVANJE -->
+<div id="addCinema" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-add-cinema [cinema]="selected" (addedCinema)="cinemas.push($event)"></app-add-cinema>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODALNI ZA IZMENU -->
+<div id="editCinema" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form class="form-horizontal" #editForm="ngForm" (ngSubmit)="editCinema(selected.id)">
+
+          <div class="form-group">
+            <label for="name" class="col-sm-2 control-label"> Name: </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address" class="col-sm-2 control-label"> Address: </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="address" name="address" [(ngModel)]="address">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description" class="col-sm-2 control-label"> Description: </label>
+            <div class="col-sm-10">
+              <textarea class="form-control description" id="description" name="description" [(ngModel)]="description"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+
+            <button *ngIf="allowP" type="button" class="btn btn-success" (click)="allowPreview1()">Preview </button>
+            <button *ngIf="!allowP" type="button" class="btn btn-success" (click)="allowPreview2()"> OK </button>
+
+            <hr *ngIf="!allowP">
+            <div class="row col-xm-36" *ngIf="!allowP">
+
+              <div class="col-xs-8">
+                <a class="list-group-item clearfix">
+                  <div class="pull-left">
+                    <h2 class="list-group-item-heading letter">
+                      <b>{{ name }} </b>
+                    </h2>
+                    <div *ngIf="detailCinema !== i">
+                      <a class="detail" (click)="onDetail(i)">Detaljnije</a>
+                    </div>
+                    <div *ngIf="detailCinema === i">
+                      <a class="detail" (click)="offDetail()">Vrati</a>
+                    </div>
+                    <div *ngIf="detailCinema === i">
+                      <p class="list-group-item-text">
+                        <i> {{ address }} </i>
+                      </p>
+                      <p class="list-group-item-text desc"> {{ description }}</p>
+                    </div>
+                  </div>
+                  
+                  <hr>
+                </a>
+              </div>
+            </div>
+
+            <hr>
+
+
+            <input type="submit" class="btn btn-primary" value="Edit cinema" />
+
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>

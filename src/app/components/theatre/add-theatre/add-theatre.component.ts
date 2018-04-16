@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Theatre } from '../../../model/theatre.model';
 import { NgForm } from '@angular/forms';
 import { TheatreService } from '../../../services/theatre.service';
+import { TheatreCreation } from '../../../model/creation/theatre-creation.model';
 
 @Component({
   selector: 'app-add-theatre',
@@ -49,8 +50,8 @@ export class AddTheatreComponent implements OnInit {
 
   addTheatre() {
     console.log('add theatre');
-    const theatre: Theatre = new Theatre(null, this.form.value['name'], this.form.value['address'], 
-            this.form.value['description'], 0, null, this.form.value['poster']);
+    const theatre: TheatreCreation = new TheatreCreation(this.form.value['name'], this.form.value['address'], 
+            this.form.value['description'], 0);
     this.theatreService.insert(theatre).subscribe(
       resp => {
         this.addedTheatre.emit(resp);

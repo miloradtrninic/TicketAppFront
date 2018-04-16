@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-24">
-        <a class="btn btn-primary" (click) = "selected=undefined" data-toggle="modal" data-target="#editTheatre"> Add theatre </a>
+    <a class="btn btn-primary" (click)="selected=undefined" data-toggle="modal" data-target="#addTheatre"> Add theatre </a>
   </div>
 </div>
 
@@ -8,52 +8,126 @@
 
 <div class="row">
   <div class="col-xs-12">
-      <a class = "list-group-item clearfix" 
-      *ngFor = "let theatre of theatres; let i = index">
-     
-        <div class = "pull-left">
-            <h2 class = "list-group-item-heading letter"> <a routerLink= "{{theatre.id}}"><b>{{ theatre.name | uppercase }} </b></a></h2>
-                <div *ngIf = "detailTheatre !== i">
-                    <a class = "detail" (click)="onDetail(i)"  >Detaljnije</a>
-                </div>
-                <div *ngIf = "detailTheatre === i">
-                    <a class = "detail" (click)="offDetail()"  >Vrati</a>
-                </div>
+    <a class="list-group-item clearfix" *ngFor="let theatre of theatres; let i = index">
 
-                <div *ngIf = "detailTheatre === i" >
-                <p class = "list-group-item-text"><i> {{ theatre.address }} </i></p>
-                <p class = "list-group-item-text desc"> {{ theatre.description }}</p>
-                <button class="btn btn-success" (click) = "selected=theatre" data-toggle="modal" data-target="#editTheatre"> Edit theatre </button>
-                <button class="btn btn-danger" (click) = "selected=theatre"><a (click) = "deleteTheatre(theatre.id)"> Delete theatre </a></button>
-            </div> 
+      <div class="pull-left">
+        <h2 class="list-group-item-heading letter">
+          <a routerLink="{{theatre.id}}">
+            <b>{{ theatre.name | uppercase }} </b>
+          </a>
+        </h2>
+        <div *ngIf="detailTheatre !== i">
+          <a class="detail" (click)="onDetail(i)">Detaljnije</a>
         </div>
-      <span class="pull-right">
-          <img 
-          src="{{ theatre.poster }}" 
-          class="img-responsive" 
-          style = "max-height : 120px">
-      </span>
-    </a> 
+        <div *ngIf="detailTheatre === i">
+          <a class="detail" (click)="offDetail()">Vrati</a>
+        </div>
+
+        <div *ngIf="detailTheatre === i">
+          <p class="list-group-item-text">
+            <i> {{ theatre.address }} </i>
+          </p>
+          <p class="list-group-item-text desc"> {{ theatre.description }}</p>
+          <button class="btn btn-success" (click)="selected=theatre; fillFields(selected)" data-toggle="modal" data-target="#editTheatre">
+          Edit theatre </button>
+          <button class="btn btn-danger" (click)="selected=theatre">
+            <a (click)="deleteTheatre(theatre.id)"> Delete theatre </a>
+          </button>
+        </div>
+      </div>
+    
+    </a>
   </div>
 </div>
 
 
 
 
+<!--MODALNI ZA DODAVANJE POZORISTA -->
+<div id="addTheatre" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-add-theatre [theatre]="selected" (addedTheatre)="theatres.push($event)"></app-add-theatre>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+
+<!--MODALNI ZA IZMENU POZORISTA -->
 <div id="editTheatre" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <app-add-theatre [theatre] = "selected" (addedTheatre)="theatres.push($event)" ></app-add-theatre>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form class="form-horizontal" #addForm="ngForm" (ngSubmit)="editTheatre(selected.id)">
+
+          <div class="form-group">
+            <label for="name" class="col-sm-2 control-label"> Name: </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name">
             </div>
           </div>
-        </div>
+
+          <div class="form-group">
+            <label for="address" class="col-sm-2 control-label"> Address: </label>
+            <div class="col-sm-10">
+              <input type="address" class="form-control" id="address" name="address" [(ngModel)]="address">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description" class="col-sm-2 control-label"> Description: </label>
+            <div class="col-sm-10">
+              <textarea class="form-control description" id="description" name="description" [(ngModel)]="description"></textarea>
+            </div>
+          </div>
+
+         
+
+          <div class="form-group">
+
+            <button *ngIf="allowP" type="button" class="btn btn-success" (click)="allowPreview1()"> Preview </button>
+            <button *ngIf="!allowP" type="button" class="btn btn-success" (click)="allowPreview2()"> OK </button>
+            <hr>
+            <div class="row col-xm-36" *ngIf="!allowP">
+
+              <div class="col-xs-8">
+                <a class="list-group-item clearfix">
+                  <div class="pull-left">
+                    <h2 class="list-group-item-heading letter">
+                      <b>{{ name | uppercase }} </b>
+                    </h2>
+                    <div *ngIf="detailTheatre !== i">
+                      <a class="detail" (click)="onDetail(i)">Detaljnije</a>
+                    </div>
+                    <div *ngIf="detailTheatre === i">
+                      <a class="detail" (click)="offDetail()">Vrati</a>
+                    </div>
+                    <div *ngIf="detailTheatre === i">
+                      <p class="list-group-item-text">
+                        <i> {{ address }} </i>
+                      </p>
+                      <p class="list-group-item-text desc"> {{ description }}</p>
+                    </div>
+                  </div>
+            
+                  <hr>
+                </a>
+              </div>
+            </div>
+
+            <hr>
+            <input type="submit" class="btn btn-primary" value="Edit theatre" data-dismiss="myModal">
+
+          </div>
+        </form>
+
+
+
+
+      </div>
     </div>
-
-
-
-
-
-
-
+  </div>
+</div>

@@ -26,6 +26,6 @@ export abstract class AbstractService<Entity, Key> {
     return this.http.delete(this.actionUrl + 'delete/' + toDelete);
   }
   update(toUpdate: any): Observable<any> {
-    return this.http.put(this.actionUrl + 'update/', toUpdate);
+    return this.http.put(this.actionUrl + 'update', toUpdate);
   }
 }

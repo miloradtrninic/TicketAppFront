@@ -26,6 +26,8 @@ import {FanadAdminComponent} from '../components/admin-panel/fanad-admin/fanad-a
 import {HomeAdminComponent} from '../components/admin-panel/home-admin/home-admin.component';
 import {FanadToApproveComponent} from '../components/admin-panel/fanad-admin/fanad-to-approve/fanad-to-approve.component';
 import { AddPlayComponent } from '../components/theatre/play/add-play/add-play.component';
+import { ReservationComponent } from '../components/reservation/reservation.component';
+import { TerminComponent } from '../components/termin/termin.component';
 
 
 
@@ -33,8 +35,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
   { path: 'cinema', component: CinemaListComponent},
+  { path: 'cinema/update/:id', component: CinemaListComponent},
   { path: 'cinema/:id', component: CinemaComponent},
   { path: 'cinema/:id/new', component: AddMovieComponent},
+  { path: 'cinema/:id/termin', component: TerminComponent},  
+  { path: 'cinema/:id/reservation', component: ReservationComponent},
   { path: 'cinema/:id/movie/:movieId', component: MovieComponent},
   { path: 'theatre', component: TheatreListComponent},
   { path: 'theatre/:id', component: TheatreComponent},
