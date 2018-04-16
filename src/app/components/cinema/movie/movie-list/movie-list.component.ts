@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { Movie } from '../../../../model/movie.model';
 import { MovieService } from '../../../../services/movie.service';
+import { Director } from '../../../../model/director.model';
 
 @Component({
   selector: 'app-movie-list',
@@ -13,6 +14,7 @@ export class MovieListComponent implements OnInit {
   selected: Movie;
   message: string;
   movies : Movie[] = [];
+  newDirector : Director;
 
   constructor(public movieService: MovieService) { }
 

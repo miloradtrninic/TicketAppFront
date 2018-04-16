@@ -56,6 +56,9 @@ import {MembershipService} from './services/membership.service';
 import {FanadToApproveComponent} from './components/admin-panel/fanad-admin/fanad-to-approve/fanad-to-approve.component';
 import { AddPlayComponent } from './components/theatre/play/add-play/add-play.component';
 import { PlayListComponent } from './components/theatre/play/play-list/play-list.component';
+import { HallComponent } from './components/hall/hall.component';
+import { TerminComponent } from './components/termin/termin.component';
+import { PlayService } from './services/play.service';
 import { TopLevelComponent } from './components/top-level/top-level.component';
 import { RequestComponent } from './shared/components/request/request.component';
 
@@ -95,6 +98,8 @@ import { RequestComponent } from './shared/components/request/request.component'
     FanadToApproveComponent,
     AddPlayComponent,
     PlayListComponent,
+    HallComponent,
+    TerminComponent
     TopLevelComponent,
     RequestComponent
   ],
@@ -107,7 +112,7 @@ import { RequestComponent } from './shared/components/request/request.component'
   providers: [BidService, CinemaService, FanItemService, AuthService,
      FanadService, FanzoneService, TheatreService, UserService, MovieService,
      DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
-    MembershipService],
+    MembershipService, PlayService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

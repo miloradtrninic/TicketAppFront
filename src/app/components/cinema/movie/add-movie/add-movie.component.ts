@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output } from '@angular/core';
 import { MovieService } from '../../../../services/movie.service';
 import { Movie } from '../../../../model/movie.model';
 import { NgForm } from '@angular/forms';

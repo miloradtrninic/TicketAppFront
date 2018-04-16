@@ -1,5 +1,5 @@
 <div class="panel-group" style="margin-top: 5ex;">
-    <div class="panel panel-primary">
+    <div class="panel panel-primary back">
 
         <div class="panel-heading">
             <h4>{{ theatre?.name | uppercase }} </h4>
@@ -7,20 +7,20 @@
 
         <div class="panel-body">
             <ul class="list-unstyled">
-                <div> Description:
+                <div>
+                    <span class="style"> Description: </span>
                     <span class="lisyt-group-item-text desc">{{theatre?.description}} </span>
                 </div>
-                <div class="list-group-item-text">Address: {{theatre?.address}}</div>
+                <div class="list-group-item-text">
+                    <span class="style">Address: </span> {{theatre?.address}}</div>
             </ul>
-            <span class="pull-right">
-                <img src="{{theatre?.poster}}" class="img-responsive" style="max-height : 120px">
-            </span>
 
         </div>
-        <button routerLink="new" class="btn btn-primary"> Add play </button>
-
+        <button routerLink="new" class="btn btn-primary"> Add new play </button>
+        <button routerLink="projection" class="btn btn-primary"> Add new projection </button>
+        <a routerLink="reservation" class="right"> Quick reservation </a>
         <hr/>
-        <p> ovde predstave
+        <p> 
             <app-play-list></app-play-list>
         </p>
     </div>

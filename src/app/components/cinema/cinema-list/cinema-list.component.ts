@@ -1,6 +1,7 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output,ViewChild } from '@angular/core';
 import { Cinema } from '../../../model/cinema.model';
 import { CinemaService } from '../../../services/cinema.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-cinema-list',
@@ -9,11 +10,18 @@ import { CinemaService } from '../../../services/cinema.service';
 })
 export class CinemaListComponent implements OnInit {
 
+  name = '';
+  address = '';
+  description = '';
+  poster = '';
+
+  allowP = true;
   detailCinema = -1;
   @Output() selected: Cinema;
   message: string;
   cinemas : Cinema[] = [];
 
+  @ViewChild('editForm') form: NgForm;
 
   constructor(public cinemaService: CinemaService) { }
 
@@ -28,6 +36,13 @@ export class CinemaListComponent implements OnInit {
       }
     );
   }
+  fillFields(selected){
+    this.name = selected.name;
+    this.address = selected.address;
+    this.description = selected.description;
+    this.poster = selected.poster;
+  }
+
   deleteCinema(index){
     console.log('delete cinema');
     this.cinemaService.delete(index).subscribe(
@@ -39,17 +54,34 @@ export class CinemaListComponent implements OnInit {
       }
     );
   }
-
-  updateCinema(index) {
-    
+  editCinema(index){
+    console.log('edit cinema');
+    console.log('broj indexa je : ' + index);
+    this.cinemaService.update(index).subscribe(
+      resp => {
+    // this.cinemas.splice(index, 1);
+        console.log(resp);
+      }, error => {
+        this.message = JSON.stringify(error);
+      }
+    );
   }
+  
 
-  onDetail(index: number)  {
+ onDetail(index: number)  {
     this.detailCinema = index;
   }
 
   offDetail()  {
     this.detailCinema = -1;
+  }
+
+  allowPreview1() {
+    this.allowP = false;
+  }
+  
+  allowPreview2() {
+    this.allowP = true;
   }
 
 }

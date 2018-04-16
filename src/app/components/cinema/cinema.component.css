@@ -15,3 +15,14 @@ h2 {
     font-style: italic;
     cursor:pointer;
 }
+.back {
+    background: #F0F0F0;
+}
+.style{
+    font-weight: bold;
+    font-size: 16px;
+    margin : 3px;
+}
+.right {
+    float: right;
+}

@@ -1,6 +1,7 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Theatre } from '../../../model/theatre.model';
 import { TheatreService } from '../../../services/theatre.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-theatre-list',
@@ -9,10 +10,18 @@ import { TheatreService } from '../../../services/theatre.service';
 })
 export class TheatreListComponent implements OnInit {
 
+  name = '';
+  address = '';
+  description = '';
+  poster = '';
+
+  allowP = true;
   detailTheatre = -1;
   @Output()  selected: Theatre;
   message: string;
   theatres : Theatre[] = [];
+
+  @ViewChild('editForm') form: NgForm;
 
   constructor(public theatreService: TheatreService) { }
 
@@ -26,11 +35,31 @@ export class TheatreListComponent implements OnInit {
       }
     );
   }
+
+  fillFields(selected){
+    this.name = selected.name;
+    this.address = selected.address;
+    this.description = selected.description;
+    this.poster = selected.poster;
+  }
+
   deleteTheatre(index){
     console.log('delete theatre');
     this.theatreService.delete(index).subscribe(
       resp => {
         this.theatres.splice(index, 1);
+        console.log(resp);
+      }, error => {
+        this.message = JSON.stringify(error);
+      }
+    );
+  }
+
+  editTheatre(index){
+    console.log('edit theatre');
+    console.log('broj indexa je : ' + index);
+    this.theatreService.update(index).subscribe(
+      resp => {
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);
@@ -45,6 +74,14 @@ export class TheatreListComponent implements OnInit {
 
   offDetail()  {
     this.detailTheatre = -1;
+  }
+
+  allowPreview1() {
+    this.allowP = false;
+  }
+  
+  allowPreview2() {
+    this.allowP = true;
   }
 
 }

@@ -1,0 +1,12 @@
+.back {
+    background: #F0F0F0;
+}
+.style{
+    font-weight: bold;
+    font-size: 16px;
+    margin : 3px;
+}
+.detail {
+    font-style: italic;
+    cursor:pointer;
+}

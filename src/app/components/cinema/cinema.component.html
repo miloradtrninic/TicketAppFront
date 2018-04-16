@@ -1,5 +1,5 @@
 <div class="panel-group" style="margin-top: 5ex;">
-  <div class="panel panel-primary">
+  <div class="panel panel-primary back">
 
     <div class="panel-heading">
       <h4>{{ cinema?.name | uppercase }} </h4>
@@ -7,20 +7,21 @@
 
     <div class="panel-body">
       <ul class="list-unstyled">
-        <div> Description:
+        <div> <span class = "style" > Description: </span>
           <span class="lisyt-group-item-text desc">{{cinema?.description}} </span>
         </div>
-        <div class="list-group-item-text">Address: {{cinema?.address}}</div>
+        <div class="list-group-item-text"><span class = "style" >Address: </span> {{cinema?.address}}</div>
+        
       </ul>
-      <span class="pull-right">
-        <img src="{{cinema?.poster}}" class="img-responsive" style="max-height : 120px">
-      </span>
+     
 
     </div>
-    <button routerLink="new" class="btn btn-primary"> Add movie </button>
-
+    <button routerLink="new" class="btn btn-primary"> Add new movie </button>
+    <button routerLink="termin" class="btn btn-primary"> Add new projection </button>
+    
+    <a routerLink = "reservation" class = "right" > Quick reservation </a>
     <hr/>
-    <p> ovde filmovi
+    <p> 
       <app-movie-list></app-movie-list>
     </p>
   </div>
