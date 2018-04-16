@@ -7,7 +7,7 @@ import {AuthService} from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnChanges {
+export class AppComponent {
   @Input()
   private isUserAuthenticated: boolean;
 
@@ -19,16 +19,5 @@ export class AppComponent implements OnChanges {
         console.log(tok);
         this.isUserAuthenticated = tok;
       })
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('Pozvan!');
-    for (let prop in changes) {
-      let chng = changes[prop];
-      let cur = JSON.stringify(chng.currentValue);
-      let old = JSON.stringify(chng.previousValue);
-      console.log(cur);
-      console.log(old);
-    }
   }
 }
