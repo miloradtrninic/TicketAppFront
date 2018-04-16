@@ -61,6 +61,7 @@ import { TerminComponent } from './components/termin/termin.component';
 import { PlayService } from './services/play.service';
 import { TopLevelComponent } from './components/top-level/top-level.component';
 import { RequestComponent } from './shared/components/request/request.component';
+import { HallService } from './services/hall.service';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,7 @@ import { RequestComponent } from './shared/components/request/request.component'
     AddPlayComponent,
     PlayListComponent,
     HallComponent,
-    TerminComponent
+    TerminComponent,
     TopLevelComponent,
     RequestComponent
   ],
@@ -112,7 +113,7 @@ import { RequestComponent } from './shared/components/request/request.component'
   providers: [BidService, CinemaService, FanItemService, AuthService,
      FanadService, FanzoneService, TheatreService, UserService, MovieService,
      DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
-    MembershipService, PlayService],
+    MembershipService, PlayService, HallService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

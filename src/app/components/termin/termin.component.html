@@ -1,3 +1,163 @@
-<p>
-  termin works!
-</p>
+<div class="row">
+  <div class="col-sm-10" align="center">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#addHall"> Add hall </button>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#addTime"> Add time </button>
+  </div>
+</div>
+<hr>
+
+<form class="form-horizontal" #addForm="ngForm" (ngSubmit)="addTermin()">
+
+  <!-- MOVIE -->
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label"> Movie: </label>
+    <div class="col-sm-7">
+      <select class="form-control">
+        <option></option>
+        <option *ngFor="let movie of movies" [ngValue]="movie">{{movie.name}}</option>
+      </select>
+    </div>
+  </div>
+
+
+
+  <!-- HALL -->
+  <div class="form-group">
+    <label for="hall" class="col-sm-2 control-label"> Select halls: </label>
+
+    <div class="col-sm-9">
+      <select class="form-control" [(ngModel)]="newHall" [ngModelOptions]="{standalone: true}">
+        <option></option>
+        <option *ngFor="let hall of halls" [hidden]="hasHall(hall.id)" [ngValue]="hall">{{hall.name}}</option>
+      </select>
+    </div>
+
+    <div class="col-sm-1">
+      <a class="btn btn-primary" (click)="selectHall()">
+        <i class="glyphicon glyphicon-add"></i>Add hall</a>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-sm-4">
+      &nbsp;
+    </div>
+    <div class="col-sm-8 bord">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let actor of selectedActors; let i = index">
+          {{actor.name}}
+          <span class="pull-right">
+            <span class="btn btn-xs btn-danger">
+              <span class="glyphicon glyphicon-minus" (click)="removeActor(i)" aria-hidden="true"></span>
+            </span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DATE -->
+  <div class="form-group">
+    <label for="duration" class="col-sm-2 control-label"> Date: </label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control " id="date" name="date" placeholder="MM/DD/YYY" [(ngModel)]="date">
+    </div>
+  </div>
+
+
+
+
+  <!-- TIME  ovo posipravljati-->
+  <div class="form-group">
+    <label for="genre" class="col-sm-2 control-label"> Select time: </label>
+
+    <div class="col-sm-9">
+      <select class="form-control" [(ngModel)]="newGenre" [ngModelOptions]="{standalone: true}">
+        <option></option>
+        <option *ngFor="let genre of genres" [hidden]="hasGenre(genre.id)" [ngValue]="genre">{{genre.name}}</option>
+      </select>
+    </div>
+
+    <div class="col-sm-1">
+      <a class="btn btn-primary" (click)="selectGenre()">
+        <i class="glyphicon glyphicon-add"></i>Add time</a>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-sm-4">
+      &nbsp;
+    </div>
+    <div class="col-sm-8 bord">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let genre of selectedGenres; let i = index">
+          {{genre.name}}
+          <span class="pull-right">
+            <span class="btn btn-xs btn-danger">
+              <span class="glyphicon glyphicon-minus" (click)="removeGenre(i)" aria-hidden="true"></span>
+            </span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- PRICE -->
+  <div class="form-group">
+    <label for="duration" class="col-sm-2 control-label"> Price: </label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control " id="price" name="price" [(ngModel)]="price">
+    </div>
+  </div>
+
+
+
+
+  <button type="submit" class="btn btn-primary">Add termin</button>
+</form>
+
+
+<!--MODALNI ZA DODAVANJE HALL -->
+<div id="addHall" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-body">
+
+              <form class="form-horizontal" #addHall="ngForm" (submit)="addHall()">
+                  <div class="form-group">
+                      <label for="nameHall" class="col-sm-2 control-label"> Name: </label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" id="nameHall" name="nameHall" [(ngModel)]="nameHall">
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="seatingsNo" class="col-sm-2 control-label"> Seatings number: </label>
+                      <div class="col-sm-10">
+                          <input type="number" class="form-control" id="seatingsNo" name="seatingsNo" [(ngModel)]="seatingsNo">
+                      </div>
+                  </div>
+                  <input type="submit" class="btn btn-primary" value="Add hall" />
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!--MODALNI ZA DODAVANJE TIME -->
+<div id="addTime" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-body">
+              <form class="form-horizontal" #addHall="ngForm" (submit)="addTime()">
+                  <div class="form-group">
+                      <label for="time" class="col-sm-2 control-label"> Time: </label>
+                      <div class="col-sm-10">
+                          <input type="number" class="form-control" id="time" name="time" [(ngModel)]="time">
+                      </div>
+                  </div>
+                  <input type="submit" class="btn btn-primary" value="Add time" />
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

@@ -19,7 +19,7 @@ export class TopLevelComponent implements OnInit {
         this.router.navigate([this.redirectUrl]);
       }
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
     }
   }
 
