@@ -11,6 +11,7 @@ export class AuthService {
   headers = new HttpHeaders({'Content-Type': 'application/json' });
 
   constructor(http: HttpClient, private router: Router) {
+    this.loggedUserToken = new Token(' ', ' ', ' ', 0, ' ');
   }
 
   init() {
