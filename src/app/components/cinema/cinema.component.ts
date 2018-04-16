@@ -14,7 +14,8 @@ export class CinemaComponent implements OnInit {
   message: string;
   id: number;
   cinemas : Cinema[] = [];
-  
+  openM = false;
+  openP = false;
   constructor(public cinemaService: CinemaService, private route: ActivatedRoute) {
 
   }
@@ -32,5 +33,12 @@ export class CinemaComponent implements OnInit {
       );
    });
    console.log(window.location.href);
+  }
+
+  openMovies() {
+    this.openM = true;
+  }
+  openProjection(){
+    this.openP = true;
   }
 }

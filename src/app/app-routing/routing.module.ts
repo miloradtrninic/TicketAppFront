@@ -30,6 +30,7 @@ import { ReservationComponent } from '../components/reservation/reservation.comp
 import { TerminComponent } from '../components/termin/termin.component';
 import { OnlyAdminGuard } from './guards/only-admin-guard';
 import { OnlyLoggedInGuard } from './guards/only-logged-in-guard';
+import { MovieListComponent } from '../components/cinema/movie/movie-list/movie-list.component';
 
 
 const routes: Routes = [

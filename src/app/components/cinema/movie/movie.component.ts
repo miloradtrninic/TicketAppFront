@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../../model/movie.model';
+import {Router, ActivatedRoute} from '@angular/router';
+import { MovieService } from '../../../services/movie.service';
 
 @Component({
   selector: 'app-movie',
@@ -8,13 +10,24 @@ import { Movie } from '../../../model/movie.model';
 })
 export class MovieComponent implements OnInit {
 
-  movies : Movie[] = [
-    new Movie(1, "The Transporter", 4, "Louis Leterrier", 123, "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/The_transporter.svg/1280px-The_transporter.svg.png", "Description1"),
-  ];
-  
-  constructor() { }
+  movies : Movie[] = [];
+  movie : Movie;
+  id: number;
+
+  constructor(public movieService: MovieService,  private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(window.location.href);
+    this.route.params.subscribe(params => {
+      this.id = +params['id']; // (+) converts string 'id' to a number
+       this.movieService.getOne(this.id).subscribe(
+        (resp: Movie) => {
+          this.movie = resp;
+        }, error => {
+          this.movie = error;
+        }
+      );
+   });
   }
 
 }
