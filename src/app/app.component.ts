@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {UserService} from './services/user.service';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Riki tests if this is what he thinks';
+  isUserAuthenticated = window.localStorage.getItem('currentUser') != null;
 }

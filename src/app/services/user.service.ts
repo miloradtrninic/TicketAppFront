@@ -41,13 +41,13 @@ export class UserService extends AbstractService<User, number> {
     return this.http.get(this.actionUrl + '/byrole?role=' + role).map(resp => resp as User[]);
   }
   changeRole(userID: number, roles: number[]): Observable<any> {
-    return this.http.post(this.actionUrl + 'updaterole', {'userID': userID, 'roles': roles}).map(resp => resp as User);
+    return this.http.post(this.actionUrl + '/updaterole', {'userID': userID, 'roles': roles}).map(resp => resp as User);
   }
   activate(id: number): Observable<any> {
-    return this.http.get(this.actionUrl + 'activate/' + id, ).map(resp => resp as User);
+    return this.http.get(this.actionUrl + '/activate/' + id, ).map(resp => resp as User);
   }
   ban(id: number): Observable<any> {
-    return this.http.get(this.actionUrl + 'ban/' + id, ).map(resp => resp as User);
+    return this.http.get(this.actionUrl + '/ban/' + id, ).map(resp => resp as User);
   }
   getByToken() {
     const options = {
@@ -73,7 +73,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}friends/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}/friends/${this.authService.loggedUserToken['id']}`;
 
     return this.http.get(url, options).map(resp => resp as UserPreview[]);
   }
@@ -82,7 +82,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}notFriends/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}/notFriends/${this.authService.loggedUserToken['id']}`;
 
     return this.http.get(url, options).map(resp => resp as UserPreview[]);
   }
@@ -100,7 +100,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}removeFriend/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}/removeFriend/${this.authService.loggedUserToken['id']}`;
 
     return this.http.post(url, userId, options).map(resp => resp as UserPreview);
   }
@@ -109,7 +109,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}acceptFriendship/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}/acceptFriendship/${this.authService.loggedUserToken['id']}`;
 
     return this.http.post(url, userId, options).map(resp => resp as UserPreview);
   }
@@ -118,7 +118,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}declineFriendship/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}/declineFriendship/${this.authService.loggedUserToken['id']}`;
 
     return this.http.post(url, userId, options).map(resp => resp as UserPreview);
   }
@@ -127,7 +127,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}getFriendRequests/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}/getFriendRequests/${this.authService.loggedUserToken['id']}`;
 
     return this.http.get(url, options).map(resp => resp as UserPreview[]);
   }
@@ -136,7 +136,7 @@ export class UserService extends AbstractService<User, number> {
     const options = {
       headers: this.authService.getAuthHeader()
     }
-    const url = `${this.actionUrl}changePw/${this.authService.loggedUserToken['id']}`;
+    const url = `${this.actionUrl}/changePw/${this.authService.loggedUserToken['id']}`;
 
     return this.http.put(url, newPassword, options).map(resp => resp as UserPreview);
   }

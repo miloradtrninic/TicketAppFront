@@ -9,7 +9,7 @@ export abstract class AbstractService<Entity, Key> {
   actionUrl = 'http://localhost:8080/api';
 
   constructor(protected http: HttpClient, protected url: string, protected authService: AuthService) {
-    this.actionUrl = this.actionUrl + url + '/';
+    this.actionUrl = this.actionUrl + url;
     this.authService.init();
   }
 

@@ -1,20 +1,18 @@
-<div class="row" align="center" class="Panel">
-  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{1}} [ngClass] = "{'Active':activeTab === '1'}">
-    Theatre
-  </div>
-  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{2}} [ngClass] = "{'Active':activeTab === '2'}">
-    Cinema
-  </div>
-  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{3}} [ngClass] = "{'Active':activeTab === '3'}">
-    Friends
-  </div>
-  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{4}} [ngClass] = "{'Active':activeTab === '4'}">
-    Reservations
-  </div>
-  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{5}} [ngClass] = "{'Active':activeTab === '5'}">
-    Settings
-  </div>
-  <div class="col-sm-2 PanelBtn" (click)="changeActive($event)" id={{6}} [ngClass] = "{'Active':activeTab === '6'}">
-    Fan Zone
-  </div>
+<div class="row Wrapper" align="center">
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'Active':this.activeTab === '1'}">
+      <a href="#" id="1" >Home</a></li>
+    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '2'}">
+      <a routerLink="#" id="2">Theatre</a></li>
+    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '3'}">
+      <a href="#" id="3">Cinema</a></li>
+    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '4'}">
+      <a href="#" id="4">Friends</a></li>
+    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '5'}">
+      <a href="#" id="5">Reservations</a></li>
+    <li role="presentation" (click)="changeActive($event)" [ngClass] = "{'active':activeTab === '6'}">
+      <a routerLink="/profile" id="6">Profile</a></li>
+    <li role="presentation" (click)="changeActive($event)" [ngClass] = "{'active':activeTab === '7'}">
+      <a href="#" id="7">Fan zone</a></li>
+  </ul>
 </div>

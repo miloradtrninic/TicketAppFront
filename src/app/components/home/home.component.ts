@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {TopLevelComponent} from '../top-level/top-level.component';
+import {UserService} from '../../services/user.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends TopLevelComponent implements OnInit {
 
   private dummyItems = [];
   private userAuthenticated: boolean;
@@ -14,9 +17,12 @@ export class HomeComponent implements OnInit {
   selectedTheatre = false;
 
 
-  constructor() { }
+  constructor(protected service: UserService, protected router: Router) {
+    super(service, router, null);
+  }
 
   ngOnInit() {
+    super.ngOnInit();
     this.userAuthenticated = true;
     this.createDummyTest()
   }
