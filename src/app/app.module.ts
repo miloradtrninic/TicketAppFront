@@ -48,9 +48,9 @@ import { GenreService } from './services/genre.service';
 import {HomeAdminComponent} from './components/admin-panel/home-admin/home-admin.component';
 import {UserAdministrationComponent} from './components/admin-panel/user-administration/user-administration.component';
 import {MembershipAdminComponent} from './components/admin-panel/membership-admin/membership-admin.component';
-import {FanadAdminComponent} from "app/components/admin-panel/fanad-admin/fanad-admin.component";
-import {AllAdsComponent} from "app/components/admin-panel/fanad-admin/all-ads/all-ads.component";
-import {AuditoriumService} from "app/services/auditorium.service";
+import {FanadAdminComponent} from 'app/components/admin-panel/fanad-admin/fanad-admin.component';
+import {AllAdsComponent} from 'app/components/admin-panel/fanad-admin/all-ads/all-ads.component';
+import {AuditoriumService} from 'app/services/auditorium.service';
 import {UserRoleService} from './services/user-role.service';
 import {MembershipService} from './services/membership.service';
 import {FanadToApproveComponent} from './components/admin-panel/fanad-admin/fanad-to-approve/fanad-to-approve.component';
@@ -62,6 +62,8 @@ import { PlayService } from './services/play.service';
 import { TopLevelComponent } from './components/top-level/top-level.component';
 import { RequestComponent } from './shared/components/request/request.component';
 import { HallService } from './services/hall.service';
+import { OnlyLoggedInGuard } from './app-routing/guards/only-logged-in-guard';
+import { OnlyAdminGuard } from './app-routing/guards/only-admin-guard';
 
 @NgModule({
   declarations: [
@@ -113,7 +115,7 @@ import { HallService } from './services/hall.service';
   providers: [BidService, CinemaService, FanItemService, AuthService,
      FanadService, FanzoneService, TheatreService, UserService, MovieService,
      DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
-    MembershipService, PlayService, HallService],
+    MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

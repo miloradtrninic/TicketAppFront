@@ -4,6 +4,7 @@ import {UserService} from '../../services/user.service';
 import {AuthenticationRequest} from '../../model/authentication-request';
 import {Router} from '@angular/router';
 import {TopLevelComponent} from '../top-level/top-level.component';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent extends TopLevelComponent implements OnInit {
     password: ''
   };
 
-  constructor(protected service: UserService, protected router: Router) {
+  constructor(protected service: UserService, protected router: Router, protected auth: AuthService) {
     super(service, router, '/home');
   }
 
@@ -33,7 +34,7 @@ export class LoginComponent extends TopLevelComponent implements OnInit {
   tryLogin() {
     if (!HelperFunctions.containsEmptyValues(this.logInfo)) {
       this.errorMessage = null;
-      this.service.login(new AuthenticationRequest(this.logInfo.email, this.logInfo.password))
+      this.auth.login(new AuthenticationRequest(this.logInfo.email, this.logInfo.password))
         .subscribe(ret => {
           console.log('Ulogovan!');
           this.errorMessage = null;

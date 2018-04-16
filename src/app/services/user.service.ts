@@ -25,18 +25,6 @@ export class UserService extends AbstractService<User, number> {
   setLoginInfo() {
     this.authService.init();
   }
-
-  register(user: UserCreation) {
-    return this.http.post(this.actionUrl + '/auth/register', user);
-  }
-
-  login(loginInfo: AuthenticationRequest) {
-    return this.http.post(this.actionUrl + '/auth/login', loginInfo)
-      .map(ret => {
-          this.authService.loggedUserToken =  new Token(ret['roles'], ret['privileges'], loginInfo.username, ret['id'], ret['token']);
-          this.authService.storeToken();
-      });
-  }
   getByRole(role: string): Observable<User[]> {
     return this.http.get(this.actionUrl + '/byrole?role=' + role).map(resp => resp as User[]);
   }

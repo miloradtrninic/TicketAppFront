@@ -28,7 +28,8 @@ import {FanadToApproveComponent} from '../components/admin-panel/fanad-admin/fan
 import { AddPlayComponent } from '../components/theatre/play/add-play/add-play.component';
 import { ReservationComponent } from '../components/reservation/reservation.component';
 import { TerminComponent } from '../components/termin/termin.component';
-
+import { OnlyAdminGuard } from './guards/only-admin-guard';
+import { OnlyLoggedInGuard } from './guards/only-logged-in-guard';
 
 
 const routes: Routes = [
@@ -38,7 +39,7 @@ const routes: Routes = [
   { path: 'cinema/update/:id', component: CinemaListComponent},
   { path: 'cinema/:id', component: CinemaComponent},
   { path: 'cinema/:id/new', component: AddMovieComponent},
-  { path: 'cinema/:id/termin', component: TerminComponent},  
+  { path: 'cinema/:id/termin', component: TerminComponent},
   { path: 'cinema/:id/reservation', component: ReservationComponent},
   { path: 'cinema/:id/movie/:movieId', component: MovieComponent},
   { path: 'theatre', component: TheatreListComponent},
@@ -59,7 +60,7 @@ const routes: Routes = [
   ]},
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'profile', component: UserProfileComponent}
+  { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]}
 
 ];
 

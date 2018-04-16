@@ -1,15 +1,15 @@
 <div class="row Wrapper" align="center">
   <ul class="nav nav-tabs nav-justified">
     <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'Active':this.activeTab === '1'}">
-      <a href="#" id="1" >Home</a></li>
+      <a routerLink="/home" id="1" >Home</a></li>
     <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '2'}">
-      <a routerLink="#" id="2">Theatre</a></li>
+      <a routerLink="/theatre" id="2">Theatre</a></li>
     <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '3'}">
-      <a href="#" id="3">Cinema</a></li>
+      <a routerLink="/cinema" id="3">Cinema</a></li>
     <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '4'}">
-      <a href="#" id="4">Friends</a></li>
+      <a friends="/friends" id="4">Friends</a></li>
     <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '5'}">
-      <a href="#" id="5">Reservations</a></li>
+      <a href="/reservations" id="5">Reservations</a></li>
     <li role="presentation" (click)="changeActive($event)" [ngClass] = "{'active':activeTab === '6'}">
       <a routerLink="/profile" id="6">Profile</a></li>
     <li role="presentation" (click)="changeActive($event)" [ngClass] = "{'active':activeTab === '7'}">

@@ -4,6 +4,7 @@ import {UserService} from '../../services/user.service';
 import {UserCreation} from '../../model/creation/user-creation.model';
 import {TopLevelComponent} from '../top-level/top-level.component';
 import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -23,7 +24,7 @@ export class RegistrationComponent extends TopLevelComponent implements OnInit {
   };
   errorMessage = null;
 
-  constructor(protected service: UserService, protected router: Router) {
+  constructor(protected service: UserService, protected router: Router, protected auth: AuthService) {
     super(service, router, '/home');
   }
 
@@ -40,7 +41,7 @@ export class RegistrationComponent extends TopLevelComponent implements OnInit {
       const user = (new UserCreation(this.regInfo.username, this.regInfo.email, this.regInfo.name,
                                       this.regInfo.lastname, this.regInfo.phoneNo, this.regInfo.password));
 
-      const ret = this.service.register(user)
+      const ret = this.auth.register(user)
         .subscribe(res => {
           this.registered = true;
           this.errorMessage = null;

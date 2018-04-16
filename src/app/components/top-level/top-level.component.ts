@@ -15,11 +15,6 @@ export class TopLevelComponent implements OnInit {
   ngOnInit() {
     if (!HelperFunctions.isEmptyValue(window.localStorage.getItem('currentUser'))) {
       this.service.setLoginInfo();
-      if (!HelperFunctions.isEmptyValue(this.redirectUrl)) {
-        this.router.navigate([this.redirectUrl]);
-      }
-    } else {
-      this.router.navigate(['/home']);
     }
   }
 
