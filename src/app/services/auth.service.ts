@@ -11,18 +11,20 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
   private logger = new Subject<boolean>();
+  private readonly emptyToken = '{}';
   loggedUserToken: Token;
   headers = new HttpHeaders({'Content-Type': 'application/json' });
 
 
   constructor(private http: HttpClient, private router: Router) {
-    this.loggedUserToken = new Token(' ', ' ', ' ', 0, ' ');
+    this.loggedUserToken = new Token('', '', '', 0, '');
   }
 
   init() {
     const item = window.localStorage.getItem('currentUser');
+
     if (!HelperFunctions.isEmptyValue(item)) {
-      if (!HelperFunctions.containsEmptyValues(item)) {
+      if (!HelperFunctions.containsEmptyValues(item) && item === this.emptyToken) {
         const ls = JSON.parse(window.localStorage.getItem('currentUser'));
         this.loggedUserToken = new Token(ls['roles'], ls['privileges'], ls['username'], ls['id'], ls['token']);
       }
@@ -79,11 +81,13 @@ export class AuthService {
   }
   getToken(): Token {
     let token = null;
-    const ls = window.localStorage.getItem('currentUser');
+    const storage = window.localStorage.getItem('currentUser');
+    const emptyToken = '{}';
 
     if (this.loggedUserToken != null && this.loggedUserToken.id !== 0) {
       token = this.loggedUserToken;
-    } else if (!HelperFunctions.isEmptyValue(window.localStorage.getItem('currentUser'))) {
+    } else if (!HelperFunctions.containsEmptyValues(storage) && storage !== emptyToken) {
+      const ls = JSON.parse(window.localStorage.getItem('currentUser'));
       this.loggedUserToken = new Token(ls['roles'], ls['privileges'], ls['username'], ls['id'], ls['token']);
       this.storeToken();
       token = this.loggedUserToken;

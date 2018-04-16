@@ -1,3 +1,4 @@
+
 export class HelperFunctions {
   /*Moze biti bilo sta. Ako treba dodati jos nesto, slobodno prosirite.*/
   public static isEmptyValue(toCheck: any): boolean {
@@ -25,7 +26,7 @@ export class HelperFunctions {
     if (Array.isArray(toCheck)) {
       for (let i = 0; i < toCheck.length; i++) {
         hasEmpty = this.isEmptyValue(toCheck[i]);
-        if(hasEmpty === true){
+        if (hasEmpty === true) {
           break;
         }
       }
@@ -41,5 +42,25 @@ export class HelperFunctions {
     }
 
     return hasEmpty;
+  }
+
+  public static sortArrayByKey(array, key) {
+    return array.sort((a, b) => {
+      if (typeof a[key] === 'string') {
+        if (a[key].toLowerCase() < b[key].toLowerCase()) {
+          return -1;
+        } else if (a[key].toLowerCase() > b[key].toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      } else {
+        if (a[key] < b[key]) {
+          return -1;
+        } else if (a[key] > b[key]) {
+          return 1;
+        }
+        return 0;
+      }
+    })
   }
 }

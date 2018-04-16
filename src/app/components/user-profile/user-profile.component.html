@@ -148,7 +148,7 @@
       </div>
 
       <div class="col-sm-4" *ngIf="friendRequests != null && friendRequests != undefined && friendRequests.length > 0">
-        <app-list (onElementClickEvent)="null" [header]="'Friend requests'" [items]=""
+        <app-list (onElementClickEvent)="null" [header]="'Friend requests'" [items]="makeRequests()"
                   [type]="'Request list'"></app-list>
       </div>
   </div>

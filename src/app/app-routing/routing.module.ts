@@ -30,6 +30,7 @@ import { ReservationComponent } from '../components/reservation/reservation.comp
 import { TerminComponent } from '../components/termin/termin.component';
 import { OnlyAdminGuard } from './guards/only-admin-guard';
 import { OnlyLoggedInGuard } from './guards/only-logged-in-guard';
+import {FriendsComponent} from '../components/friends/friends.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'theatre/:id/new', component: AddPlayComponent},
   { path: 'theatre/:id/play/:playId', component: TheatreComponent},
   { path: 'fanzone', component: FanZoneComponent},
+  { path: 'friends', component: FriendsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'admin-panel', component: AdminPanelComponent, /*canActivate: [OnlyAdminGuard],*/ children: [
     {path: '', component: HomeAdminComponent},
     {path: 'fan-zone', component: AdminFanZoneComponent},

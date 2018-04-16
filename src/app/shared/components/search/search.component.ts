@@ -131,7 +131,7 @@ export class SearchComponent implements OnInit {
       for (let i = 0; i < this.searchResults.length; i++) {
         ret.push(this.searchResultToString(this.searchResults[i]));
       }
-    } else if (HelperFunctions.isEmptyValue(this.text)) {
+    } else if (HelperFunctions.isEmptyValue(this.text) && !HelperFunctions.isEmptyValue(this.items)) {
       for (let i = 0; i < this.items.length; i++) {
         ret.push(this.searchResultToString(this.items[i]));
       }

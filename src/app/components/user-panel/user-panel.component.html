@@ -7,12 +7,12 @@
     <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '3'}">
       <a routerLink="/cinema" id="3">Cinema</a></li>
     <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '4'}">
-      <a friends="/friends" id="4">Friends</a></li>
+      <a routerLink="/friends" id="4">Friends</a></li>
     <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '5'}">
-      <a href="/reservations" id="5">Reservations</a></li>
+      <a routerLink="/reservations" id="5">Reservations</a></li>
     <li role="presentation" (click)="changeActive($event)" [ngClass] = "{'active':activeTab === '6'}">
       <a routerLink="/profile" id="6">Profile</a></li>
     <li role="presentation" (click)="changeActive($event)" [ngClass] = "{'active':activeTab === '7'}">
-      <a href="#" id="7">Fan zone</a></li>
+      <a routerLink="/fanzone" id="7">Fan zone</a></li>
   </ul>
 </div>

@@ -64,6 +64,7 @@ import { RequestComponent } from './shared/components/request/request.component'
 import { HallService } from './services/hall.service';
 import { OnlyLoggedInGuard } from './app-routing/guards/only-logged-in-guard';
 import { OnlyAdminGuard } from './app-routing/guards/only-admin-guard';
+import { FriendsComponent } from './components/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { OnlyAdminGuard } from './app-routing/guards/only-admin-guard';
     HallComponent,
     TerminComponent,
     TopLevelComponent,
-    RequestComponent
+    RequestComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,
