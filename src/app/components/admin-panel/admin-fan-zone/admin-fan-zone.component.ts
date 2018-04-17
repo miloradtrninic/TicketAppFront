@@ -16,7 +16,9 @@ import {AuditoriumService} from '../../../services/auditorium.service';
 export class AdminFanZoneComponent implements OnInit {
   fanZones: Array<Fanzone>;
   error: string;
+  newAdmin: User;
   admins: Array<User>;
+  adminsSelected: Array<User>;
   auditoriums: Array<Auditorium>;
   selected: Fanzone;
   @ViewChild('f') form: NgForm;
@@ -51,21 +53,19 @@ export class AdminFanZoneComponent implements OnInit {
     );
   }
   insertNew() {
-    const newFanzone = new FanzoneCreation(this.form.value['admin'], this.form.value['auditorium']);
+    const newFanzone = new FanzoneCreation(this.adminsSelected.map(admin => admin.id), this.form.value['auditorium']);
     this.fanzoneService.insert(newFanzone).subscribe(
         resp => this.fanZones.push(resp), error2 => this.error = error2
     );
   }
-  userId(u1: User, u2: User): boolean {
-    if (u1 && u2) {
-      return u1.username === u2.username;
-    }
-    return false;
+  removeAdmin(i: number) {
+    this.adminsSelected.splice(i, 1);
   }
-  audId(a1: Auditorium, a2: Auditorium) {
-    if (a1 && a2) {
-      return a1.id === a2.id;
-    }
-    return false;
+  addAdmin() {
+    this.adminsSelected.push(this.newAdmin);
+    this.newAdmin = undefined;
+  }
+  hasAdmin(id) {
+    return this.adminsSelected.map(adm => adm.id).indexOf(id) !== -1;
   }
 }

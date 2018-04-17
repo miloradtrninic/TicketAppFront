@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Ratings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let aud of auditoriums">
+        <td>{{aud.id}}</td>
+        <td>{{aud.name}}</td>
+        <td>{{aud.address}}</td>
+        <td>{{aud.ratings}}</td>
+        <td><button class="btn btn-primary">Change admins</button> </td>
+        <td><button class="btn btn-danger">Delete</button> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

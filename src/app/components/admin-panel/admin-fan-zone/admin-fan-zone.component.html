@@ -31,12 +31,26 @@
       </div>
       <div class="modal-body" style="padding: 2em">
         <form class="form-horizontal" (submit)="insertNew()" #f="ngForm" >
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let admin of adminsSelected; let i = index">
+              {{admin.username}}
+              <span class="pull-right">
+              <span class="btn btn-xs btn-danger">
+                  <span class="glyphicon glyphicon-minus" (click)="removeAdmin(i)" aria-hidden="true"></span>
+              </span>
+            </span>
+            </li>
+          </ul>
           <div class="form-group">
             <label>Admin: </label>
-            <select class="form-control" name="admin" #admin="ngModel" ngModel>
-              <option [ngValue]="admin.id" *ngFor="let admin of admins">{{admin.username}}</option>
+            <select class="form-control" name="admin" [(ngModel)]="newAdmin" [ngModelOptions] = "{standalone: true}">
+              <option [ngValue]="admin.id" [hidden]="hasAdmin(admin.id)" *ngFor="let admin of admins">{{admin.username}}</option>
             </select>
           </div>
+          <span class="input-group-btn">
+            <button class="btn btn-primary" style="margin:1em;" (click)="addAdmin()"><i class="glyphicon glyphicon-add"></i>Add admin</button>
+          </span>
+
           <div class="form-group">
             <label>Auditorium</label>
             <select  class="form-control" name="auditorium" #autitorium="ngModel" ngModel>

@@ -1,0 +1,51 @@
+<h1>Fan Ads
+  <div class="btn btn-primary pull-right">Sell item</div>
+</h1>
+<hr />
+<div class="media" *ngFor="let ad of fanAds; let i = index">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" [src]="ad.imagePath" alt="...">
+    </a>
+  </div>
+  <div class="media-body">
+    <div class="media-heading">
+      <h4><a [routerLink]="ad.id">{{ad.name}} <i class="glyphicon glyphicon-user"></i>{{ad.postedBy.username}} </a></h4>
+    </div>
+    <p class="media-middle">{{ad.description}}</p>
+    <div class="media-bottom">
+      <button class="btn btn-success" (click)="selected === ad" data-toggle="modal" data-target="#bid">Bid</button>
+    </div>
+  </div>
+</div>
+
+<div id="bid" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Bid for {{selected.name}}</h4>
+      </div>
+      <div class="modal-body" style="padding: 2em;">
+        <div class="alert alert-info alert-dismissable" *ngIf="message">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{message}}
+        </div>
+        <div class="alert alert-danger alert-dismissable" *ngIf="error">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{error}}
+        </div>
+        <form class="form form-horizontal" (ngSubmit)="makeBid()" #f = "ngForm">
+          <div class="form-group">
+            <label>Offer:</label>
+            <input type="number" ngModel name ="offer" #offer = "ngModel"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-block">Submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>

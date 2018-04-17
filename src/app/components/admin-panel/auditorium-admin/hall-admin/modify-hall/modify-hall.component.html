@@ -1,0 +1,87 @@
+<h4>Modify hall</h4>
+<div class="alert alert-info alert-dismissable" *ngIf="message">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+
+<div class="alert alert-danger alert-dismissable" *ngIf="error">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
+
+<form class="form form-horizontal" #hf="ngForm" (ngSubmit)="newHall()">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" ngModel class="form-control" name="name" #name="ngModel"/>
+  </div>
+  <div class="form-group">
+    <label>Auditorium</label>
+    <select type="text" ngModel class="form-control" name="audit" #audit="ngModel">
+      <option></option>
+      <option [ngValue]="aud" *ngFor="let aud of auditoriums">{{aud.name}}</option>
+    </select>
+  </div>
+
+  <div class="col-xs-2">
+    <label>Segments: </label>
+  </div>
+  <div class="col-xs-8">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let segment of segments; let i = index">
+        {{segment.name}}
+        <span class="pull-right">
+          <span class="btn btn-xs btn-primary">
+            <span class="glyphicon glyphicon-edit" (click)="selectSegment(segment)"
+                  data-toggle="modal" data-target="#segMod" aria-hidden="true"></span>
+          </span>
+          <span class="btn btn-xs btn-danger">
+            <span class="glyphicon glyphicon-minus" (click)="segments.splice(i, 1)" aria-hidden="true"></span>
+          </span>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div class="col-xs-2">
+    <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#segMod">Add segment</a>
+  </div>
+  <p style="height: 3ex;">&nbsp;</p>
+  <button class="btn btn-primary btn-block" >Add hall</button>
+</form>
+
+<div id="segMod" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Segment</h3>
+      </div>
+      <div class="modal-body" style="padding: 2em">
+        <form class="form-horizontal" (ngSubmit)="insertSegment()" #sf="ngForm" >
+          <div class="form-group">
+            <label>Segment name: </label>
+            <input type="text" class="form-control" name="segName" ngModel #segName="ngModel">
+          </div>
+          <div class="form-group">
+            <label>Rows: </label>
+            <input type="number" min="1" class="form-control" name="rows" [(ngModel)]="rows" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="form-group">
+            <label>Columns: </label>
+            <input type="number" min="1" max="55" class="form-control" name="columns" [(ngModel)]="columns" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="row" *ngFor="let r of toArray(rows)">
+            <div class="col-xs-1">
+            {{r + 1}}
+            </div>
+            <div class="col-xs-11">
+              <a [ngClass]="{'btn circle btn-xs': true, 'btn-default': findSeat(r, c) === -1, 'btn-danger': findSeat(r, c) !== -1}" style="margin: 0.5em 0.1em 0.5em 0.1em;" (click)="reserveSeat(r, c)" *ngFor="let c of toArray(columns)">
+                {{c + 1}}
+              </a>
+            </div>
+          </div>
+          <button type="submit" style="margin-top: 1ex;" class="btn btn-success btn-lg btn-block">Save
+            <i class="glyphicon glyphicon-upload"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

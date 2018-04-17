@@ -67,6 +67,7 @@ import { OnlyAdminGuard } from './app-routing/guards/only-admin-guard';
 import {AuditoriumAdminComponent} from './components/admin-panel/auditorium-admin/auditorium-admin.component';
 import {HallAdminComponent} from './components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
 import {ModifyHallComponent} from './components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
+import { AuditoriumsAdminComponent } from './components/admin-panel/auditorium-admin/auditoriums/auditoriums.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import {ModifyHallComponent} from './components/admin-panel/auditorium-admin/hal
     RequestComponent,
     AuditoriumAdminComponent,
     HallAdminComponent,
-    ModifyHallComponent
+    ModifyHallComponent,
+    AuditoriumsAdminComponent
   ],
   imports: [
     BrowserModule,

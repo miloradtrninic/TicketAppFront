@@ -1,0 +1,39 @@
+<h4>Halls
+  <a class="btn btn-primary pull-right" routerLink="new">Add hall</a>
+</h4>
+<div class="alert alert-info alert-dismissable" *ngIf="message">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+
+<div class="alert alert-danger alert-dismissable" *ngIf="error">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
+<hr/>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Auditorium name</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hall of halls; let i = index">
+        <td class="col-xs-2">{{hall.id}}</td>
+        <td class="col-xs-3">{{hall.name}}</td>
+        <td class="col-xs-4">{{hall.auditoriumName}}</td>
+        <td class="col-xs-2">
+          <a class="btn btn-primary" routerLink="modify/{{hall.id}}">Edit hall</a>
+        </td>
+        <td class="col-xs-2">
+          <button class="btn btn-danger" (click)="removeHall(hall.id, i)">Remove hall</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
