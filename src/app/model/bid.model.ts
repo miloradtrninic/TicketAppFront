@@ -3,8 +3,7 @@ import {Fanad} from './fanad.model';
 
 export class Bid {
 
-  constructor(public id: number, public fromUser: User,public offer: string, public fanAd: Fanad) {
-
+  constructor(public id: number, public fromUserUsername: string, public offer: number, public offerDate: Date) {
   }
 
 

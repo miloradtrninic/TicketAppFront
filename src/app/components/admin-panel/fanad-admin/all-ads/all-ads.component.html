@@ -9,6 +9,7 @@
       <th>Expiration date</th>
       <th>Posted by</th>
       <th>Fan item</th>
+      <th>Reviewed by</th>
       <th>&nbsp;</th>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
         <td>{{ad.expirationDate}}</td>
         <td>{{ad.postedBy.username}}</td>
         <td>{{ad.fanItem.name}}</td>
+        <td>{{ad.admin?.username}}</td>
         <td>
           <button class="btn btn-primary" *ngIf="!ad.accepted" (click)="assign()">Assign to me</button>
           <button class="btn btn-success" disabled *ngIf="ad.accepted">Approved</button>

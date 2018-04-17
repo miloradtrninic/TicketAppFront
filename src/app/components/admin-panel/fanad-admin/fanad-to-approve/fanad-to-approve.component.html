@@ -3,13 +3,13 @@
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
-    <th>#</th>
-    <th>Name</th>
-    <th>Date created</th>
-    <th>Expiration date</th>
-    <th>Posted by</th>
-    <th>Fan item</th>
-    <th>&nbsp;</th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Date created</th>
+      <th>Expiration date</th>
+      <th>Posted by</th>
+      <th>Fan item</th>
+      <th>&nbsp;</th>
     </thead>
     <tbody>
     <ng-container *ngFor="let ad of ads; let i = index;">
@@ -20,8 +20,8 @@
         <td>{{ad.expirationDate}}</td>
         <td>{{ad.postedBy.username}}</td>
         <td>{{ad.fanItem.name}}</td>
-        <td><button class="btn btn-primary" *ngIf="!ad.accepted">Approve</button></td>
-        <td><button class="btn btn-primary" *ngIf="!ad.accepted">Disapprove</button></td>
+        <td><button class="btn btn-primary" (click)="approve(ad, i)">Approve</button></td>
+        <td><button class="btn btn-primary" (click)="disapprove(ad, i)">Disapprove</button></td>
       </tr>
       <div class="collapse">
         <div class="well" [attr.id]="ad.id">

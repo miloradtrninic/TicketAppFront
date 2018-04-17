@@ -31,6 +31,10 @@ import { TerminComponent } from '../components/termin/termin.component';
 import { OnlyAdminGuard } from './guards/only-admin-guard';
 import { OnlyLoggedInGuard } from './guards/only-logged-in-guard';
 import { MovieListComponent } from '../components/cinema/movie/movie-list/movie-list.component';
+import {AuditoriumAdminComponent} from '../components/admin-panel/auditorium-admin/auditorium-admin.component';
+import {HallAdminComponent} from '../components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
+import {ModifyHallComponent} from '../components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
+
 
 
 const routes: Routes = [
@@ -50,6 +54,11 @@ const routes: Routes = [
   { path: 'fanzone', component: FanZoneComponent},
   { path: 'admin-panel', component: AdminPanelComponent, /*canActivate: [OnlyAdminGuard],*/ children: [
     {path: '', component: HomeAdminComponent},
+    {path: 'auditorium', component: AuditoriumAdminComponent, children: [
+      {path: 'halls', component: HallAdminComponent},
+      {path: 'halls/modify/:hallId', component: ModifyHallComponent},
+      {path: 'halls/new', component: ModifyHallComponent}
+    ]},
     {path: 'fan-zone', component: AdminFanZoneComponent},
     {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent},
     {path: 'user-admin', component: UserAdministrationComponent},
