@@ -1,3 +1,23 @@
-<p> 
-    movie
- </p>
+<div class="panel-group" style="margin-top: 5ex;">
+    <div class="panel panel-primary back">
+
+        <div class="panel-heading">
+            <h4>{{ movie?.name | uppercase }} </h4>
+        </div>
+
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                <div>
+                    <span class="style"> Description: </span>
+                    <span class="lisyt-group-item-text desc">{{movie?.description}} </span>
+                </div>
+                <div class="list-group-item-text">
+                    <span class="style">Duration: </span> {{movie?.durationMinutes}}</div>
+
+            </ul>
+            <div class="right"> {{movie?.coverPath}} </div>
+
+        </div>
+
+    </div>
+</div>

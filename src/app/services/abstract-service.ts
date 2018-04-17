@@ -24,17 +24,17 @@ export abstract class AbstractService<Entity, Key> {
 
   insert(toInsert: any): Observable<Entity> {
     console.log(toInsert);
-    return this.http.post(this.actionUrl + 'new', toInsert, {headers: this.authService.getJSONAuthHeader()})
+    return this.http.post(this.actionUrl + '/new', toInsert, {headers: this.authService.getJSONAuthHeader()})
       .map(resp => resp as Entity);
   }
   
   delete(toDelete: Key): Observable<any> {
-    return this.http.delete(this.actionUrl + 'delete/' + toDelete, {headers: this.authService.getJSONAuthHeader()});
+    return this.http.delete(this.actionUrl + '/delete/' + toDelete, {headers: this.authService.getJSONAuthHeader()});
   }
 
   update(toUpdate: any): Observable<any> {
 
-    return this.http.put(this.actionUrl + 'update/', toUpdate, {headers: this.authService.getJSONAuthHeader()});
+    return this.http.put(this.actionUrl + '/update/', toUpdate, {headers: this.authService.getJSONAuthHeader()});
 
   }
 

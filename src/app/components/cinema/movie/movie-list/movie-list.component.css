@@ -1,12 +1,29 @@
-.back {
-    background: #F0F0F0;
+.addForm {
+    width: 50%;
+    align-items: center;
+    align-self: center;
+    padding-top: 10px;
+  }
+
+.description {
+    height: 150px;
 }
-.style{
+.letter {
     font-weight: bold;
-    font-size: 16px;
-    margin : 3px;
+   
+}
+.desc {
+    border : 2px solid linen;
+    margin : 5px;
+}
+h2 {
+    color: black;
+    font-size: 36px;
 }
 .detail {
     font-style: italic;
     cursor:pointer;
+}
+.bord {
+    border:  solid mintcream;
 }
