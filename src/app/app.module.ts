@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -64,10 +65,14 @@ import { RequestComponent } from './shared/components/request/request.component'
 import { HallService } from './services/hall.service';
 import { OnlyLoggedInGuard } from './app-routing/guards/only-logged-in-guard';
 import { OnlyAdminGuard } from './app-routing/guards/only-admin-guard';
-import {AuditoriumAdminComponent} from './components/admin-panel/auditorium-admin/auditorium-admin.component';
-import {HallAdminComponent} from './components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
-import {ModifyHallComponent} from './components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
+import { AuditoriumAdminComponent} from './components/admin-panel/auditorium-admin/auditorium-admin.component';
+import { HallAdminComponent} from './components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
+import { ModifyHallComponent} from './components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
 import { AuditoriumsAdminComponent } from './components/admin-panel/auditorium-admin/auditoriums/auditoriums.component';
+import { TerminService } from './services/termin.service';
+import { MovieTerminListComponent } from './components/termin/movie-termin-list/movie-termin-list.component';
+import { PlayTerminListComponent } from './components/termin/play-termin-list/play-termin-list.component';
+import { CinemaMapComponent } from './components/cinema/cinema-map/cinema-map.component';
 
 @NgModule({
   declarations: [
@@ -112,18 +117,25 @@ import { AuditoriumsAdminComponent } from './components/admin-panel/auditorium-a
     AuditoriumAdminComponent,
     HallAdminComponent,
     ModifyHallComponent,
-    AuditoriumsAdminComponent
+    AuditoriumsAdminComponent,
+    MovieTerminListComponent,
+    PlayTerminListComponent,
+    CinemaMapComponent
   ],
   imports: [
     BrowserModule,
     RoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey : 'AIzaSyB81X56Wa1HeAUSFYN4R5JmwkUNBekBrOM'
+    })
   ],
   providers: [BidService, CinemaService, FanItemService, AuthService,
      FanadService, FanzoneService, TheatreService, UserService, MovieService,
      DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
-    MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard],
+    MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
+     TerminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

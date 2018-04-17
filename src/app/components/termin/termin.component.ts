@@ -5,6 +5,8 @@ import { HallService } from '../../services/hall.service';
 import { Hall } from '../../model/hall.model';
 import { NgForm } from '@angular/forms';
 import { HallCreation } from '../../model/creation/hall-creation.model';
+import { TerminService } from '../../services/termin.service';
+import { TerminCreation } from '../../model/creation/termin-creation.model';
 
 @Component({
   selector: 'app-termin',
@@ -14,22 +16,28 @@ import { HallCreation } from '../../model/creation/hall-creation.model';
 export class TerminComponent implements OnInit {
 
   movies: Array<Movie>;
- 
+  movie : Movie;
   times: Array<Number>
   message: string;
   nameHall = '';
   seatingsNo = '';
   time ='';
+  discount = false; 
+  price = '';
+  
+  
+
 
   halls: Array<Hall>;
   newHall : Hall;
   selectedHalls: Array<Hall>;
 
-  @ViewChild('addHall') formHall : NgForm;
-  @ViewChild('addTime') formTime : NgForm;
+  @ViewChild('addForm') form : NgForm;
 
-  constructor(public movieService: MovieService, public hallService: HallService) { }
-
+  constructor(public movieService: MovieService, public hallService: HallService,
+                public terminService : TerminService) { 
+                this.selectedHalls = new Array();
+             }
   ngOnInit() {
 
     this.movieService.getAll().subscribe(
@@ -38,20 +46,28 @@ export class TerminComponent implements OnInit {
     this.hallService.getAll().subscribe(
       resp => this.halls = resp, error => this.message = JSON.stringify(error)
     );
+  
   }
-  addHall(){
-  /*  console.log("Dodaaaaaaaajem hall");
-    const dir : HallCreation = new HallCreation(this.formHall.value['nameHall'],
-    movies.id, 0);
-    this.directorService.insert(dir).subscribe(
+  addTermin(){
+    console.log("aaat" +this.selectedHalls);
+    const halls = this.selectedHalls.map(hall => hall.id);
+    console.log(halls);
+    const termin: TerminCreation = new TerminCreation(this.movie.id, halls, 
+            this.form.value['date'], this.form.value['price'], this.form.value['discount']);
+            console.log(termin);
+    this.terminService.insert(termin).subscribe(
       resp => {
+
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);
       }
-    );*/
+    );
    
   }
+
+
+
   hasHall(idHall: number): boolean {
     let found = false;
     for(const a of this.selectedHalls) {
@@ -66,7 +82,7 @@ export class TerminComponent implements OnInit {
   removeHall(index: number) {
     this.selectedHalls.splice(index, 1);
   }
- 
+
 
   selectHall() {
     if(this.newHall !== undefined && !this.hasHall(this.newHall.id)){
@@ -74,9 +90,6 @@ export class TerminComponent implements OnInit {
       this.newHall = undefined;
     }
   }
-  addTime() {
-    this.times.push(this.formTime.value['time']);
-    console.log("aaaaaa" + this.times);
-  }
+
 
 }

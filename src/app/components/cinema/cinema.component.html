@@ -12,20 +12,29 @@
           <span class="lisyt-group-item-text desc">{{cinema?.description}} </span>
         </div>
         <div class="list-group-item-text">
-          <span class="style">Address: </span> {{cinema?.address}}</div>
+          <span class="style">Address: </span> {{cinema?.address}}  
+           <a  class = "mouse" (click) = "showMap()"><i> Show map </i> </a>
+          </div>
 
+      
       </ul>
-
+     
 
     </div>
+    <div *ngIf = "showmap"  >
+        <agm-map [latitude] = "latitude" [longitude] = "longitude" (mapClick) = "onChooseLocation($event)">
+            <agm-marker [latitude] = "latitude" [longitude] = "longitude">
+
+            </agm-marker>
+        </agm-map>
+      </div>
     <button routerLink="new" class="btn btn-primary"> Add new movie </button>
     <button routerLink="termin" class="btn btn-primary"> Add new projection </button>
 
     <a routerLink="reservation" class="right"> Quick reservation </a>
     <hr/>
 
-    <!--  <app-movie-list></app-movie-list> -->
-
+   
     <div class="row">
       <div class="col-xs-12">
         <div class="panel with-nav-tabs panel-default">
@@ -41,7 +50,7 @@
                 <app-movie-list></app-movie-list>
               </span>
               <span *ngIf="openP">
-                <!--<router-outlet></router-outlet>-->
+                <app-movie-termin-list></app-movie-termin-list>
               </span>
 
             </div>
