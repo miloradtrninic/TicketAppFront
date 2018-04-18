@@ -1,9 +1,14 @@
 import {Projection} from './projection.model';
+import { Genre } from './genre.model';
+import { Director } from './director.model';
+import { Actor } from './actor.model';
+import { Termin } from './termin.model';
 
 export class Play extends Projection {
 
-  constructor(id: number, name: string, ratings: number, director: string,
-    durationMinutes: number, coverPath: string, description: string) {
-    super(id, name, ratings, director, durationMinutes, coverPath, description);
+  constructor(id: number, name: string, ratings: number,  actors : Array<Actor>,
+    genres : Array<Genre> , director: Director, durationMinutes: number, coverPath: string,
+    description: string, projectionTime : Array<Termin>) {
+    super(id, name, ratings, actors, genres,  director, durationMinutes, coverPath, description, projectionTime);
   }
 }

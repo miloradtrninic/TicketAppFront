@@ -1,3 +1,38 @@
-<p>
-  movie-termin-list works!
-</p>
+<hr>
+<p> Sve projekcije u ovom bioskopu: </p>
+<div class="row">
+  <div class="col-xs-12">
+    <a class="list-group-item clearfix" *ngFor="let termin of termins; let i = index">
+      <div class="pull-left">
+        <h2 class="list-group-item-heading letter">
+          <a routerLink="termin/{{termin?.id}}">
+            <b>{{ termin.projection.name | uppercase }} </b>
+          </a>
+        </h2>
+        <div *ngIf="detailTermin !== i">
+          <a class="detail" (click)="onDetail(i)">Detaljnije</a>
+        </div>
+        <div *ngIf="detailTermin === i">
+          <a class="detail" (click)="offDetail()">Vrati</a>
+        </div>
+        <div *ngIf="detailTermin === i">
+         <p class="list-group-item-text">
+            <span class="style"> Date:</span> {{ termin.date }}</p>
+          <p class="list-group-item-text">
+            <span class="style">Price:</span> {{ termin.price }}</p>
+          <p class="list-group-item-text">
+            <span class="style"> Discaunt:</span> {{ termin.discount }}</p>
+          <button class="btn btn-danger " (click)="selected=termin ">
+            <a (click)="deleteTermin(termin.id)"> Delete termin </a>
+          </button>
+        </div>
+      </div>
+    
+    </a>
+  </div>
+</div>
+
+
+
+
+

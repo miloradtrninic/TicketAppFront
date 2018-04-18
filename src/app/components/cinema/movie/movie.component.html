@@ -4,20 +4,43 @@
         <div class="panel-heading">
             <h4>{{ movie?.name | uppercase }} </h4>
         </div>
+       
 
         <div class="panel-body">
             <ul class="list-unstyled">
-                <div>
-                    <span class="style"> Description: </span>
-                    <span class="lisyt-group-item-text desc">{{movie?.description}} </span>
-                </div>
-                <div class="list-group-item-text">
-                    <span class="style">Duration: </span> {{movie?.durationMinutes}}</div>
+                <span class="pull-left">
+                    <div>
+                        <span class="style"> Description: </span>
+                        <span class="lisyt-group-item-text desc">{{movie?.description}} </span>
+                    </div>
+                    <div class="list-group-item-text">
+                        <span class="style">Duration: </span> {{movie?.durationMinutes}}</div>
+                    <div class="list-group-item-text">
+                        <span class="style">Director: </span> {{movie?.director.name }} {{movie?.director.lastName }}
+                    </div>
+                    <div class="list-group-item-text">
+                        <span class="style">Actors: </span> 
+                        <span *ngFor = "let actor of movie?.actors">{{actor.name}} {{actor.lastName}}</span>
+                       
+                    </div>
+                    <div class="list-group-item-text">
+                        <span class="style">Genre: </span>
+                        <span *ngFor = "let gen of movie?.genres">{{gen.name}}</span>
+                    </div>
+
+                    <div class="list-group-item-text">
+                            <span class="style">Termins: </span>
+                            <span *ngFor = "let term of movie?.projectionTime">{{term.date | date: 'dd/MM/yyyy hh:mm:ss'}} Price:  {{term.price}}</span>
+                        </div>
+                </span>
+
 
             </ul>
-            <div class="right"> {{movie?.coverPath}} </div>
+            <span class="pull-right">
+                <img src="{{ movie?.coverPath }}" class="img-responsive" style="max-height : 120px">
+            </span>
 
         </div>
-
+        <button routerLink="termin" class="btn btn-primary"> Add new projection </button>
     </div>
 </div>

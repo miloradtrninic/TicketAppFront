@@ -7,6 +7,8 @@ import { NgForm } from '@angular/forms';
 import { HallCreation } from '../../model/creation/hall-creation.model';
 import { TerminService } from '../../services/termin.service';
 import { TerminCreation } from '../../model/creation/termin-creation.model';
+import { ActivatedRoute } from '@angular/router';
+import { AuditoriumService } from '../../services/auditorium.service';
 
 @Component({
   selector: 'app-termin',
@@ -17,6 +19,7 @@ export class TerminComponent implements OnInit {
 
   movies: Array<Movie>;
   movie : Movie;
+  hall : Hall;
   times: Array<Number>
   message: string;
   nameHall = '';
@@ -25,34 +28,40 @@ export class TerminComponent implements OnInit {
   discount = false; 
   price = '';
   
-  
 
 
   halls: Array<Hall>;
   newHall : Hall;
   selectedHalls: Array<Hall>;
-
+  projectionId: number;
+  auditoriumId: number;
   @ViewChild('addForm') form : NgForm;
 
-  constructor(public movieService: MovieService, public hallService: HallService,
-                public terminService : TerminService) { 
-                this.selectedHalls = new Array();
+  constructor(public hallService: HallService,
+              public terminService : TerminService, private route: ActivatedRoute) { 
+              this.selectedHalls = new Array();
              }
   ngOnInit() {
-
-    this.movieService.getAll().subscribe(
-      resp => this.movies = resp, error => this.message = JSON.stringify(error)
-    );
-    this.hallService.getAll().subscribe(
-      resp => this.halls = resp, error => this.message = JSON.stringify(error)
-    );
+    this.route.params.subscribe(params => {
+      this.projectionId = +params['projId'];
+    });
+   this.route.params.subscribe(params => {
+    this.auditoriumId = +params['id'];
+    this.hallService.getByAuditorium(this.auditoriumId).subscribe(
+      (resp: Hall[]) => {
+        this.halls = resp;
+      }, error => {
+        this.message = error;
+      }
+     );
+ });
   
   }
   addTermin(){
     console.log("aaat" +this.selectedHalls);
     const halls = this.selectedHalls.map(hall => hall.id);
     console.log(halls);
-    const termin: TerminCreation = new TerminCreation(this.movie.id, halls, 
+    const termin: TerminCreation = new TerminCreation(this.projectionId , halls, 
             this.form.value['date'], this.form.value['price'], this.form.value['discount']);
             console.log(termin);
     this.terminService.insert(termin).subscribe(

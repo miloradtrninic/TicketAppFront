@@ -12,6 +12,7 @@ import { GenreCreation } from '../../../../model/creation/genre-creation.model';
 import { Genre } from '../../../../model/genre.model';
 import { Actor } from '../../../../model/actor.model';
 import { Director } from '../../../../model/director.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-movie',
@@ -44,19 +45,23 @@ export class AddMovieComponent implements OnInit {
   directors: Array<Director>;
   newDirector : Director;
  
-
+  cinemaId: number;
   @Input() movie: Movie;
   @ViewChild('addForm') form: NgForm;
   @ViewChild('addDirector') formDirector : NgForm;
   @ViewChild('addActor') formActor : NgForm;
   @ViewChild('addGenre') formGenre : NgForm;
   constructor(public movieService: MovieService, public directorService : DirectorService,
-              public actorService :ActorService, public genreService: GenreService) {
+              public actorService :ActorService, public genreService: GenreService, private route: ActivatedRoute) {
                 this.selectedGenres = new Array();
                 this.selectedActors = new Array();
+                
               }
 
   ngOnInit() {
+    this.route.params.subscribe(
+      parms=> this.cinemaId = +parms['id'], error => this.message = JSON.stringify(error)
+    );
     this.genreService.getAll().subscribe(
       resp => this.genres = resp, error => this.message = JSON.stringify(error)
     );
@@ -95,7 +100,7 @@ export class AddMovieComponent implements OnInit {
     const genres = this.selectedGenres.map(gen=>gen.id);
     const movie: MovieCreation = new MovieCreation(this.form.value['name'], 0, director_id,
       actors, genres, this.form.value['duration'], this.form.value['poster'],
-      this.form.value['description']);
+      this.form.value['description'], this.cinemaId);
     console.log(movie);
     this.movieService.insert(movie).subscribe(
       resp => {
