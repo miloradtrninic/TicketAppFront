@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Termin } from '../../../model/termin.model';
 import { TerminService } from '../../../services/termin.service';
+import { ActivatedRoute } from '@angular/router';
+import { MovieService } from '../../../services/movie.service';
+import { Movie } from '../../../model/movie.model';
 
 @Component({
   selector: 'app-movie-termin-list',
@@ -9,22 +12,30 @@ import { TerminService } from '../../../services/termin.service';
 })
 export class MovieTerminListComponent implements OnInit {
 
-  selected : Termin;
+
   message: string;
-  termins : Termin[] = [];
+  movies : Movie[] = [];
   detailTermin = -1;
   allowP = true;
-  
-  constructor(public terminService : TerminService) { }
+  cinemaId: number;
+
+  constructor(public terminService : TerminService, public movieService: MovieService,public route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.terminService.getAll().subscribe(
-      (resp: Termin[]) => {
-        this.termins = resp;
-      }, error => {
-        this.message = error;
-      }
-    );
+    console.log("olalal" + this.movies);
+   
+      this.route.params.subscribe(
+        params => {
+          this.cinemaId = +params['id'];
+          this.movieService.getAllFromCinema(this.cinemaId).subscribe(
+           (resp: Movie[]) => {
+             this.movies = resp;
+           }, error => {
+             this.message = error;
+           }
+         );
+         }, error => {}
+      );
 
   }
 
@@ -44,5 +55,8 @@ export class MovieTerminListComponent implements OnInit {
     this.allowP = true;  
   }
 
+  forSale(num : number){
+    return (num * 75 ) / 100;
+}
 
 }

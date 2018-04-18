@@ -1,3 +1,59 @@
-<p>
-  play works!
-</p>
+<div class="panel-group" style="margin-top: 5ex;">
+  <div class="panel panel-primary back">
+
+    <div class="panel-heading">
+      <h4>{{ play?.name | uppercase }} </h4>
+    </div>
+
+
+    <div class="panel-body">
+      <ul class="list-unstyled">
+        <span class="pull-left">
+          <div>
+            <span class="style"> Description: </span>
+            <span class="lisyt-group-item-text desc">{{play?.description}} </span>
+          </div>
+          <div class="list-group-item-text">
+            <span class="style">Duration: </span> {{play?.durationMinutes}}</div>
+          <div class="list-group-item-text">
+            <span class="style">Director: </span> {{play?.director.name }} {{play?.director.lastName }}
+          </div>
+          <div class="list-group-item-text">
+            <span class="style">Actors: </span>
+            <span *ngFor="let actor of play?.actors">{{actor.name}} {{actor.lastName}}</span>
+
+          </div>
+          <div class="list-group-item-text">
+            <span class="style">Genre: </span>
+            <span *ngFor="let gen of play?.genres">{{gen.name}}</span>
+          </div>
+
+          <div class="list-group-item-text">
+
+            <span class="style">Termins: </span>
+            <div>
+              <span *ngFor="let term of play?.projectionTime">
+                <a class="btn btn-3d btn-xlg btn-default noborder margin-right-6 padding-10">
+                  <h3 class="nomargin nopadding yellow"> {{term.date | date: 'hh:mm:ss'}} </h3>
+                  <h3 class="nomargin nopadding yellow"> {{term.date | date: 'MMMM d, y'}} </h3>
+                  <br>
+                  {{term.price}} RSD
+                  <span class="block font-lato">
+                    <hr class="nomargin nopadding">
+                  </span>
+                  <strong>Discount: </strong>
+                  <span *ngIf="term.discount"> Yes </span>
+                  <span *ngIf="!term.discount"> No </span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </span>
+      </ul>
+      <span class="pull-right">
+        <img src="{{ play?.coverPath }}" class="img-responsive" style="max-height : 120px">
+      </span>
+    </div>
+    <a routerLink="termin" class="right"> Add new projection </a>
+  </div>
+</div>

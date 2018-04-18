@@ -32,19 +32,16 @@
 
                         <span class="style">Termins: </span>
                         <div>
-                            <!--  <span *ngFor = "let term of movie?.projectionTime">
-                                    {{term.date | date: 'dd/MM/yyyy hh:mm:ss'}} 
-                                    Price:  {{term.price}} 
-                                    Discount: <span *ngIf = "term.discount"> Yes </span><span *ngIf = "!term.discount"> No </span>
-                                   
-                                </span>-->
                             <span *ngFor="let term of movie?.projectionTime">
                                 <a class="btn btn-3d btn-xlg btn-default noborder margin-right-6 padding-10">
-                                    <h3 class="nomargin nopadding yellow"> {{term.date | date: 'hh:mm:ss'}} </h3>{{term.price}} RSD
+                                    <h3 class="nomargin nopadding yellow"> {{term.date | date: 'hh:mm:ss'}} </h3>
+                                    <h3 class="nomargin nopadding yellow"> {{term.date | date: 'MMMM d, y'}} </h3>
+                                    <br>
+                                    {{term.price}} RSD
                                     <span class="block font-lato">
                                         <hr class="nomargin nopadding">
                                     </span>
-                                    <strong>Discount:  </strong>
+                                    <strong>Discount: </strong>
                                     <span *ngIf="term.discount"> Yes </span>
                                     <span *ngIf="!term.discount"> No </span>
                                 </a>
@@ -63,6 +60,6 @@
             </span>
 
         </div>
-        <button routerLink="termin" class="btn btn-primary"> Add new projection </button>
+        <a routerLink="termin" class="right"> Add new projection </a>
     </div>
 </div>

@@ -21,21 +21,21 @@
 
         </div>
 
-        <div *ngIf = "showmap"  >
-                <agm-map [latitude] = "latitude" [longitude] = "longitude" (mapClick) = "onChooseLocation($event)">
-                    <agm-marker [latitude] = "latitude" [longitude] = "longitude">
-        
-                    </agm-marker>
-                </agm-map>
-              </div>
+        <div *ngIf="showmap">
+            <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChooseLocation($event)">
+                <agm-marker [latitude]="latitude" [longitude]="longitude">
+
+                </agm-marker>
+            </agm-map>
+        </div>
 
         <button routerLink="new" class="btn btn-primary"> Add new play </button>
-        <button routerLink="projection" class="btn btn-primary"> Add new projection </button>
 
-        <div  class="rightText">
-                <p>Average rating for this theatre : {{ theatre?.rating}} </p>
-            </div>
-        <a routerLink="reservation" class="right"> Quick reservation </a>
+
+        <div class="rightText">
+            <p>Average rating for this theatre : {{ theatre?.rating}} </p>
+        </div>
+
         <hr/>
 
         <div class="row">
@@ -47,7 +47,7 @@
                                 <a (click)="openPlays()" class="mouse">All plays</a>
                             </li>
                             <li>
-                                <a (click)="openProjection()" class="mouse">All projections</a>
+                                <a (click)="openProjection()" class="mouse">Quick reservation</a>
                             </li>
                         </ul>
                     </div>
@@ -59,7 +59,6 @@
                             <span *ngIf="openPr">
                                 <app-play-termin-list></app-play-termin-list>
                             </span>
-
                         </div>
                     </div>
                 </div>
