@@ -3,3 +3,21 @@
     font-size: 16px;
     margin : 3px;
 }
+.okvir{ 
+    border : 2px solid ;
+    margin : 5px;
+}
+.btn-3d.btn-xlg {
+    line-height: inherit;
+}
+a.btn {
+    line-height: 26px;
+}
+.btn-default {
+    color: #fff;
+    background-color: #0519d3;
+    border-color: #777;
+}
+.btn {
+    color: #fff;
+}
