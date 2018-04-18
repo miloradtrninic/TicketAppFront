@@ -16,7 +16,7 @@ export abstract class AbstractService<Entity, Key> {
     return this.http.get(this.actionUrl, {headers: this.authService.getJSONAuthHeader()})
       .map(resp => resp as Entity[]);
   }
-  
+
   getOne(id: Key): Observable<any> {
     return this.http.get(`${this.actionUrl}/${id}`, {headers: this.authService.getJSONAuthHeader()})
       .map(resp => resp as Entity);
@@ -27,7 +27,7 @@ export abstract class AbstractService<Entity, Key> {
     return this.http.post(this.actionUrl + '/new', toInsert, {headers: this.authService.getJSONAuthHeader()})
       .map(resp => resp as Entity);
   }
-  
+
   delete(toDelete: Key): Observable<any> {
     return this.http.delete(this.actionUrl + '/delete/' + toDelete, {headers: this.authService.getJSONAuthHeader()});
   }

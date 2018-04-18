@@ -65,6 +65,9 @@ import { HallService } from './services/hall.service';
 import { OnlyLoggedInGuard } from './app-routing/guards/only-logged-in-guard';
 import { OnlyAdminGuard } from './app-routing/guards/only-admin-guard';
 import { FriendsComponent } from './components/friends/friends.component';
+import {ReservationService} from './services/reservation.service';
+import { ReservationListComponent } from './components/reservation/reservation-list/reservation-list.component';
+import { SeatingsComponent } from './shared/components/seatings/seatings.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +109,9 @@ import { FriendsComponent } from './components/friends/friends.component';
     TerminComponent,
     TopLevelComponent,
     RequestComponent,
-    FriendsComponent
+    FriendsComponent,
+    ReservationListComponent,
+    SeatingsComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +122,7 @@ import { FriendsComponent } from './components/friends/friends.component';
   providers: [BidService, CinemaService, FanItemService, AuthService,
      FanadService, FanzoneService, TheatreService, UserService, MovieService,
      DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
-    MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard],
+    MembershipService, PlayService, HallService, ReservationService, OnlyLoggedInGuard, OnlyAdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-3">
+    <app-list [type]="listType" [items]="createListItems()" [header]="'Reservations'"
+              (onElementClickEvent)="reservationClick($event)"></app-list>
+  </div>
+
+  <div class="col-sm-9" *ngIf="reservationToView != null">
+    <div class="row">
+      <div class="col-sm-4">
+        <button class="btn btn-warning" (click)="clearPreviewWindow($event)">Hide</button>
+      </div>
+      <div class="col-sm-4">
+        <button class="btn btn-danger" (click)="cancelReservation($event)">Cancel reservation</button>
+      </div>
+    </div>
+    <app-seatings [message]="'Taken Seats'" [seatings]="getSeatingsOfReservation()"></app-seatings>
+  </div>
+</div>

@@ -42,14 +42,14 @@ const routes: Routes = [
   { path: 'cinema/:id', component: CinemaComponent},
   { path: 'cinema/:id/new', component: AddMovieComponent},
   { path: 'cinema/:id/termin', component: TerminComponent},
-  { path: 'cinema/:id/reservation', component: ReservationComponent},
+  { path: 'cinema/:id/reservation', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'cinema/:id/movie/:movieId', component: MovieComponent},
   { path: 'theatre', component: TheatreListComponent},
   { path: 'theatre/:id', component: TheatreComponent},
   { path: 'theatre/:id/new', component: AddPlayComponent},
   { path: 'theatre/:id/play/:playId', component: TheatreComponent},
   { path: 'fanzone', component: FanZoneComponent},
-  { path: 'friends', component: FriendsComponent},
+  { path: 'friends', component: FriendsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'admin-panel', component: AdminPanelComponent, /*canActivate: [OnlyAdminGuard],*/ children: [
     {path: '', component: HomeAdminComponent},
     {path: 'fan-zone', component: AdminFanZoneComponent},
@@ -63,8 +63,8 @@ const routes: Routes = [
   ]},
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]}
-
+  { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'reservations', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]}
 ];
 
 @NgModule({
