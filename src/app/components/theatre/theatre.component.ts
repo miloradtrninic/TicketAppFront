@@ -44,13 +44,12 @@ export class TheatreComponent implements OnInit {
     this.openPr = false;
     this.openPl = true;
    
-    console.log("aaaaaaaaaaaaaaaa");
   
   }
   openProjection(){
     this.openPl = false;
     this.openPr = true;
-    console.log("bbbbbbbbbbbbb");
+ 
   }
 
   showMap(){

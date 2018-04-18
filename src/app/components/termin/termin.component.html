@@ -22,9 +22,9 @@
 
   <!-- HALL -->
   <div class="form-group">
-    <label for="hall" class="col-sm-2 control-label"> Select actors: </label>
+    <label for="hall" class="col-sm-2 control-label"> Select hall: </label>
 
-    <div class="col-sm-9">
+    <div class="col-sm-7">
       <select class="form-control" [(ngModel)]="newHall" [ngModelOptions]="{standalone: true}">
         <option></option>
         <option *ngFor="let hall of halls" [hidden]="hasHall(hall.id)" [ngValue]="hall">{{hall.name}}  </option>

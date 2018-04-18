@@ -7,6 +7,7 @@ import { ActorService } from '../../../../services/actor.service';
 import { GenreService } from '../../../../services/genre.service';
 import { Genre } from '../../../../model/genre.model';
 import { Actor } from '../../../../model/actor.model';
+import { Cinema } from '../../../../model/cinema.model';
 
 @Component({
   selector: 'app-movie-list',
@@ -19,6 +20,7 @@ export class MovieListComponent implements OnInit {
   selected: Movie;
   message: string;
   movies : Movie[] = [];
+  @Input() cinema: Cinema;
   name = '';
   description = '';
   duration = '';
@@ -45,6 +47,8 @@ export class MovieListComponent implements OnInit {
 
   ngOnInit() {
     console.log("olalal" + this.movies);
+ //  console.log("olalal" + this.movies.id);
+   
     this.movieService.getAll().subscribe(
       (resp: Movie[]) => {
         this.movies = resp;

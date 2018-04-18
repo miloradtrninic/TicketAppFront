@@ -10,4 +10,7 @@ export class CinemaService extends AbstractService<Cinema, number> {
     super(http, '/cinema', authService);
   }
 
+  getMovies(index : number){
+      //tu dodati
+}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Cinema } from '../../model/cinema.model';
 import {Router, ActivatedRoute} from '@angular/router';
 import { CinemaService } from '../../services/cinema.service';
@@ -14,7 +14,7 @@ export class CinemaComponent implements OnInit {
   latitude : number =  45.2671;
   longitude : number =  19.8335;
 
-  @Input() cinema: Cinema;
+  @Output() cinema: Cinema;
   message: string;
   id: number;
   cinemas : Cinema[] = [];
