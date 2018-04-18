@@ -93,17 +93,19 @@ export class HelperFunctions {
   public static createListItems(arrayOfItems, imageKey, textKeys: Array<any>): ListItem[] {
     const ret = [];
 
-    for (let i = 0; i < arrayOfItems.length; i++) {
-      let text = '';
+    if (!this.isEmptyValue(arrayOfItems)) {
+      for (let i = 0; i < arrayOfItems.length; i++) {
+        let text = '';
 
-      for (let j = 0; j < textKeys.length; j++) {
-        text += arrayOfItems[i][textKeys[j]] + ' ';
+        for (let j = 0; j < textKeys.length; j++) {
+          text += arrayOfItems[i][textKeys[j]] + ' ';
+        }
+
+        text = text.trim();
+        const item = this.isEmptyValue(imageKey) ? new ListItem(arrayOfItems[i][imageKey], text, arrayOfItems[i])
+                                       : new ListItem(null, text, arrayOfItems[i]);
+        ret.push(item);
       }
-
-      text = text.trim();
-      const item = this.isEmptyValue(imageKey) ? new ListItem(arrayOfItems[i][imageKey], text, arrayOfItems[i])
-                                     : new ListItem(null, text, arrayOfItems[i]);
-      ret.push(item);
     }
 
     return ret;
@@ -112,16 +114,18 @@ export class HelperFunctions {
   public static createRequestItems(arrayOfItems, textKeys: Array<any>, acfn, decfn, type): Request[] {
     const ret = [];
 
-    for (let i = 0; i < arrayOfItems.length; i++) {
-      let text = '';
+    if (!this.isEmptyValue(arrayOfItems)) {
+      for (let i = 0; i < arrayOfItems.length; i++) {
+        let text = '';
 
-      for (let j = 0; j < textKeys.length; j++) {
-        text += arrayOfItems[i][textKeys[j]] + ' ';
+        for (let j = 0; j < textKeys.length; j++) {
+          text += arrayOfItems[i][textKeys[j]] + ' ';
+        }
+
+        text = text.trim();
+        const item = new Request(text, type, arrayOfItems[i], acfn, decfn);
+        ret.push(item);
       }
-
-      text = text.trim();
-      const item = new Request(text, type, arrayOfItems[i], acfn, decfn);
-      ret.push(item);
     }
 
     return ret;

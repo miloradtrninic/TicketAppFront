@@ -15,7 +15,7 @@
   </div>
 
   <div *ngIf="userAuthenticated">
-    <app-list [type]="Constants.ListType.COMMON" [header]="'Visits'"
+    <app-list [type]="type" [header]="'Visits'"
               [items]="getAuditoriumListItems()"
               (onElementClickEvent)="goToPage($event)"></app-list>
   </div>
