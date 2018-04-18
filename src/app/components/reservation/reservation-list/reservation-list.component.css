@@ -1,0 +1,8 @@
+.DisableClicks {
+  pointer-events: none;
+}
+
+.BorderedArea {
+  border-style: ridge;
+  border-color: darkslateblue;
+}

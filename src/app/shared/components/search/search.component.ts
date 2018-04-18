@@ -99,7 +99,7 @@ export class SearchComponent implements OnInit {
       for (let i = 0; i < this.items.length; i++) {
         const toAdd = {};
         const item = this.items[i];
-
+        toAdd['relatedItem'] = item;
         for (let k = 0; k < this.displayKeys.length; k++) {
           const key = this.displayKeys[k];
           toAdd[key] = item[key];
@@ -158,10 +158,14 @@ export class SearchComponent implements OnInit {
       for (let i = 0; i < this.searchResults.length; i++) {
         if (imgInfo.CONTAINS) {
           const imgKey = this.searchResults[i].keys[imgInfo.INDEX];
-          const item: ListItem = new ListItem(this.searchResults[i][imgKey], this.searchResultToString(this.searchResults[i]));
+          const item: ListItem = new ListItem(this.searchResults[i][imgKey],
+                                              this.searchResultToString(this.searchResults[i]),
+                                              this.searchResults[i]['relatedItem']);
           ret.push(item);
         } else {
-          const item: ListItem = new ListItem(null, this.searchResultToString(this.searchResults[i]));
+          const item: ListItem = new ListItem(null,
+                                                        this.searchResultToString(this.searchResults[i]),
+                                                        this.searchResults[i]['relatedItem']);
           ret.push(item);
         }
       }
@@ -169,10 +173,14 @@ export class SearchComponent implements OnInit {
       for (let i = 0; i < this.items.length; i++) {
         if (imgInfo.CONTAINS) {
           const imgKey = this.items[i].keys[imgInfo.INDEX];
-          const item: ListItem = new ListItem(this.items[i][imgKey], this.searchResultToString(this.items[i]));
+          const item: ListItem = new ListItem(this.items[i][imgKey],
+                                              this.searchResultToString(this.items[i]),
+                                              this.items[i]);
           ret.push(item);
         } else {
-          const item: ListItem = new ListItem(null, this.searchResultToString(this.items[i]));
+          const item: ListItem = new ListItem(null,
+                                              this.searchResultToString(this.items[i]),
+                                              this.items[i]);
           ret.push(item);
         }
       }
@@ -185,22 +193,28 @@ export class SearchComponent implements OnInit {
     let containsImg = false;
     let keyIndex = null;
     let i = 0;
-
-    for (let key in this.items[0].keys) {
-      if (this.items[0].hasOwnProperty(key)) {
-        key = key.toLowerCase();
-        if (key.indexOf('path') > -1) {
-          containsImg = true;
-          keyIndex = i;
-          break;
-        }
-      }
-      i++;
-    }
-
-    return {
-      CONTAINS: containsImg,
-      INDEX: keyIndex
+    let ret = {
+      CONTAINS: false,
+      INDEX: null
     };
+
+    if (!HelperFunctions.isEmptyValue(this.items)) {
+      for (let key in this.items[0].keys) {
+        if (this.items[0].hasOwnProperty(key)) {
+          key = key.toLowerCase();
+          if (key.indexOf('path') > -1) {
+            containsImg = true;
+            keyIndex = i;
+            break;
+          }
+        }
+        i++;
+      }
+      ret = {
+        CONTAINS: containsImg,
+        INDEX: keyIndex
+      }
+    }
+    return ret;
   }
 }

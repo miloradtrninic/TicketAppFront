@@ -14,14 +14,14 @@
       <div class="row">
         <div class="row Buttons" align="center">
           <div class="col-sm-6">
-            <button class="btn btn-primary" (click)="sortByName(notFriends)">Sort by Name</button>
+            <button class="btn btn-primary" (click)="sortByName(notFriends)" [disabled]="notFriends === null">Sort by Name</button>
           </div>
           <div class="col-sm-6">
-            <button class="btn btn-primary" (click)="sortByLastName(notFriends)">Sort by Last Name</button>
+            <button class="btn btn-primary" (click)="sortByLastName(notFriends)" [disabled]="notFriends === null">Sort by Last Name</button>
           </div>
         </div>
       </div>
-
+      <br/>
       <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="notFriends"
                   [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Add Friends'"
                   (onElementClickEvent)="addFriend($event)">
@@ -33,14 +33,14 @@
       <div class="row">
         <div class="row Buttons" align="center">
           <div class="col-sm-6">
-            <button class="btn btn-primary" (click)="sortByName(friends)" [disabled]="mode === 'edit'">Sort by Name</button>
+            <button class="btn btn-primary" (click)="sortByName(friends)" [disabled]="friends === null">Sort by Name</button>
           </div>
           <div class="col-sm-6">
-            <button class="btn btn-primary" (click)="sortByLastName(friends)" [disabled]="mode === 'view'">Sort by Last Name</button>
+            <button class="btn btn-primary" (click)="sortByLastName(friends)" [disabled]="friends === null">Sort by Last Name</button>
           </div>
         </div>
       </div>
-
+      <br/>
       <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="friends"
                   [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Remove Friends'"
                   (onElementClickEvent)="removeFriend($event)">
@@ -48,6 +48,7 @@
     </div>
 
     <div class="col-sm-4">
+      <br/>
       <br/>
       <br/>
       <app-list (onElementClickEvent)="null" [header]="'Friend requests'" [items]="makeRequests()"

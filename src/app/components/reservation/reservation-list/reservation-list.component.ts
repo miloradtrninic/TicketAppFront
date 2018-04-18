@@ -3,6 +3,7 @@ import {ReservationService} from '../../../services/reservation.service';
 import {ReservationPreview} from '../../../model/preview/reservation-preview';
 import {Constants} from '../../../shared/constants/constants';
 import {ListItem} from '../../../shared/model/list-item';
+import {HelperFunctions} from '../../../shared/util/helper-functions';
 
 @Component({
   selector: 'app-reservation-list',
@@ -13,7 +14,9 @@ export class ReservationListComponent implements OnInit {
 
   @Input()
   private userId: number;
-  private reservations: ReservationPreview[];
+  private dummies;
+  private dummyItem = new ReservationPreview(0, null, null);
+  private reservations;
   private errormsg: string;
   private msg: string;
   private reservationToView: ReservationPreview;
@@ -21,6 +24,7 @@ export class ReservationListComponent implements OnInit {
 
   constructor(private service: ReservationService) {
     this.service.getAllForUser(this.userId)
+    this.getDummy();
   }
 
   ngOnInit() {
@@ -46,11 +50,10 @@ export class ReservationListComponent implements OnInit {
       });
   }
 
-  reservationClick(event) {
-    const index = event.target.getAttribute('id');
-    this.reservationToView = this.reservations[index];
+  reservationClick(reservation) {
+    this.reservationToView = reservation;
     const list = this.reservationToView.ticketList;
-    //Dodati getovanje hall i hallsegmenta
+    const hallSegment = list[0].seating.hallSegment;
   }
 
   clearPreviewWindow(event) {
@@ -62,10 +65,14 @@ export class ReservationListComponent implements OnInit {
 
     for (let i = 0; i < this.reservations.length; i++) {
       const ticket = this.reservations[i].ticketList[0].projection;
-      const toPush: ListItem = new ListItem(ticket.coverPath, ticket.name);
+      const toPush: ListItem = new ListItem(ticket.coverPath, ticket.name, this.reservations[i]);
       ret.push(toPush);
     }
 
     return ret;
+  }
+
+  getDummy() {
+    this.dummies = HelperFunctions.createDummyTest(this.dummyItem);
   }
 }

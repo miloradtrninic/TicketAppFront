@@ -23,7 +23,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {}
 
-  elementClicked(event) {
-    this.onElementClickEvent.emit(event);
+  elementClicked(item) {
+    this.onElementClickEvent.emit(item);
   }
 }

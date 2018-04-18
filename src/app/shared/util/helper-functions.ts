@@ -1,3 +1,5 @@
+import {ListItem} from '../model/list-item';
+import {Request} from '../model/request';
 
 export class HelperFunctions {
   /*Moze biti bilo sta. Ako treba dodati jos nesto, slobodno prosirite.*/
@@ -62,5 +64,66 @@ export class HelperFunctions {
         return 0;
       }
     })
+  }
+
+  private static makeRandom() {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (let i = 0; i < 5; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return text;
+  }
+
+  public static createDummyTest(dummyEntity) {
+    const ret = [];
+
+    for (let i = 0; i < 20; i++) {
+      const text = this.makeRandom();
+      const item = new ListItem('assets/aaa.jpg', text, dummyEntity);
+
+      ret.push(item);
+    }
+
+    return ret;
+  }
+
+  public static createListItems(arrayOfItems, imageKey, textKeys: Array<any>): ListItem[] {
+    const ret = [];
+
+    for (let i = 0; i < arrayOfItems.length; i++) {
+      let text = '';
+
+      for (let j = 0; j < textKeys.length; j++) {
+        text += arrayOfItems[i][textKeys[j]] + ' ';
+      }
+
+      text = text.trim();
+      const item = this.isEmptyValue(imageKey) ? new ListItem(arrayOfItems[i][imageKey], text, arrayOfItems[i])
+                                     : new ListItem(null, text, arrayOfItems[i]);
+      ret.push(item);
+    }
+
+    return ret;
+  }
+
+  public static createRequestItems(arrayOfItems, textKeys: Array<any>, acfn, decfn, type): Request[] {
+    const ret = [];
+
+    for (let i = 0; i < arrayOfItems.length; i++) {
+      let text = '';
+
+      for (let j = 0; j < textKeys.length; j++) {
+        text += arrayOfItems[i][textKeys[j]] + ' ';
+      }
+
+      text = text.trim();
+      const item = new Request(text, type, arrayOfItems[i], acfn, decfn);
+      ret.push(item);
+    }
+
+    return ret;
   }
 }
