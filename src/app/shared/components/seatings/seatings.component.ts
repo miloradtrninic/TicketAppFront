@@ -14,20 +14,21 @@ export class SeatingsComponent implements OnInit {
   private message: string;
   @Input()
   private seatings: SeatingPreview[];
-  private seatingsMatrix: SeatingPreview[][];
+  @Input()
   private hallSegId: number;
+  private seatingsMatrix: SeatingPreview[][];
   private hallSegment: HallPreview;
   private errormsg: string;
 
   constructor(private hallService: HallService) {
-    /*hallService.getOne(this.hallSegId)
+    hallService.getOne(this.hallSegId)
       .subscribe(res => {
         this.hallSegment = res;
         this.seatings = this.hallSegment.seatingList;
-        //this.createSeatingsMatrix();
+        this.createSeatingsMatrix();
       }, err => {
         this.errormsg = err;
-      });*/
+      });
     this.createDummySeatingsMatrix();
   }
 

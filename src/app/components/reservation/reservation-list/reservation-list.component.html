@@ -12,13 +12,13 @@
     </div>
     <br/>
     <div class="row">
-      <button class="btn btn-danger" (click)="cancelReservation($event)" [disabled]="reservationToView == null">Cancel</button>
+      <button class="btn btn-danger" (click)="cancelReservation($event)" [disabled]="canCancel()">Cancel</button>
     </div>
   </div>
 
   <div class="col-sm-8 BorderedArea" *ngIf="reservationToView != null">
     <div class="DisableClicks">
-      <app-seatings [message]="'Taken Seats'" [seatings]="null"></app-seatings>
+      <app-seatings [message]="'Taken Seats'" [seatings]="seatings" [hallSegId]="hallSegId"></app-seatings>
     </div>
   </div>
 

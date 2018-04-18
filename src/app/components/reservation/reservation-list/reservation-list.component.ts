@@ -19,6 +19,8 @@ export class ReservationListComponent implements OnInit {
   private reservations;
   private errormsg: string;
   private msg: string;
+  private hallSegId;
+  private seatings;
   private reservationToView: ReservationPreview;
   private readonly listType = Constants.ListType.COMMON;
 
@@ -28,6 +30,7 @@ export class ReservationListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.seatings = [];
     this.service.getAllForUser(this.userId)
       .subscribe(res => {
         this.reservations = res;
@@ -53,11 +56,17 @@ export class ReservationListComponent implements OnInit {
   reservationClick(reservation) {
     this.reservationToView = reservation;
     const list = this.reservationToView.ticketList;
-    const hallSegment = list[0].seating.hallSegment;
+    this.hallSegId = list[0].seating.hallSegment;
+
+    for (let i = 0; i < list.length; i++) {
+      this.seatings.push(list[i].seating);
+    }
   }
 
   clearPreviewWindow(event) {
     this.reservationToView = null;
+    this.seatings = [];
+    this.hallSegId = null;
   }
 
   createListItems() {
@@ -70,6 +79,16 @@ export class ReservationListComponent implements OnInit {
     }
 
     return ret;
+  }
+
+  canCancel() {
+    if (this.reservationToView === null) {
+      return false;
+    }
+    const ms = 60000;
+    const now = new Date();
+    const cancelationTimeLimit = new Date(this.reservationToView.ticketList[0].time.valueOf() - 30 * ms);
+    return now <= cancelationTimeLimit;
   }
 
   getDummy() {

@@ -40,4 +40,9 @@ export class Constants {
     AFU_THEATRE: 'All_For_User_Theatre',
     AFU_CINEMA: 'All_For_User_Cinema'
   }
+
+  public static readonly AuditoriumType = {
+    THEATRE: 'Theatre',
+    CINEMA: 'Cinema'
+  }
 }
