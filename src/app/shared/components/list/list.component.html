@@ -3,18 +3,20 @@
     {{header}}
   </div>
 
-  <div class="ListWrapper" *ngIf="type == null || type == listType.COMMON">
+  <div class="ListWrapper" *ngIf="type == null || type == listType.COMMON" id="Common">
     <ul class="list-group">
       <li class="list-group-item ListItem" *ngFor="let item of items; let i = index" (click)="elementClicked($event)"
           id={{i}}>
-         {{item}}
+        <img src="{{item.imagePath}}" class="img-responsive" align="left" width="50px" height="50px"/>
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        {{item.text}}
       </li>
     </ul>
   </div>
 
-  <div class="ListWrapper" *ngIf="type != null || type == listType.REQUEST_LIST">
+  <div class="ListWrapper" *ngIf="type != null && type == listType.REQUEST_LIST" id="Request">
     <ul class="list-group">
-      <li class="list-group-item RequestItem" *ngFor="let item of items; let i = index" (click)="elementClicked($event)"
+      <li class="list-group-item RequestItem" *ngFor="let item of items; let i = index" (click)="elementClicked(item)"
           id="{{'Request'+i}}">
         <app-request [requestText]="item.text" [acceptClickEvent]="item.acceptFn"
                       [declineClickEvent]="item.declineFn" [type]="item.type" [relatedItem]="item.relatedItem"></app-request>

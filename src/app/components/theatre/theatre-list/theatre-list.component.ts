@@ -2,6 +2,7 @@ import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Theatre } from '../../../model/theatre.model';
 import { TheatreService } from '../../../services/theatre.service';
 import { NgForm } from '@angular/forms';
+import {HelperFunctions} from '../../../shared/util/helper-functions';
 
 @Component({
   selector: 'app-theatre-list',
@@ -79,9 +80,20 @@ export class TheatreListComponent implements OnInit {
   allowPreview1() {
     this.allowP = false;
   }
-  
+
   allowPreview2() {
     this.allowP = true;
   }
 
+  sortByName() {
+    this.theatres = HelperFunctions.sortArrayByKey(this.theatres, 'name');
+  }
+
+  sortByAddress() {
+    this.theatres = HelperFunctions.sortArrayByKey(this.theatres, 'address');
+  }
+
+  sortByRatings() {
+    this.theatres = HelperFunctions.sortArrayByKey(this.theatres, 'ratings');
+  }
 }

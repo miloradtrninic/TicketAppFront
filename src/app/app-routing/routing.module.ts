@@ -30,12 +30,11 @@ import { ReservationComponent } from '../components/reservation/reservation.comp
 import { TerminComponent } from '../components/termin/termin.component';
 import { OnlyAdminGuard } from './guards/only-admin-guard';
 import { OnlyLoggedInGuard } from './guards/only-logged-in-guard';
+import {FriendsComponent} from '../components/friends/friends.component';
 import { MovieListComponent } from '../components/cinema/movie/movie-list/movie-list.component';
 import {AuditoriumAdminComponent} from '../components/admin-panel/auditorium-admin/auditorium-admin.component';
 import {HallAdminComponent} from '../components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
 import {ModifyHallComponent} from '../components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
-
-
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -47,6 +46,8 @@ const routes: Routes = [
   { path: 'cinema/:id/movies', component: MovieListComponent},
   { path: 'cinema/:id/movie/:projId/termin', component: TerminComponent},
   { path: 'cinema/:id/reservation', component: ReservationComponent},
+  { path: 'cinema/:id/termin', component: TerminComponent},
+  { path: 'cinema/:id/reservation', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'cinema/:id/movie/:movieId', component: MovieComponent},
   { path: 'theatre', component: TheatreListComponent},
   { path: 'theatre/:id', component: TheatreComponent},
@@ -54,26 +55,27 @@ const routes: Routes = [
   { path: 'theatre/:id/play/:projId/termin', component: TerminComponent},
   { path: 'theatre/:id/play/:playId', component: PlayComponent},
   { path: 'fanzone', component: FanZoneComponent},
+  { path: 'friends', component: FriendsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'admin-panel', component: AdminPanelComponent, /*canActivate: [OnlyAdminGuard],*/ children: [
-    {path: '', component: HomeAdminComponent},
-    {path: 'auditorium', component: AuditoriumAdminComponent, children: [
-      {path: 'halls', component: HallAdminComponent},
-      {path: 'halls/modify/:hallId', component: ModifyHallComponent},
-      {path: 'halls/new', component: ModifyHallComponent}
+      {path: '', component: HomeAdminComponent},
+      {path: 'auditorium', component: AuditoriumAdminComponent, children: [
+          {path: 'halls', component: HallAdminComponent},
+          {path: 'halls/modify/:hallId', component: ModifyHallComponent},
+          {path: 'halls/new', component: ModifyHallComponent}
+        ]},
+      {path: 'fan-zone', component: AdminFanZoneComponent},
+      {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent},
+      {path: 'user-admin', component: UserAdministrationComponent},
+      {path: 'memberships', component: MembershipAdminComponent},
+      {path: 'fan-ads', component: FanadAdminComponent, children: [
+          {path: '', component: AllAdsComponent},
+          {path: 'to-approve', component: FanadToApproveComponent}
+        ]}
     ]},
-    {path: 'fan-zone', component: AdminFanZoneComponent},
-    {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent},
-    {path: 'user-admin', component: UserAdministrationComponent},
-    {path: 'memberships', component: MembershipAdminComponent},
-    {path: 'fan-ads', component: FanadAdminComponent, children: [
-      {path: '', component: AllAdsComponent},
-      {path: 'to-approve', component: FanadToApproveComponent}
-    ]}
-  ]},
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]}
-
+  { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'reservations', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]}
 ];
 
 @NgModule({

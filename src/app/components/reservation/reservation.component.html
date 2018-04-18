@@ -1,3 +1,6 @@
-<p>
-  reservation works!
-</p>
+<div class="row">
+
+  <app-reservation-list *ngIf="mode === reservationTypes.ALLFORUSER"
+                        [userId]="userId"></app-reservation-list>
+
+</div>

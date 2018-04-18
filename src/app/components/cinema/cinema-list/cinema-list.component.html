@@ -1,6 +1,15 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-sm-3">
     <a class="btn btn-primary" (click)="selected=undefined" data-toggle="modal" data-target="#addCinema">Add cinema</a>
+  </div>
+  <div class="col-sm-3">
+    <a class="btn btn-primary" (click)="sortByName(cinemas)">Sort by Name</a>
+  </div>
+  <div class="col-sm-3">
+    <button class="btn btn-primary" (click)="sortByAddress(cinemas)">Sort by Address</button>
+  </div>
+  <div class="col-sm-3">
+    <button class="btn btn-primary" (click)="sortByRatings(cinemas)">Sort by Rating</button>
   </div>
 </div>
 
@@ -103,7 +112,7 @@
                       <p class="list-group-item-text desc"> {{ description }}</p>
                     </div>
                   </div>
-                  
+
                   <hr>
                 </a>
               </div>
