@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output,ViewChild } from '@angular/core';
 import { Cinema } from '../../model/cinema.model';
 import {Router, ActivatedRoute} from '@angular/router';
 import { CinemaService } from '../../services/cinema.service';
 import { AgmCoreModule } from '@agm/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-cinema',
@@ -21,11 +22,19 @@ export class CinemaComponent implements OnInit {
   openM = false;
   openP = false;
   showmap = false;
-  constructor(public cinemaService: CinemaService, private route: ActivatedRoute) {
+  ratings = 0;
+  num = 0;
+  up = 0;
+  down = 0;
+  av = 0;
+  @ViewChild('addRate') form: NgForm;
 
+  constructor(public cinemaService: CinemaService, private route: ActivatedRoute) {
+    
   }
 
   ngOnInit() {
+   
     console.log(window.location.href);
     this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
@@ -60,5 +69,25 @@ export class CinemaComponent implements OnInit {
     console.log(event);
     this.latitude = event.coords.lat;
     this.longitude = event.coords.lng;
+  }
+
+  evaluateCinema() {
+    console.log(this.cinema.ratings);
+     this.cinema.ratings =  this.cinema.ratings + this.ratings;
+     this.num = this.num + 1;
+     this.up =  this.cinema.ratings;
+     this.down =  this.num ;
+     this.av =this.up / this.down;
+    console.log(this.ratings);
+    console.log(this.cinema.ratings);
+    console.log( "num "+this.num );
+    console.log( "up "+this.up  );
+    console.log( "down "+this.down  );
+    
+  }
+
+  average() : number {
+   
+    return this.av;
   }
 }

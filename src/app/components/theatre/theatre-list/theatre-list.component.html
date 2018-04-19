@@ -33,12 +33,15 @@
         </div>
 
         <div *ngIf="detailTheatre === i">
-          <p class="list-group-item-text">
+          <p class="list-group-item-text"> Address :
             <i> {{ theatre.address }} </i>
           </p>
-          <p class="list-group-item-text desc"> {{ theatre.description }}</p>
+          <p class="list-group-item-text "> Description :
+            <span class="desc"> {{ theatre.description }} </span>
+          </p>
+          <p class="list-group-item-text"> Ratings : {{ theatre.ratings }}</p>
           <button class="btn btn-success" (click)="selected=theatre; fillFields(selected)" data-toggle="modal" data-target="#editTheatre">
-          Edit theatre </button>
+            Edit theatre </button>
           <button class="btn btn-danger" (click)="selected=theatre">
             <a (click)="deleteTheatre(theatre.id)"> Delete theatre </a>
           </button>
@@ -70,7 +73,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <form class="form-horizontal" #addForm="ngForm" (ngSubmit)="editTheatre()">
+        <form class="form-horizontal" #editForm="ngForm" (ngSubmit)="editTheatre()">
 
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label"> Name: </label>

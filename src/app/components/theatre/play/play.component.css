@@ -22,3 +22,8 @@ a.btn {
 .btn {
     color: #fff;
 }
+.text {
+    color : black;
+    text-justify: auto;
+    border-color: #777;
+}

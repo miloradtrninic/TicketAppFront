@@ -22,8 +22,6 @@ export class TerminComponent implements OnInit {
   hall : Hall;
   times: Array<Number>
   message: string;
-  nameHall = '';
-  seatingsNo = '';
   time ='';
   discount = false; 
   price = '';
