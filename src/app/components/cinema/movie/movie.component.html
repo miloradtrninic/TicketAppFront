@@ -40,10 +40,13 @@
                                     <span class="block font-lato">
                                         <hr class="nomargin nopadding">
                                     </span>
+                                    <span *ngFor="let hallName of term?.hallNames">
+                                        {{hallName}}
+                                    </span>
                                     <strong>Discount: </strong>
                                     <span *ngIf="term.discount"> Yes </span>
                                     <span *ngIf="!term.discount"> No </span>
-                                    <button class="text" (click)="selected=termin; fillFields()" data-toggle="modal" data-target="#editTermin"> Edit </button>
+                                    <button class="text" (click)="fillFields(term)" data-toggle="modal" data-target="#editTermin"> Edit </button>
                                 </a>
 
                             </span>
@@ -76,7 +79,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" #editForm="ngForm" (ngSubmit)="editTermin()">
 
-                    <!-- HALL -->
+                    <!-- HALL 
                     <div class="form-group">
                         <label for="hall" class="col-sm-2 control-label"> Select hall: </label>
 
@@ -108,7 +111,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- DATE -->
                     <div class="form-group">

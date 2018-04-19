@@ -1,9 +1,8 @@
 import {Projection} from './projection.model';
-import { Hall } from './hall.model';
 
 export class Termin   {
 
-  constructor(public id: number, public projection: Projection, public hallList: Array<Hall>, 
+  constructor(public id: number, public projection: Projection, public hallNames: Array<String>, 
     public date : Date,  public price: number, public discount: boolean){
 
     }
