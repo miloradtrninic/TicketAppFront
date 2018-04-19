@@ -1,20 +1,33 @@
-<h2>Item list</h2>
-<hr/>
-<a data-toggle="modal" data-target="#dialog" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>
+<h2>Item list
+<a (click)="selectedItem = undefined" data-toggle="modal" data-target="#dialog"
+   class="btn btn-primary pull-right">
+  <i class="glyphicon glyphicon-plus"> </i>
   Add item</a>
+</h2>
+<hr/>
+<div class="alert alert-info alert-dismissable" *ngIf="message">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+
+<div class="alert alert-danger alert-dismissable" *ngIf="error">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
+
 <ul class="media-list">
-  <li class="media" *ngFor="let item of fanZone.fanitemList">
+  <li class="media" *ngFor="let item of fanZone?.fanitemList; let i = index">
     <div class="media-left">
       <a href="#">
-        <img class="media-object" [src]="item.imagePath" [alt]="item.name">
+        <img class="media-object img-thumbnail img-responsive" style="max-width: 100px; max-height: 100px;" src="http://localhost:8080/api/{{item.imagePath}}" [alt]="item.name">
       </a>
     </div>
     <div class="media-body">
       <h4 class="media-heading">{{item.name}}</h4>
       <p>{{item.description}}</p>
       <div class="media-bottom">
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-primary" (click)="selectItem(item)">Edit</button>
+        <button class="btn btn-danger" (click)="delete(item, i)">Delete</button>
       </div>
     </div>
   </li>
@@ -28,31 +41,24 @@
         <h4 class="modal-title">Fan zone item</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" (submit)="send()" #f="ngForm">
+        <form class="form-horizontal" (ngSubmit)="send()" #f="ngForm">
           <div class="form-group">
             <label>Name</label>
             <input type="text" name="name" class="form-control" ngModel #name = "ngModel"/>
           </div>
           <div class="form-group">
             <label>Description</label>
-            <textarea name="desc" ngModel #desc="ngModel" class="form-control"></textarea>
+            <textarea name="description" ngModel #desc="ngModel" class="form-control"></textarea>
           </div>
           <div class="form-group">
             <label>Image</label>
-            <input type="file" accept="image/*" name="image" #image="ngModel" class="form-control" ngModel/>
+            <input type="file" accept="image/*" name="image"  (change)="fileChange($event)" ngModel #image="ngModel" class="form-control" />
           </div>
-          <div class="form-group">
-            <label>Projection</label>
-            <select class="form-control" ngModel name="projection" #projection = "ngModel">
-              <option [ngValue]="project" *ngFor="let project of projections">
-                {{project.name}}
-              </option>
-            </select>
-          </div>
+          <button class="btn btn-success btn-block">Send</button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
       </div>
     </div>
 

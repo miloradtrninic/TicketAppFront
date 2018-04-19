@@ -1,22 +1,35 @@
+
 <div *ngIf="error" class="alert alert-warning alert-dismissable">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   {{error}}
 </div>
-<a class="btn btn-success" (click)="add()" data-target="#addZone" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> New fan zone</a>
+<div *ngIf="message" class="alert alert-info alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+<h1>
+  Fan zones
+  <a class="btn btn-success pull-right" (click)="add()" data-target="#addZone" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> New fan zone</a>
+</h1>
 <p class="divider"></p>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
-      <th>#</th>
-      <th>Admin</th>
-      <th>Auditorium</th>
+      <tr>
+        <th>#</th>
+        <th>Auditorium</th>
+        <th>Auditorium</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let zone of fanZones">
         <td>{{zone.id}}</td>
-        <td>{{zone.adminUsername}}</td>
         <td>{{zone.auditoriumName}}</td>
-        <td><button class="btn btn-primary" (click)="select(zone)" data-target="#dialog" data-toggle="modal">Edit zone</button></td>
+        <td><a class="btn btn-info" routerLink="{{zone.id}}">View items</a></td>
+        <td><button class="btn btn-primary" (click)="select(zone)" data-target="#addZone" data-toggle="modal">Edit zone</button></td>
         <td><button class="btn btn-danger" (click)="delete()">Delete zone</button></td>
       </tr>
     </tbody>
@@ -30,36 +43,42 @@
         <h3>Fan zone</h3>
       </div>
       <div class="modal-body" style="padding: 2em">
-        <form class="form-horizontal" (submit)="insertNew()" #f="ngForm" >
-          <ul class="list-group">
-            <li class="list-group-item" *ngFor="let admin of adminsSelected; let i = index">
-              {{admin.username}}
-              <span class="pull-right">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let adm of adminsSelected; let i = index">
+            {{adm.username}}
+            <span class="pull-right">
               <span class="btn btn-xs btn-danger">
                   <span class="glyphicon glyphicon-minus" (click)="removeAdmin(i)" aria-hidden="true"></span>
               </span>
             </span>
-            </li>
-          </ul>
-          <div class="form-group">
-            <label>Admin: </label>
-            <select class="form-control" name="admin" [(ngModel)]="newAdmin" [ngModelOptions] = "{standalone: true}">
-              <option [ngValue]="admin.id" [hidden]="hasAdmin(admin.id)" *ngFor="let admin of admins">{{admin.username}}</option>
-            </select>
-          </div>
-          <span class="input-group-btn">
-            <button class="btn btn-primary" style="margin:1em;" (click)="addAdmin()"><i class="glyphicon glyphicon-add"></i>Add admin</button>
-          </span>
+          </li>
+        </ul>
+        <form class="form-horizontal" (ngSubmit)="insertNew()" #f="ngForm" >
 
           <div class="form-group">
-            <label>Auditorium</label>
-            <select  class="form-control" name="auditorium" #autitorium="ngModel" ngModel>
-              <option [ngValue]="audit.id" *ngFor="let audit of auditoriums">
-                {{audit.name}}
-              </option>
-            </select>
+            <label class="control-label col-sm-2">Admin: </label>
+            <div class="col-sm-7">
+              <select class="form-control" name="admin" [(ngModel)]="newAdmin" [ngModelOptions] = "{standalone: true}">
+                <option [ngValue]="admin" [hidden]="hasAdmin(admin.id)" *ngFor="let admin of admins">{{admin.username}}</option>
+              </select>
+            </div>
+            <div class="col-sm-1">
+              <a class="btn btn-sm btn-primary" style="margin:1em;" (click)="addAdmin()"><i class="glyphicon glyphicon-add"></i>Add admin</a>
+            </div>
           </div>
-          <button type="submit" [disabled]="!f.valid" class="btn btn-success btn-lg btn-block">Send
+
+          <div class="form-group" *ngIf="selected === undefined">
+            <label class="control-label col-sm-2">Auditorium</label>
+            <div class="col-xs-10">
+              <select  class="form-control" name="auditorium" #autitorium="ngModel" ngModel required="required">
+                <option [ngValue]="audit.id" *ngFor="let audit of auditoriums">
+                  {{audit.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" [disabled]="adminsSelected === undefined || adminsSelected.length === 0 || !f.valid"
+                  class="btn btn-success btn-lg btn-block">Send
             <i class="glyphicon glyphicon-upload"></i></button>
         </form>
       </div>

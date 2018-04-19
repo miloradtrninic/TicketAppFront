@@ -25,7 +25,7 @@ export class MovieListComponent implements OnInit {
   poster = '';
   director = '';
   allowP = true;
-  
+
   genres: Array<Genre>;
   newGenre: Genre;
   selectedGenres: Array<Genre>;
@@ -38,7 +38,7 @@ export class MovieListComponent implements OnInit {
   newDirector : Director;
 
   constructor(public movieService: MovieService, public directorService : DirectorService,
-                public actorService :ActorService, public genreService: GenreService) {
+                public actorService: ActorService, public genreService: GenreService) {
                     this.selectedGenres = new Array();
                     this.selectedActors = new Array();
        }
@@ -98,7 +98,7 @@ export class MovieListComponent implements OnInit {
   }
 
   allowPreview2() {
-    this.allowP = true;  
+    this.allowP = true;
   }
 
   hasDirector(idDirector: number): boolean {
@@ -121,7 +121,7 @@ export class MovieListComponent implements OnInit {
     }
     return found;
   }
- 
+
   removeActor(index: number) {
     this.selectedActors.splice(index, 1);
   }
@@ -154,7 +154,7 @@ export class MovieListComponent implements OnInit {
       this.newGenre = undefined;
     }
   }
- 
+
 
 
 }

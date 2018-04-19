@@ -34,6 +34,10 @@ import { MovieListComponent } from '../components/cinema/movie/movie-list/movie-
 import {AuditoriumAdminComponent} from '../components/admin-panel/auditorium-admin/auditorium-admin.component';
 import {HallAdminComponent} from '../components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
 import {ModifyHallComponent} from '../components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
+import {AuditoriumsAdminComponent} from '../components/admin-panel/auditorium-admin/auditoriums/auditoriums.component';
+import {FanItemsComponent} from '../components/fan-zone/fan-items/fan-items.component';
+import {FanAdsComponent} from '../components/fan-zone/fan-ads/fan-ads.component';
+import {SingleAdComponent} from '../components/fan-zone/fan-ads/single-ad/single-ad.component';
 
 
 
@@ -51,10 +55,15 @@ const routes: Routes = [
   { path: 'theatre/:id', component: TheatreComponent},
   { path: 'theatre/:id/new', component: AddPlayComponent},
   { path: 'theatre/:id/play/:playId', component: TheatreComponent},
-  { path: 'fanzone', component: FanZoneComponent},
+  { path: 'fan-zones/:id/zone', component: FanZoneComponent, children: [
+    {path: 'official-items', component: FanItemsComponent},
+    {path: 'fan-ads', component: FanAdsComponent},
+    {path: 'fan-ads/:adId', component: SingleAdComponent}
+  ]},
   { path: 'admin-panel', component: AdminPanelComponent, /*canActivate: [OnlyAdminGuard],*/ children: [
     {path: '', component: HomeAdminComponent},
     {path: 'auditorium', component: AuditoriumAdminComponent, children: [
+      {path: '', component: AuditoriumsAdminComponent},
       {path: 'halls', component: HallAdminComponent},
       {path: 'halls/modify/:hallId', component: ModifyHallComponent},
       {path: 'halls/new', component: ModifyHallComponent}

@@ -68,6 +68,9 @@ import {AuditoriumAdminComponent} from './components/admin-panel/auditorium-admi
 import {HallAdminComponent} from './components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
 import {ModifyHallComponent} from './components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
 import { AuditoriumsAdminComponent } from './components/admin-panel/auditorium-admin/auditoriums/auditoriums.component';
+import {FanItemsComponent} from './components/fan-zone/fan-items/fan-items.component';
+import {FanAdsComponent} from './components/fan-zone/fan-ads/fan-ads.component';
+import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-ad.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +115,10 @@ import { AuditoriumsAdminComponent } from './components/admin-panel/auditorium-a
     AuditoriumAdminComponent,
     HallAdminComponent,
     ModifyHallComponent,
-    AuditoriumsAdminComponent
+    AuditoriumsAdminComponent,
+    FanItemsComponent,
+    FanAdsComponent,
+    SingleAdComponent
   ],
   imports: [
     BrowserModule,

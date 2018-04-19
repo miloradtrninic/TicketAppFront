@@ -17,6 +17,11 @@ export abstract class AbstractService<Entity, Key> {
       .map(resp => resp as Entity[]);
   }
 
+  getAllByZone(zoneId: number): Observable<Entity[]> {
+    return this.http.get(this.actionUrl + '/getall/' + zoneId, {headers: this.authService.getJSONAuthHeader()})
+      .map(resp => resp as Entity[]);
+  }
+
   getOne(id: Key): Observable<any> {
     return this.http.get(`${this.actionUrl}/${id}`, {headers: this.authService.getJSONAuthHeader()})
       .map(resp => resp as Entity);

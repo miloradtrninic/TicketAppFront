@@ -11,7 +11,16 @@ export class FanItemService extends AbstractService<Fanitem, number> {
   constructor(http: HttpClient, protected authService: AuthService) {
     super(http, '/fanitem', authService);
   }
-  getFanZoneByAuditorium(audId: number): Observable<Fanitem[]> {
-    return this.http.get(this.actionUrl + '/' + audId).map(resp => resp as Fanitem[]);
+  uploadImage(formData) {
+    return this.http.post(this.actionUrl + '/new/', formData, {headers : this.authService.getAuthHeaderMultipart()})
+      .map(resp => resp as Fanitem);
+  }
+  updateItem(formData) {
+    return this.http.post(this.actionUrl + '/update/', formData, {headers : this.authService.getAuthHeaderMultipart()})
+      .map(resp => resp as Fanitem);
+  }
+  reserve(idItem: number) {
+    return this.http.get(this.actionUrl + '/reserve/' + idItem, {headers : this.authService.getJSONAuthHeader()})
+      .map(resp => resp as Fanitem);
   }
 }

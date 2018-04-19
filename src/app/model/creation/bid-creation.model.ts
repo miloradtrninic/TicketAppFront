@@ -1,9 +1,6 @@
-
-
 export class BidCreation  {
 
-  constructor(public offer: string) {
-
+  constructor(public offer: number, public adFK: number) {
   }
 
 

@@ -1,9 +1,17 @@
-<h1>Fan Zone</h1>
-
-<div class="media" *ngFor="let item of fanItems; let i = index">
+<h3>Official items</h3>
+<div *ngIf="error" class="alert alert-warning alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
+<div *ngIf="message" class="alert alert-info alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+<div class="media" *ngFor="let item of fanZone?.fanitemList; let i = index">
   <div class="media-left">
     <a href="#">
-      <img class="media-object" [src]="item.imagePath" alt="...">
+      <img class="media-object img-thumbnail img-responsive" style="max-height: 200px; max-height: 200px;"
+           src="http://localhost:8080/api/{{item.imagePath}}" alt="...">
     </a>
   </div>
   <div class="media-body">

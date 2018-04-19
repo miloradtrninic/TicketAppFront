@@ -13,7 +13,7 @@ export class CinemaComponent implements OnInit {
   @Input() cinema: Cinema;
   message: string;
   id: number;
-  cinemas : Cinema[] = [];
+  cinemas: Cinema[] = [];
   openM = false;
   openP = false;
   constructor(public cinemaService: CinemaService, private route: ActivatedRoute) {

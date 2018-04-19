@@ -19,13 +19,13 @@ export class CinemaListComponent implements OnInit {
   detailCinema = -1;
   @Output() selected: Cinema;
   message: string;
-  cinemas : Cinema[] = [];
+  cinemas: Cinema[] = [];
 
   @ViewChild('editForm') form: NgForm;
 
   constructor(public cinemaService: CinemaService) { }
 
-  
+
   ngOnInit() {
     console.log('ngOnInit cinema list');
     this.cinemaService.getAll().subscribe(
@@ -66,7 +66,7 @@ export class CinemaListComponent implements OnInit {
       }
     );
   }
-  
+
 
  onDetail(index: number)  {
     this.detailCinema = index;
@@ -79,7 +79,7 @@ export class CinemaListComponent implements OnInit {
   allowPreview1() {
     this.allowP = false;
   }
-  
+
   allowPreview2() {
     this.allowP = true;
   }

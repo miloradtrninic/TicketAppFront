@@ -27,4 +27,12 @@ export class FanadService extends AbstractService<Fanad, number> {
   disapprove(ad: Fanad): Observable<Fanad> {
     return this.http.put(this.actionUrl + '/disapprove', ad).map(resp => resp as Fanad);;
   }
+  uploadImage(formData) {
+    return this.http.post(this.actionUrl + '/new/', formData, {headers : this.authService.getAuthHeaderMultipart()})
+      .map(resp => resp as Fanad);
+  }
+  updateItem(formData) {
+    return this.http.post(this.actionUrl + '/update/', formData, {headers : this.authService.getAuthHeaderMultipart()})
+      .map(resp => resp as Fanad);
+  }
 }
