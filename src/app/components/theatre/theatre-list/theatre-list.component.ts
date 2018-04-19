@@ -3,6 +3,7 @@ import { Theatre } from '../../../model/theatre.model';
 import { TheatreService } from '../../../services/theatre.service';
 import { NgForm } from '@angular/forms';
 import {HelperFunctions} from '../../../shared/util/helper-functions';
+import { TheatreUpdate } from '../../../model/update/theatre-update.model';
 
 @Component({
   selector: 'app-theatre-list',
@@ -27,12 +28,16 @@ export class TheatreListComponent implements OnInit {
   constructor(public theatreService: TheatreService) { }
 
   ngOnInit() {
-    console.log('ngOnInit theatre list');
-    this.theatreService.getAll().subscribe(
-      (resp: Theatre[]) => {
-        this.theatres = resp;
+    console.log('edit theatre');
+    const theatreUpdate : TheatreUpdate = new TheatreUpdate(this.selected.id,this.form.value['name'], 
+    this.form.value['address'],  this.form.value['description'], 0);
+    this.theatreService.update(theatreUpdate).subscribe(
+      resp => {
+    const idx = this.theatres.map(cin => cin.id).findIndex(id => id === resp.id);
+    this.theatres[idx] = resp;
+        console.log(resp);
       }, error => {
-        this.message = error;
+        this.message = JSON.stringify(error);
       }
     );
   }

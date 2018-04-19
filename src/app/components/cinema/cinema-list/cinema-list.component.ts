@@ -3,6 +3,7 @@ import { Cinema } from '../../../model/cinema.model';
 import { CinemaService } from '../../../services/cinema.service';
 import { NgForm } from '@angular/forms';
 import {HelperFunctions} from '../../../shared/util/helper-functions';
+import { CinemaUpdate } from '../../../model/update/cinema-update.model';
 
 @Component({
   selector: 'app-cinema-list',
@@ -58,9 +59,12 @@ export class CinemaListComponent implements OnInit {
   editCinema(index){
     console.log('edit cinema');
     console.log('broj indexa je : ' + index);
-    this.cinemaService.update(index).subscribe(
+    const cinemaUpdate : CinemaUpdate = new CinemaUpdate(this.selected.id,this.form.value['name'], 
+    this.form.value['address'],  this.form.value['description'], 0);
+    this.cinemaService.update(cinemaUpdate).subscribe(
       resp => {
-    // this.cinemas.splice(index, 1);
+    const idx = this.cinemas.map(cin => cin.id).findIndex(id => id === resp.id);
+    this.cinemas[idx] = resp;
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);
