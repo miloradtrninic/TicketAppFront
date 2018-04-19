@@ -232,3 +232,9 @@ label {
   -webkit-animation-name: rubberBand;
   animation-name: rubberBand;
 }
+
+.BorderedArea {
+  border-style: ridge;
+  border-color: darkslateblue;
+  border-collapse: collapse;
+}

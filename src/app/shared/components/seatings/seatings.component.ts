@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SeatingPreview} from '../../../model/preview/seating-preview';
 import {HallService} from '../../../services/hall.service';
 import {HallPreview} from '../../../model/preview/hall-preview';
+import {HallSegmentPreview} from '../../../model/preview/hall-segment-preview';
 
 @Component({
   selector: 'app-seatings',
@@ -16,9 +17,13 @@ export class SeatingsComponent implements OnInit {
   private seatings: SeatingPreview[];
   @Input()
   private hallSegId: number;
+  @Output()
+  private seatingSelectionEvent: EventEmitter<any> = new EventEmitter<any>();
+
   private seatingsMatrix: SeatingPreview[][];
-  private hallSegment: HallPreview;
+  private hallSegment: HallSegmentPreview;
   private errormsg: string;
+  private selectedSeats: SeatingPreview[];
 
   constructor(private hallService: HallService) {
     hallService.getOne(this.hallSegId)
@@ -35,6 +40,10 @@ export class SeatingsComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  seatingClick(seating: SeatingPreview) {
+    this.seatingSelectionEvent.emit(seating);
+  }
 
   findMaxRow() {
     let max = this.seatings[0].row;

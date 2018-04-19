@@ -1,0 +1,51 @@
+<div>
+  <div class="row">
+    <h3>Step 1: Select projection time</h3>
+    <span *ngFor="let term of movie?.projectionTime" (click)="selectTermin(term)">
+      <a class="btn btn-3d btn-xlg btn-default noborder margin-right-6 padding-10">
+        <h3 class="nomargin nopadding yellow"> {{term.date | date: 'hh:mm'}} </h3>
+        <h3 class="nomargin nopadding yellow"> {{term.date | date: 'MMMM d, y'}} </h3>
+        <hr class="nomargin nopadding">
+        <del>{{term.price}} RSD </del>
+        <br>
+        <b> {{ term.price }} RSD </b>
+      </a>
+    </span>
+  </div>
+
+  <div class="row" *ngIf="selectedTermin !== null">
+    <h3>Step 2: Select a hall</h3>
+    <div class="col-sm-3">
+      <app-list [header]="'Projection Halls'" [type]="listType"
+                [items]="createHallSelection()"></app-list>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="selectedHall !== null">
+    <h3>Step 3: Select halls segment</h3>
+    <div class="col-sm-3">
+      <app-list [header]="'Hall segments'" [type]="listType"
+                [items]="createHallSegmentSelection()"></app-list>
+    </div>
+  </div>
+
+  <div *ngIf="selectedHallSegment !== null">
+    <div class="col-sm-6">
+      <app-seatings [hallSegId]="selectedHallSegment.id" [seatings]="seatings" [message]="'Step 4: Select seatings'"></app-seatings>
+    </div>
+    <div class="col-sm-3" *ngIf="inviteFriendsCount > 0">
+      <app-list [header]="'Invite Friends'" [type]="listType" [items]="createInvFriends()"
+                (onElementClickEvent)="selectFriendToInv($event)"></app-list>
+    </div>
+    <div class="col-sm-3" *ngIf="inviteFriendsCount > 0">
+      <app-list [header]="'Selected Friends'" [type]="listType" [items]="createRMFriends()"
+                (onElementClickEvent)="removeFriendFromInv($event)"></app-list>
+    </div>
+  </div>
+
+  <br/>
+
+  <div *ngIf="selectedSeats !== null">
+    <button class="btn btn-success" (click)="createReservation($event)">Create Reservation</button>
+  </div>
+</div>
