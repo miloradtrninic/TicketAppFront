@@ -77,6 +77,8 @@ import { FriendsComponent } from './components/friends/friends.component';
 import {ReservationService} from './services/reservation.service';
 import { ReservationListComponent } from './components/reservation/reservation-list/reservation-list.component';
 import { SeatingsComponent } from './shared/components/seatings/seatings.component';
+import { ReservationCreateComponent } from './components/reservation/reservation-create/reservation-create.component';
+import { TicketService } from './services/ticket.service';
 
 @NgModule({
   declarations: [
@@ -127,7 +129,8 @@ import { SeatingsComponent } from './shared/components/seatings/seatings.compone
     CinemaMapComponent,
     FriendsComponent,
     ReservationListComponent,
-    SeatingsComponent
+    SeatingsComponent,
+    ReservationCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -142,7 +145,7 @@ import { SeatingsComponent } from './shared/components/seatings/seatings.compone
     FanadService, FanzoneService, TheatreService, UserService, MovieService,
     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
     MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
-    TerminService, ReservationService],
+    TerminService, ReservationService, TicketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

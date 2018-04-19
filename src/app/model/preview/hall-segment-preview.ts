@@ -4,8 +4,7 @@ export class HallSegmentPreview {
   constructor(
     public id: number,
     public name: string,
-    public seatingsNo: number,
+    public auditoriumName: string,
     public seatingList: SeatingPreview[],
-    public hallId: number,
   ) {}
 }
