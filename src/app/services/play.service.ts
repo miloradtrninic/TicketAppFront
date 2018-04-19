@@ -5,6 +5,7 @@ import { AbstractService } from './abstract-service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Play } from '../model/play.model';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class PlayService extends AbstractService<Play, number> {
@@ -12,4 +13,7 @@ export class PlayService extends AbstractService<Play, number> {
     super(http, '/play', authService);
   }
 
+  getAllFromTheatre(theatreId: number): Observable<Play[]> {
+    return this.http.get(this.actionUrl + '/allFromTheatre/'+theatreId).map(resp=> resp as Play[]);
+   }
 }

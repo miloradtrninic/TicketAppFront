@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Director } from '../../../../model/director.model';
 import { Genre } from '../../../../model/genre.model';
 import { Actor } from '../../../../model/actor.model';
@@ -13,6 +13,8 @@ import { PlayService } from '../../../../services/play.service';
 import { DirectorCreation } from '../../../../model/creation/director-creation.model';
 import { ActorCreation } from '../../../../model/creation/actor-creation.model';
 import { GenreCreation } from '../../../../model/creation/genre-creation.model';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-play',
@@ -45,21 +47,23 @@ export class AddPlayComponent implements OnInit {
 
   directors: Array<Director>;
   newDirector: Director;
-
+  thetreId: number;
   @Input() play: Play;
   @ViewChild('addForm') form: NgForm;
   @ViewChild('addDirector') formDirector: NgForm;
   @ViewChild('addActor') formActor: NgForm;
   @ViewChild('addGenre') formGenre: NgForm;
-
+  @Output() addedPlay: EventEmitter<any> = new EventEmitter();
   constructor(public playService: PlayService, public directorService: DirectorService,
-     public actorService: ActorService, public genreService: GenreService) {
+     public actorService: ActorService, public genreService: GenreService, private route: ActivatedRoute) {
           this.selectedGenres = new Array();
           this.selectedActors = new Array();  
   }
 
   ngOnInit() {
-
+    this.route.params.subscribe(
+      parms=> this.thetreId = +parms['id']
+    );
     this.genreService.getAll().subscribe(
       resp => this.genres = resp, error => this.message = JSON.stringify(error)
     );
@@ -99,10 +103,11 @@ export class AddPlayComponent implements OnInit {
     const genres = this.selectedGenres.map(gen=>gen.id);
     const play: PlayCreation = new PlayCreation(this.form.value['name'], 0, director_id,
       actors, genres, this.form.value['duration'], this.form.value['poster'],
-      this.form.value['description']);
+      this.form.value['description'], this.thetreId);
     console.log(play);
     this.playService.insert(play).subscribe(
       resp => {
+        this.addedPlay.emit(resp);
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);

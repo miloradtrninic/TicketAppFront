@@ -5,6 +5,7 @@ import {AuthService} from './auth.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../model/user.model';
+import {AuditoriumPreview} from '../model/preview/auditorium-preview';
 
 @Injectable()
 export class AuditoriumService extends AbstractService<Auditorium, number> {
@@ -24,4 +25,11 @@ export class AuditoriumService extends AbstractService<Auditorium, number> {
     return this.http.put(this.actionUrl + '/update/admins', any, {headers: this.authService.getJSONAuthHeader()});
   }
 
+  getVisits(userId: number) {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    };
+
+    return this.http.get(this.actionUrl, options).map(res => res as AuditoriumPreview[]);
+  }
 }

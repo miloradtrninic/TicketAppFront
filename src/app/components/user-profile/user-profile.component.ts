@@ -188,4 +188,17 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
     this.pw = '';
     this.repeatpw = '';
   }
+
+  createNonFriendsLI() {
+    return HelperFunctions.createListItems(this.notFriends, null, ['name', 'lastname']);
+  }
+
+  createFriendsLI() {
+    return HelperFunctions.createListItems(this.friends, null, ['name', 'lastname']);
+  }
+
+  createFriendRequests() {
+    return HelperFunctions.createRequestItems(this.friendRequests, ['name', 'lastname'],
+                                              this.accept, this.decline, Constants.RequestType.ACPTDEC);
+  }
 }

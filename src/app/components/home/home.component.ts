@@ -3,6 +3,12 @@ import {Router} from '@angular/router';
 import {TopLevelComponent} from '../top-level/top-level.component';
 import {UserService} from '../../services/user.service';
 import {AuthService} from '../../services/auth.service';
+import {ListItem} from '../../shared/model/list-item';
+import {Constants} from '../../shared/constants/constants';
+import {HelperFunctions} from '../../shared/util/helper-functions';
+import {AuditoriumService} from '../../services/auditorium.service';
+import {AuditoriumPreview} from '../../model/preview/auditorium-preview';
+import {Token} from '../../model/token.model';
 
 @Component({
   selector: 'app-home',
@@ -13,45 +19,51 @@ export class HomeComponent extends TopLevelComponent implements OnInit {
 
   private dummyItems = [];
   private userAuthenticated: boolean;
+  private errormsg: string;
   selectedCinema = false;
   selectedTheatre = false;
+  private visits: AuditoriumPreview[];
 
+  private readonly type = Constants.ListType.COMMON;
 
-  constructor(protected service: UserService, protected router: Router) {
+  constructor(protected service: UserService, protected router: Router, private auditServ: AuditoriumService) {
     super(service, router, null);
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.userAuthenticated = true;
-    this.createDummyTest()
-  }
+    const token: Token = this.service.getToken();
+    this.userAuthenticated = token !== null;
+    this.dummyItems = HelperFunctions.createDummyTest(null);
 
-  createDummyTest() {
-    for (let i = 0; i < 20; i++) {
-      const text = this.makeRandom();
-      const item = {
-        'id' : i,
-        'text' : text,
-      };
-
-      this.dummyItems.push(item);
+    if (this.userAuthenticated) {
+      this.auditServ.getVisits(token.id)
+        .subscribe(res => {
+          this.visits = res;
+        }, err => {
+          this.errormsg = err;
+        });
     }
   }
 
-  makeRandom() {
-    let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-    for (let i = 0; i < 5; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-
-    return text;
+  getAuditoriumListItems() {
+    return HelperFunctions.createListItems(this.visits, null, ['name']);
   }
 
-  itemClicked(index) {
-   alert('Item clicked, with text: ' + this.dummyItems[index]['text']);
+  goToPage(auditorium: AuditoriumPreview) {
+    const type = auditorium.entity_type;
+
+    if (type === Constants.AuditoriumType.CINEMA) {
+      this.router.navigate([]);
+    } else if (type === Constants.AuditoriumType.THEATRE) {
+      this.router.navigate([]);
+    } else {
+      this.errormsg = 'Something went wrong while redirecting you to selected page.';
+    }
+  }
+
+  itemClicked(item) {
+    console.log(item);
   }
 
   selectTheatre() {
@@ -61,4 +73,5 @@ export class HomeComponent extends TopLevelComponent implements OnInit {
   selectCinema() {
     this.selectedCinema = true;
   }
+
 }

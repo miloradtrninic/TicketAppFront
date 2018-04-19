@@ -32,4 +32,17 @@ export class Constants {
     COMMON : 'Common',
     REQUEST_LIST: 'Request list'
   }
+
+  public static readonly ReservationType = {
+    THEATRE: 'Theatre',
+    CINEMA: 'Cinema',
+    ALLFORUSER: 'All_For_User',
+    AFU_THEATRE: 'All_For_User_Theatre',
+    AFU_CINEMA: 'All_For_User_Cinema'
+  }
+
+  public static readonly AuditoriumType = {
+    THEATRE: 'Theatre',
+    CINEMA: 'Cinema'
+  }
 }

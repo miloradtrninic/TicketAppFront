@@ -25,6 +25,9 @@ export class UserService extends AbstractService<User, number> {
   setLoginInfo() {
     this.authService.init();
   }
+  getToken(): Token {
+    return this.authService.getToken();
+  }
   getByRole(role: string): Observable<User[]> {
     return this.http.get(this.actionUrl + '/byrole?role=' + role).map(resp => resp as User[]);
   }

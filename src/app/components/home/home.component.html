@@ -1,20 +1,24 @@
 <div>
 
-  <div class="row">
-    <div class="col-sm-3 button"  (click)  = selectTheatre()>
-        <button class="btn btn-primary btn-xlarge letter" routerLink="/theatre" >
-         THEATRE</button>
-    </div>
+  <div *ngIf="userAuthenticated === false">
+    <div class="row">
+      <div class="col-sm-3 button"  (click)  = selectTheatre()>
+          <button class="btn btn-primary btn-xlarge letter" routerLink="/theatre" >
+           THEATRE</button>
+      </div>
 
-    <div class="col-sm-3 button"  (click)  = selectCinema() >
-        <button class="btn btn-primary btn-xlarge letter" routerLink="/cinema" >
-        CINEMA</button>
+      <div class="col-sm-3 button"  (click)  = selectCinema() >
+          <button class="btn btn-primary btn-xlarge letter" routerLink="/cinema" >
+          CINEMA</button>
+      </div>
     </div>
   </div>
 
+  <div *ngIf="userAuthenticated">
+    <app-list [type]="type" [header]="'Visits'"
+              [items]="getAuditoriumListItems()"
+              (onElementClickEvent)="goToPage($event)"></app-list>
   </div>
-
-
-
-
-
+  <!--app-list [header]="'Test'" [items]="dummyItems" [type]="type" (onElementClickEvent)="itemClicked($event)"></app-list-->
+  <!--app-seatings [message]="'Helou'" [seatings]="null"></app-seatings-->
+</div>

@@ -13,10 +13,14 @@ export class TheatreComponent implements OnInit {
 
 
   @Input() theatre: Theatre;
+  latitude : number =  45.2671;
+  longitude : number =  19.8335;
   message: string;
   id: number;
   theatres : Theatre[] = [];
-
+  showmap = false;
+  openPl = false;
+  openPr = false;
 
 
 
@@ -36,8 +40,30 @@ export class TheatreComponent implements OnInit {
    });
    console.log(window.location.href);
   }
+  openPlays() {
+    this.openPr = false;
+    this.openPl = true;
+   
+  
+  }
+  openProjection(){
+    this.openPl = false;
+    this.openPr = true;
+ 
+  }
 
-
+  showMap(){
+    if(this.showmap) {
+      this.showmap = false;
+    } else {
+      this.showmap = true;
+    }
+  }
+  onChooseLocation(event){
+    console.log(event);
+    this.latitude = event.coords.lat;
+    this.longitude = event.coords.lng;
+  }
 
 
  

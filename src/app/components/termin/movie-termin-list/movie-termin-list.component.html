@@ -1,0 +1,47 @@
+<hr>
+<p> Sve projekcije filmova u ovom bioskopu: </p>
+<div class="row">
+  <div class="col-xs-12">
+    <a class="list-group-item clearfix" *ngFor="let movie of movies; let i = index">
+      <ng-container *ngIf="hasDiscount(movie)">
+        <div class="pull-left">
+          <h2 class="list-group-item-heading letter">
+            <a routerLink="movie/{{movie?.id}}">
+              <b>{{ movie.name | uppercase }} </b>
+            </a>
+          </h2>
+
+
+          <p class="list-group-item-text">
+            <span class="style"> Description:</span> {{ movie.description }}</p>
+          <p class="list-group-item-text">
+            <span class="style">Duration:</span> {{ movie.durationMinutes }}</p>
+          <p class="list-group-item-text">
+            <span class="style"> Ratings:</span> {{ movie.ratings }}</p>
+
+        </div>
+        <span *ngFor="let term of movie?.projectionTime">
+          <span *ngIf="term.discount">
+            <a class="btn btn-3d btn-xlg btn-default noborder margin-right-6 padding-10">
+              <h3 class="nomargin nopadding yellow"> {{term.date | date: 'hh:mm'}} </h3>
+              <h3 class="nomargin nopadding yellow"> {{term.date | date: 'MMMM d, y'}} </h3>
+              <hr class="nomargin nopadding">
+              <del>{{term.price}} RSD </del>
+              <br>
+              <b> {{ forSale(term.price) }} RSD </b>
+              <br>
+              <button class="text"> Reserve </button>
+            </a>
+
+          </span>
+        </span>
+
+
+        <span class="pull-right">
+          <img src="{{movie.coverPath}}" class="img-responsive" style="max-height : 150px">
+        </span>
+      </ng-container>
+    </a>
+
+  </div>
+</div>

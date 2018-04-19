@@ -15,5 +15,7 @@ export class HallService extends AbstractService<Hall, number> {
   public getAllOfMyAuds(): Observable<Hall[]> {
     return this.http.get(this.actionUrl + '/myhalls').map(resp => resp as Hall[])
   }
-
+  public getByAuditorium(id: number): Observable<Hall[]> {
+    return this.http.get(this.actionUrl + '/byauditorim/' + id).map(resp => resp as Hall[])
+  }
 }

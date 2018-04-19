@@ -7,21 +7,67 @@
 
         <div class="panel-body">
             <ul class="list-unstyled">
+                
                 <div>
                     <span class="style"> Description: </span>
                     <span class="lisyt-group-item-text desc">{{theatre?.description}} </span>
                 </div>
                 <div class="list-group-item-text">
-                    <span class="style">Address: </span> {{theatre?.address}}</div>
+                    <span class="style">Address: </span> {{theatre?.address}}
+                    <a class="mouse" (click)="showMap()">
+                        <i> Show map </i>
+                    </a>
+                </div>
             </ul>
 
         </div>
+
+        <div *ngIf="showmap">
+            <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChooseLocation($event)">
+                <agm-marker [latitude]="latitude" [longitude]="longitude">
+
+                </agm-marker>
+            </agm-map>
+        </div>
+
         <button routerLink="new" class="btn btn-primary"> Add new play </button>
-        <button routerLink="projection" class="btn btn-primary"> Add new projection </button>
-        <a routerLink="reservation" class="right"> Quick reservation </a>
+
+
+        <div class="rightText">
+            <p>Average rating for this theatre : {{ theatre?.rating}} </p>
+        </div>
+
         <hr/>
-        <p> 
-            <app-play-list></app-play-list>
-        </p>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel with-nav-tabs panel-default">
+                    <div class="panel-heading">
+                        <ul class="nav nav-tabs" style="margin-top: 1em;">
+                            <li>
+                                <a (click)="openPlays()" class="mouse">Repertoar</a>
+                            </li>
+                            <li>
+                                <a (click)="openProjection()" class="mouse">Quick reservation</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <span *ngIf="openPl">
+                                <app-play-list></app-play-list>
+                            </span>
+                            <span *ngIf="openPr">
+                                <app-play-termin-list></app-play-termin-list>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 </div>

@@ -7,6 +7,8 @@ import { ActorService } from '../../../../services/actor.service';
 import { GenreService } from '../../../../services/genre.service';
 import { Genre } from '../../../../model/genre.model';
 import { Actor } from '../../../../model/actor.model';
+import { Cinema } from '../../../../model/cinema.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
@@ -19,13 +21,14 @@ export class MovieListComponent implements OnInit {
   selected: Movie;
   message: string;
   movies : Movie[] = [];
+  @Input() cinema: Cinema;
   name = '';
   description = '';
   duration = '';
   poster = '';
   director = '';
   allowP = true;
-
+  
   genres: Array<Genre>;
   newGenre: Genre;
   selectedGenres: Array<Genre>;
@@ -36,22 +39,29 @@ export class MovieListComponent implements OnInit {
 
   directors: Array<Director>;
   newDirector : Director;
-
+  cinemaId: number;
   constructor(public movieService: MovieService, public directorService : DirectorService,
-                public actorService: ActorService, public genreService: GenreService) {
+                public actorService :ActorService, public genreService: GenreService, public route: ActivatedRoute) {
                     this.selectedGenres = new Array();
                     this.selectedActors = new Array();
        }
 
   ngOnInit() {
     console.log("olalal" + this.movies);
-    this.movieService.getAll().subscribe(
-      (resp: Movie[]) => {
-        this.movies = resp;
-      }, error => {
-        this.message = error;
-      }
-    );
+ //  console.log("olalal" + this.movies.id);
+   this.route.params.subscribe(
+     params => {
+       this.cinemaId = +params['id'];
+       this.movieService.getAllFromCinema(this.cinemaId).subscribe(
+        (resp: Movie[]) => {
+          this.movies = resp;
+        }, error => {
+          this.message = error;
+        }
+      );
+      }, error => {}
+   );
+    
     this.genreService.getAll().subscribe(
       resp => this.genres = resp, error => this.message = JSON.stringify(error)
     );
@@ -98,7 +108,7 @@ export class MovieListComponent implements OnInit {
   }
 
   allowPreview2() {
-    this.allowP = true;
+    this.allowP = true;  
   }
 
   hasDirector(idDirector: number): boolean {
@@ -121,7 +131,7 @@ export class MovieListComponent implements OnInit {
     }
     return found;
   }
-
+ 
   removeActor(index: number) {
     this.selectedActors.splice(index, 1);
   }
@@ -154,7 +164,7 @@ export class MovieListComponent implements OnInit {
       this.newGenre = undefined;
     }
   }
-
+ 
 
 
 }

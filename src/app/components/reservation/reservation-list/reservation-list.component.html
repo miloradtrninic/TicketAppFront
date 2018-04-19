@@ -1,0 +1,28 @@
+<div class="row">
+  <h3 align="center">Select a reservation from list</h3>
+
+  <div class="col-sm-3">
+    <app-list [type]="listType" [items]="dummies" [header]="'Reservations'"
+              (onElementClickEvent)="reservationClick($event)"></app-list>
+  </div>
+
+  <div class="col-sm-1">
+    <div class="row">
+      <button class="btn btn-warning" (click)="clearPreviewWindow($event)" [disabled]="reservationToView == null">Hide</button>
+    </div>
+    <br/>
+    <div class="row">
+      <button class="btn btn-danger" (click)="cancelReservation($event)" [disabled]="canCancel() === false">Cancel</button>
+    </div>
+  </div>
+
+  <div class="col-sm-8 BorderedArea" *ngIf="reservationToView != null">
+    <div class="DisableClicks">
+      <app-seatings [message]="'Taken Seats'" [seatings]="seatings" [hallSegId]="hallSegId"></app-seatings>
+    </div>
+  </div>
+
+  <div class="col-sm-8 BorderedArea" *ngIf="reservationToView == null">
+    <h4 align="center">After selection, seatings will be displayed here</h4>
+  </div>
+</div>

@@ -2,8 +2,8 @@
 
 export class TerminCreation   {
 
-  constructor(public projectionId: number, public hallList: Array<number>, 
-    public date : Date, public time: string, public price: number){
+  constructor(public projFK: number, public hallFKs: Array<number>, 
+    public date : Date, public price: number, public discount: boolean){
 
     }
 }

@@ -1,6 +1,15 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-sm-3">
     <a class="btn btn-primary" (click)="selected=undefined" data-toggle="modal" data-target="#addCinema">Add cinema</a>
+  </div>
+  <div class="col-sm-3">
+    <a class="btn btn-primary" (click)="sortByName(cinemas)">Sort by Name</a>
+  </div>
+  <div class="col-sm-3">
+    <button class="btn btn-primary" (click)="sortByAddress(cinemas)">Sort by Address</button>
+  </div>
+  <div class="col-sm-3">
+    <button class="btn btn-primary" (click)="sortByRatings(cinemas)">Sort by Rating</button>
   </div>
 </div>
 
@@ -22,20 +31,20 @@
           <a class="detail" (click)="offDetail()">Vrati</a>
         </div>
         <div *ngIf="detailCinema === i">
-          <p class="list-group-item-text">
+          <p class="list-group-item-text"> Address :
             <i> {{ cinema.address }} </i>
           </p>
-          <p class="list-group-item-text desc"> {{ cinema.description }}</p>
+          <p class="list-group-item-text "> Description :
+            <span class="desc">{{ cinema.description }} </span>
+          </p>
+          <p class="list-group-item-text"> Ratings : {{ cinema.ratings }}</p>
           <button class="btn btn-success" (click)="selected=cinema; fillFields(selected)" data-toggle="modal" data-target="#editCinema">
-          Edit cinema </button>
+            Edit cinema </button>
           <button class="btn btn-danger" (click)="selected=cinema ">
             <a (click)="deleteCinema(cinema.id)"> Delete cinema </a>
           </button>
         </div>
       </div>
-      <span class="pull-right">
-        <img src="{{cinema.poster}}" class="img-responsive" style="max-height : 120px">
-      </span>
     </a>
   </div>
 </div>
@@ -56,7 +65,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <form class="form-horizontal" #editForm="ngForm" (ngSubmit)="editCinema(selected.id)">
+        <form class="form-horizontal" #editForm="ngForm" (ngSubmit)="editCinema()">
 
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label"> Name: </label>
@@ -106,7 +115,7 @@
                       <p class="list-group-item-text desc"> {{ description }}</p>
                     </div>
                   </div>
-                  
+
                   <hr>
                 </a>
               </div>

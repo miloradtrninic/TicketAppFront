@@ -49,7 +49,7 @@ export class ModifyHallComponent implements OnInit {
               this.hallToEdit = resp;
               this.segments = this.hallToEdit.hallSegmentList;
               this.hallForm.controls['name'].setValue(this.hallToEdit.name);
-              this.hallForm.controls['name'].enable(false);
+              this.hallForm.controls['name'].enable({onlySelf:false});
             }, error2 => this.error = JSON.stringify(error2)
           )
         }
@@ -108,8 +108,9 @@ export class ModifyHallComponent implements OnInit {
     } else {
         this.hallToEdit.name = this.hallForm.value['name'];
         this.hallToEdit.hallSegmentList = this.segments;
+        console.log(this.hallToEdit);
         this.hallService.update(this.hallToEdit)
-          .subscribe(resp => this.message, error2 => this.error = JSON.stringify(error2));
+          .subscribe(resp => this.message = 'Successfully updated.', error2 => this.error = JSON.stringify(error2));
     }
   }
   selectSegment(segment: HallSegment) {

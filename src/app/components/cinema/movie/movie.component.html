@@ -5,19 +5,148 @@
             <h4>{{ movie?.name | uppercase }} </h4>
         </div>
 
+
         <div class="panel-body">
             <ul class="list-unstyled">
-                <div>
-                    <span class="style"> Description: </span>
-                    <span class="lisyt-group-item-text desc">{{movie?.description}} </span>
-                </div>
-                <div class="list-group-item-text">
-                    <span class="style">Duration: </span> {{movie?.durationMinutes}}</div>
+                <span class="pull-left">
+                    <div>
+                        <span class="style"> Description: </span>
+                        <span class="lisyt-group-item-text desc">{{movie?.description}} </span>
+                    </div>
+                    <div class="list-group-item-text">
+                        <span class="style">Duration: </span> {{movie?.durationMinutes}}</div>
+                    <div class="list-group-item-text">
+                        <span class="style">Director: </span> {{movie?.director.name }} {{movie?.director.lastName }}
+                    </div>
+                    <div class="list-group-item-text">
+                        <span class="style">Actors: </span>
+                        <span *ngFor="let actor of movie?.actors">{{actor.name}} {{actor.lastName}}</span>
+
+                    </div>
+                    <div class="list-group-item-text">
+                        <span class="style">Genre: </span>
+                        <span *ngFor="let gen of movie?.genres">{{gen.name}}</span>
+                    </div>
+
+                    <div class="list-group-item-text">
+
+                        <span class="style">Termins: </span>
+                        <div>
+                            <span *ngFor="let term of movie?.projectionTime">
+                                <a class="btn btn-3d btn-xlg btn-default noborder margin-right-6 padding-10">
+                                    <h3 class="nomargin nopadding yellow"> {{term.date | date: 'hh:mm:ss'}} </h3>
+                                    <h3 class="nomargin nopadding yellow"> {{term.date | date: 'MMMM d, y'}} </h3>
+                                    <br> {{term.price}} RSD
+                                    <span class="block font-lato">
+                                        <hr class="nomargin nopadding">
+                                    </span>
+                                    <span *ngFor="let hallName of term?.hallNames">
+                                        {{hallName}}
+                                    </span>
+                                    <strong>Discount: </strong>
+                                    <span *ngIf="term.discount"> Yes </span>
+                                    <span *ngIf="!term.discount"> No </span>
+                                    <button class="text" (click)="fillFields(term)" data-toggle="modal" data-target="#editTermin"> Edit </button>
+                                </a>
+
+                            </span>
+                        </div>
+
+
+                    </div>
+                </span>
+
 
             </ul>
-            <div class="right"> {{movie?.coverPath}} </div>
+            <span class="pull-right">
+                <img src="{{ movie?.coverPath }}" class="img-responsive" style="max-height : 200px">
+                <p> <span class="style">Ratings for this movie: {{movie?.ratings}} </span></p>
+            </span>
 
         </div>
-
+        <a routerLink="termin" class="right"> Add new projection </a>
     </div>
 </div>
+
+
+
+
+
+<!--MODALNI ZA IZMENU TERMINA-->
+<div id="editTermin" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form-horizontal" #editForm="ngForm" (ngSubmit)="editTermin()">
+
+                    <!-- HALL 
+                    <div class="form-group">
+                        <label for="hall" class="col-sm-2 control-label"> Select hall: </label>
+
+                        <div class="col-sm-7">
+                            <select class="form-control" [(ngModel)]="newHall" [ngModelOptions]="{standalone: true}">
+                                <option></option>
+                                <option *ngFor="let hall of halls" [hidden]="hasHall(hall.id)" [ngValue]="hall">{{hall.name}} </option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <a class="btn btn-primary" (click)="selectHall()">
+                                <i class="glyphicon glyphicon-add"></i>Add hall</a>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-sm-4">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-8 bord">
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let hall of selectedHalls; let i = index">
+                                    {{hall.name}}
+                                    <span class="pull-right">
+                                        <span class="btn btn-xs btn-danger">
+                                            <span class="glyphicon glyphicon-minus" (click)="removeHall(i)" aria-hidden="true"></span>
+                                        </span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>-->
+
+                    <!-- DATE -->
+                    <div class="form-group">
+                        <label for="date" class="col-sm-2 control-label"> Date: </label>
+                        <div class="col-sm-8">
+                            <input type="datetime-local" class="form-control " id="date" name="date" [(ngModel)]="date">
+                        </div>
+                    </div>
+
+
+                    <!-- PRICE -->
+                    <div class="form-group">
+                        <label for="price" class="col-sm-2 control-label"> Price: </label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control " id="price" name="price" [(ngModel)]="price">
+                        </div>
+                    </div>
+
+                    <!-- DISCOUNT -->
+                    <div class="form-group">
+                        <label for="discount" class="col-sm-2 control-label"> Discount: </label>
+                        <div class="col-sm-10">
+                            <input type="checkbox" id="discount" name="discount" [(ngModel)]="discount">
+                        </div>
+                    </div>
+
+
+                    <hr>
+
+
+                    <input type="submit" class="btn btn-primary" value="Edit termin" />
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>

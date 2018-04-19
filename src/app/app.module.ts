@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -64,10 +65,20 @@ import { RequestComponent } from './shared/components/request/request.component'
 import { HallService } from './services/hall.service';
 import { OnlyLoggedInGuard } from './app-routing/guards/only-logged-in-guard';
 import { OnlyAdminGuard } from './app-routing/guards/only-admin-guard';
-import {AuditoriumAdminComponent} from './components/admin-panel/auditorium-admin/auditorium-admin.component';
-import {HallAdminComponent} from './components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
-import {ModifyHallComponent} from './components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
+import { AuditoriumAdminComponent} from './components/admin-panel/auditorium-admin/auditorium-admin.component';
+import { HallAdminComponent} from './components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
+import { ModifyHallComponent} from './components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
 import { AuditoriumsAdminComponent } from './components/admin-panel/auditorium-admin/auditoriums/auditoriums.component';
+import { TerminService } from './services/termin.service';
+import { MovieTerminListComponent } from './components/termin/movie-termin-list/movie-termin-list.component';
+import { PlayTerminListComponent } from './components/termin/play-termin-list/play-termin-list.component';
+import { CinemaMapComponent } from './components/cinema/cinema-map/cinema-map.component';
+import { FriendsComponent } from './components/friends/friends.component';
+import {ReservationService} from './services/reservation.service';
+import { ReservationListComponent } from './components/reservation/reservation-list/reservation-list.component';
+import { SeatingsComponent } from './shared/components/seatings/seatings.component';
+import { ReservationCreateComponent } from './components/reservation/reservation-create/reservation-create.component';
+import { TicketService } from './services/ticket.service';
 import {FanItemsComponent} from './components/fan-zone/fan-items/fan-items.component';
 import {FanAdsComponent} from './components/fan-zone/fan-ads/fan-ads.component';
 import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-ad.component';
@@ -119,17 +130,29 @@ import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-
     FanItemsComponent,
     FanAdsComponent,
     SingleAdComponent
+    AuditoriumsAdminComponent,
+    MovieTerminListComponent,
+    PlayTerminListComponent,
+    CinemaMapComponent,
+    FriendsComponent,
+    ReservationListComponent,
+    SeatingsComponent,
+    ReservationCreateComponent
   ],
   imports: [
     BrowserModule,
     RoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey : 'AIzaSyB81X56Wa1HeAUSFYN4R5JmwkUNBekBrOM'
+    })
   ],
   providers: [BidService, CinemaService, FanItemService, AuthService,
-     FanadService, FanzoneService, TheatreService, UserService, MovieService,
-     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
-    MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard],
+    FanadService, FanzoneService, TheatreService, UserService, MovieService,
+    DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
+    MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
+    TerminService, ReservationService, TicketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -30,6 +30,7 @@ import { ReservationComponent } from '../components/reservation/reservation.comp
 import { TerminComponent } from '../components/termin/termin.component';
 import { OnlyAdminGuard } from './guards/only-admin-guard';
 import { OnlyLoggedInGuard } from './guards/only-logged-in-guard';
+import {FriendsComponent} from '../components/friends/friends.component';
 import { MovieListComponent } from '../components/cinema/movie/movie-list/movie-list.component';
 import {AuditoriumAdminComponent} from '../components/admin-panel/auditorium-admin/auditorium-admin.component';
 import {HallAdminComponent} from '../components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
@@ -39,8 +40,6 @@ import {FanItemsComponent} from '../components/fan-zone/fan-items/fan-items.comp
 import {FanAdsComponent} from '../components/fan-zone/fan-ads/fan-ads.component';
 import {SingleAdComponent} from '../components/fan-zone/fan-ads/single-ad/single-ad.component';
 
-
-
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
@@ -48,13 +47,18 @@ const routes: Routes = [
   { path: 'cinema/update/:id', component: CinemaListComponent},
   { path: 'cinema/:id', component: CinemaComponent},
   { path: 'cinema/:id/new', component: AddMovieComponent},
-  { path: 'cinema/:id/termin', component: TerminComponent},
+  { path: 'cinema/:id/movies', component: MovieListComponent},
+  { path: 'cinema/:id/movie/:projId/termin', component: TerminComponent},
   { path: 'cinema/:id/reservation', component: ReservationComponent},
+  { path: 'cinema/:id/termin', component: TerminComponent},
+  { path: 'cinema/:id/reservation', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'cinema/:id/movie/:movieId', component: MovieComponent},
   { path: 'theatre', component: TheatreListComponent},
   { path: 'theatre/:id', component: TheatreComponent},
   { path: 'theatre/:id/new', component: AddPlayComponent},
-  { path: 'theatre/:id/play/:playId', component: TheatreComponent},
+  { path: 'theatre/:id/play/:projId/termin', component: TerminComponent},
+  { path: 'theatre/:id/play/:playId', component: PlayComponent},
+  { path: 'friends', component: FriendsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'fan-zones/:id/zone', component: FanZoneComponent, children: [
     {path: 'official-items', component: FanItemsComponent},
     {path: 'fan-ads', component: FanAdsComponent},
@@ -79,8 +83,8 @@ const routes: Routes = [
   ]},
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]}
-
+  { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'reservations', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]}
 ];
 
 @NgModule({
