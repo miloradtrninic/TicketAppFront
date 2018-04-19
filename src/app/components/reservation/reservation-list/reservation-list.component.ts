@@ -56,10 +56,12 @@ export class ReservationListComponent implements OnInit {
   reservationClick(reservation) {
     this.reservationToView = reservation;
     const list = this.reservationToView.ticketList;
-    this.hallSegId = list[0].seating.hallSegment;
+    if(!HelperFunctions.isEmptyValue(list)) {
+      this.hallSegId = list[0].seating.hallSegment;
 
-    for (let i = 0; i < list.length; i++) {
-      this.seatings.push(list[i].seating);
+      for (let i = 0; i < list.length; i++) {
+        this.seatings.push(list[i].seating);
+      }
     }
   }
 
@@ -82,7 +84,7 @@ export class ReservationListComponent implements OnInit {
   }
 
   canCancel() {
-    if (this.reservationToView === null) {
+    if (HelperFunctions.isEmptyValue(this.reservationToView)) {
       return false;
     }
     const ms = 60000;

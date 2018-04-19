@@ -142,7 +142,7 @@ import { SeatingsComponent } from './shared/components/seatings/seatings.compone
     FanadService, FanzoneService, TheatreService, UserService, MovieService,
     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
     MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
-    TerminService],
+    TerminService, ReservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

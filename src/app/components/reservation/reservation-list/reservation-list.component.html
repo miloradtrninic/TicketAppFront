@@ -12,7 +12,7 @@
     </div>
     <br/>
     <div class="row">
-      <button class="btn btn-danger" (click)="cancelReservation($event)" [disabled]="canCancel()">Cancel</button>
+      <button class="btn btn-danger" (click)="cancelReservation($event)" [disabled]="canCancel() === false">Cancel</button>
     </div>
   </div>
 
