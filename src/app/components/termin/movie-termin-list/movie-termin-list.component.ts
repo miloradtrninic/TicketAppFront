@@ -15,10 +15,9 @@ export class MovieTerminListComponent implements OnInit {
 
   message: string;
   movies : Movie[] = [];
-  detailTermin = -1;
   allowP = true;
   cinemaId: number;
-
+  movie: Movie;
   constructor(public terminService : TerminService, public movieService: MovieService,public route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -38,15 +37,6 @@ export class MovieTerminListComponent implements OnInit {
       );
 
   }
-
-  onDetail(index: number)  {
-    this.detailTermin = index;
-  }
-
-  offDetail()  {
-    this.detailTermin = -1;
-  }
-
   allowPreview1() {
     this.allowP = false;
   }
@@ -56,7 +46,10 @@ export class MovieTerminListComponent implements OnInit {
   }
 
   forSale(num : number){
+    
     return (num * 75 ) / 100;
-}
-
+  }
+  hasDiscount(movie: Movie) {
+    return movie.projectionTime.map(time => time.discount).findIndex(disc => disc === true) !== -1
+  }
 }

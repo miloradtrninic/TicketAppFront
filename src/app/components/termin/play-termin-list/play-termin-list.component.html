@@ -1,3 +1,44 @@
-<p>
-  play-termin-list works!
-</p>
+<hr>
+<p> Sve predstave u ovom pozoristu: </p>
+<div class="row">
+  <div class="col-xs-12">
+    <a class="list-group-item clearfix" *ngFor="let play of plays; let i = index">
+      <ng-container *ngIf="hasDiscount(play)">
+        <div class="pull-left">
+          <h2 class="list-group-item-heading letter">
+            <a routerLink="play/{{play?.id}}">
+              <b>{{ play.name | uppercase }} </b>
+            </a>
+          </h2>
+
+
+          <p class="list-group-item-text">
+            <span class="style"> Description:</span> {{ play.description }}</p>
+          <p class="list-group-item-text">
+            <span class="style">Duration:</span> {{ play.durationMinutes }}</p>
+          <p class="list-group-item-text">
+            <span class="style"> Ratings:</span> {{ play.ratings }}</p>
+
+        </div>
+        <span *ngFor="let term of play?.projectionTime">
+          <span *ngIf="term.discount">
+            <a class="btn btn-3d btn-xlg btn-default noborder margin-right-6 padding-10">
+              <h3 class="nomargin nopadding yellow"> {{term.date | date: 'hh:mm'}} </h3>
+              <h3 class="nomargin nopadding yellow"> {{term.date | date: 'MMMM d, y'}} </h3>
+              <hr class="nomargin nopadding">
+              <del>{{term.price}} RSD </del>
+              <br>
+              <b> {{ forSale(term.price) }} RSD </b>
+            </a>
+          </span>
+        </span>
+
+
+        <span class="pull-right">
+          <img src="{{play.coverPath}}" class="img-responsive" style="max-height : 120px">
+        </span>
+      </ng-container>
+    </a>
+    
+  </div>
+</div>

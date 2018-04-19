@@ -1,0 +1,31 @@
+.style{
+    font-weight: bold;
+    font-size: 16px;
+    margin : 3px;
+}
+.okvir{ 
+    border : 2px solid ;
+    margin : 5px;
+}
+.btn-3d.btn-xlg {
+    line-height: inherit;
+}
+a.btn {
+    line-height: 26px;
+}
+.btn-default {
+    color: #fff;
+    background-color: #8c95f5;
+    border-color: #777;
+}
+.btn {
+    color: #fff;
+}
+.cen {
+    margin-left: 200px;
+    margin-top: 30px;
+  }
+  .rig{
+    margin-left: 800px;
+    margin-top: 30px;
+  }
