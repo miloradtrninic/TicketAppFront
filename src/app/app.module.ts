@@ -129,8 +129,7 @@ import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-
     AuditoriumsAdminComponent,
     FanItemsComponent,
     FanAdsComponent,
-    SingleAdComponent
-    AuditoriumsAdminComponent,
+    SingleAdComponent,
     MovieTerminListComponent,
     PlayTerminListComponent,
     CinemaMapComponent,
