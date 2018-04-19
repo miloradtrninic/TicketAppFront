@@ -159,9 +159,9 @@ export class ReservationCreateComponent implements OnInit {
       userList.push(this.selectedFriends[i].id);
     }
 
-    const res = new ReservationCreation(this.auth.getToken().id, ticketlist, userList);
+    const reserv = new ReservationCreation(this.auth.getToken().id, ticketlist, userList);
 
-    this.reservationService.create(res)
+    this.reservationService.create(reserv)
       .subscribe(res => {
         console.log(res);
       }, err => {
