@@ -28,16 +28,12 @@ export class TheatreListComponent implements OnInit {
   constructor(public theatreService: TheatreService) { }
 
   ngOnInit() {
-    console.log('edit theatre');
-    const theatreUpdate : TheatreUpdate = new TheatreUpdate(this.selected.id,this.form.value['name'], 
-    this.form.value['address'],  this.form.value['description'], 0);
-    this.theatreService.update(theatreUpdate).subscribe(
-      resp => {
-    const idx = this.theatres.map(cin => cin.id).findIndex(id => id === resp.id);
-    this.theatres[idx] = resp;
-        console.log(resp);
+    console.log('ngOnInit theatre list');
+    this.theatreService.getAll().subscribe(
+      (resp: Theatre[]) => {
+        this.theatres = resp;
       }, error => {
-        this.message = JSON.stringify(error);
+        this.message = error;
       }
     );
   }
@@ -63,9 +59,12 @@ export class TheatreListComponent implements OnInit {
 
   editTheatre(index){
     console.log('edit theatre');
-    console.log('broj indexa je : ' + index);
-    this.theatreService.update(index).subscribe(
+    const theatreUpdate : TheatreUpdate = new TheatreUpdate(this.selected.id,this.form.value['name'], 
+    this.form.value['address'],  this.form.value['description'], 0);
+    this.theatreService.update(theatreUpdate).subscribe(
       resp => {
+    const idx = this.theatres.map(cin => cin.id).findIndex(id => id === resp.id);
+    this.theatres[idx] = resp;
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);

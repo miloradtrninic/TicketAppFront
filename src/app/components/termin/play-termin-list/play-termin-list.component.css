@@ -29,3 +29,8 @@ a.btn {
     margin-left: 800px;
     margin-top: 30px;
   }
+  .text {
+    color : black;
+    text-justify: auto;
+    border-color: #777;
+}
