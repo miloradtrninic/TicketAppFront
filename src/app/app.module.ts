@@ -73,6 +73,10 @@ import { TerminService } from './services/termin.service';
 import { MovieTerminListComponent } from './components/termin/movie-termin-list/movie-termin-list.component';
 import { PlayTerminListComponent } from './components/termin/play-termin-list/play-termin-list.component';
 import { CinemaMapComponent } from './components/cinema/cinema-map/cinema-map.component';
+import { FriendsComponent } from './components/friends/friends.component';
+import {ReservationService} from './services/reservation.service';
+import { ReservationListComponent } from './components/reservation/reservation-list/reservation-list.component';
+import { SeatingsComponent } from './shared/components/seatings/seatings.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +124,10 @@ import { CinemaMapComponent } from './components/cinema/cinema-map/cinema-map.co
     AuditoriumsAdminComponent,
     MovieTerminListComponent,
     PlayTerminListComponent,
-    CinemaMapComponent
+    CinemaMapComponent,
+    FriendsComponent,
+    ReservationListComponent,
+    SeatingsComponent
   ],
   imports: [
     BrowserModule,
@@ -132,10 +139,10 @@ import { CinemaMapComponent } from './components/cinema/cinema-map/cinema-map.co
     })
   ],
   providers: [BidService, CinemaService, FanItemService, AuthService,
-     FanadService, FanzoneService, TheatreService, UserService, MovieService,
-     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
+    FanadService, FanzoneService, TheatreService, UserService, MovieService,
+    DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
     MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
-     TerminService],
+    TerminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

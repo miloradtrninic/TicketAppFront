@@ -2,6 +2,7 @@ import { Component, OnInit, Output,ViewChild } from '@angular/core';
 import { Cinema } from '../../../model/cinema.model';
 import { CinemaService } from '../../../services/cinema.service';
 import { NgForm } from '@angular/forms';
+import {HelperFunctions} from '../../../shared/util/helper-functions';
 
 @Component({
   selector: 'app-cinema-list',
@@ -25,7 +26,7 @@ export class CinemaListComponent implements OnInit {
 
   constructor(public cinemaService: CinemaService) { }
 
-  
+
   ngOnInit() {
     console.log('ngOnInit cinema list');
     this.cinemaService.getAll().subscribe(
@@ -66,7 +67,7 @@ export class CinemaListComponent implements OnInit {
       }
     );
   }
-  
+
 
  onDetail(index: number)  {
     this.detailCinema = index;
@@ -79,9 +80,20 @@ export class CinemaListComponent implements OnInit {
   allowPreview1() {
     this.allowP = false;
   }
-  
+
   allowPreview2() {
     this.allowP = true;
   }
 
+  sortByName() {
+    this.cinemas = HelperFunctions.sortArrayByKey(this.cinemas, 'name');
+  }
+
+  sortByAddress() {
+    this.cinemas = HelperFunctions.sortArrayByKey(this.cinemas, 'address');
+  }
+
+  sortByRatings() {
+    this.cinemas = HelperFunctions.sortArrayByKey(this.cinemas, 'ratings');
+  }
 }

@@ -1,3 +1,6 @@
+import {ListItem} from '../model/list-item';
+import {Request} from '../model/request';
+
 export class HelperFunctions {
   /*Moze biti bilo sta. Ako treba dodati jos nesto, slobodno prosirite.*/
   public static isEmptyValue(toCheck: any): boolean {
@@ -25,7 +28,7 @@ export class HelperFunctions {
     if (Array.isArray(toCheck)) {
       for (let i = 0; i < toCheck.length; i++) {
         hasEmpty = this.isEmptyValue(toCheck[i]);
-        if(hasEmpty === true){
+        if (hasEmpty === true) {
           break;
         }
       }
@@ -41,5 +44,90 @@ export class HelperFunctions {
     }
 
     return hasEmpty;
+  }
+
+  public static sortArrayByKey(array, key) {
+    return array.sort((a, b) => {
+      if (typeof a[key] === 'string') {
+        if (a[key].toLowerCase() < b[key].toLowerCase()) {
+          return -1;
+        } else if (a[key].toLowerCase() > b[key].toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      } else {
+        if (a[key] < b[key]) {
+          return -1;
+        } else if (a[key] > b[key]) {
+          return 1;
+        }
+        return 0;
+      }
+    })
+  }
+
+  private static makeRandom() {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (let i = 0; i < 5; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return text;
+  }
+
+  public static createDummyTest(dummyEntity) {
+    const ret = [];
+
+    for (let i = 0; i < 20; i++) {
+      const text = this.makeRandom();
+      const item = new ListItem('assets/aaa.jpg', text, dummyEntity);
+
+      ret.push(item);
+    }
+
+    return ret;
+  }
+
+  public static createListItems(arrayOfItems, imageKey, textKeys: Array<any>): ListItem[] {
+    const ret = [];
+
+    if (!this.isEmptyValue(arrayOfItems)) {
+      for (let i = 0; i < arrayOfItems.length; i++) {
+        let text = '';
+
+        for (let j = 0; j < textKeys.length; j++) {
+          text += arrayOfItems[i][textKeys[j]] + ' ';
+        }
+
+        text = text.trim();
+        const item = this.isEmptyValue(imageKey) ? new ListItem(arrayOfItems[i][imageKey], text, arrayOfItems[i])
+                                       : new ListItem(null, text, arrayOfItems[i]);
+        ret.push(item);
+      }
+    }
+
+    return ret;
+  }
+
+  public static createRequestItems(arrayOfItems, textKeys: Array<any>, acfn, decfn, type): Request[] {
+    const ret = [];
+
+    if (!this.isEmptyValue(arrayOfItems)) {
+      for (let i = 0; i < arrayOfItems.length; i++) {
+        let text = '';
+
+        for (let j = 0; j < textKeys.length; j++) {
+          text += arrayOfItems[i][textKeys[j]] + ' ';
+        }
+
+        text = text.trim();
+        const item = new Request(text, type, arrayOfItems[i], acfn, decfn);
+        ret.push(item);
+      }
+    }
+
+    return ret;
   }
 }
