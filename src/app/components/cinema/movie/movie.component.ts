@@ -47,22 +47,22 @@ export class MovieComponent implements OnInit {
    this.selected = termin;
    this.form.controls['date'].setValue(this.selected.date);
    this.form.controls['price'].setValue(this.selected.price);
-   
+
    console.log(this.selected);
    this.discount = this.selected.discount;
   }
 
   hasHall(idHall: number): boolean {
     let found = false;
-    for(const a of this.selectedHalls) {
-      if(a.id === idHall){
+    for (const a of this.selectedHalls) {
+      if (a.id === idHall) {
         found = true;
         return found;
       }
     }
     return found;
   }
- 
+
   removeHall(index: number) {
     this.selectedHalls.splice(index, 1);
   }
@@ -75,11 +75,11 @@ export class MovieComponent implements OnInit {
   }
 
   editTermin() {
-    const terminUpdate : TerminUpdate = new TerminUpdate(this.selected.id,this.form.value['date'], 
+    const terminUpdate : TerminUpdate = new TerminUpdate(this.selected.id,this.form.value['date'],
     this.form.value['price'],  this.form.value['discount']);
     this.terminService.update(terminUpdate).subscribe(
       resp => {
-      
+
     const idx = this.movie.projectionTime.map(cin => cin.id).findIndex(id => id === resp.id);
     this.movie.projectionTime[idx] = resp;
         console.log(resp);
@@ -87,5 +87,9 @@ export class MovieComponent implements OnInit {
         this.message = JSON.stringify(error);
       }
     );
+  }
+
+  makeReservation() {
+
   }
 }

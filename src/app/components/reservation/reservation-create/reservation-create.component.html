@@ -1,6 +1,51 @@
 <div>
   <div class="row">
-    <h3>Step 1: Select projection time</h3>
+
+    <h1 align="center">Welcome to reservation creation</h1>
+
+    <br>
+    <br/>
+
+    <h3 align="center">Step 1: Select a cinema or a theatre from lists</h3>
+
+    <div>
+      <div class="col-sm-4" align="left">
+        <app-list [type]="listType" [header]="'Cinemas'" (onElementClickEvent)="this.selectAuditorium($event)"
+                  [items]="createCinemaLI()"></app-list>
+      </div>
+      <div class="col-sm-4" align="right">
+        <app-list [type]="listType" [header]="'Theatres'" (onElementClickEvent)="this.selectAuditorium($event)"
+                  [items]="createTheatreLI()" ></app-list>
+      </div>
+    </div>
+
+    <br>
+    <br/>
+
+    <div *ngIf="auditoriumId != null">
+      <div *ngIf="selectedAuditoriumType === 'Cinema'">
+        <h3 align="center">Step 2: Select a movie from list</h3>
+
+        <div class="col-sm-6" align="center">
+          <app-list [type]="listType" [header]="'Movies'" [items]="createMovieLI()"
+                    (onElementClickEvent)="selectMovie($event)"> </app-list>
+        </div>
+      </div>
+
+      <div *ngIf="selectedAuditoriumType === 'Theatre'">
+        <h3 *ngIf="selectedAuditoriumType === 'theatre'" align="center">Step 2: Select a play from list</h3>
+
+        <div class="col-sm-6" align="center">
+          <app-list [type]="listType" [header]="'Plays'" [items]="createPlaysLI()"
+                    (onElementClickEvent)="selectPlay($event)"> </app-list>
+        </div>
+      </div>
+
+    </div>
+
+
+  <div class="row" *ngIf="selectedProjection != null">
+    <h3>Step 3: Select projection time</h3>
     <span *ngFor="let term of movie?.projectionTime" (click)="selectTermin(term)">
       <a class="btn btn-3d btn-xlg btn-default noborder margin-right-6 padding-10">
         <h3 class="nomargin nopadding yellow"> {{term.date | date: 'hh:mm'}} </h3>
@@ -14,7 +59,7 @@
   </div>
 
   <div class="row" *ngIf="selectedTermin !== null">
-    <h3>Step 2: Select a hall</h3>
+    <h3>Step 4: Select a hall</h3>
     <div class="col-sm-3">
       <app-list [header]="'Projection Halls'" [type]="listType"
                 [items]="createHallSelection()"></app-list>
@@ -22,7 +67,7 @@
   </div>
 
   <div class="row" *ngIf="selectedHall !== null">
-    <h3>Step 3: Select halls segment</h3>
+    <h3>Step 5: Select halls segment</h3>
     <div class="col-sm-3">
       <app-list [header]="'Hall segments'" [type]="listType"
                 [items]="createHallSegmentSelection()"></app-list>
@@ -45,7 +90,7 @@
 
   <br/>
 
-  <div *ngIf="selectedSeats !== null">
+  <div *ngIf="selectedSeatings !== null" class="row">
     <button class="btn btn-success" (click)="createReservation($event)">Create Reservation</button>
   </div>
 </div>
