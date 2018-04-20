@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Termin } from '../../../model/termin.model';
 import { Hall } from '../../../model/hall.model';
 import { NgForm } from '@angular/forms';
+import { TerminUpdate } from '../../../model/update/termin-update.model';
+import { TerminService } from '../../../services/termin.service';
 
 @Component({
   selector: 'app-play',
@@ -20,10 +22,11 @@ export class PlayComponent implements OnInit {
   selected: Termin;
   newHall : Hall;
   selectedHalls: Array<Hall>;
-
+  discount: boolean;
+  
   @ViewChild('editForm') form: NgForm;
 
-  constructor(public playService: PlayService, private route: ActivatedRoute) { }
+  constructor(public playService: PlayService,public terminService: TerminService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -38,9 +41,28 @@ export class PlayComponent implements OnInit {
        );
    });
   }
+  editTermin() {
+    const terminUpdate : TerminUpdate = new TerminUpdate(this.selected.id,this.form.value['date'], 
+    this.form.value['price'],  this.form.value['discount']);
+    this.terminService.update(terminUpdate).subscribe(
+      resp => {
+      
+    const idx = this.play.projectionTime.map(cin => cin.id).findIndex(id => id === resp.id);
+    this.play.projectionTime[idx] = resp;
+        console.log(resp);
+      }, error => {
+        this.message = JSON.stringify(error);
+      }
+    );
+  }
 
-  fillFields(){
+  fillFields(termin: Termin){
+   this.selected = termin;
+   this.form.controls['date'].setValue(this.selected.date);
+   this.form.controls['price'].setValue(this.selected.price);
    
+   console.log(this.selected);
+   this.discount = this.selected.discount;
   }
 
   hasHall(idHall: number): boolean {
@@ -65,8 +87,6 @@ export class PlayComponent implements OnInit {
     }
   }
 
-  editTermin() {
-    
-  }
+  
 
 }

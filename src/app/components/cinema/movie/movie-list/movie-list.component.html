@@ -22,7 +22,7 @@
             <span class="style">Duration:</span> {{ movie.durationMinutes }}</p>
           <p class="list-group-item-text">
             <span class="style"> Ratings:</span> {{ movie.ratings }}</p>
-          <button class="btn btn-success" (click)="selected=movie; fillFields(selected)" data-toggle="modal" data-target="#editMovie"> Edit movie </button>
+          <button class="btn btn-success" (click)="selected = movie; fillFields(movie)" data-toggle="modal" data-target="#editMovie"> Edit movie </button>
           <button class="btn btn-danger " (click)="selected=movie ">
             <a (click)="deleteMovie(movie.id)"> Delete movie </a>
           </button>
@@ -46,92 +46,12 @@
   <div class="modal-dialog modal-lg ">
     <div class="modal-content">
       <div class="modal-body ">
-        <form class="form-horizontal" #editForm="ngForm" (ngSubmit)="editMovie(selected.id)">
+        <form class="form-horizontal" #editForm="ngForm" (ngSubmit)="editMovie()">
 
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label"> Name: </label>
             <div class="col-sm-8">
               <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name">
-            </div>
-          </div>
-
-          <!-- DIRECTOR -->
-          <div class="form-group">
-            <label for="director" class="col-sm-2 control-label"> Select director: </label>
-
-            <div class="col-sm-8">
-              <select class="form-control" name="newDirector" [(ngModel)]="newDirector">
-                <option></option>
-                <option *ngFor="let director of directors" [ngValue]="director">{{director.name}} {{director.lastName}} </option>
-              </select>
-            </div>
-          </div>
-
-          <!-- ACTOR -->
-          <div class="form-group">
-            <label for="actor" class="col-sm-2 control-label"> Select actors: </label>
-
-            <div class="col-sm-8">
-              <select class="form-control" [(ngModel)]="newActor" [ngModelOptions]="{standalone: true}">
-                <option></option>
-                <option *ngFor="let actor of actors" [hidden]="hasActor(actor.id)" [ngValue]="actor">{{actor.name}} {{actor.lastName}} </option>
-              </select>
-            </div>
-
-            <div class="col-sm-1">
-              <a class="btn btn-primary" (click)="selectActor()">
-                <i class="glyphicon glyphicon-add"></i>Add actor</a>
-            </div>
-          </div>
-          <div class="row ">
-            <div class="col-sm-4">
-              &nbsp;
-            </div>
-            <div class="col-sm-8 bord">
-              <ul class="list-group">
-                <li class="list-group-item" *ngFor="let actor of selectedActors; let i = index">
-                  {{actor.name}}
-                  <span class="pull-right">
-                    <span class="btn btn-xs btn-danger">
-                      <span class="glyphicon glyphicon-minus" (click)="removeActor(i)" aria-hidden="true"></span>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- GENRE -->
-          <div class="form-group">
-            <label for="genre" class="col-sm-2 control-label"> Select genre: </label>
-
-            <div class="col-sm-8">
-              <select class="form-control" [(ngModel)]="newGenre" [ngModelOptions]="{standalone: true}">
-                <option></option>
-                <option *ngFor="let genre of genres" [hidden]="hasGenre(genre.id)" [ngValue]="genre">{{genre.name}}</option>
-              </select>
-            </div>
-
-            <div class="col-sm-1">
-              <a class="btn btn-primary" (click)="selectGenre()">
-                <i class="glyphicon glyphicon-add"></i>Add genre</a>
-            </div>
-          </div>
-          <div class="row ">
-            <div class="col-sm-4">
-              &nbsp;
-            </div>
-            <div class="col-sm-8 bord">
-              <ul class="list-group">
-                <li class="list-group-item" *ngFor="let genre of selectedGenres; let i = index">
-                  {{genre.name}}
-                  <span class="pull-right">
-                    <span class="btn btn-xs btn-danger">
-                      <span class="glyphicon glyphicon-minus" (click)="removeGenre(i)" aria-hidden="true"></span>
-                    </span>
-                  </span>
-                </li>
-              </ul>
             </div>
           </div>
 
@@ -182,17 +102,12 @@
                     </div>
                     <div *ngIf="detailMovie === i">
 
-                      <p class="list-group-item-text"> Director : {{ newDirector.name }} {{ newDirector.lastName}}</p>
-                      <p class="list-group-item-text"> Description :
+                       <p class="list-group-item-text"> Description :
                          {{ description }} 
                       </p>
-                      <p class="list-group-item-text"> Genre:
-                        <span *ngFor="let genre of selectedGenres"> {{ genre.name }}, </span>
-                      </p>
-                      <p class="list-group-item-text"> Duration: {{ selected.durationMinutes }}</p>
-                      <p class="list-group-item-text"> Actors :
-                        <span *ngFor="let actor of selectedActors"> {{ actor.name }} {{ actor.lastName}}, </span>
-                      </p>
+                     
+                      <p class="list-group-item-text"> Duration: {{ duration }}</p>
+                    
 
                     </div>
                   </div>
@@ -209,7 +124,7 @@
           <hr>
 
 
-          <input type="submit" class="btn btn-primary" value="Edit cinema" />
+          <input type="submit" class="btn btn-primary" value="Edit movie" />
 
      
       </form>
