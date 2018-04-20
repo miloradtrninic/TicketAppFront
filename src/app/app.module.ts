@@ -85,6 +85,9 @@ import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-
 import { MyAdsComponent } from './components/user-panel/my-ads/my-ads.component';
 import { MyItemsComponent } from './components/user-panel/my-items/my-items.component';
 import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.component';
+import {AdminSysGuardService} from './app-routing/guards/admin-sys-guard.service';
+import {AdminFanGuardService} from './app-routing/guards/admin-fan-guard.service';
+import {AdminAudGuardService} from './app-routing/guards/admin-aud-guard.service';
 
 @NgModule({
   declarations: [
@@ -158,7 +161,8 @@ import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.compone
     FanadService, FanzoneService, TheatreService, UserService, MovieService,
     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
     MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
-    TerminService, ReservationService, TicketService],
+    TerminService, ReservationService, TicketService, AdminSysGuardService, AdminFanGuardService,
+    AdminAudGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

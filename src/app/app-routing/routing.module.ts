@@ -42,6 +42,9 @@ import {SingleAdComponent} from '../components/fan-zone/fan-ads/single-ad/single
 import {MyAdsComponent} from '../components/user-panel/my-ads/my-ads.component';
 import {MyItemsComponent} from '../components/user-panel/my-items/my-items.component';
 import {MyBidsComponent} from '../components/user-panel/my-bids/my-bids.component';
+import {AdminAudGuardService} from './guards/admin-aud-guard.service';
+import {AdminFanGuardService} from './guards/admin-fan-guard.service';
+import {AdminSysGuardService} from "app/app-routing/guards/admin-sys-guard.service";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -67,19 +70,19 @@ const routes: Routes = [
     {path: 'fan-ads', component: FanAdsComponent},
     {path: 'fan-ads/:adId', component: SingleAdComponent}
   ]},
-  { path: 'admin-panel', component: AdminPanelComponent, /*canActivate: [OnlyAdminGuard],*/ children: [
+  { path: 'admin-panel', component: AdminPanelComponent, canActivate: [OnlyAdminGuard], children: [
     {path: '', component: HomeAdminComponent},
-    {path: 'auditorium', component: AuditoriumAdminComponent, children: [
+    {path: 'auditorium', component: AuditoriumAdminComponent, canActivate: [AdminAudGuardService], children: [
       {path: '', component: AuditoriumsAdminComponent},
       {path: 'halls', component: HallAdminComponent},
       {path: 'halls/modify/:hallId', component: ModifyHallComponent},
       {path: 'halls/new', component: ModifyHallComponent}
     ]},
-    {path: 'fan-zone', component: AdminFanZoneComponent},
-    {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent},
-    {path: 'user-admin', component: UserAdministrationComponent},
-    {path: 'memberships', component: MembershipAdminComponent},
-    {path: 'fan-ads', component: FanadAdminComponent, children: [
+    {path: 'fan-zone', component: AdminFanZoneComponent, canActivate: [AdminFanGuardService]},
+    {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent, canActivate: [AdminFanGuardService]},
+    {path: 'user-admin', component: UserAdministrationComponent, canActivate: [AdminSysGuardService]},
+    {path: 'memberships', component: MembershipAdminComponent, canActivate: [AdminSysGuardService]},
+    {path: 'fan-ads', component: FanadAdminComponent, canActivate: [AdminFanGuardService], children: [
       {path: '', component: AllAdsComponent},
       {path: 'to-approve', component: FanadToApproveComponent}
     ]}
