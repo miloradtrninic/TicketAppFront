@@ -40,9 +40,11 @@
                                     <span class="block font-lato">
                                         <hr class="nomargin nopadding">
                                     </span>
+
                                     <span *ngFor="let hallName of term?.hallNames">
-                                        {{hallName}}
+                                        <strong>Hall: </strong> {{hallName}}
                                     </span>
+                                    <br>
                                     <strong>Discount: </strong>
                                     <span *ngIf="term.discount"> Yes </span>
                                     <span *ngIf="!term.discount"> No </span>
@@ -60,7 +62,9 @@
             </ul>
             <span class="pull-right">
                 <img src="{{ movie?.coverPath }}" class="img-responsive" style="max-height : 200px">
-                <p> <span class="style">Ratings for this movie: {{movie?.ratings}} </span></p>
+                <p>
+                    <span class="style">Ratings for this movie: {{movie?.ratings}} </span>
+                </p>
             </span>
 
         </div>

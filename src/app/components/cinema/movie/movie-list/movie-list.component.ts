@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,ViewChild, Output } from '@angular/core';
 import { Movie } from '../../../../model/movie.model';
 import { MovieService } from '../../../../services/movie.service';
 import { Director } from '../../../../model/director.model';
@@ -9,6 +9,8 @@ import { Genre } from '../../../../model/genre.model';
 import { Actor } from '../../../../model/actor.model';
 import { Cinema } from '../../../../model/cinema.model';
 import { ActivatedRoute } from '@angular/router';
+import { MovieUpdate } from '../../../../model/update/movie-update.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-movie-list',
@@ -18,10 +20,9 @@ import { ActivatedRoute } from '@angular/router';
 export class MovieListComponent implements OnInit {
 
   detailMovie = -1;
-  selected: Movie;
+  @Output()   selected: Movie;
   message: string;
   movies : Movie[] = [];
-  @Input() cinema: Cinema;
   name = '';
   description = '';
   duration = '';
@@ -40,6 +41,9 @@ export class MovieListComponent implements OnInit {
   directors: Array<Director>;
   newDirector : Director;
   cinemaId: number;
+
+  @ViewChild('editForm') form: NgForm;
+
   constructor(public movieService: MovieService, public directorService : DirectorService,
                 public actorService :ActorService, public genreService: GenreService, public route: ActivatedRoute) {
                     this.selectedGenres = new Array();
@@ -75,8 +79,6 @@ export class MovieListComponent implements OnInit {
 
   fillFields(selected){
     this.name = selected.name;
-    this.newDirector = selected.director;
-    this.director = selected.director;
     this.description = selected.description;
     this.duration = selected.durationMinutes;
     this.poster = selected.coverPath;
@@ -87,6 +89,22 @@ export class MovieListComponent implements OnInit {
     this.movieService.delete(index).subscribe(
       resp => {
         this.movies.splice(index, 1);
+        console.log(resp);
+      }, error => {
+        this.message = JSON.stringify(error);
+      }
+    );
+  }
+ 
+  editMovie(){
+    console.log('edit movie');
+    console.log(this.selected);
+    const movieUpdate : MovieUpdate = new MovieUpdate(this.selected.id, this.form.value['name'], 
+    this.form.value['description'],  this.form.value['duration'], this.form.value['coverPath']);
+    this.movieService.update(movieUpdate).subscribe(
+      resp => {
+    const idx = this.movies.map(cin => cin.id).findIndex(id => id === resp.id);
+    this.movies[idx] = resp;
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);
