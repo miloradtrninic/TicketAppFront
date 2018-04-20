@@ -44,7 +44,7 @@ export class AddCinemaComponent implements OnInit {
   }
   addCinema() {
     console.log('add cinema');
-    const cinema: CinemaCreation = new CinemaCreation(this.form.value['name'], this.form.value['address'], 
+    const cinema: CinemaCreation = new CinemaCreation(this.form.value['name'], this.form.value['address'],
             this.form.value['description'], 0);
     this.cinemaService.insert(cinema).subscribe(
       resp => {
@@ -59,5 +59,5 @@ export class AddCinemaComponent implements OnInit {
     this.description = '';
     this.poster = '';
   }
-  
+
 }

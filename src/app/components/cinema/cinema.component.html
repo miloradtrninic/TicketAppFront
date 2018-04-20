@@ -25,10 +25,8 @@
 
     </div>
     <div *ngIf="showmap">
-      <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChooseLocation($event)">
-        <agm-marker [latitude]="latitude" [longitude]="longitude">
-
-        </agm-marker>
+      <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="15" (mapClick)="onChooseLocation($event)">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
       </agm-map>
     </div>
     <button routerLink="new" class="btn btn-primary"> Add new movie </button>
@@ -53,6 +51,10 @@
         <button (click)="randomizeType()" style="display: inline-block">Toggle</button>
       </div>
     </div>
+    <button (click)="seeStat()" class="btn btn-primary"> View statistic </button>
+    <button *ngIf="cinema.fanZone" routerLink="/fan-zones/{{cinema.fanZone.id}}/zone" class="btn btn-primary">Visit fan zone</button>
+    <div *ngIf="stat">
+
 
 
 

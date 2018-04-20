@@ -24,7 +24,9 @@ export class AdminFanZoneComponent implements OnInit {
   auditoriums: Array<Auditorium>;
   selected: Fanzone;
   @ViewChild('f') form: NgForm;
-  constructor(public fanzoneService: FanzoneService, public userService: UserService, public auditoriumService: AuditoriumService) {
+  constructor(public fanzoneService: FanzoneService,
+              public userService: UserService,
+              public auditoriumService: AuditoriumService) {
     this.fanZones = new Array();
     this.adminsSelected = new Array<User>();
   }

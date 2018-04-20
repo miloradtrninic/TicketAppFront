@@ -57,7 +57,9 @@ export class AdminFanZoneItemsComponent implements OnInit {
   send() {
     const formData: FormData = new FormData();
     if (this.selectedItem === undefined) {
-      formData.append('image', this.fanItemImage, this.fanItemImage.name);
+      if (this.fanItemImage !== undefined) {
+        formData.append('image', this.fanItemImage, this.fanItemImage.name);
+      }
       formData.append('name', this.uploadForm.value['name']);
       formData.append('description', this.uploadForm.value['description']);
       formData.append('fanzoneId', this.fanZone.id + '');
@@ -72,13 +74,15 @@ export class AdminFanZoneItemsComponent implements OnInit {
     } else {
       formData.append('name', this.uploadForm.value['name']);
       formData.append('description', this.uploadForm.value['description']);
-      formData.append('description', this.selectedItem.id + '');
+      formData.append('fanitemId', this.selectedItem.id + '');
       if (this.fanItemImage !== undefined) {
         formData.append('image', this.fanItemImage, this.fanItemImage.name);
       }
       this.fanItemService.updateItem(formData).subscribe(
         resp => {
           this.message = 'Item updated.';
+          const idx = this.fanZone.fanitemList.map(it => it.id).findIndex(ind => ind === resp.id);
+          this.fanZone.fanitemList[idx] = resp;
           this.uploadForm.resetForm();
           this.fanItemImage = undefined;
           this.selectedItem = undefined;

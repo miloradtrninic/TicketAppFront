@@ -86,6 +86,12 @@ import { MyAdsComponent } from './components/user-panel/my-ads/my-ads.component'
 import { MyItemsComponent } from './components/user-panel/my-items/my-items.component';
 import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.component';
 import { ChartsModule } from 'ng2-charts';
+import {AdminSysGuardService} from './app-routing/guards/admin-sys-guard.service';
+import {AdminFanGuardService} from './app-routing/guards/admin-fan-guard.service';
+import {AdminAudGuardService} from './app-routing/guards/admin-aud-guard.service';
+import {OnlyAnonymousService} from './app-routing/guards/only-anonymous.service';
+import { MyZonesComponent } from './components/admin-panel/admin-fan-zone/my-zones/my-zones.component';
+import {GeocoderService} from './services/geocoder.service';
 
 @NgModule({
   declarations: [
@@ -144,7 +150,8 @@ import { ChartsModule } from 'ng2-charts';
     MyAdsComponent,
     MyItemsComponent,
     MyBidsComponent,
-    TopLevelComponent
+    TopLevelComponent,
+    MyZonesComponent
   ],
   imports: [
     BrowserModule,
@@ -160,7 +167,8 @@ import { ChartsModule } from 'ng2-charts';
     FanadService, FanzoneService, TheatreService, UserService, MovieService,
     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
     MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
-    TerminService, ReservationService, TicketService],
+    TerminService, ReservationService, TicketService, AdminSysGuardService, AdminFanGuardService,
+    AdminAudGuardService, OnlyAnonymousService, GeocoderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

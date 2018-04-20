@@ -49,4 +49,9 @@ export class AuditoriumsAdminComponent implements OnInit {
     this.auditoriumService.updateAdmins({'id': this.selected.id, 'adminFKs': this.adminsSelected.map(adm => adm.id)})
       .subscribe(resp => this.message = 'Updated!', error2 => this.error = JSON.stringify(error2));
   }
+  removeAud(id: number, index: number) {
+    this.auditoriumService.delete(id).subscribe(
+      resp => this.auditoriums.splice(index, 1), error2 => this.error = JSON.stringify(error2)
+    );
+  }
 }
