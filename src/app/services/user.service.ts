@@ -102,7 +102,7 @@ export class UserService extends AbstractService<User, number> {
     }
     const url = `${this.actionUrl}/acceptFriendship/${this.authService.loggedUserToken['id']}`;
 
-    return this.http.post(url, userId, options).map(resp => resp as UserPreview);
+    return this.http.put(url, userId, options).map(resp => resp as UserPreview);
   }
 
   declineFriendship(userId: number) {
@@ -111,7 +111,7 @@ export class UserService extends AbstractService<User, number> {
     }
     const url = `${this.actionUrl}/declineFriendship/${this.authService.loggedUserToken['id']}`;
 
-    return this.http.post(url, userId, options).map(resp => resp as UserPreview);
+    return this.http.put(url, userId, options).map(resp => resp as UserPreview);
   }
 
   getFriendRequests() {

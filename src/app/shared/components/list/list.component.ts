@@ -14,8 +14,10 @@ export class ListComponent implements OnInit {
   private requestType = Constants.RequestType;
   @Output() onElementClickEvent: EventEmitter<any> = new EventEmitter();
   @Input() public header: string;
-  @Input() public items: ListItem[];
+  @Input() public items: any;
   @Input() public type: string;
+  @Output() acceptClickEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() declineClickEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
     console.log(this.items);
@@ -25,5 +27,13 @@ export class ListComponent implements OnInit {
 
   elementClicked(item) {
     this.onElementClickEvent.emit(item);
+  }
+
+  accept(object) {
+    this.acceptClickEvent.emit(object);
+  }
+
+  decline(object) {
+    this.declineClickEvent.emit(object);
   }
 }

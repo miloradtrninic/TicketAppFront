@@ -52,7 +52,7 @@
       <br/>
       <br/>
       <app-list (onElementClickEvent)="null" [header]="'Friend requests'" [items]="makeRequests()"
-                [type]="'Request list'"></app-list>
+                [type]="'Request list'" (acceptClickEvent)="accept($event)" (declineClickEvent)="decline($event)"></app-list>
     </div>
   </div>
 

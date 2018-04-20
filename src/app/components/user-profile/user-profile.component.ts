@@ -14,7 +14,7 @@ import {Request} from '../../shared/model/request';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent extends TopLevelComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
 
   private pw: string;
   private repeatpw: string;
@@ -33,12 +33,11 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
     email: null
   };
 
-  constructor(protected service: UserService, protected router: Router, private authService: AuthService) {
-    super(service, router, null);
+  constructor(private service: UserService, private router: Router, private authService: AuthService) {
+
   }
 
   ngOnInit() {
-    super.ngOnInit();
     this.mode = Constants.State.VIEW;
     this.shouldShowPWForm = false;
 
@@ -102,6 +101,7 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
     this.service.update(up)
       .subscribe(res => {
         this.user = res;
+        this.mode = Constants.State.VIEW;
       },
         err => {
           this.errormsg = 'Error updating user information';
@@ -139,13 +139,14 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
   }
 
   accept(user: UserPreview) {
+    alert('Ja pozvan');
     this.service.acceptFriendship(user.id)
       .subscribe(res => {
         if (HelperFunctions.isEmptyValue(this.friends)) {
           this.friends = [];
         }
-        this.friends.push(res);
-        this.notFriends.splice(this.notFriends.indexOf(res), 1);
+        this.friends.push(user);
+        this.friendRequests.splice(this.friendRequests.indexOf(user), 1);
       })
   }
 
@@ -155,19 +156,14 @@ export class UserProfileComponent extends TopLevelComponent implements OnInit {
         if (HelperFunctions.isEmptyValue(this.notFriends)) {
           this.notFriends = [];
         }
-        this.notFriends.push(res);
-        this.friends.splice(this.friends.indexOf(res), 1);
+        this.notFriends.push(user);
+        this.friendRequests.splice(this.friendRequests.indexOf(user), 1);
       })
   }
 
   makeRequests() {
-    const items = [];
-
-    for (let i = 0; i < this.friendRequests.length; i++) {
-      items.push(new Request('Request' + i, Constants.RequestType.ACPTDEC, this.friendRequests[i], this.accept, this.decline));
-    }
-
-    return items;
+    return HelperFunctions.createRequestItems(this.friendRequests, ['name', 'lastname'],
+      this.accept, this.decline, Constants.RequestType.ACPTDEC);
   }
 
   changePassword() {

@@ -72,7 +72,7 @@ export class FriendsComponent implements OnInit {
             this.notFriends = [];
           }
           this.notFriends.push(removeMe);
-          this.friends.splice(this.friends.indexOf(removeMe), 1);
+          this.friends.splice(this.friendRequests.indexOf(removeMe), 1);
         },
         err => {
           this.errormsg = 'Error deleting friend';
@@ -86,7 +86,7 @@ export class FriendsComponent implements OnInit {
           this.friends = [];
         }
         this.friends.push(res);
-        this.notFriends.splice(this.notFriends.indexOf(res), 1);
+        this.friendRequests.splice(this.friendRequests.indexOf(res), 1);
       })
   }
 
@@ -97,19 +97,13 @@ export class FriendsComponent implements OnInit {
           this.notFriends = [];
         }
         this.notFriends.push(res);
-        this.friends.splice(this.friends.indexOf(res), 1);
+        this.friendRequests.splice(this.friends.indexOf(res), 1);
       })
   }
 
   makeRequests() {
-    const items = [];
-
-    if (!HelperFunctions.isEmptyValue(this.friendRequests)) {
-      for (let i = 0; i < this.friendRequests.length; i++) {
-        items.push(new Request('Request' + i, Constants.RequestType.ACPTDEC, this.friendRequests[i], this.accept, this.decline));
-      }
-    }
-    return items;
+    return HelperFunctions.createRequestItems(this.friendRequests, ['name', 'lastname'],
+      this.accept, this.decline, Constants.RequestType.ACPTDEC);
   }
 
   sortByName(array) {

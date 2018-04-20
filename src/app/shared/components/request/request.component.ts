@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Constants} from '../../constants/constants';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-request',
@@ -9,30 +10,32 @@ import {Constants} from '../../constants/constants';
 export class RequestComponent implements OnInit {
 
   public types = Constants.RequestType;
-  @Input() public type: string;
-  @Input() public requestText: string;
-  @Input() acceptClickEvent;
-  @Input() declineClickEvent;
+  @Input() private type: string;
+  @Input() private requestText: string;
+  @Output() acceptClickEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() declineClickEvent: EventEmitter<any> = new EventEmitter<any>();
   @Input() relatedItem: any;
 
-  constructor() { }
+  constructor(private service: UserService) { }
 
   ngOnInit() {
+    console.log(this.requestText);
+    console.log(this.type);
   }
 
   accept(event) {
     if (this.relatedItem == null) {
-      this.acceptClickEvent(0);
+      this.acceptClickEvent.emit(null);
     } else {
-      this.acceptClickEvent(this.relatedItem);
+      this.acceptClickEvent.emit(this.relatedItem);
     }
   }
 
   decline(event) {
     if (this.relatedItem == null) {
-      this.declineClickEvent(0);
+      this.declineClickEvent.emit(null);
     } else {
-      this.declineClickEvent(this.relatedItem);
+      this.declineClickEvent.emit(this.relatedItem);
     }
   }
 }

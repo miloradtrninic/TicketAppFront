@@ -20,6 +20,7 @@ export class RegistrationComponent extends TopLevelComponent implements OnInit {
     password: null,
     name: null,
     lastname: null,
+    city: null,
     phoneNo: null,
   };
   errorMessage = null;
@@ -39,7 +40,7 @@ export class RegistrationComponent extends TopLevelComponent implements OnInit {
 
     if (shouldSendToServer) {
       const user = (new UserCreation(this.regInfo.username, this.regInfo.email, this.regInfo.name,
-                                      this.regInfo.lastname, this.regInfo.phoneNo, this.regInfo.password));
+                                      this.regInfo.lastname, this.regInfo.phoneNo, this.regInfo.city, this.regInfo.password));
 
       const ret = this.auth.register(user)
         .subscribe(res => {
