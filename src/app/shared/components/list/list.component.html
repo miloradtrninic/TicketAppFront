@@ -18,8 +18,8 @@
     <ul class="list-group">
       <li class="list-group-item RequestItem" *ngFor="let item of items; let i = index" (click)="elementClicked(item)"
           id="{{'Request'+i}}">
-        <app-request [requestText]="item.text" [acceptClickEvent]="item.acceptFn"
-                      [declineClickEvent]="item.declineFn" [type]="item.type" [relatedItem]="item.relatedItem"></app-request>
+        <app-request [requestText]="item.text" (acceptClickEvent)="accept($event)"
+                      (declineClickEvent)="decline($event)" [type]="item.type" [relatedItem]="item.relatedItem"></app-request>
       </li>
     </ul>
   </div>

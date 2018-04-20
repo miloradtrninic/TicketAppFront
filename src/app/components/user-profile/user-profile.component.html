@@ -134,14 +134,14 @@
 
   <div class="row">
     <div class="col-sm-4" *ngIf="notFriends != null && notFriends != undefined && notFriends.length > 0">
-      <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="notFriends"
+      <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="this.notFriends"
                   [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Add Friends'"
                   (onElementClickEvent)="addFriend($event)">
       </app-search>
     </div>
 
       <div class="col-sm-4" *ngIf="friends != null && friends != undefined && friends.length > 0">
-        <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="friends"
+        <app-search [criteriaKeys]="['name', 'lastname', ['name', 'lastname']]" [items]="this.friends"
                     [displayKeys]="['name', 'lastname']" [shouldHaveList]="true" [header]="'Remove Friends'"
                     (onElementClickEvent)="removeFriend($event)">
         </app-search>
@@ -149,7 +149,7 @@
 
       <div class="col-sm-4" *ngIf="friendRequests != null && friendRequests != undefined && friendRequests.length > 0">
         <app-list (onElementClickEvent)="null" [header]="'Friend requests'" [items]="makeRequests()"
-                  [type]="'Request list'"></app-list>
+                  [type]="'Request list'" (declineClickEvent)="decline($event)" (acceptClickEvent)="accept($event)"></app-list>
       </div>
   </div>
 

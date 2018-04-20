@@ -43,7 +43,7 @@
 
     <div class="rightText">
       <p>
-        <span class="style">Average rating for this cinema : {{ average() }} </span>
+        <span class="style">Average rating for this cinema : {{ cinema?.ratings }} </span>
       </p>
       <button data-toggle="modal" data-target="#addRate">Evaluate</button>
     </div>
@@ -83,12 +83,12 @@
 </div>
 
 
-<!--MODALNI ZA IZMENU TERMINA-->
+<!--MODALNI ZA GLasanje-->
 <div id="addRate" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <form class="form-horizontal" #addRate="ngForm" (ngSubmit)="evaluateCinema()">
+        <form class="form-horizontal" #addRate="ngForm" (ngSubmit)="rateCinema()">
 
 
           <!-- RATINGS -->

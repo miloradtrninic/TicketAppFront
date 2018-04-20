@@ -57,7 +57,7 @@ const routes: Routes = [
   { path: 'cinema/:id/new', component: AddMovieComponent},
   { path: 'cinema/:id/movies', component: MovieListComponent},
   { path: 'cinema/:id/movie/:projId/termin', component: TerminComponent},
-  { path: 'cinema/:id/reservation', component: ReservationComponent},
+  { path: 'cinema/:id/movie/:projId/reservation', component: ReservationComponent},
   { path: 'cinema/:id/termin', component: TerminComponent},
   { path: 'cinema/:id/reservation', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'cinema/:id/movie/:movieId', component: MovieComponent},

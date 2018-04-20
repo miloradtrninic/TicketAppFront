@@ -18,6 +18,11 @@ import {Ticket} from '../../../model/ticket.model';
 import {TicketService} from '../../../services/ticket.service';
 import {ReservationCreation} from '../../../model/creation/reservation-creation';
 import {ReservationService} from '../../../services/reservation.service';
+import {Cinema} from '../../../model/cinema.model';
+import {Theatre} from '../../../model/theatre.model';
+import {CinemaService} from '../../../services/cinema.service';
+import {Auditorium} from '../../../model/auditorium.model';
+import {Projection} from '../../../model/projection.model';
 
 @Component({
   selector: 'app-reservation-create',
@@ -26,45 +31,55 @@ import {ReservationService} from '../../../services/reservation.service';
 })
 export class ReservationCreateComponent implements OnInit {
 
-  /*Inputs*/
-  @Input()
-  private projection: any;
-  @Input()
-  private auditoriumId: number;
-
   /*Status variables*/
   private listType = Constants.ListType.COMMON;
   private errormsg: string;
+  private selectedAuditoriumType: string;
   /********************/
 
   /*Selections*/
-  private selectedTermin: Termin;
-  private selectedHall: HallPreview;
-  private selectedHallSegment: HallSegmentPreview;
+  private selectedAuditorium: Auditorium = null;
+  private selectedProjection: Projection = null;
+  private auditoriumId: number = null;
+  private selectedTermin: Termin = null;
+  private selectedHall: HallPreview = null;
+  private selectedHallSegment: HallSegmentPreview = null;
   private inviteFriendsCount = 0;
   /***********/
 
   /*Arrays*/
-  private availableTickets: Ticket[];
-  private halls: Hall[];
-  private hallSegments: HallSegmentPreview[];
-  private seatings: SeatingPreview[];
-  private selectedSeatings: SeatingPreview[];
-  private friends: UserPreview[];
-  private selectedFriends: UserPreview[];
+  private cinemas: Cinema[] = null;
+  private theatres: Theatre[] = null;
+  private availableTickets: Ticket[] = null;
+  private halls: Hall[] = null;
+  private hallSegments: HallSegmentPreview[] = null;
+  private seatings: SeatingPreview[] = null;
+  private selectedSeatings: SeatingPreview[] = null;
+  private friends: UserPreview[] = null;
+  private selectedFriends: UserPreview[] = null;
   /*******/
 
-  constructor(private terminService: TerminService, private hallService: HallService, private auth: AuthService,
+  constructor(private cinemaService: CinemaService, private theatreService: TheatreService,
+              private terminService: TerminService, private hallService: HallService, private auth: AuthService,
               private userService: UserService, private ticketService: TicketService,
-              private reservationService: ReservationService) { }
+              private reservationService: ReservationService) {
+
+  }
 
   ngOnInit() {
-    this.ticketService.getAvailableTickets(this.projection.id)
+    this.cinemaService.getAll()
       .subscribe(res => {
-        this.availableTickets = res;
+        this.cinemas = res;
       }, err => {
         this.errormsg = err;
-      })
+      });
+
+    this.theatreService.getAll()
+      .subscribe(res => {
+        this.theatres = res;
+      }, err => {
+        this.errormsg = err;
+      });
   }
 
   selectTermin(termin) {
@@ -87,6 +102,30 @@ export class ReservationCreateComponent implements OnInit {
     return HelperFunctions.createListItems(this.hallSegments, null, ['name']);
   }
 
+  createCinemaLI() {
+    return HelperFunctions.createListItems(this.cinemas, null, ['name']);
+  }
+
+  createTheatreLI() {
+    return HelperFunctions.createListItems(this.theatres, null, ['name']);
+  }
+
+  selectAuditorium(aud: Auditorium) {
+    this.selectedAuditorium = aud;
+    this.auditoriumId = aud.id;
+    this.selectedAuditoriumType = aud.type;
+  }
+
+  selectProjection(proj: Projection) {
+    this.selectedProjection = proj;
+    this.ticketService.getAvailableTickets(this.selectedProjection.id)
+      .subscribe(res => {
+        this.availableTickets = res;
+      }, err => {
+        this.errormsg = err;
+      })
+  }
+
   selectHall(hall: HallPreview) {
     this.selectedHall = hall;
     this.hallSegments = hall.hallSegmentList;
@@ -105,10 +144,10 @@ export class ReservationCreateComponent implements OnInit {
     }
     index = this.seatings.indexOf(seating)
     if (index === -1) {
-      console.log("Selection!");
+      console.log('Selection!');
       this.selectedSeatings.push(seating);
     } else {
-      console.log("Deselect!");
+      console.log('Deselect!');
       this.selectedSeatings.splice(index, 1);
     }
 
@@ -143,7 +182,7 @@ export class ReservationCreateComponent implements OnInit {
   }
 
   createReservation() {
-    const projectionId = this.projection.id;
+    const projectionId = this.selectedProjection.id;
     const ticketlist = [];
     const userList = [];
 

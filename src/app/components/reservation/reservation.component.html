@@ -3,4 +3,7 @@
   <app-reservation-list *ngIf="mode === reservationTypes.ALLFORUSER"
                         [userId]="userId"></app-reservation-list>
 
+  <app-reservation-create *ngIf="mode !== reservationTypes.ALLFORUSER">
+  </app-reservation-create>
+
 </div>
