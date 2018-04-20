@@ -1,4 +1,3 @@
-
 <div class="panel-group" style="margin-top: 5ex;">
   <div class="panel panel-primary back">
 
@@ -33,12 +32,64 @@
       </agm-map>
     </div>
     <button routerLink="new" class="btn btn-primary"> Add new movie </button>
-    <button (click)="seeStat()" class="btn btn-primary"> View statistic </button>
-    <div *ngIf="stat">
-      
-     
+    <br>
+    <a (click)="annuallyStat()" class="mouse"> Annually statistics </a>
+    <br>
+    <a (click)="weeklyStat()" class="mouse"> Weekly statistics </a>
+    <br>
+    <a (click)="dailyStat()" class="mouse"> Daily statistics </a>
+    <br>
+    <a (click)="annuallyStat()" class="mouse"> Earnings </a>
 
+    <!--GODISNJEM NIVOU -->
+    <div *ngIf="year">
+      <div class="col-md-8">
+
+        <canvas baseChart [data]="lineChartData1" [labels]="lineChartLabels1" [options]="lineChartOptions" [chartType]="lineChartType1"
+          (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+
+      <div class="col-md-12 text-center" style="margin-top: 10px;height: 50%">
+        <button (click)="randomizeType()" style="display: inline-block">Toggle</button>
+      </div>
     </div>
+
+
+
+    <!--NEDELJNOM NIVOU-->
+    <div *ngIf="week">
+      <div class="row">
+        <div class="col-md-6">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+              [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-bottom: 10px">
+          <table class="table table-responsive table-condensed">
+            <tr>
+              <th *ngFor="let label of lineChartLabels">{{label}}</th>
+            </tr>
+            <tr *ngFor="let d of lineChartData">
+              <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+            </tr>
+          </table>
+         
+        </div>
+      </div>
+    </div>
+    <!--DNEVNOM NIVOU-->
+    <div *ngIf="day">
+      <div class="col-md-8">
+        <div style="display: block">
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+            [chartType]="barChartType" (chartHover)="chartHovered2($event)" (chartClick)="chartClicked2($event)"></canvas>
+        </div>
+      </div>
+    </div>
+
+
 
 
 

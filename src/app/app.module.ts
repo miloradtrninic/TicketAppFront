@@ -85,6 +85,7 @@ import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-
 import { MyAdsComponent } from './components/user-panel/my-ads/my-ads.component';
 import { MyItemsComponent } from './components/user-panel/my-items/my-items.component';
 import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -150,6 +151,7 @@ import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.compone
     RoutingModule,
     FormsModule,
     HttpClientModule,
+    ChartsModule,
     AgmCoreModule.forRoot({
       apiKey : 'AIzaSyB81X56Wa1HeAUSFYN4R5JmwkUNBekBrOM'
     })
