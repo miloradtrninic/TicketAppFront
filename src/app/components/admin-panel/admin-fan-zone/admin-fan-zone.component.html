@@ -18,8 +18,6 @@
       <tr>
         <th>#</th>
         <th>Auditorium</th>
-        <th>Auditorium</th>
-        <th>&nbsp;</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
       </tr>
@@ -28,7 +26,6 @@
       <tr *ngFor="let zone of fanZones">
         <td>{{zone.id}}</td>
         <td>{{zone.auditoriumName}}</td>
-        <td><a class="btn btn-info" routerLink="{{zone.id}}">View items</a></td>
         <td><button class="btn btn-primary" (click)="select(zone)" data-target="#addZone" data-toggle="modal">Edit zone</button></td>
         <td><button class="btn btn-danger" (click)="delete()">Delete zone</button></td>
       </tr>

@@ -10,10 +10,11 @@ export class AdminSysGuardService implements CanActivate {
   }
 
   canActivate() {
-    const isLogged = this.service.loggedUserToken != null;
-    const hasRights = isLogged && this.service.loggedUserToken.roles.indexOf('ADMIN_SYS') > -1;
-
-    if (!isLogged && !hasRights) {
+    const isLogged = this.service.isLoggedInSimple();
+    const hasRights = this.service.hasRole('ADMIN_SYS');
+    console.log('is logged' + isLogged);
+    console.log('has rights' + hasRights);
+    if (!isLogged || !hasRights) {
       this.router.navigate(['/login']);
     }
 

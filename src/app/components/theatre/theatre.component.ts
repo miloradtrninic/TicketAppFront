@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, NgZone} from '@angular/core';
 import { Theatre } from '../../model/theatre.model';
 import {Router, ActivatedRoute} from '@angular/router';
 import { TheatreService } from '../../services/theatre.service';
+import {GeocoderService} from '../../services/geocoder.service';
 
 @Component({
   selector: 'app-theatre',
@@ -24,7 +25,8 @@ export class TheatreComponent implements OnInit {
 
 
 
-  constructor(public theatreService: TheatreService, private route: ActivatedRoute) { }
+  constructor(public theatreService: TheatreService, private route: ActivatedRoute, private _zone: NgZone,
+              private geocoderService: GeocoderService) { }
 
   ngOnInit() {
     console.log(window.location.href);
@@ -33,6 +35,7 @@ export class TheatreComponent implements OnInit {
        this.theatreService.getOne(this.id).subscribe(
         (resp: Theatre) => {
           this.theatre = resp;
+          this.getLatLonForAdress();
         }, error => {
           this.message = error;
         }
@@ -43,13 +46,13 @@ export class TheatreComponent implements OnInit {
   openPlays() {
     this.openPr = false;
     this.openPl = true;
-   
-  
+
+
   }
   openProjection(){
     this.openPl = false;
     this.openPr = true;
- 
+
   }
 
   showMap(){
@@ -65,6 +68,18 @@ export class TheatreComponent implements OnInit {
     this.longitude = event.coords.lng;
   }
 
-
- 
+  getLatLonForAdress() {
+    this.geocoderService.getGeocoding(this.theatre.address)
+      .subscribe(
+        result => {
+          // needs to run inside zone to update the map
+          this._zone.run(() => {
+            this.latitude = result.lat();
+            this.longitude = result.lng();
+          });
+        },
+        error => console.log(error),
+        () => console.log('Geocoding completed!')
+      );
+  }
 }

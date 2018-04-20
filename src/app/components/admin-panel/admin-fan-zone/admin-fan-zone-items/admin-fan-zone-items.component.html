@@ -26,7 +26,7 @@
       <h4 class="media-heading">{{item.name}}</h4>
       <p>{{item.description}}</p>
       <div class="media-bottom">
-        <button class="btn btn-primary" (click)="selectItem(item)">Edit</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#dialog" (click)="select(item)">Edit</button>
         <button class="btn btn-danger" (click)="delete(item, i)">Delete</button>
       </div>
     </div>
@@ -44,17 +44,17 @@
         <form class="form-horizontal" (ngSubmit)="send()" #f="ngForm">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" name="name" class="form-control" ngModel #name = "ngModel"/>
+            <input type="text" name="name" class="form-control" ngModel #name = "ngModel" required/>
           </div>
           <div class="form-group">
             <label>Description</label>
-            <textarea name="description" ngModel #desc="ngModel" class="form-control"></textarea>
+            <textarea name="description" ngModel #desc="ngModel" class="form-control" required></textarea>
           </div>
           <div class="form-group">
             <label>Image</label>
             <input type="file" accept="image/*" name="image"  (change)="fileChange($event)" ngModel #image="ngModel" class="form-control" />
           </div>
-          <button class="btn btn-success btn-block">Send</button>
+          <button [disabled]="!f.valid" class="btn btn-success btn-block">Send</button>
         </form>
       </div>
       <div class="modal-footer">

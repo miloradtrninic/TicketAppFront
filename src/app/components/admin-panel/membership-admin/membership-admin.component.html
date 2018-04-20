@@ -63,17 +63,17 @@
         <form class="form form-horizontal" #fNew="ngForm" (submit)="addNew()">
           <div class="form-group">
             <label>Name:</label>
-            <input class="form-control" type="text" ngModel name="name" #name = "ngModel"/>
+            <input class="form-control" type="text" ngModel name="name" #name = "ngModel" required/>
           </div>
           <div class="form-group">
             <label>Points:</label>
-            <input class="form-control" type="number" ngModel name="points" #points = "ngModel"/>
+            <input class="form-control" type="number" ngModel name="points" #points = "ngModel" required/>
           </div>
           <div class="form-group">
             <label>Discount(%):</label>
-            <input [disabled]="!fNew.valid" class="form-control" type="number" ngModel name="discount" #discount = "ngModel"/>
+            <input class="form-control" type="number" ngModel name="discount" #discount = "ngModel" required/>
           </div>
-          <input type="submit" class="btn btn-success" />
+          <input [disabled]="!fNew.valid" type="submit" class="btn btn-success" />
         </form>
       </div>
       <div class="modal-footer">

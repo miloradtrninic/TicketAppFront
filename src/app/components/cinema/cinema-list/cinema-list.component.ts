@@ -4,6 +4,7 @@ import { CinemaService } from '../../../services/cinema.service';
 import { NgForm } from '@angular/forms';
 import {HelperFunctions} from '../../../shared/util/helper-functions';
 import { CinemaUpdate } from '../../../model/update/cinema-update.model';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-cinema-list',
@@ -25,7 +26,7 @@ export class CinemaListComponent implements OnInit {
 
   @ViewChild('editForm') form: NgForm;
 
-  constructor(public cinemaService: CinemaService) { }
+  constructor(public cinemaService: CinemaService, public authService: AuthService) { }
 
 
   ngOnInit() {
@@ -59,7 +60,7 @@ export class CinemaListComponent implements OnInit {
   editCinema(index){
     console.log('edit cinema');
     console.log('broj indexa je : ' + index);
-    const cinemaUpdate : CinemaUpdate = new CinemaUpdate(this.selected.id, this.form.value['name'], 
+    const cinemaUpdate : CinemaUpdate = new CinemaUpdate(this.selected.id, this.form.value['name'],
     this.form.value['address'],  this.form.value['description'], 0);
     this.cinemaService.update(cinemaUpdate).subscribe(
       resp => {
@@ -71,9 +72,7 @@ export class CinemaListComponent implements OnInit {
       }
     );
   }
-
-
- onDetail(index: number)  {
+  onDetail(index: number)  {
     this.detailCinema = index;
   }
 
@@ -99,5 +98,8 @@ export class CinemaListComponent implements OnInit {
 
   sortByRatings() {
     this.cinemas = HelperFunctions.sortArrayByKey(this.cinemas, 'ratings');
+  }
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
   }
 }

@@ -92,12 +92,18 @@ export class AuthService {
       this.storeToken();
       token = this.loggedUserToken;
     }
-    console.log('Token: ' + token);
+    // console.log('Token: ' + token);
     return token;
   }
 
   isLoggedIn(): Observable<boolean> {
     return this.logger.asObservable();
+  }
+  hasRole(role: string): boolean {
+    return this.getToken().roles.indexOf(role) !== -1;
+  }
+  isLoggedInSimple(): boolean {
+    return this.getToken() !== null;
   }
 
 }

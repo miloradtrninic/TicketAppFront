@@ -45,6 +45,8 @@ import {MyBidsComponent} from '../components/user-panel/my-bids/my-bids.componen
 import {AdminAudGuardService} from './guards/admin-aud-guard.service';
 import {AdminFanGuardService} from './guards/admin-fan-guard.service';
 import {AdminSysGuardService} from "app/app-routing/guards/admin-sys-guard.service";
+import {OnlyAnonymousService} from './guards/only-anonymous.service';
+import {MyZonesComponent} from '../components/admin-panel/admin-fan-zone/my-zones/my-zones.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -70,16 +72,17 @@ const routes: Routes = [
     {path: 'fan-ads', component: FanAdsComponent},
     {path: 'fan-ads/:adId', component: SingleAdComponent}
   ]},
-  { path: 'admin-panel', component: AdminPanelComponent, canActivate: [OnlyAdminGuard], children: [
+  { path: 'admin-panel', component: AdminPanelComponent, children: [
     {path: '', component: HomeAdminComponent},
-    {path: 'auditorium', component: AuditoriumAdminComponent, canActivate: [AdminAudGuardService], children: [
-      {path: '', component: AuditoriumsAdminComponent},
-      {path: 'halls', component: HallAdminComponent},
-      {path: 'halls/modify/:hallId', component: ModifyHallComponent},
-      {path: 'halls/new', component: ModifyHallComponent}
+    {path: 'auditorium', component: AuditoriumAdminComponent, children: [
+      {path: '', component: AuditoriumsAdminComponent, canActivate: [AdminSysGuardService]},
+      {path: 'halls', component: HallAdminComponent, canActivate: [AdminAudGuardService]},
+      {path: 'halls/modify/:hallId', component: ModifyHallComponent, canActivate: [AdminAudGuardService]},
+      {path: 'halls/new', component: ModifyHallComponent, canActivate: [AdminAudGuardService]}
     ]},
-    {path: 'fan-zone', component: AdminFanZoneComponent, canActivate: [AdminFanGuardService]},
-    {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent, canActivate: [AdminFanGuardService]},
+    {path: 'fan-zone', component: AdminFanZoneComponent, canActivate: [AdminSysGuardService]},
+    {path: 'my-zones', component: MyZonesComponent, canActivate: [AdminFanGuardService]},
+    {path: 'my-zones/:id', component: AdminFanZoneItemsComponent, canActivate: [AdminFanGuardService]},
     {path: 'user-admin', component: UserAdministrationComponent, canActivate: [AdminSysGuardService]},
     {path: 'memberships', component: MembershipAdminComponent, canActivate: [AdminSysGuardService]},
     {path: 'fan-ads', component: FanadAdminComponent, canActivate: [AdminFanGuardService], children: [
@@ -87,8 +90,8 @@ const routes: Routes = [
       {path: 'to-approve', component: FanadToApproveComponent}
     ]}
   ]},
-  { path: 'register', component: RegistrationComponent},
-  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegistrationComponent, canActivate: [OnlyAnonymousService]},
+  { path: 'login', component: LoginComponent, canActivate: [OnlyAnonymousService]},
   { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'my-ads', component: MyAdsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'my-items', component: MyItemsComponent, canActivate: [OnlyLoggedInGuard]},

@@ -10,10 +10,9 @@ export class AdminAudGuardService implements CanActivate {
   }
 
   canActivate() {
-    const isLogged = this.service.loggedUserToken != null;
-    const hasRights = isLogged && this.service.loggedUserToken.roles.indexOf('ADMIN_AUD') > -1;
-
-    if (!isLogged && !hasRights) {
+    const isLogged = this.service.isLoggedInSimple();
+    const hasRights = this.service.hasRole('ADMIN_AUD');
+    if (!isLogged || !hasRights) {
       this.router.navigate(['/login']);
     }
 

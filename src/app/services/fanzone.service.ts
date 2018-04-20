@@ -14,6 +14,11 @@ export class FanzoneService extends AbstractService<Fanzone, number> {
     super(http, '/fanzone', authService);
   }
   getAdmins(id: number): Observable<User[]> {
-    return this.http.get(this.actionUrl + '/' + id + '/admins').map(resp => resp as User[]);
+    return this.http.get(this.actionUrl + '/' + id + '/admins',
+      {headers: this.authService.getJSONAuthHeader()}).map(resp => resp as User[]);
+  }
+  getMyZones(): Observable<Fanzone[]> {
+    return this.http.get(this.actionUrl + '/myzones',
+      {headers: this.authService.getJSONAuthHeader()}).map(resp => resp as Fanzone[]);
   }
 }

@@ -29,7 +29,7 @@
         <td>{{user.membershipName}}</td>
         <td *ngIf="user.enabled"><button class="btn btn-danger" (click)="ban(user)">Ban</button> </td>
         <td *ngIf="!user.enabled"><button class="btn btn-success" (click)="activate(user)">Activate</button> </td>
-        <td><button class="btn btn-primary" (click)="selected = user" data-target="#editRoles" data-toggle="modal">Edit roles</button></td>
+        <td><button class="btn btn-primary" (click)="selectUser(user)" data-target="#editRoles" data-toggle="modal">Edit roles</button></td>
       </tr>
     </tbody>
   </table>
@@ -52,7 +52,7 @@
           {{error}}
         </div>
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let role of selected.userRoles">
+          <li class="list-group-item" *ngFor="let role of selectedRoles">
             {{role.name}}
             <span class="pull-right">
               <span class="btn btn-xs btn-danger">
@@ -67,12 +67,12 @@
             <option *ngFor="let role of roles" [hidden]="hasRole(role.id)" [ngValue]="role">{{role.name}}</option>
           </select>
           <span class="input-group-btn">
-            <button class="btn btn-primary" style="margin:1em;" (click)="addRole()"><i class="glyphicon glyphicon-add"></i>Add role</button>
+            <button class="btn btn-primary"(click)="addRole()"><i class="glyphicon glyphicon-add"></i>Add role</button>
           </span>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success btn-block" (click)="editRoles()">Submit</button>
+        <button type="button" [disabled]="selectedRoles.length === 0" class="btn btn-success btn-block" (click)="editRoles()">Submit</button>
       </div>
     </div>
 

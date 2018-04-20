@@ -11,12 +11,10 @@ export class OnlyLoggedInGuard implements CanActivate {
 
   canActivate() {
     console.log('Only logged in users.')
-    const hasRights = this.service.loggedUserToken != null;
-
+    const hasRights = this.service.isLoggedInSimple();
     if (!hasRights) {
       this.router.navigate(['/login']);
     }
-
     return hasRights;
   }
 }
