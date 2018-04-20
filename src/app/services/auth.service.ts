@@ -100,7 +100,11 @@ export class AuthService {
     return this.logger.asObservable();
   }
   hasRole(role: string): boolean {
-    return this.getToken().roles.indexOf(role) !== -1;
+    if (this.getToken() !== null) {
+      return this.getToken().roles.indexOf(role) !== -1;
+    } else {
+      return false;
+    }
   }
   isLoggedInSimple(): boolean {
     return this.getToken() !== null;
