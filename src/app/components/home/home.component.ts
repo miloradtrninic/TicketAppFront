@@ -51,7 +51,7 @@ export class HomeComponent extends TopLevelComponent implements OnInit {
   }
 
   goToPage(auditorium: AuditoriumPreview) {
-    const type = auditorium.type;
+    const type = auditorium.entity_type;
 
     if (type === Constants.AuditoriumType.CINEMA) {
       this.router.navigate([]);

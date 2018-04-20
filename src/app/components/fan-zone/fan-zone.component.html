@@ -1,11 +1,18 @@
-<div class="col-xs-3">
-  <ul class="nav nav-pills nav-stacked">
-    <li [routerLinkActive]="['active']"><a routerLink="official-items">Official items</a></li>
-    <li [routerLinkActive]="['active']"><a routerLink="fan-ads">Fan ads</a></li>
-  </ul>
-</div>
-<div class="col-xs-9">
-  <div class="tab-content">
-    <router-outlet></router-outlet>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs" style="margin-top: 1em;">
+          <li [routerLinkActive]="['active']"><a routerLink="official-items">Official items</a></li>
+          <li [routerLinkActive]="['active']"><a routerLink="fan-ads">Fan ads</a></li>
+        </ul>
+      </div>
+      <div class="panel-body">
+        <div class="tab-content">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+

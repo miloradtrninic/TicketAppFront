@@ -1,3 +1,13 @@
+<div class="alert alert-info alert-dismissable" *ngIf="message">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+
+<div class="alert alert-danger alert-dismissable" *ngIf="error">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
+
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -14,9 +24,42 @@
         <td>{{aud.name}}</td>
         <td>{{aud.address}}</td>
         <td>{{aud.ratings}}</td>
-        <td><button class="btn btn-primary">Change admins</button> </td>
-        <td><button class="btn btn-danger">Delete</button> </td>
+        <td><button class="btn btn-primary" (click)="selectAud(aud)" data-target="#modAdmins" data-toggle="modal">Change admins</button> </td>
+        <td><button class="btn btn-danger" (click)="removeAud(aud.id)">Delete</button> </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div id="modAdmins" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Modify admins</h3>
+      </div>
+      <div class="modal-body" style="padding: 2em">
+        <label>Select admin: </label>
+        <div class="input-group">
+          <select class="form-control" name="admin" [(ngModel)]="newAdmin" [ngModelOptions] = "{standalone: true}">
+            <option [ngValue]="admin" [hidden]="hasAdmin(admin.id)" *ngFor="let admin of admins">{{admin.username}}</option>
+          </select>
+          <span class="input-group-btn">
+            <button class="btn btn-primary" (click)="addAdmin()"><i class="glyphicon glyphicon-add"></i>Add admin</button>
+          </span>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let adm of adminsSelected; let i = index">
+            {{adm.username}}
+            <span class="pull-right">
+              <span class="btn btn-xs btn-danger">
+                  <span class="glyphicon glyphicon-minus" (click)="removeAdmin(i)" aria-hidden="true"></span>
+              </span>
+            </span>
+          </li>
+        </ul>
+        <button type="submit" (click)="update()" [disabled]="adminsSelected === undefined || adminsSelected.length === 0" class="btn btn-success btn-lg btn-block">Save
+          <i class="glyphicon glyphicon-save"></i></button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,46 @@
+<h1>My active bids</h1>
+<div class="alert alert-info alert-dismissable" *ngIf="message">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+<div class="alert alert-danger alert-dismissable" *ngIf="error">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
+
+<div class="panel panel-default" *ngFor="let bid of myBids">
+  <div class="panel-heading">
+    <strong>Ad: {{bid?.fanAdName}}</strong>
+    <span class="text-muted">
+        <i class="glyphicon glyphicon-calendar"></i>{{bid?.offerDate | date: 'dd/MM/yyyy HH:mm'}}
+    </span>
+  </div>
+  <div class="panel-body">
+    {{bid?.offer}}
+  </div>
+  <div class="panel-footer">
+    <button class="btn btn-primary" (click)="selected = bid" data-target="#modBid" data-toggle="modal" ></button>
+  </div>
+</div>
+
+<div id="modBid" class="modal fade" role="dialog" *ngIf="selected !== undefined">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Bid for {{selected.fanAdName}}</h4>
+      </div>
+      <div class="modal-body" style="padding: 2em;">
+        <form class="form form-horizontal" (ngSubmit)="changeBid()" #f = "ngForm">
+          <div class="form-group">
+            <label>Offer:</label>
+            <input class="form-control" type="number" ngModel name ="offer" #offer = "ngModel"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-block">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

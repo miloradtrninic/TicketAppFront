@@ -79,6 +79,12 @@ import { ReservationListComponent } from './components/reservation/reservation-l
 import { SeatingsComponent } from './shared/components/seatings/seatings.component';
 import { ReservationCreateComponent } from './components/reservation/reservation-create/reservation-create.component';
 import { TicketService } from './services/ticket.service';
+import {FanItemsComponent} from './components/fan-zone/fan-items/fan-items.component';
+import {FanAdsComponent} from './components/fan-zone/fan-ads/fan-ads.component';
+import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-ad.component';
+import { MyAdsComponent } from './components/user-panel/my-ads/my-ads.component';
+import { MyItemsComponent } from './components/user-panel/my-items/my-items.component';
+import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.component';
 
 @NgModule({
   declarations: [
@@ -124,13 +130,20 @@ import { TicketService } from './services/ticket.service';
     HallAdminComponent,
     ModifyHallComponent,
     AuditoriumsAdminComponent,
+    FanItemsComponent,
+    FanAdsComponent,
+    SingleAdComponent,
     MovieTerminListComponent,
     PlayTerminListComponent,
     CinemaMapComponent,
     FriendsComponent,
     ReservationListComponent,
     SeatingsComponent,
-    ReservationCreateComponent
+    ReservationCreateComponent,
+    MyAdsComponent,
+    MyItemsComponent,
+    MyBidsComponent,
+    TopLevelComponent
   ],
   imports: [
     BrowserModule,

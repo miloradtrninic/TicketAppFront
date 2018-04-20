@@ -35,6 +35,13 @@ import { MovieListComponent } from '../components/cinema/movie/movie-list/movie-
 import {AuditoriumAdminComponent} from '../components/admin-panel/auditorium-admin/auditorium-admin.component';
 import {HallAdminComponent} from '../components/admin-panel/auditorium-admin/hall-admin/hall-admin.component';
 import {ModifyHallComponent} from '../components/admin-panel/auditorium-admin/hall-admin/modify-hall/modify-hall.component';
+import {AuditoriumsAdminComponent} from '../components/admin-panel/auditorium-admin/auditoriums/auditoriums.component';
+import {FanItemsComponent} from '../components/fan-zone/fan-items/fan-items.component';
+import {FanAdsComponent} from '../components/fan-zone/fan-ads/fan-ads.component';
+import {SingleAdComponent} from '../components/fan-zone/fan-ads/single-ad/single-ad.component';
+import {MyAdsComponent} from '../components/user-panel/my-ads/my-ads.component';
+import {MyItemsComponent} from '../components/user-panel/my-items/my-items.component';
+import {MyBidsComponent} from '../components/user-panel/my-bids/my-bids.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -54,27 +61,35 @@ const routes: Routes = [
   { path: 'theatre/:id/new', component: AddPlayComponent},
   { path: 'theatre/:id/play/:projId/termin', component: TerminComponent},
   { path: 'theatre/:id/play/:playId', component: PlayComponent},
-  { path: 'fanzone', component: FanZoneComponent},
   { path: 'friends', component: FriendsComponent, canActivate: [OnlyLoggedInGuard]},
-  { path: 'admin-panel', component: AdminPanelComponent, canActivate: [OnlyAdminGuard], children: [
-      {path: '', component: HomeAdminComponent},
-      {path: 'auditorium', component: AuditoriumAdminComponent, children: [
-          {path: 'halls', component: HallAdminComponent},
-          {path: 'halls/modify/:hallId', component: ModifyHallComponent},
-          {path: 'halls/new', component: ModifyHallComponent}
-        ]},
-      {path: 'fan-zone', component: AdminFanZoneComponent},
-      {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent},
-      {path: 'user-admin', component: UserAdministrationComponent},
-      {path: 'memberships', component: MembershipAdminComponent},
-      {path: 'fan-ads', component: FanadAdminComponent, children: [
-          {path: '', component: AllAdsComponent},
-          {path: 'to-approve', component: FanadToApproveComponent}
-        ]}
+  { path: 'fan-zones/:id/zone', component: FanZoneComponent, children: [
+    {path: 'official-items', component: FanItemsComponent},
+    {path: 'fan-ads', component: FanAdsComponent},
+    {path: 'fan-ads/:adId', component: SingleAdComponent}
+  ]},
+  { path: 'admin-panel', component: AdminPanelComponent, /*canActivate: [OnlyAdminGuard],*/ children: [
+    {path: '', component: HomeAdminComponent},
+    {path: 'auditorium', component: AuditoriumAdminComponent, children: [
+      {path: '', component: AuditoriumsAdminComponent},
+      {path: 'halls', component: HallAdminComponent},
+      {path: 'halls/modify/:hallId', component: ModifyHallComponent},
+      {path: 'halls/new', component: ModifyHallComponent}
     ]},
+    {path: 'fan-zone', component: AdminFanZoneComponent},
+    {path: 'fan-zone/:id', component: AdminFanZoneItemsComponent},
+    {path: 'user-admin', component: UserAdministrationComponent},
+    {path: 'memberships', component: MembershipAdminComponent},
+    {path: 'fan-ads', component: FanadAdminComponent, children: [
+      {path: '', component: AllAdsComponent},
+      {path: 'to-approve', component: FanadToApproveComponent}
+    ]}
+  ]},
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'my-ads', component: MyAdsComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'my-items', component: MyItemsComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'my-bids', component: MyBidsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'reservations', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]}
 ];
 

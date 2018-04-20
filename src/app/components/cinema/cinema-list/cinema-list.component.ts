@@ -21,7 +21,7 @@ export class CinemaListComponent implements OnInit {
   detailCinema = -1;
   @Output() selected: Cinema;
   message: string;
-  cinemas : Cinema[] = [];
+  cinemas: Cinema[] = [];
 
   @ViewChild('editForm') form: NgForm;
 
@@ -59,7 +59,7 @@ export class CinemaListComponent implements OnInit {
   editCinema(index){
     console.log('edit cinema');
     console.log('broj indexa je : ' + index);
-    const cinemaUpdate : CinemaUpdate = new CinemaUpdate(this.selected.id,this.form.value['name'], 
+    const cinemaUpdate : CinemaUpdate = new CinemaUpdate(this.selected.id, this.form.value['name'], 
     this.form.value['address'],  this.form.value['description'], 0);
     this.cinemaService.update(cinemaUpdate).subscribe(
       resp => {

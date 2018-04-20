@@ -1,4 +1,4 @@
-<h3>Official items</h3>
+<h3>My reserved items</h3>
 <div *ngIf="error" class="alert alert-warning alert-dismissable">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   {{error}}
@@ -7,7 +7,7 @@
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   {{message}}
 </div>
-<div class="media" *ngFor="let item of fanZone?.fanitemList; let i = index">
+<div class="media" *ngFor="let item of myItems; let i = index">
   <div class="media-left">
     <a href="#">
       <img class="media-object img-thumbnail img-responsive" style="max-height: 200px; max-height: 200px;"

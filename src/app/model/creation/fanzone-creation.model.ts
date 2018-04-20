@@ -1,6 +1,3 @@
-
-
-
 export class FanzoneCreation {
-  constructor(public adminId: Array<number>, public auditoriumId: number) {}
+  constructor(public adminFKs: Array<number>, public audFK: number) {}
 }

@@ -18,7 +18,7 @@ export class CinemaComponent implements OnInit {
   @Output() cinema: Cinema;
   message: string;
   id: number;
-  cinemas : Cinema[] = [];
+  cinemas: Cinema[] = [];
   openM = false;
   openP = false;
   showmap = false;
@@ -27,6 +27,7 @@ export class CinemaComponent implements OnInit {
   up = 0;
   down = 0;
   av = 0;
+  stat = false;
   @ViewChild('addRate') form: NgForm;
 
   constructor(public cinemaService: CinemaService, private route: ActivatedRoute) {
@@ -90,4 +91,15 @@ export class CinemaComponent implements OnInit {
    
     return this.av;
   }
+
+  seeStat() {
+    if(this.stat) {
+      this.stat = false;
+    } else {
+      this.stat = true;
+    }
+  }
+
+
+  
 }

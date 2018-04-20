@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Play } from '../../../../model/play.model';
 import { Genre } from '../../../../model/genre.model';
 import { Actor } from '../../../../model/actor.model';
@@ -7,6 +7,8 @@ import { PlayService } from '../../../../services/play.service';
 import { DirectorService } from '../../../../services/director.service';
 import { ActorService } from '../../../../services/actor.service';
 import { GenreService } from '../../../../services/genre.service';
+import { PlayUpdate } from '../../../../model/update/play-update.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-play-list',
@@ -16,7 +18,7 @@ import { GenreService } from '../../../../services/genre.service';
 export class PlayListComponent implements OnInit {
 
   detailPlay = -1;
-  selected: Play;
+  @Output() selected: Play;
   message: string;
   plays : Play[] = [];
   name = '';
@@ -36,6 +38,8 @@ export class PlayListComponent implements OnInit {
 
   directors: Array<Director>;
   newDirector : Director;
+
+  @ViewChild('editForm') form: NgForm;
 
   constructor(public playService: PlayService, public directorService : DirectorService,
     public actorService :ActorService, public genreService: GenreService) { 
@@ -77,6 +81,21 @@ export class PlayListComponent implements OnInit {
     this.playService.delete(index).subscribe(
       resp => {
         this.plays.splice(index, 1);
+        console.log(resp);
+      }, error => {
+        this.message = JSON.stringify(error);
+      }
+    );
+  }
+  editPlay() {
+    console.log('edit play');
+    console.log(this.selected);
+    const playUpdate : PlayUpdate = new PlayUpdate(this.selected.id, this.form.value['name'], 
+    this.form.value['description'],  this.form.value['duration'], this.form.value['coverPath']);
+    this.playService.update(playUpdate).subscribe(
+      resp => {
+    const idx = this.plays.map(cin => cin.id).findIndex(id => id === resp.id);
+    this.plays[idx] = resp;
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);

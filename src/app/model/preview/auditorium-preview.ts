@@ -4,7 +4,7 @@ export class AuditoriumPreview {
     public name: string,
     public address: string,
     public description: string,
-    public type: string,
+    public entity_type: string,
     public ratings: number
   ) {}
 }
