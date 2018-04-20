@@ -4,6 +4,8 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { CinemaService } from '../../services/cinema.service';
 import { AgmCoreModule } from '@agm/core';
 import { NgForm } from '@angular/forms';
+import { UserAuditoriumCreation } from '../../model/creation/userauditorium-creation.model';
+import { UserAuditoriumPreview } from '../../model/preview/userauditorium-preview';
 
 @Component({
   selector: 'app-cinema',
@@ -30,7 +32,7 @@ export class CinemaComponent implements OnInit {
   stat = false;
   @ViewChild('addRate') form: NgForm;
 
-  constructor(public cinemaService: CinemaService, private route: ActivatedRoute) {
+  constructor(public cinemaService: CinemaService,  private route: ActivatedRoute) {
     
   }
 
@@ -72,8 +74,17 @@ export class CinemaComponent implements OnInit {
     this.longitude = event.coords.lng;
   }
 
-  evaluateCinema() {
-    console.log(this.cinema.ratings);
+  rateCinema() {
+    const creation = new UserAuditoriumCreation( this.cinema.id,this.form.value['ratings']);
+    this.cinemaService.rateCinema(creation).subscribe(
+      (resp: UserAuditoriumPreview) => {
+        this.cinema.ratings = resp.rating;
+      }, error => {
+        this.message = error;
+      }
+    );
+
+  /*  console.log(this.cinema.ratings);
      this.cinema.ratings =  this.cinema.ratings + this.ratings;
      this.num = this.num + 1;
      this.up =  this.cinema.ratings;
@@ -83,7 +94,7 @@ export class CinemaComponent implements OnInit {
     console.log(this.cinema.ratings);
     console.log( "num "+this.num );
     console.log( "up "+this.up  );
-    console.log( "down "+this.down  );
+    console.log( "down "+this.down  );*/
     
   }
 
