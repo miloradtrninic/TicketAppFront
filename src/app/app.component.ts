@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges, OnInit} from '@angular/core';
 import {HelperFunctions} from './shared/util/helper-functions';
 import {AuthService} from './services/auth.service';
 
@@ -7,17 +7,14 @@ import {AuthService} from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @Input()
   private isUserAuthenticated: boolean;
 
   constructor(private auth: AuthService) {
     this.isUserAuthenticated = !HelperFunctions.containsEmptyValues(this.auth.getToken());
-
-    auth.isLoggedIn()
-      .subscribe(tok => {
-        console.log(tok);
-        this.isUserAuthenticated = tok;
-      })
+  }
+  ngOnInit() {
+    this.isUserAuthenticated = this.auth.isLoggedInSimple();
   }
 }

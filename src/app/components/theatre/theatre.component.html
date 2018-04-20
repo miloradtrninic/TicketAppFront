@@ -29,6 +29,7 @@
                 </agm-marker>
             </agm-map>
         </div>
+        <button *ngIf="theatre?.fanZone" routerLink="/fan-zones/{{theatre?.fanZone.id}}/zone" class="btn btn-primary">Visit fan zone</button>
 
         <button routerLink="new" class="btn btn-primary"> Add new play </button>
         <br>
