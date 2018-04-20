@@ -36,11 +36,11 @@ export class AuthService {
   }
 
   register(user: UserCreation) {
-    return this.http.post(this.appUrl+'api/auth/register', user);
+    return this.http.post(this.appUrl + 'api/auth/register', user);
   }
 
   login(loginInfo: AuthenticationRequest) {
-    return this.http.post(this.appUrl+'api/auth/login', loginInfo)
+    return this.http.post(this.appUrl + 'api/auth/login', loginInfo)
       .map(ret => {
         this.loggedUserToken =  new Token(ret['roles'], ret['privileges'], loginInfo.username, ret['id'], ret['token']);
         this.storeToken();

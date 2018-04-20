@@ -1,18 +1,22 @@
 <div class="row Wrapper" align="center">
   <ul class="nav nav-tabs nav-justified">
-    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'Active':this.activeTab === '1'}">
+    <li role="presentation" [routerLinkActive]="['active']">
       <a routerLink="/home" id="1" >Home</a></li>
-    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '2'}">
+    <li role="presentation" [routerLinkActive]="['active']">
       <a routerLink="/theatre" id="2">Theatre</a></li>
-    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '3'}">
+    <li role="presentation" [routerLinkActive]="['active']">
       <a routerLink="/cinema" id="3">Cinema</a></li>
-    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '4'}">
+    <li role="presentation" [routerLinkActive]="['active']">
       <a routerLink="/friends" id="4">Friends</a></li>
-    <li role="presentation" (click)="changeActive($event)"  [ngClass] = "{'active':activeTab === '5'}">
+    <li role="presentation" [routerLinkActive]="['active']">
       <a routerLink="/reservations" id="5">Reservations</a></li>
-    <li role="presentation" (click)="changeActive($event)" [ngClass] = "{'active':activeTab === '6'}">
+    <li role="presentation" [routerLinkActive]="['active']">
       <a routerLink="/profile" id="6">Profile</a></li>
-    <li role="presentation" (click)="changeActive($event)" [ngClass] = "{'active':activeTab === '7'}">
-      <a routerLink="/fanzone" id="7">Fan zone</a></li>
+    <li role="presentation" [routerLinkActive]="['active']">
+      <a routerLink="/my-ads" id="7">My Ads</a></li>
+    <li role="presentation" [routerLinkActive]="['active']">
+      <a routerLink="/my-items" id="8">My Reservations</a></li>
+    <li role="presentation" [routerLinkActive]="['active']">
+      <a routerLink="/my-bids" id="9">My Bids</a></li>
   </ul>
 </div>

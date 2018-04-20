@@ -23,4 +23,8 @@ export class FanItemService extends AbstractService<Fanitem, number> {
     return this.http.get(this.actionUrl + '/reserve/' + idItem, {headers : this.authService.getJSONAuthHeader()})
       .map(resp => resp as Fanitem);
   }
+  getMyItems(): Observable<Fanitem[]> {
+    return this.http.get(this.actionUrl + '/myitems', {headers : this.authService.getJSONAuthHeader()})
+      .map(resp => resp as Fanitem[]);
+  }
 }

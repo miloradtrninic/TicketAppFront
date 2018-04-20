@@ -39,6 +39,9 @@ import {AuditoriumsAdminComponent} from '../components/admin-panel/auditorium-ad
 import {FanItemsComponent} from '../components/fan-zone/fan-items/fan-items.component';
 import {FanAdsComponent} from '../components/fan-zone/fan-ads/fan-ads.component';
 import {SingleAdComponent} from '../components/fan-zone/fan-ads/single-ad/single-ad.component';
+import {MyAdsComponent} from '../components/user-panel/my-ads/my-ads.component';
+import {MyItemsComponent} from '../components/user-panel/my-items/my-items.component';
+import {MyBidsComponent} from '../components/user-panel/my-bids/my-bids.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -84,6 +87,9 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: UserProfileComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'my-ads', component: MyAdsComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'my-items', component: MyItemsComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'my-bids', component: MyBidsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'reservations', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]}
 ];
 
