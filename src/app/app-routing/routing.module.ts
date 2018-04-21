@@ -97,7 +97,7 @@ const routes: Routes = [
   { path: 'my-items', component: MyItemsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'my-bids', component: MyBidsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'reservations', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
-  { path: 'createReservation', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'home/createReservation', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'invitations', component: InvitationComponent, canActivate: [OnlyLoggedInGuard]}
 ];
 

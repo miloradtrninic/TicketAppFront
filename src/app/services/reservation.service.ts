@@ -15,7 +15,7 @@ export class ReservationService extends AbstractService<Reservation, number> {
   }
 
   getAllForUser(userId: number): Observable<ReservationPreview[]> {
-    const url = this.url + '/' + userId;
+    const url = this.actionUrl + '/' + userId;
     const options = {
       headers: this.auth.getAuthHeader()
     }
@@ -23,7 +23,7 @@ export class ReservationService extends AbstractService<Reservation, number> {
   }
 
   create(reservation: ReservationCreation): Observable<ReservationPreview> {
-    const url = this.url + '/new';
+    const url = this.actionUrl + '/new';
     const options = {
       headers: this.auth.getAuthHeader()
     }
