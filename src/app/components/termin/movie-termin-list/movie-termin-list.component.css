@@ -34,3 +34,8 @@ a.btn {
       text-justify: auto;
       border-color: #777;
   }
+  .circle {
+    min-width: 2em;
+    border-radius: 50%;
+  }
+  
