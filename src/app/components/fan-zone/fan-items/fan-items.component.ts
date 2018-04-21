@@ -11,7 +11,7 @@ import {Fanitem} from '../../../model/fanitem.model';
   styleUrls: ['./fan-items.component.css']
 })
 export class FanItemsComponent implements OnInit {
-  fanZone: Fanzone;
+  fanItems: Array<Fanitem>;
   id: number;
   message: string;
   error: string;
@@ -21,18 +21,22 @@ export class FanItemsComponent implements OnInit {
   ngOnInit() {
     this.route.parent.params.subscribe(params => {
       this.id = +params['id'];
-      this.fanZoneService.getOne(this.id).subscribe(
-        (resp: Fanzone) => {
-          this.fanZone = resp;
+      this.fanItemService.getNotReserved(this.id).subscribe(
+        (resp: Fanitem[]) => {
+          this.fanItems = resp;
         }, error => {
           this.error = JSON.stringify(error);
         }
       );
     });
   }
-  reserve(item: Fanitem) {
+  reserve(item: Fanitem, idx: number) {
     this.fanItemService.reserve(item.id).subscribe(
-      resp => {item = resp, this.message = 'Item reserved.'}, error2 => this.error = JSON.stringify(error2)
+      resp => {
+        item = resp;
+        this.message = 'Item reserved.';
+        this.fanItems.splice(idx, 1);
+      }, error2 => this.error = JSON.stringify(error2)
     )
   }
 }

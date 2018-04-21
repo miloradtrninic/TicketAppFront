@@ -17,8 +17,10 @@
   <div class="media-body">
     <div class="media-heading">
       <h4>
-        <a [routerLink]="ad.id">{{ad.name}}
+        <a (click)="select(ad.id)" data-toggle="collapse" data-target="#bids">{{ad.name}}
           <span class="pull-right">
+            <span *ngIf="ad.accepted"><i class="glyphicon glyphicon-ok" ></i> Accepted</span>
+            <span *ngIf="!ad.accepted"><i class="glyphicon glyphicon-remove" ></i>Not Accepted</span>
             <i class="glyphicon glyphicon-user "></i>{{ad.postedBy.username}}
           </span>
         </a>
@@ -31,19 +33,22 @@
   </div>
 </div>
 
-<div id="bids">
+<div id="bids" class="collapse">
+  <h4>Bids: <span class="badge">{{selected?.bidList.length}}</span> </h4>
+  <hr/>
   <div class="panel panel-default" *ngFor="let bid of selected?.bidList">
     <div class="panel-heading">
       <strong>{{bid?.fromUserUsername}}</strong>
       <span class="text-muted">
         <i class="glyphicon glyphicon-calendar"></i>{{bid?.offerDate | date: 'dd/MM/yyyy HH:mm'}}
-    </span>
+      </span>
     </div>
     <div class="panel-body">
       {{bid?.offer}}
+      <span class="badge" *ngIf="selected.acceptedBid !== null && selected.acceptedBid.id === bid.id">Accepted</span>
     </div>
     <div class="panel-footer">
-      <button class="btn btn-primary" (click)="acceptBid(bid.id)" [disabled]="selected.acceptedBid !== null"></button>
+      <button class="btn btn-primary" (click)="acceptBid(bid.id)" [disabled]="selected.acceptedBid !== null">Accept bid</button>
     </div>
   </div>
 </div>

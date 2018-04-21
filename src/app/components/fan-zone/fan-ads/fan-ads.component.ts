@@ -29,7 +29,7 @@ export class FanAdsComponent implements OnInit {
       this.fanZoneId = +params['id'];
       this.fanAdsService.getAllByZone(this.fanZoneId).subscribe(
         (resp: Fanad[]) => {
-          if (resp !== null || resp.length > 0) {
+          if (resp !== null && resp.length > 0) {
             this.fanAds = resp;
           }
         }, error => {
@@ -62,6 +62,8 @@ export class FanAdsComponent implements OnInit {
     }
   }
   makeBid() {
+    console.log('make bid');
+    console.log(this.selected.id);
     const newBid = new BidCreation(this.bidForm.value['offer'], this.selected.id);
     this.bidService.insert(newBid).subscribe(
       resp => this.message = 'Bid successfully placed.', error2 => this.error = JSON.stringify(error2)

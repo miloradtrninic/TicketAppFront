@@ -19,7 +19,7 @@
     {{bid?.offer}}
   </div>
   <div class="panel-footer">
-    <button class="btn btn-primary" (click)="selected = bid" data-target="#modBid" data-toggle="modal" ></button>
+    <button class="btn btn-primary" (click)="selected = bid" data-target="#modBid" data-toggle="modal" >Change bid</button>
   </div>
 </div>
 
@@ -36,10 +36,8 @@
             <label>Offer:</label>
             <input class="form-control" type="number" ngModel name ="offer" #offer = "ngModel"/>
           </div>
+          <button class="btn btn-success btn-block">Submit</button>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success btn-block">Submit</button>
       </div>
     </div>
   </div>

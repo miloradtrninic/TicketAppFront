@@ -21,7 +21,7 @@ export class MyAdsComponent implements OnInit {
   }
   select(id: number) {
     this.fanAdService.getOne(id).subscribe(
-      resp => this.selected = resp, error2 => this.error = JSON.stringify(error2)
+      resp => {this.selected = resp; console.log(this.selected);}, error2 => this.error = JSON.stringify(error2)
     );
   }
   acceptBid(id: number) {

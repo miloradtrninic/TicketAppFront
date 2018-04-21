@@ -9,6 +9,6 @@ export class Cinema extends Auditorium {
               public description: string,
               public ratings: number,
               public fanZone: Fanzone) {
-    super(id, name, address, description, 'Cinema', ratings);
+    super(id, name, address, description, 'Cinema', ratings, fanZone);
   }
 }

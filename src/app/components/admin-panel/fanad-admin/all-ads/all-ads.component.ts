@@ -16,11 +16,15 @@ export class AllAdsComponent implements OnInit {
 
   ngOnInit() {
     this.fanadService.getAll().subscribe(
-      resp => this.ads = resp, error2 => this.error = JSON.stringify(error2)
+      resp => {
+        this.ads = resp;
+      }, error2 => this.error = JSON.stringify(error2)
     );
   }
-  assign() {
-
+  assign(selected: Fanad, i: number) {
+    this.fanadService.assignToMe(selected).subscribe(resp => {
+      this.message = 'Assigned.';
+      this.ads[i] = resp; }, error2 => this.error = JSON.stringify(error2));
   }
 
 

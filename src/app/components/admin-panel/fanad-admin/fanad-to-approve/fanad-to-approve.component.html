@@ -1,5 +1,13 @@
 <h4>To approve</h4>
 <hr/>
+<div class="alert alert-info alert-dismissable" *ngIf="message">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+<div class="alert alert-info alert-dismissable" *ngIf="error">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -8,7 +16,6 @@
       <th>Date created</th>
       <th>Expiration date</th>
       <th>Posted by</th>
-      <th>Fan item</th>
       <th>&nbsp;</th>
     </thead>
     <tbody>
@@ -19,9 +26,8 @@
         <td>{{ad.dateCreated}}</td>
         <td>{{ad.expirationDate}}</td>
         <td>{{ad.postedBy.username}}</td>
-        <td>{{ad.fanItem.name}}</td>
-        <td><button class="btn btn-primary" (click)="approve(ad, i)">Approve</button></td>
-        <td><button class="btn btn-primary" (click)="disapprove(ad, i)">Disapprove</button></td>
+        <td><button class="btn btn-success" (click)="approve(ad, i)">Approve</button></td>
+        <td><button class="btn btn-danger" (click)="disapprove(ad, i)">Disapprove</button></td>
       </tr>
       <div class="collapse">
         <div class="well" [attr.id]="ad.id">

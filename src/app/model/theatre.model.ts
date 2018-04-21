@@ -1,4 +1,5 @@
 import {Auditorium} from './auditorium.model';
+import {Fanzone} from './fanzone.model';
 
 export class Theatre extends Auditorium {
 
@@ -7,8 +8,8 @@ export class Theatre extends Auditorium {
               public address: string,
               public description: string,
               public ratings: number,
-              public fanZone: string) {
-    super(id, name, address, description, 'Theatre', ratings);
+              public fanZone: Fanzone) {
+    super(id, name, address, description, 'Theatre', ratings, fanZone);
   }
 
 }

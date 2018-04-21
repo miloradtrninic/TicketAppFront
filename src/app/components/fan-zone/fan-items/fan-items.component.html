@@ -7,7 +7,7 @@
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   {{message}}
 </div>
-<div class="media" *ngFor="let item of fanZone?.fanitemList; let i = index">
+<div class="media" *ngFor="let item of fanItems; let i = index">
   <div class="media-left">
     <a href="#">
       <img class="media-object img-thumbnail img-responsive" style="max-height: 200px; max-height: 200px;"
@@ -18,7 +18,7 @@
     <h4 class="media-heading">{{item.name}}</h4>
     <p class="media-middle">{{item.description}}</p>
     <div class="media-bottom">
-      <button class="btn btn-success" (click)="reserve(item)">Reserve</button>
+      <button class="btn btn-success" (click)="reserve(item, i)">Reserve</button>
     </div>
   </div>
 </div>

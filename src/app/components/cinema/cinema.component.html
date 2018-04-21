@@ -32,7 +32,7 @@
     </div>
     <button routerLink="new" class="btn btn-primary"> Add new movie </button>
     <button (click)="seeStat()" class="btn btn-primary"> View statistic </button>
-    <button *ngIf="cinema.fanZone" routerLink="/fan-zones/{{cinema.fanZone.id}}/zone" class="btn btn-primary">Visit fan zone</button>
+    <button *ngIf="cinema?.fanZone" routerLink="/fan-zones/{{cinema?.fanZone.id}}/zone" class="btn btn-primary">Visit fan zone</button>
     <div *ngIf="stat">
 
 

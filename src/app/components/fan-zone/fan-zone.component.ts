@@ -3,6 +3,7 @@ import {Fanitem} from '../../model/fanitem.model';
 import {FanItemService} from '../../services/fan-item.service';
 import {ActivatedRoute} from '@angular/router';
 import {FanzoneService} from '../../services/fanzone.service';
+import {Fanzone} from '../../model/fanzone.model';
 
 @Component({
   selector: 'app-fan-zone',
@@ -10,7 +11,7 @@ import {FanzoneService} from '../../services/fanzone.service';
   styleUrls: ['./fan-zone.component.css']
 })
 export class FanZoneComponent implements OnInit {
-  fanItems: Array<Fanitem>;
+  fanZone: Fanzone;
   audId: number;
   error2: any;
   constructor(public fanitemService: FanItemService, public fanZoneService: FanzoneService, public route: ActivatedRoute) {
@@ -21,7 +22,7 @@ export class FanZoneComponent implements OnInit {
       params => {
         this.audId = +params['id'];
         this.fanZoneService.getOne(this.audId).subscribe(
-          resp => this.fanItems = resp, error2 => this.error2 = error2
+          resp => this.fanZone = resp, error2 => this.error2 = error2
         );
       }
     );
