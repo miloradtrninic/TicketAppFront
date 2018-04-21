@@ -85,8 +85,18 @@ import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-
 import { MyAdsComponent } from './components/user-panel/my-ads/my-ads.component';
 import { MyItemsComponent } from './components/user-panel/my-items/my-items.component';
 import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.component';
+<<<<<<< HEAD
 import { InvitationComponent } from './components/invitation/invitation.component';
 import {InvitationService} from './services/invitation.service';
+=======
+import { ChartsModule } from 'ng2-charts';
+import {AdminSysGuardService} from './app-routing/guards/admin-sys-guard.service';
+import {AdminFanGuardService} from './app-routing/guards/admin-fan-guard.service';
+import {AdminAudGuardService} from './app-routing/guards/admin-aud-guard.service';
+import {OnlyAnonymousService} from './app-routing/guards/only-anonymous.service';
+import { MyZonesComponent } from './components/admin-panel/admin-fan-zone/my-zones/my-zones.component';
+import {GeocoderService} from './services/geocoder.service';
+>>>>>>> f916b0520f7c6ca27a1a401ded01147f67733bc8
 
 @NgModule({
   declarations: [
@@ -146,13 +156,18 @@ import {InvitationService} from './services/invitation.service';
     MyItemsComponent,
     MyBidsComponent,
     TopLevelComponent,
+<<<<<<< HEAD
     InvitationComponent
+=======
+    MyZonesComponent
+>>>>>>> f916b0520f7c6ca27a1a401ded01147f67733bc8
   ],
   imports: [
     BrowserModule,
     RoutingModule,
     FormsModule,
     HttpClientModule,
+    ChartsModule,
     AgmCoreModule.forRoot({
       apiKey : 'AIzaSyB81X56Wa1HeAUSFYN4R5JmwkUNBekBrOM'
     })
@@ -161,7 +176,12 @@ import {InvitationService} from './services/invitation.service';
     FanadService, FanzoneService, TheatreService, UserService, MovieService,
     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
     MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
+<<<<<<< HEAD
     TerminService, ReservationService, TicketService, InvitationService],
+=======
+    TerminService, ReservationService, TicketService, AdminSysGuardService, AdminFanGuardService,
+    AdminAudGuardService, OnlyAnonymousService, GeocoderService],
+>>>>>>> f916b0520f7c6ca27a1a401ded01147f67733bc8
   bootstrap: [AppComponent]
 })
 export class AppModule { }

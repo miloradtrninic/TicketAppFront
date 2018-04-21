@@ -40,8 +40,8 @@ export class RegistrationComponent extends TopLevelComponent implements OnInit {
 
     if (shouldSendToServer) {
       const user = (new UserCreation(this.regInfo.username, this.regInfo.email, this.regInfo.name,
-                                      this.regInfo.lastname, this.regInfo.phoneNo, this.regInfo.city, this.regInfo.password));
-
+                      this.regInfo.password, this.regInfo.lastname, this.regInfo.city, this.regInfo.phoneNo));
+      console.log(user);
       const ret = this.auth.register(user)
         .subscribe(res => {
           this.registered = true;

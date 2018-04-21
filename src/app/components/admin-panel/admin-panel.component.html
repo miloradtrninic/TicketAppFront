@@ -4,11 +4,12 @@
       <div class="panel-heading">
         <ul class="nav nav-tabs" style="margin-top: 1em;">
           <li><a routerLink="/admin-panel">Home</a></li>
-          <li [routerLinkActive]="['active']"><a routerLink="auditorium">Auditoriums</a></li>
-          <li [routerLinkActive]="['active']"><a routerLink="fan-zone">Fan zones</a></li>
-          <li [routerLinkActive]="['active']"><a routerLink="user-admin">Users</a></li>
-          <li [routerLinkActive]="['active']"><a routerLink="memberships">Memberships</a></li>
-          <li [routerLinkActive]="['active']"><a routerLink="fan-ads">Fan Ads</a></li>
+          <li [routerLinkActive]="['active']" *ngIf="authService.hasRole('ADMIN_AUD') || authService.hasRole('ADMIN_SYS')"><a routerLink="auditorium">Auditoriums</a></li>
+          <li [routerLinkActive]="['active']" *ngIf="authService.hasRole('ADMIN_SYS')"><a routerLink="fan-zone">Fan zones</a></li>
+          <li [routerLinkActive]="['active']" *ngIf="authService.hasRole('ADMIN_FAN')"><a routerLink="my-zones">My fan zones</a></li>
+          <li [routerLinkActive]="['active']" *ngIf="authService.hasRole('ADMIN_SYS')"><a routerLink="user-admin">Users</a></li>
+          <li [routerLinkActive]="['active']" *ngIf="authService.hasRole('ADMIN_SYS')"><a routerLink="memberships">Memberships</a></li>
+          <li [routerLinkActive]="['active']" *ngIf="authService.hasRole('ADMIN_FAN')"><a routerLink="fan-ads">Fan Ads</a></li>
         </ul>
       </div>
       <div class="panel-body">

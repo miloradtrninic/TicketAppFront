@@ -17,6 +17,7 @@ export class UserAdministrationComponent implements OnInit {
   error: string;
   newRole: UserRole;
   roles: Array<UserRole>;
+  selectedRoles: Array<UserRole>;
   constructor(public userService: UserService, public userRolesService: UserRoleService) { }
 
   ngOnInit() {
@@ -27,20 +28,24 @@ export class UserAdministrationComponent implements OnInit {
       resp => this.roles = resp, error => this.message = JSON.stringify(error)
     );
   }
+  selectUser(user: User) {
+    this.selected = user;
+    this.selectedRoles = Object.assign([], user.userRoles);
+  }
   editRoles() {
-    this.userService.changeRole(this.selected.id, this.selected.userRoles.map(rol => rol.id)).subscribe(
+    this.userService.changeRole(this.selected.id, this.selectedRoles.map(rol => rol.id)).subscribe(
       resp => this.message = 'User promoted', error2 => this.error = JSON.stringify(error2)
     );
   }
   hasRole(id) {
-    return this.selected.userRoles.map(rol => rol.id).indexOf(id) !== -1;
+    return this.selectedRoles.map(rol => rol.id).indexOf(id) !== -1;
   }
   addRole() {
-    this.selected.userRoles.push(this.newRole);
+    this.selectedRoles.push(this.newRole);
     this.newRole = undefined;
   }
   removeRole(role: UserRole) {
-    this.selected.userRoles.splice(this.selected.userRoles.indexOf(role), 1);
+    this.selectedRoles.splice(this.selectedRoles.indexOf(role), 1);
   }
   ban(user: User) {
     this.userService.ban(user.id).subscribe(

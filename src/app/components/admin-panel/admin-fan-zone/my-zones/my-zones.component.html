@@ -1,0 +1,30 @@
+<div *ngIf="error" class="alert alert-warning alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{error}}
+</div>
+<div *ngIf="message" class="alert alert-info alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{message}}
+</div>
+<h1>
+  My Fan zones
+</h1>
+<p class="divider"></p>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Auditorium</th>
+      <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let zone of fanZones">
+      <td>{{zone.id}}</td>
+      <td>{{zone.auditoriumName}}</td>
+      <td><a class="btn btn-info" routerLink="{{zone.id}}">View items</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
