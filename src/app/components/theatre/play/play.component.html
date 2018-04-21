@@ -20,12 +20,12 @@
           </div>
           <div class="list-group-item-text">
             <span class="style">Actors: </span>
-            <span *ngFor="let actor of play?.actors">{{actor.name}} {{actor.lastName}}</span>
+            <span *ngFor="let actor of play?.actors"> {{actor.name}} {{actor.lastName}}, </span>
 
           </div>
           <div class="list-group-item-text">
             <span class="style">Genre: </span>
-            <span *ngFor="let gen of play?.genres">{{gen.name}}</span>
+            <span *ngFor="let gen of play?.genres">{{gen.name}},</span>
           </div>
 
           <div class="list-group-item-text">
