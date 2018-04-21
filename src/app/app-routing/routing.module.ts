@@ -42,6 +42,7 @@ import {SingleAdComponent} from '../components/fan-zone/fan-ads/single-ad/single
 import {MyAdsComponent} from '../components/user-panel/my-ads/my-ads.component';
 import {MyItemsComponent} from '../components/user-panel/my-items/my-items.component';
 import {MyBidsComponent} from '../components/user-panel/my-bids/my-bids.component';
+import {InvitationComponent} from '../components/invitation/invitation.component';
 import {AdminAudGuardService} from './guards/admin-aud-guard.service';
 import {AdminFanGuardService} from './guards/admin-fan-guard.service';
 import {AdminSysGuardService} from "app/app-routing/guards/admin-sys-guard.service";
@@ -57,7 +58,6 @@ const routes: Routes = [
   { path: 'cinema/:id/new', component: AddMovieComponent},
   { path: 'cinema/:id/movies', component: MovieListComponent},
   { path: 'cinema/:id/movie/:projId/termin', component: TerminComponent},
-  { path: 'cinema/:id/movie/:projId/reservation', component: ReservationComponent},
   { path: 'cinema/:id/termin', component: TerminComponent},
   { path: 'cinema/:id/reservation', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'cinema/:id/movie/:movieId', component: MovieComponent},
@@ -96,7 +96,9 @@ const routes: Routes = [
   { path: 'my-ads', component: MyAdsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'my-items', component: MyItemsComponent, canActivate: [OnlyLoggedInGuard]},
   { path: 'my-bids', component: MyBidsComponent, canActivate: [OnlyLoggedInGuard]},
-  { path: 'reservations', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]}
+  { path: 'reservations', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'createReservation', component: ReservationComponent, canActivate: [OnlyLoggedInGuard]},
+  { path: 'invitations', component: InvitationComponent, canActivate: [OnlyLoggedInGuard]}
 ];
 
 @NgModule({

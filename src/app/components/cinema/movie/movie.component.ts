@@ -9,6 +9,7 @@ import { Termin } from '../../../model/termin.model';
 import { Hall } from '../../../model/hall.model';
 import { TerminService } from '../../../services/termin.service';
 import { TerminUpdate } from '../../../model/update/termin-update.model';
+import {TicketService} from '../../../services/ticket.service';
 
 @Component({
   selector: 'app-movie',
@@ -28,7 +29,7 @@ export class MovieComponent implements OnInit {
   discount: boolean;
   @ViewChild('editForm') form: NgForm;
 
-  constructor(public movieService: MovieService, public terminService: TerminService, private route: ActivatedRoute) { }
+  constructor(public movieService: MovieService, public terminService: TerminService, private route: ActivatedRoute, private tickService: TicketService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -82,6 +83,14 @@ export class MovieComponent implements OnInit {
 
     const idx = this.movie.projectionTime.map(cin => cin.id).findIndex(id => id === resp.id);
     this.movie.projectionTime[idx] = resp;
+    /*Update tickets*/
+    this.tickService.updateTickets(resp.id)
+      .subscribe(res => {
+        console.log(res);
+      }, err => {
+        console.log(err);
+      });
+    /*END update*/
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);

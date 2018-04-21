@@ -2,5 +2,5 @@ import {User} from './user.model';
 import {Reservation} from './reservation.model';
 
 export class Invitation {
-  constructor(id: number, invitedUser: User, reservation: Reservation) {}
+  constructor(public id: number, public invitedUser: User, public reservation: Reservation) {}
 }

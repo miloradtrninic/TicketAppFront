@@ -9,7 +9,7 @@ import {TicketPreview} from '../model/preview/ticket-preview';
 export class TicketService extends AbstractService<Ticket, number> {
 
   constructor(protected http: HttpClient, private auth: AuthService) {
-    super(http, '/tickets', auth);
+    super(http, '/ticket', auth);
   }
 
   getAvailableTickets(projId: number) {
@@ -17,6 +17,22 @@ export class TicketService extends AbstractService<Ticket, number> {
       headers: this.auth.getAuthHeader()
     }
 
-    return this.http.get(this.actionUrl + '/getAvailable/' + projId, options).map(res => res as Ticket[]);
+    return this.http.get(this.actionUrl + '/getAvailableTickets/' + projId, options).map(res => res as Ticket[]);
+  }
+
+  createTickets(terminId: number) {
+    const options = {
+      headers: this.auth.getAuthHeader()
+    }
+
+    return this.http.get(this.actionUrl + '/createTickets/' + terminId, options).map(res => res as Ticket[]);
+  }
+
+  updateTickets(terminId: number) {
+    const options = {
+      headers: this.auth.getAuthHeader()
+    }
+
+    return this.http.get(this.actionUrl + '/update/' + terminId, options).map(res => res as Ticket[]);
   }
 }

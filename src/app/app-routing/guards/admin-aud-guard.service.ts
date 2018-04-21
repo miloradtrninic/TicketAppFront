@@ -11,7 +11,7 @@ export class AdminAudGuardService implements CanActivate {
 
   canActivate() {
     const isLogged = this.service.isLoggedInSimple();
-    const hasRights = this.service.hasRole('ADMIN_AUD');
+    const hasRights = this.service.hasRole('ADMIN_AUDITORIUM');
     if (!isLogged || !hasRights) {
       this.router.navigate(['/login']);
     }

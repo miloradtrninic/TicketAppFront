@@ -38,7 +38,8 @@ export class Constants {
     CINEMA: 'Cinema',
     ALLFORUSER: 'All_For_User',
     AFU_THEATRE: 'All_For_User_Theatre',
-    AFU_CINEMA: 'All_For_User_Cinema'
+    AFU_CINEMA: 'All_For_User_Cinema',
+    CREATE: 'Create'
   }
 
   public static readonly AuditoriumType = {

@@ -37,7 +37,7 @@ export class HomeComponent extends TopLevelComponent implements OnInit {
     this.dummyItems = HelperFunctions.createDummyTest(null);
 
     if (this.userAuthenticated) {
-      this.auditServ.getVisits(token.id)
+      this.service.getVisited()
         .subscribe(res => {
           this.visits = res;
         }, err => {

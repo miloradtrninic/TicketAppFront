@@ -49,30 +49,28 @@ export class FriendsComponent implements OnInit {
         });
   }
 
-  addFriend(index) {
-    this.service.sendFriendRequest(this.notFriends[index].id)
+  addFriend(user: UserPreview) {
+    this.service.sendFriendRequest(user.id)
       .subscribe(res => {
-          const removeMe = this.notFriends[index];
           if (HelperFunctions.isEmptyValue(this.friends)) {
             this.friends = [];
           }
-          this.friends.push(removeMe);
-          this.notFriends.splice(this.notFriends.indexOf(removeMe), 1);
+          this.friends.push(user);
+          this.notFriends.splice(this.notFriends.indexOf(user), 1);
         },
         err => {
           this.errormsg = 'Error adding friend';
         });
   }
 
-  removeFriend(index) {
-    this.service.removeFriend(this.friends[index].id)
+  removeFriend(user: UserPreview) {
+    this.service.removeFriend(user.id)
       .subscribe(res => {
-          const removeMe = this.friends[index];
           if (HelperFunctions.isEmptyValue(this.notFriends)) {
             this.notFriends = [];
           }
-          this.notFriends.push(removeMe);
-          this.friends.splice(this.friendRequests.indexOf(removeMe), 1);
+          this.notFriends.push(user);
+          this.friends.splice(this.friendRequests.indexOf(user), 1);
         },
         err => {
           this.errormsg = 'Error deleting friend';

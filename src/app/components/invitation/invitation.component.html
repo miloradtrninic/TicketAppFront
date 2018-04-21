@@ -1,0 +1,8 @@
+<div>
+  <h1>Welcome to invitations page</h1>
+  <br/>
+  <br/>
+  <br/>
+  <app-list [header]="'Invitations'" [type]="listType" [items]="invitations"
+            (acceptClickEvent)="accept($event)" (declineClickEvent)="decline($event)"></app-list>
+</div>
