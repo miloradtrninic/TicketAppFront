@@ -9,6 +9,7 @@ import { TerminService } from '../../services/termin.service';
 import { TerminCreation } from '../../model/creation/termin-creation.model';
 import { ActivatedRoute } from '@angular/router';
 import { AuditoriumService } from '../../services/auditorium.service';
+import {TicketService} from '../../services/ticket.service';
 
 @Component({
   selector: 'app-termin',
@@ -23,9 +24,9 @@ export class TerminComponent implements OnInit {
   times: Array<Number>
   message: string;
   time ='';
-  discount = false; 
+  discount = false;
   price = '';
-  
+
 
 
   halls: Array<Hall>;
@@ -36,7 +37,9 @@ export class TerminComponent implements OnInit {
   @ViewChild('addForm') form : NgForm;
 
   constructor(public hallService: HallService,
-              public terminService : TerminService, private route: ActivatedRoute) { 
+              public terminService : TerminService,
+              private route: ActivatedRoute,
+              private ticketService: TicketService) {
               this.selectedHalls = new Array();
              }
   ngOnInit() {
@@ -53,24 +56,29 @@ export class TerminComponent implements OnInit {
       }
      );
  });
-  
+
   }
   addTermin(){
     console.log("aaat" +this.selectedHalls);
     const halls = this.selectedHalls.map(hall => hall.id);
     console.log(halls);
-    const termin: TerminCreation = new TerminCreation(this.projectionId , halls, 
+    const termin: TerminCreation = new TerminCreation(this.projectionId , halls,
             this.form.value['date'], this.form.value['price'], this.form.value['discount']);
             console.log(termin);
     this.terminService.insert(termin).subscribe(
       resp => {
-
+        this.ticketService.createTickets(resp.id)
+          .subscribe(res => {
+            console.log(res);
+          }, err => {
+            this.message = err;
+          });
         console.log(resp);
       }, error => {
         this.message = JSON.stringify(error);
       }
     );
-   
+
   }
 
 
@@ -85,7 +93,7 @@ export class TerminComponent implements OnInit {
     }
     return found;
   }
- 
+
   removeHall(index: number) {
     this.selectedHalls.splice(index, 1);
   }

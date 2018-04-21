@@ -29,9 +29,12 @@ export class ReservationComponent implements OnInit {
     } else if (url.indexOf('/theatre') > -1) {
       this.mode = Constants.ReservationType.THEATRE;
       this.entityid = this.activRoute.snapshot.params.id;
-    } else {
+    } else if (url.indexOf('/reservations') > -1) {
       this.mode = Constants.ReservationType.ALLFORUSER;
+    } else if (url.indexOf('/createReservation') > -1) {
+      this.mode = Constants.ReservationType.CREATE;
     }
+
     console.log("Url: " + url);
     console.log("User id: " + this.userId);
     console.log("Id:" + this.entityid);

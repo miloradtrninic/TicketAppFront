@@ -85,6 +85,8 @@ import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-
 import { MyAdsComponent } from './components/user-panel/my-ads/my-ads.component';
 import { MyItemsComponent } from './components/user-panel/my-items/my-items.component';
 import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.component';
+import { InvitationComponent } from './components/invitation/invitation.component';
+import {InvitationService} from './services/invitation.service';
 
 @NgModule({
   declarations: [
@@ -143,7 +145,8 @@ import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.compone
     MyAdsComponent,
     MyItemsComponent,
     MyBidsComponent,
-    TopLevelComponent
+    TopLevelComponent,
+    InvitationComponent
   ],
   imports: [
     BrowserModule,
@@ -158,7 +161,7 @@ import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.compone
     FanadService, FanzoneService, TheatreService, UserService, MovieService,
     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
     MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
-    TerminService, ReservationService, TicketService],
+    TerminService, ReservationService, TicketService, InvitationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

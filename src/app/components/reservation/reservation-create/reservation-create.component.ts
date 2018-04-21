@@ -23,6 +23,7 @@ import {Theatre} from '../../../model/theatre.model';
 import {CinemaService} from '../../../services/cinema.service';
 import {Auditorium} from '../../../model/auditorium.model';
 import {Projection} from '../../../model/projection.model';
+import {AuditoriumPreview} from '../../../model/preview/auditorium-preview';
 
 @Component({
   selector: 'app-reservation-create',
@@ -38,7 +39,7 @@ export class ReservationCreateComponent implements OnInit {
   /********************/
 
   /*Selections*/
-  private selectedAuditorium: Auditorium = null;
+  private selectedAuditorium: AuditoriumPreview = null;
   private selectedProjection: Projection = null;
   private auditoriumId: number = null;
   private selectedTermin: Termin = null;
@@ -48,8 +49,9 @@ export class ReservationCreateComponent implements OnInit {
   /***********/
 
   /*Arrays*/
-  private cinemas: Cinema[] = null;
-  private theatres: Theatre[] = null;
+  private cinemas: AuditoriumPreview[] = null;
+  private theatres: AuditoriumPreview[] = null;
+  private projections: Projection[] = null;
   private availableTickets: Ticket[] = null;
   private halls: Hall[] = null;
   private hallSegments: HallSegmentPreview[] = null;
@@ -80,19 +82,17 @@ export class ReservationCreateComponent implements OnInit {
       }, err => {
         this.errormsg = err;
       });
-  }
 
-  selectTermin(termin) {
-    this.selectedTermin = termin;
-    this.halls = [];
-
-    this.hallService.getByAuditorium(this.auditoriumId)
+    this.userService.getUserFriends()
       .subscribe(res => {
-        this.halls = res;
+        this.friends = res;
+        console.log(res);
       }, err => {
         this.errormsg = err;
-    });
+      })
   }
+
+
 
   createHallSelection() {
     return HelperFunctions.createListItems(this.halls, null, ['name']);
@@ -110,14 +110,55 @@ export class ReservationCreateComponent implements OnInit {
     return HelperFunctions.createListItems(this.theatres, null, ['name']);
   }
 
-  selectAuditorium(aud: Auditorium) {
+  createProjectionLI() {
+    return HelperFunctions.createListItems(this.projections, 'coverPath', ['name']);
+  }
+
+  createInvFriends() {
+    return HelperFunctions.createListItems(this.friends, null, ['name', 'lastname']);
+  }
+
+  createRMFriends() {
+    return HelperFunctions.createListItems(this.selectedFriends, null, ['name', 'lastname']);
+  }
+
+  selectAuditorium(aud: AuditoriumPreview) {
     this.selectedAuditorium = aud;
     this.auditoriumId = aud.id;
-    this.selectedAuditoriumType = aud.type;
+    this.selectedAuditoriumType = aud.entity_type;
+
+    if (aud.entity_type === 'cinema') {
+      this.cinemaService.getMovies(aud.id)
+        .subscribe(res => {
+          this.projections = res;
+        }, err => {
+          this.errormsg = err;
+        })
+    } else {
+      this.theatreService.getAllPlays(aud.id)
+        .subscribe(res => {
+          this.projections = res;
+        }, err => {
+          this.errormsg = err;
+        })
+    }
   }
 
   selectProjection(proj: Projection) {
     this.selectedProjection = proj;
+  }
+
+  selectTermin(termin) {
+    this.selectedTermin = termin;
+    this.halls = [];
+
+    this.hallService.getByAuditorium(this.auditoriumId)
+      .subscribe(res => {
+        this.halls = res;
+      }, err => {
+        this.errormsg = err;
+      });
+
     this.ticketService.getAvailableTickets(this.selectedProjection.id)
       .subscribe(res => {
         this.availableTickets = res;
@@ -134,6 +175,10 @@ export class ReservationCreateComponent implements OnInit {
   selectHallSegment(hallSegment: HallSegmentPreview) {
     this.selectedHallSegment = hallSegment;
     this.seatings = hallSegment.seatingList;
+
+    if (HelperFunctions.isEmptyValue(this.selectedFriends)) {
+      this.selectedFriends = [];
+    }
   }
 
   selectSeating(seating) {
@@ -142,7 +187,7 @@ export class ReservationCreateComponent implements OnInit {
     if (HelperFunctions.isEmptyValue(this.selectedSeatings)) {
       this.selectedSeatings = [];
     }
-    index = this.seatings.indexOf(seating)
+    index = this.selectedSeatings.indexOf(seating)
     if (index === -1) {
       console.log('Selection!');
       this.selectedSeatings.push(seating);
@@ -152,23 +197,6 @@ export class ReservationCreateComponent implements OnInit {
     }
 
     this.inviteFriendsCount = this.selectedSeatings.length - 1;
-
-    if (this.inviteFriendsCount > 0 && HelperFunctions.isEmptyValue(this.friends)) {
-      this.userService.getUserFriends()
-        .subscribe(res => {
-          this.friends = res;
-        }, err => {
-          this.errormsg = err;
-        })
-    }
-  }
-
-  createInvFriends() {
-    return HelperFunctions.createListItems(this.friends, null, ['name', 'lastname']);
-  }
-
-  createRMFriends() {
-    return HelperFunctions.createListItems(this.selectedFriends, null, ['name', 'lastname']);
   }
 
   selectFriendToInv(friend) {
@@ -181,6 +209,14 @@ export class ReservationCreateComponent implements OnInit {
     this.friends.push(friend);
   }
 
+  calculateAmmount() {
+    if (!HelperFunctions.isEmptyValue(this.selectedSeatings)) {
+      return this.selectedTermin.price * this.selectedSeatings.length;
+    } else {
+      return 0;
+    }
+  }
+
   createReservation() {
     const projectionId = this.selectedProjection.id;
     const ticketlist = [];
@@ -189,7 +225,7 @@ export class ReservationCreateComponent implements OnInit {
     for (let i = 0 ; i < this.selectedSeatings.length; i++) {
       for (let j = 0; j < this.availableTickets.length; j++) {
         if (this.selectedSeatings[i].id === this.availableTickets[j].seating.id) {
-          ticketlist.push(this.availableTickets[j]);
+          ticketlist.push(this.availableTickets[j].id);
         }
       }
     }
@@ -198,7 +234,7 @@ export class ReservationCreateComponent implements OnInit {
       userList.push(this.selectedFriends[i].id);
     }
 
-    const reserv = new ReservationCreation(this.auth.getToken().id, ticketlist, userList);
+    const reserv = new ReservationCreation(this.auth.getToken().id, ticketlist, userList, this.calculateAmmount());
 
     this.reservationService.create(reserv)
       .subscribe(res => {

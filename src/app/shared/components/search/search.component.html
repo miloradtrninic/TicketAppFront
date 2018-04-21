@@ -9,7 +9,7 @@
     </select>
 
     <ul class="list-group AutocompleteWrapper" *ngIf="shouldShowAutocomplete && searchResults.length > 0">
-      <li class="list-group-item AutocompleteItem" *ngFor="let result of searchResults; let i = index" (click)="elementClicked($event)"
+      <li class="list-group-item AutocompleteItem" *ngFor="let result of searchResults; let i = index" (click)="elementClicked(result)"
           id={{result.index}}>
         {{searchResultToString(result)}}
       </li>

@@ -14,6 +14,7 @@ import 'rxjs/add/operator/do';  // debug
 import 'rxjs/add/operator/catch';
 import {Token} from '../model/token.model';
 import {UserPreview} from '../model/preview/user-preview.model';
+import {AuditoriumPreview} from '../model/preview/auditorium-preview';
 
 @Injectable()
 export class UserService extends AbstractService<User, number> {
@@ -130,5 +131,14 @@ export class UserService extends AbstractService<User, number> {
     const url = `${this.actionUrl}/changePw/${this.authService.loggedUserToken['id']}`;
 
     return this.http.put(url, newPassword, options).map(resp => resp as UserPreview);
+  }
+
+  getVisited() {
+    const options = {
+      headers: this.authService.getAuthHeader()
+    }
+    const url = `${this.actionUrl}/getVisited/${this.authService.loggedUserToken['id']}`;
+
+    return this.http.get(url, options).map(resp => resp as AuditoriumPreview[]);
   }
 }

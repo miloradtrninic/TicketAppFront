@@ -8,45 +8,75 @@
 
     <h3 align="center">Step 1: Select a cinema or a theatre from lists</h3>
 
-    <div>
+    <div class="row">
       <div class="col-sm-4" align="left">
         <app-list [type]="listType" [header]="'Cinemas'" (onElementClickEvent)="this.selectAuditorium($event)"
                   [items]="createCinemaLI()"></app-list>
       </div>
-      <div class="col-sm-4" align="right">
+      <div class="col-sm-4" align="left">
         <app-list [type]="listType" [header]="'Theatres'" (onElementClickEvent)="this.selectAuditorium($event)"
                   [items]="createTheatreLI()" ></app-list>
+      </div>
+      <div class="col-sm-4" align="right">
+        <table class="table">
+          <tr>
+            <th> Selected {{selectedAuditoriumType}}: </th>
+          </tr>
+          <tr>
+            <td>Name: </td>
+            <td *ngIf="selectedAuditorium != null">{{selectedAuditorium.name}}</td>
+          </tr>
+          <tr>
+            <td>Description: </td>
+            <td *ngIf="selectedAuditorium != null">{{selectedAuditorium.description}}</td>
+          </tr>
+        </table>
       </div>
     </div>
 
     <br>
     <br/>
 
-    <div *ngIf="auditoriumId != null">
-      <div *ngIf="selectedAuditoriumType === 'Cinema'">
+    <div *ngIf="selectedAuditorium != null" class="row">
+      <div *ngIf="selectedAuditoriumType === 'cinema'">
         <h3 align="center">Step 2: Select a movie from list</h3>
 
         <div class="col-sm-6" align="center">
-          <app-list [type]="listType" [header]="'Movies'" [items]="createMovieLI()"
-                    (onElementClickEvent)="selectMovie($event)"> </app-list>
+          <app-list [type]="listType" [header]="'Movies'" [items]="createProjectionLI()"
+                    (onElementClickEvent)="selectProjection($event)"> </app-list>
         </div>
       </div>
 
-      <div *ngIf="selectedAuditoriumType === 'Theatre'">
+      <div *ngIf="selectedAuditoriumType === 'theatre'">
         <h3 *ngIf="selectedAuditoriumType === 'theatre'" align="center">Step 2: Select a play from list</h3>
 
         <div class="col-sm-6" align="center">
-          <app-list [type]="listType" [header]="'Plays'" [items]="createPlaysLI()"
-                    (onElementClickEvent)="selectPlay($event)"> </app-list>
+          <app-list [type]="listType" [header]="'Plays'" [items]="createProjectionLI()"
+                    (onElementClickEvent)="selectProjection($event)"> </app-list>
         </div>
       </div>
 
+      <div class="col-sm-6">
+        <table class="table">
+          <tr>
+            <th style="font-size: 1.4em"> Selected projection: </th>
+          </tr>
+          <tr>
+            <td>Name: </td>
+            <td *ngIf="selectedProjection != null">{{selectedProjection.name}}</td>
+          </tr>
+          <tr>
+            <td>Description: </td>
+            <td *ngIf="selectedProjection != null">{{selectedProjection.description}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
 
 
-  <div class="row" *ngIf="selectedProjection != null">
-    <h3>Step 3: Select projection time</h3>
-    <span *ngFor="let term of movie?.projectionTime" (click)="selectTermin(term)">
+  <div class="row" *ngIf="selectedProjection != null" align="center">
+    <h3 align="center">Step 3: Select projection time</h3>
+    <span *ngFor="let term of selectedProjection.projectionTime" (click)="selectTermin(term)">
       <a class="btn btn-3d btn-xlg btn-default noborder margin-right-6 padding-10">
         <h3 class="nomargin nopadding yellow"> {{term.date | date: 'hh:mm'}} </h3>
         <h3 class="nomargin nopadding yellow"> {{term.date | date: 'MMMM d, y'}} </h3>
@@ -59,38 +89,86 @@
   </div>
 
   <div class="row" *ngIf="selectedTermin !== null">
-    <h3>Step 4: Select a hall</h3>
-    <div class="col-sm-3">
+    <h3 align="center">Step 4: Select a hall</h3>
+    <div class="col-sm-6" align="left">
       <app-list [header]="'Projection Halls'" [type]="listType"
-                [items]="createHallSelection()"></app-list>
+                [items]="createHallSelection()" (onElementClickEvent)="selectHall($event)"></app-list>
+    </div>
+
+    <div class="col-sm-5" align="right">
+      <table class="table">
+        <tr>
+          <th style="font-size: 1.4em"> Selected hall: </th>
+        </tr>
+        <tr>
+          <td>Name: </td>
+          <td *ngIf="selectedHall != null">{{selectedHall.name}}</td>
+        </tr>
+        <tr>
+          <td>Number of segments: </td>
+          <td *ngIf="selectedHall != null">{{selectedHall.hallSegmentList.length}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 
   <div class="row" *ngIf="selectedHall !== null">
     <h3>Step 5: Select halls segment</h3>
-    <div class="col-sm-3">
+    <div class="col-sm-6">
       <app-list [header]="'Hall segments'" [type]="listType"
-                [items]="createHallSegmentSelection()"></app-list>
+                [items]="createHallSegmentSelection()" (onElementClickEvent)="selectHallSegment($event)"></app-list>
     </div>
+
+    <div class="col-sm-5" align="right">
+      <table class="table">
+        <tr>
+          <th style="font-size: 1.4em"> Selected hall segment: </th>
+        </tr>
+        <tr>
+          <td>Name: </td>
+          <td *ngIf="selectedHallSegment != null">{{selectedHallSegment.name}}</td>
+        </tr>
+        <tr>
+          <td>Number of seatings: </td>
+          <td *ngIf="selectedHallSegment != null">{{selectedHallSegment.seatingList.length}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
   </div>
 
   <div *ngIf="selectedHallSegment !== null">
     <div class="col-sm-6">
-      <app-seatings [hallSegId]="selectedHallSegment.id" [seatings]="seatings" [message]="'Step 4: Select seatings'"></app-seatings>
+      <app-seatings [hallSegId]="selectedHallSegment.id" [seatings]="selectedHallSegment.seatingList"
+                    [message]="'Step 4: Select seatings'" (seatingSelectionEvent)="selectSeating($event)"></app-seatings>
     </div>
-    <div class="col-sm-3" *ngIf="inviteFriendsCount > 0">
-      <app-list [header]="'Invite Friends'" [type]="listType" [items]="createInvFriends()"
-                (onElementClickEvent)="selectFriendToInv($event)"></app-list>
+    <div class="col-sm-6">
+      <table class="table">
+        <tr>
+          <th style="font-size: 1.4em">Finishing steps</th>
+        </tr>
+        <tr>
+          <td class="col-sm-3">
+            <app-list [header]="'Invite Friends'" [type]="listType" [items]="createInvFriends()"
+                                         (onElementClickEvent)="selectFriendToInv($event)"></app-list>
+          </td>
+          <td class="col-sm-3">
+            <app-list [header]="'Selected Friends'" [type]="listType" [items]="createRMFriends()"
+                                         (onElementClickEvent)="removeFriendFromInv($event)"></app-list>
+          </td>
+        </tr>
+        <tr>
+          <td style="font-size: 1.8em; color: mediumblue">Total ammount</td>
+          <td style="font-size: 1.9em; color: orangered">{{calculateAmmount()}}</td>
+        </tr>
+        <tr>
+          <td><button class="btn btn-success" (click)="createReservation($event)">Create Reservation</button></td>
+        </tr>
+      </table>
     </div>
-    <div class="col-sm-3" *ngIf="inviteFriendsCount > 0">
-      <app-list [header]="'Selected Friends'" [type]="listType" [items]="createRMFriends()"
-                (onElementClickEvent)="removeFriendFromInv($event)"></app-list>
-    </div>
+
   </div>
 
   <br/>
 
-  <div *ngIf="selectedSeatings !== null" class="row">
-    <button class="btn btn-success" (click)="createReservation($event)">Create Reservation</button>
-  </div>
 </div>

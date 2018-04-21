@@ -19,4 +19,20 @@ export class TicketService extends AbstractService<Ticket, number> {
 
     return this.http.get(this.actionUrl + '/getAvailable/' + projId, options).map(res => res as Ticket[]);
   }
+
+  createTickets(terminId: number) {
+    const options = {
+      headers: this.auth.getAuthHeader()
+    }
+
+    return this.http.get(this.actionUrl + '/createTickets/' + terminId, options).map(res => res as Ticket[]);
+  }
+
+  updateTickets(terminId: number) {
+    const options = {
+      headers: this.auth.getAuthHeader()
+    }
+
+    return this.http.get(this.actionUrl + '/update/' + terminId, options).map(res => res as Ticket[]);
+  }
 }
