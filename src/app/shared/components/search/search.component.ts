@@ -55,11 +55,11 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  elementClicked(event) {
-    this.onElementClickEvent.emit(parseInt(event.target.getAttribute('id'), 10));
+  elementClicked(result) {
+    this.onElementClickEvent.emit(result);
 
     if (!this.shouldHaveList) {
-      this.text = event.target.outerText;
+      this.text = this.searchResultToString(result);
     }
     this.shouldShowAutocomplete = false;
   }

@@ -85,6 +85,8 @@ import {SingleAdComponent} from './components/fan-zone/fan-ads/single-ad/single-
 import { MyAdsComponent } from './components/user-panel/my-ads/my-ads.component';
 import { MyItemsComponent } from './components/user-panel/my-items/my-items.component';
 import { MyBidsComponent } from './components/user-panel/my-bids/my-bids.component';
+import { InvitationComponent } from './components/invitation/invitation.component';
+import {InvitationService} from './services/invitation.service';
 import { ChartsModule } from 'ng2-charts';
 import {AdminSysGuardService} from './app-routing/guards/admin-sys-guard.service';
 import {AdminFanGuardService} from './app-routing/guards/admin-fan-guard.service';
@@ -151,6 +153,7 @@ import {GeocoderService} from './services/geocoder.service';
     MyItemsComponent,
     MyBidsComponent,
     TopLevelComponent,
+    InvitationComponent,
     MyZonesComponent
   ],
   imports: [
@@ -168,7 +171,7 @@ import {GeocoderService} from './services/geocoder.service';
     DirectorService, ActorService, GenreService, AuditoriumService, UserRoleService,
     MembershipService, PlayService, HallService, OnlyLoggedInGuard, OnlyAdminGuard,
     TerminService, ReservationService, TicketService, AdminSysGuardService, AdminFanGuardService,
-    AdminAudGuardService, OnlyAnonymousService, GeocoderService],
+    AdminAudGuardService, OnlyAnonymousService, GeocoderService,InvitationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

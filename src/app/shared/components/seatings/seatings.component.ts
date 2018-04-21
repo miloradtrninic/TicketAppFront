@@ -1,15 +1,17 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {SeatingPreview} from '../../../model/preview/seating-preview';
 import {HallService} from '../../../services/hall.service';
 import {HallPreview} from '../../../model/preview/hall-preview';
 import {HallSegmentPreview} from '../../../model/preview/hall-segment-preview';
+import {HelperFunctions} from '../../util/helper-functions';
+import {Seating} from '../../../model/seating.model';
 
 @Component({
   selector: 'app-seatings',
   templateUrl: './seatings.component.html',
   styleUrls: ['./seatings.component.scss']
 })
-export class SeatingsComponent implements OnInit {
+export class SeatingsComponent implements OnInit, OnChanges {
 
   @Input()
   private message: string;
@@ -26,31 +28,47 @@ export class SeatingsComponent implements OnInit {
   private selectedSeats: SeatingPreview[];
 
   constructor(private hallService: HallService) {
-    hallService.getOne(this.hallSegId)
-      .subscribe(res => {
-        this.hallSegment = res;
-        this.seatings = this.hallSegment.seatingList;
-        this.createSeatingsMatrix();
-      }, err => {
-        this.errormsg = err;
-      });
-    this.createDummySeatingsMatrix();
+
+  }
+
+  seatingSelected(seating: Seating) {
+    this.seatingSelectionEvent.emit(seating);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('Promene!');
+    this.createSeatingsMatrix();
   }
 
   ngOnInit() {
+    if (HelperFunctions.isEmptyValue(this.seatings)) {
+      this.hallService.getOne(this.hallSegId)
+        .subscribe(res => {
+          this.hallSegment = res;
+          this.seatings = this.hallSegment.seatingList;
+          this.createSeatingsMatrix();
+        }, err => {
+          this.errormsg = err;
+        });
+    } else {
+      this.createSeatingsMatrix();
+    }
   }
-
 
   seatingClick(seating: SeatingPreview) {
     this.seatingSelectionEvent.emit(seating);
   }
 
   findMaxRow() {
-    let max = this.seatings[0].row;
+    let max = 0;
 
-    for (let i = 0; i < this.seatings.length; i++) {
-      if (this.seatings[i].row > max) {
-        max = this.seatings[i].row;
+    if (!HelperFunctions.isEmptyValue(this.seatings)) {
+      max = this.seatings[0].row;
+
+      for (let i = 0; i < this.seatings.length; i++) {
+        if (this.seatings[i].row > max) {
+          max = this.seatings[i].row;
+        }
       }
     }
 
@@ -58,11 +76,15 @@ export class SeatingsComponent implements OnInit {
   }
 
   findMaxNumber() {
-    let max = this.seatings[0].number
+    let max = 0;
 
-    for (let i = 0; i < this.seatings.length; i++) {
-      if (this.seatings[i].number > max) {
-        max = this.seatings[i].number;
+    if (!HelperFunctions.isEmptyValue(this.seatings)) {
+      max = this.seatings[0].number;
+
+      for (let i = 0; i < this.seatings.length; i++) {
+        if (this.seatings[i].number > max) {
+          max = this.seatings[i].number;
+        }
       }
     }
 
