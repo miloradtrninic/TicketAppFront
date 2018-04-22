@@ -8,6 +8,8 @@ import { NgForm } from '@angular/forms';
 import { TerminUpdate } from '../../../model/update/termin-update.model';
 import { TerminService } from '../../../services/termin.service';
 
+import { AuthService } from '../../../services/auth.service';
+
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
@@ -26,7 +28,7 @@ export class PlayComponent implements OnInit {
   
   @ViewChild('editForm') form: NgForm;
 
-  constructor(public playService: PlayService,public terminService: TerminService, private route: ActivatedRoute) { }
+  constructor(public playService: PlayService, public authService: AuthService, public terminService: TerminService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -87,6 +89,8 @@ export class PlayComponent implements OnInit {
     }
   }
 
-  
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
+  }
 
 }

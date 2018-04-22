@@ -48,7 +48,7 @@
                   <strong>Discount: </strong>
                   <span *ngIf="term.discount"> Yes </span>
                   <span *ngIf="!term.discount"> No </span>
-                  <button class="text" (click)="fillFields(term)" data-toggle="modal" data-target="#editTermin"> Edit </button>
+                  <button *ngIf="hasRole('ADMIN_AUD')" class="text" (click)="fillFields(term)" data-toggle="modal" data-target="#editTermin"> Edit </button>
                             
                 </a>
               </span>
@@ -58,10 +58,10 @@
       </ul>
       <span class="pull-right">
         <img src="{{ play?.coverPath }}" class="img-responsive" style="max-height : 200px">
-        <p> <span class="style">Ratings for this play: {{play?.ratings}} </span></p>
+        <p> <span *ngIf="hasRole('ADMIN_AUD')" class="style">Ratings for this play: {{play?.ratings}} </span></p>
       </span>
     </div>
-    <a routerLink="termin" class="right"> Add new projection </a>
+    <a *ngIf="hasRole('ADMIN_AUD')" routerLink="termin" class="right"> Add new projection </a>
   </div>
 </div>
 

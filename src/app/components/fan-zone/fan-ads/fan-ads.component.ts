@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {BidService} from '../../../services/bid.service';
 import {BidCreation} from '../../../model/creation/bid-creation.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-fan-ads',
@@ -20,7 +21,8 @@ export class FanAdsComponent implements OnInit {
   fanAdImage: File;
   @ViewChild('fBid') bidForm: NgForm;
   @ViewChild('f') uploadForm: NgForm;
-  constructor(public fanAdsService: FanadService, private bidService: BidService, public route: ActivatedRoute) {
+  constructor(public fanAdsService: FanadService, private bidService: BidService,
+     public route: ActivatedRoute, public authService: AuthService) {
     this.fanAds = new Array();
   }
 
@@ -68,5 +70,8 @@ export class FanAdsComponent implements OnInit {
     this.bidService.insert(newBid).subscribe(
       resp => this.message = 'Bid successfully placed.', error2 => this.error = JSON.stringify(error2)
     );
+  }
+  hasRole(role: string) {
+    return this.authService.hasRole(role);
   }
 }

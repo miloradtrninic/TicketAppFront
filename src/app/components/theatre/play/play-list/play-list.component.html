@@ -22,10 +22,10 @@
             <span class="style">Duration:</span> {{ play.durationMinutes }}</p>
           <p class="list-group-item-text">
             <span class="style"> Ratings:</span> {{ play.ratings }}</p>
-          <button class="btn btn-success" (click)="selected=play; fillFields(play)" data-toggle="modal" data-target="#editPlay">
+          <button *ngIf="hasRole('ADMIN_AUD')" class="btn btn-success" (click)="selected=play; fillFields(play)" data-toggle="modal" data-target="#editPlay">
             Edit play </button>
-          <button class="btn btn-danger " (click)="selected=play ">
-            <a (click)="deletePlay(play.id)"> Delete play </a>
+          <button *ngIf="hasRole('ADMIN_AUD')" class="btn btn-danger " (click)="selected=play ">
+            <a  (click)="deletePlay(play.id)"> Delete play </a>
           </button>
         </div>
       </div>

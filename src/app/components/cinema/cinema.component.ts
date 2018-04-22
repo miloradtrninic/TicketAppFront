@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { UserAuditoriumCreation } from '../../model/creation/userauditorium-creation.model';
 import { UserAuditoriumPreview } from '../../model/preview/userauditorium-preview';
 import { GeocoderService } from '../../services/geocoder.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-cinema',
@@ -95,7 +96,7 @@ export class CinemaComponent implements OnInit {
 
   constructor(public cinemaService: CinemaService, private route: ActivatedRoute, private geocoderService: GeocoderService,
     private _loader: MapsAPILoader,
-    private _zone: NgZone) {
+    private _zone: NgZone, public authService: AuthService) {
 
   }
 
@@ -256,6 +257,9 @@ export class CinemaComponent implements OnInit {
         error => console.log(error),
         () => console.log('Geocoding completed!')
       );
+  }
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
   }
 
 

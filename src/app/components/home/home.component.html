@@ -21,6 +21,6 @@
   </div>
   <!--app-list [header]="'Test'" [items]="dummyItems" [type]="type" (onElementClickEvent)="itemClicked($event)"></app-list-->
   <!--app-seatings [message]="'Helou'" [seatings]="null"></app-seatings-->
-  <a routerLink="createReservation" class="btn btn-primary">Make a reservation</a>
+  <a *ngIf="auth" routerLink="createReservation" class="btn btn-primary">Make a reservation</a>
 
 </div>

@@ -4,6 +4,7 @@ import {FanItemService} from '../../../services/fan-item.service';
 import {FanzoneService} from '../../../services/fanzone.service';
 import {Fanzone} from '../../../model/fanzone.model';
 import {Fanitem} from '../../../model/fanitem.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-fan-items',
@@ -16,7 +17,7 @@ export class FanItemsComponent implements OnInit {
   message: string;
   error: string;
   constructor(public fanZoneService: FanzoneService, public fanItemService: FanItemService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute, public authService: AuthService) { }
 
   ngOnInit() {
     this.route.parent.params.subscribe(params => {
@@ -38,5 +39,8 @@ export class FanItemsComponent implements OnInit {
         this.fanItems.splice(idx, 1);
       }, error2 => this.error = JSON.stringify(error2)
     )
+  }
+  hasRole(role: string) {
+    return this.authService.hasRole(role);
   }
 }

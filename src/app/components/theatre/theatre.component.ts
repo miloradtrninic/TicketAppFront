@@ -3,6 +3,7 @@ import { Theatre } from '../../model/theatre.model';
 import {Router, ActivatedRoute} from '@angular/router';
 import { TheatreService } from '../../services/theatre.service';
 import {GeocoderService} from '../../services/geocoder.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-theatre',
@@ -87,7 +88,7 @@ public barChartData:any[] = [
 
 
   constructor(public theatreService: TheatreService, private route: ActivatedRoute, private _zone: NgZone,
-              private geocoderService: GeocoderService) { }
+              private geocoderService: GeocoderService, public authService: AuthService) { }
 
   ngOnInit() {
     console.log(window.location.href);
@@ -239,5 +240,8 @@ public chartHovered1(e:any):void {
         error => console.log(error),
         () => console.log('Geocoding completed!')
       );
+  }
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
   }
 }

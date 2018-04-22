@@ -67,7 +67,7 @@ const routes: Routes = [
   { path: 'theatre/:id/play/:projId/termin', component: TerminComponent},
   { path: 'theatre/:id/play/:playId', component: PlayComponent},
   { path: 'friends', component: FriendsComponent, canActivate: [OnlyLoggedInGuard]},
-  { path: 'fan-zones/:id/zone', component: FanZoneComponent, children: [
+  { path: 'fan-zones/:id/zone', component: FanZoneComponent, canActivate: [OnlyLoggedInGuard], children: [
     {path: 'official-items', component: FanItemsComponent},
     {path: 'fan-ads', component: FanAdsComponent},
     {path: 'fan-ads/:adId', component: SingleAdComponent}

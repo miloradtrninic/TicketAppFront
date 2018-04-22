@@ -7,10 +7,11 @@
     <div class="collapse navbar-collapse" id="navbar" #navbarList>
       <ul class="nav navbar-nav navbar-right">
         <li> <button routerLink="/search" class="btn btn-primary navbar-btn"> <i class="glyphicon glyphicon-search"></i>Search </button></li>
-        <li ><a routerLink="/register" class="mouse"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-        <li ><a routerLink="/admin-panel" class="mouse"><span class="glyphicon glyphicon-user"></span> Admin panel</a></li>
-        <li ><a routerLink="/login" class="mouse"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
-        <li ><a class="mouse" (click)="logout($event)"><span class="glyphicon glyphicon-log-out link"></span> Log out</a></li>
+        <li ><a *ngIf = "!auth.isLoggedInSimple()" routerLink="/register" class="mouse"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        <li ><a *ngIf = "auth.hasRole('ADMIN_SYS') || auth.hasRole('ADMIN_AUD') || auth.hasRole('ADMIN_FAN')" routerLink="/admin-panel" class="mouse"><span class="glyphicon glyphicon-user"></span> Admin panel</a></li>
+        <li ><a *ngIf = "!auth.isLoggedInSimple()" routerLink="/login" class="mouse"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+        <li> <a *ngIf = "auth.isLoggedInSimple()" ><span class="glyphicon glyphicon-user mouse"><b> {{auth.getToken()?.username}} </b></span></a> </li>
+        <li ><a *ngIf = "auth.isLoggedInSimple()" class="mouse" (click)="logout($event)"><span class="glyphicon glyphicon-log-out link"></span> Log out</a></li>
 
       </ul>
     </div>

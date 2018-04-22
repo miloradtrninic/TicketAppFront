@@ -10,6 +10,8 @@ import { GenreService } from '../../../../services/genre.service';
 import { PlayUpdate } from '../../../../model/update/play-update.model';
 import { NgForm } from '@angular/forms';
 
+import { AuthService } from '../../../../services/auth.service';
+
 @Component({
   selector: 'app-play-list',
   templateUrl: './play-list.component.html',
@@ -42,7 +44,7 @@ export class PlayListComponent implements OnInit {
   @ViewChild('editForm') form: NgForm;
 
   constructor(public playService: PlayService, public directorService : DirectorService,
-    public actorService :ActorService, public genreService: GenreService) { 
+    public actorService :ActorService, public genreService: GenreService,public authService: AuthService,) { 
                     this.selectedGenres = new Array();
                     this.selectedActors = new Array();
     }
@@ -171,6 +173,9 @@ export class PlayListComponent implements OnInit {
       this.selectedGenres.push(this.newGenre);
       this.newGenre = undefined;
     }
+  }
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
   }
  
 }

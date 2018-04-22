@@ -22,14 +22,14 @@
             <span class="style">Duration:</span> {{ movie.durationMinutes }}</p>
           <p class="list-group-item-text">
             <span class="style"> Ratings:</span> {{ movie.ratings }}</p>
-          <button class="btn btn-success" (click)="selected = movie; fillFields(movie)" data-toggle="modal" data-target="#editMovie"> Edit movie </button>
-          <button class="btn btn-danger " (click)="selected=movie ">
-            <a (click)="deleteMovie(movie.id)"> Delete movie </a>
+          <button *ngIf="hasRole('ADMIN_AUD')" class="btn btn-success" (click)="selected = movie; fillFields(movie)" data-toggle="modal" data-target="#editMovie"> Edit movie </button>
+          <button *ngIf="hasRole('ADMIN_AUD')" class="btn btn-danger " (click)="selected=movie ">
+            <a  (click)="deleteMovie(movie.id)"> Delete movie </a>
           </button>
         </div>
       </div>
       <span class="pull-right">
-        <img src="{{movie.coverPath}}" class="img-responsive" style="max-height : 120px">
+        <img src="{{movie.coverPath}}"   class="img-responsive" style="max-height : 120px">
       </span>
     </a>
   </div>

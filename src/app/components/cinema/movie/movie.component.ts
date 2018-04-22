@@ -11,6 +11,8 @@ import { TerminService } from '../../../services/termin.service';
 import { TerminUpdate } from '../../../model/update/termin-update.model';
 import {TicketService} from '../../../services/ticket.service';
 
+import { AuthService } from '../../../services/auth.service';
+
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
@@ -29,7 +31,7 @@ export class MovieComponent implements OnInit {
   discount: boolean;
   @ViewChild('editForm') form: NgForm;
 
-  constructor(public movieService: MovieService, public terminService: TerminService, private route: ActivatedRoute, private tickService: TicketService) { }
+  constructor(public movieService: MovieService, public authService: AuthService, public terminService: TerminService, private route: ActivatedRoute, private tickService: TicketService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -100,5 +102,9 @@ export class MovieComponent implements OnInit {
 
   makeReservation() {
 
+  }
+
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
   }
 }

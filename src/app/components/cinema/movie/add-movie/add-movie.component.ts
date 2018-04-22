@@ -94,13 +94,13 @@ export class AddMovieComponent implements OnInit {
 
   
   addMovie() {
-    
+
     const director_id = this.form.value['newDirector'].id;
     const actors = this.selectedActors.map(act=>act.id);
     const genres = this.selectedGenres.map(gen=>gen.id);
     const movie: MovieCreation = new MovieCreation(this.form.value['name'], 0, director_id,
-      actors, genres, this.form.value['duration'], this.form.value['poster'],
-      this.form.value['description'], this.cinemaId);
+    actors, genres, this.form.value['duration'], this.poster,
+    this.form.value['description'],this.cinemaId);
     console.log(movie);
     this.movieService.insert(movie).subscribe(
       resp => {

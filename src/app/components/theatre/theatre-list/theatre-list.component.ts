@@ -4,6 +4,7 @@ import { TheatreService } from '../../../services/theatre.service';
 import { NgForm } from '@angular/forms';
 import {HelperFunctions} from '../../../shared/util/helper-functions';
 import { TheatreUpdate } from '../../../model/update/theatre-update.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-theatre-list',
@@ -25,7 +26,7 @@ export class TheatreListComponent implements OnInit {
 
   @ViewChild('editForm') form: NgForm;
 
-  constructor(public theatreService: TheatreService) { }
+  constructor(public theatreService: TheatreService,  public authService: AuthService) { }
 
   ngOnInit() {
     console.log('ngOnInit theatre list');
@@ -99,5 +100,8 @@ export class TheatreListComponent implements OnInit {
 
   sortByRatings() {
     this.theatres = HelperFunctions.sortArrayByKey(this.theatres, 'ratings');
+  }
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
   }
 }

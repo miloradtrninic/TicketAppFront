@@ -58,7 +58,7 @@ export class AuthService {
   getJSONAuthHeader(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.loggedUserToken.token
+      'Authorization': 'Bearer ' + this.loggedUserToken === null ? '' : this.loggedUserToken.token
     });
   }
   getFORMHeader(): HttpHeaders {

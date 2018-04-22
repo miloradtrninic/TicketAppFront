@@ -31,15 +31,15 @@
         </div>
         <button *ngIf="theatre?.fanZone" routerLink="/fan-zones/{{theatre?.fanZone.id}}/zone" class="btn btn-primary">Visit fan zone</button>
 
-        <button routerLink="new" class="btn btn-primary"> Add new play </button>
+        <button *ngIf="hasRole('ADMIN_AUD')" routerLink="new" class="btn btn-primary"> Add new play </button>
         <br>
-        <a (click)="annuallyStat()" class="mouse"> Annually statistics </a>
+        <a *ngIf="hasRole('ADMIN_AUD')" (click)="annuallyStat()" class="mouse"> Annually statistics </a>
         <br>
-        <a (click)="weeklyStat()" class="mouse"> Weekly statistics </a>
+        <a *ngIf="hasRole('ADMIN_AUD')" (click)="weeklyStat()" class="mouse"> Weekly statistics </a>
         <br>
-        <a (click)="dailyStat()" class="mouse"> Daily statistics </a>
+        <a *ngIf="hasRole('ADMIN_AUD')" (click)="dailyStat()" class="mouse"> Daily statistics </a>
         <br>
-        <a (click)="annuallyStat()" class="mouse"> Earnings </a>
+        <a *ngIf="hasRole('ADMIN_AUD')" (click)="annuallyStat()" class="mouse"> Earnings </a>
 
         <!--GODISNJEM NIVOU -->
         <div *ngIf="year">
@@ -89,8 +89,10 @@
         </div>
 
         <div class="rightText">
-            <p>Average rating for this theatre : {{ theatre?.ratings}} </p>
+            <p *ngIf="hasRole('ADMIN_AUD')">Average rating for this theatre : {{ theatre?.ratings}} </p>
+            <button  *ngIf="hasRole('REG_USER')" data-toggle="modal" data-target="#addRate">Evaluate</button>
         </div>
+        
 
         <hr/>
 
@@ -102,8 +104,8 @@
                             <li>
                                 <a (click)="openPlays()" class="mouse">Repertoar</a>
                             </li>
-                            <li>
-                                <a (click)="openProjection()" class="mouse">Quick reservation</a>
+                            <li *ngIf="hasRole('REG_USER')" >
+                                <a   (click)="openProjection()" class="mouse">Quick reservation</a>
                             </li>
                         </ul>
                     </div>

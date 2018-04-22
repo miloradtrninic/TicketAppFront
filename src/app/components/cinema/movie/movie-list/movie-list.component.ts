@@ -11,6 +11,7 @@ import { Cinema } from '../../../../model/cinema.model';
 import { ActivatedRoute } from '@angular/router';
 import { MovieUpdate } from '../../../../model/update/movie-update.model';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -44,7 +45,7 @@ export class MovieListComponent implements OnInit {
 
   @ViewChild('editForm') form: NgForm;
 
-  constructor(public movieService: MovieService, public directorService : DirectorService,
+  constructor(public movieService: MovieService, public directorService : DirectorService, public authService: AuthService,
                 public actorService :ActorService, public genreService: GenreService, public route: ActivatedRoute) {
                     this.selectedGenres = new Array();
                     this.selectedActors = new Array();
@@ -100,7 +101,7 @@ export class MovieListComponent implements OnInit {
     console.log('edit movie');
     console.log(this.selected);
     const movieUpdate : MovieUpdate = new MovieUpdate(this.selected.id, this.form.value['name'], 
-    this.form.value['description'],  this.form.value['duration'], this.form.value['coverPath']);
+    this.form.value['description'],  this.form.value['duration'], this.poster);
     this.movieService.update(movieUpdate).subscribe(
       resp => {
     const idx = this.movies.map(cin => cin.id).findIndex(id => id === resp.id);
@@ -182,7 +183,9 @@ export class MovieListComponent implements OnInit {
       this.newGenre = undefined;
     }
   }
- 
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
+  }
 
 
 }
